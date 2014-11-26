@@ -1,105 +1,62 @@
-# Websocket API Calls
+# Websocket API Calls: General
 
-## Get All Kittens
+<aside class="notice">
+All websocket calls are expecting a json with the parameters listed for each call.
+</aside>
 
-### Get Nice Kittens
+## Logon
 
-```ruby
-require 'kittn'
+Some functionality requires you to send a logon request apart from connecting. Documenation for this calls explicitly says it is presumed you are logged in.
 
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-api.kittens.get
-```
+This is performed automatically for you if you are reconnecting (returning to the site after less than 15 minutes). Otherwise, this cll needs to be made explicitly.
 
-```python
-import kittn
-
-api = kittn.authorize('meowmeowmeow')
-api.kittens.get()
+<!-- ```python
 ```
 
 ```shell
-curl "http://example.com/api/kittens"
-  -H "Authorization: meowmeowmeow"
-```
+``` -->
 
-> The above command returns JSON structured like this:
+> Expects the following JSON structure:
 
 ```json
-[
+{ "response_header":
   {
-    "id": 1,
-    "name": "Fluffums",
-    "breed": "calico",
-    "fluffiness": 6,
-    "cuteness": 7
+    "t": 1417011631016
   },
-  {
-    "id": 2,
-    "name": "Isis",
-    "breed": "unknown",
-    "fluffiness": 5,
-    "cuteness": 10
-  }
-]
+  "res": 100,
+  "session_key": "4"
+}
 ```
 
-This endpoint retrieves all kittens.
 
-### HTTP Request
+> Returns the following JSON structure:
 
-`GET http://example.com/kittens`
+```json
+{ "response_header":
+  {
+    "t": 1417011631016
+  },
+  "res": 100,
+  "session_key": "4"
+}
+```
+
+This authenticates you with the api server and allows to send all requests.
+
+### Operation code
+
+login = 100
 
 ### Query Parameters
 
 Parameter | Default | Description
 --------- | ------- | -----------
-include_cats | false | If set to true, the result will also include cats.
-available | true | If set to false, the result will include kittens that have already been adopted.
+- | - | -
 
+### Responses
 
-## Get a Specific Kitten
-
-```ruby
-require 'kittn'
-
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-api.kittens.get(2)
-```
-
-```python
-import kittn
-
-api = kittn.authorize('meowmeowmeow')
-api.kittens.get(2)
-```
-
-```shell
-curl "http://example.com/api/kittens/3"
-  -H "Authorization: meowmeowmeow"
-```
-
-> The above command returns JSON structured like this:
-
-```json
-{
-  "id": 2,
-  "name": "Isis",
-  "breed": "unknown",
-  "fluffiness": 5,
-  "cuteness": 10
-}
-```
-
-This endpoint retrieves a specific kitten.
-
-
-### HTTP Request
-
-`GET http://example.com/kittens/<ID>`
-
-### URL Parameters
-
-Parameter | Description
---------- | -----------
-ID | The ID of the cat to retrieve
+Name | Code | Result
+--------- | ------- | -----------
+logon_success | 100 | You are logged in.
+logon_fail | 110 | You have **NOT** been logged in.
+logon_fail_already_logged_in | 112 | You are logged in.
