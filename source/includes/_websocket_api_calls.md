@@ -19,12 +19,13 @@ This is performed automatically for you if you are reconnecting (returning to th
 > Expects the following JSON structure:
 
 ```json
-{ "response_header":
-  {
-    "t": 1417011631016
+{
+  "header": {
+    "t": "CURRENT_EPOCH_MILLIS",
+    "api_key": "YOUR_API_KEY",
+    "api_version": 1.0
   },
-  "res": 100,
-  "session_key": "4"
+  "op": 100
 }
 ```
 
@@ -32,10 +33,10 @@ This is performed automatically for you if you are reconnecting (returning to th
 > Returns the following JSON structure:
 
 ```json
-{ "response_header":
-  {
-    "t": 1417011631016
-  },
+{
+  "response_header": {
+      "t": 1417011631016
+    },
   "res": 100,
   "session_key": "4"
 }
