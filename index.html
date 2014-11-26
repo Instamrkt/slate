@@ -40,8 +40,8 @@
       </div>
         <ul class="toc-footer">
             <li><a href='http://instamrkt.com/'>Sign Up for a Developer Key</a></li>
-            <li><a href='http://github.com/tripit/slate'>Documentation Powered by Slate</a></li>
             <li><a href='mailto:thatguy@instamrkt.com'>Unclear? Contact us.</a></li>
+            <li><a href='http://github.com/tripit/slate'>Documentation Powered by Slate</a></li>
         </ul>
     </div>
     <div class="page-wrapper">
@@ -107,22 +107,23 @@ All websocket calls are expecting a json with the parameters listed for each cal
 <blockquote>
 <p>Expects the following JSON structure:</p>
 </blockquote>
-<pre><code class="highlight json"><span class="p">{</span><span class="w"> </span><span class="s2">"response_header"</span><span class="p">:</span><span class="w">
-  </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"t"</span><span class="p">:</span><span class="w"> </span><span class="mi">1417011631016</span><span class="w">
+<pre><code class="highlight json"><span class="p">{</span><span class="w">
+  </span><span class="s2">"header"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"t"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CURRENT_EPOCH_MILLIS"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"api_key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"YOUR_API_KEY"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"api_version"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.0</span><span class="w">
   </span><span class="p">},</span><span class="w">
-  </span><span class="s2">"res"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"session_key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"4"</span><span class="w">
+  </span><span class="s2">"op"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
 <blockquote>
 <p>Returns the following JSON structure:</p>
 </blockquote>
-<pre><code class="highlight json"><span class="p">{</span><span class="w"> </span><span class="s2">"response_header"</span><span class="p">:</span><span class="w">
-  </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"t"</span><span class="p">:</span><span class="w"> </span><span class="mi">1417011631016</span><span class="w">
-  </span><span class="p">},</span><span class="w">
+<pre><code class="highlight json"><span class="p">{</span><span class="w">
+  </span><span class="s2">"response_header"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"t"</span><span class="p">:</span><span class="w"> </span><span class="mi">1417011631016</span><span class="w">
+    </span><span class="p">},</span><span class="w">
   </span><span class="s2">"res"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
   </span><span class="s2">"session_key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"4"</span><span class="w">
 </span><span class="p">}</span><span class="w">
