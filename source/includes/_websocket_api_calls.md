@@ -54,7 +54,7 @@ Parameter | Default | Description
 --------- | ------- | -----------
 - | - | -
 
-### Responses
+### Response codes
 
 Name | Code | Result
 --------- | ------- | -----------
