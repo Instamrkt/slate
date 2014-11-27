@@ -1,5 +1,5 @@
 ---
-title: API Reference
+title: Instamrkt API Reference
 
 language_tabs:
   - shell
@@ -13,7 +13,11 @@ toc_footers:
 
 includes:
   - authentication
-  - websocket_api_calls
+  - websocket_api_calls_general
+  - websocket_api_calls_game_sources
+  - websocket_api_calls_games
+  - websocket_api_calls_betting_pools
+  - websocket_api_calls_accounting
   - rest_calls
   - scenarios
   - terms
