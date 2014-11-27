@@ -52,7 +52,7 @@ game_source_opened | 335 | Your source has been registered. You can now open and
 
 Parameter | Default | Description
 --------- | ------- | -----------
-source_id | null | The new server-assigned source id with which you, as a game provider, will be identified.
+source_id | null | The new server-assigned source id with which you, as a game provider, will be identified. Necessary for making all game source-related calls.
 
 
 

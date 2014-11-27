@@ -18,6 +18,7 @@ includes:
   - websocket_api_calls_games
   - websocket_api_calls_betting_pools
   - websocket_api_calls_accounting
+  - websocket_api_errors
   - rest_calls
   - scenarios
   - terms
