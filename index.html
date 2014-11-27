@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title>API Reference</title>
+    <title>Instamrkt API Reference</title>
 
     <link href="stylesheets/screen.css" rel="stylesheet" type="text/css" media="screen" />
     <link href="stylesheets/print.css" rel="stylesheet" type="text/css" media="print" />
@@ -89,30 +89,187 @@ Remember — we care about security for your own good!
 
 <p><aside class="warning">If you&rsquo;re not using an administrator API key, note that some kittens will return 403 Forbidden if they are hidden for admins only.</aside></p>
 
-          <h1 id='websocket-api-calls-general'>Websocket API Calls: General</h1>
+          <h1 id='websocket-api-general'>Websocket API: General</h1>
 <p><aside class="notice">
 All websocket calls are expecting a json with the parameters listed for each call.
 </aside></p>
+
+<p><aside class="notice">
+Each request needs to contain a valid header. Each response contains a response header. Both are described <a href="#headers">below</a>.
+</aside></p>
+<h2 id='headers'>Headers</h2><h3 id='header'>Header</h3><h3 id='response-header'>Response header</h3><h2 id='ping'>Ping</h2>
+<blockquote>
+<p>Expects the following JSON structure:</p>
+</blockquote>
+<pre><code class="highlight json"><span class="p">{</span><span class="w">
+  </span><span class="s2">"header"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
+  </span><span class="s2">"op"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<blockquote>
+<p>Returns the following JSON structure:</p>
+</blockquote>
+<pre><code class="highlight json"><span class="p">{</span><span class="w">
+  </span><span class="s2">"response_header"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
+  </span><span class="s2">"res"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>You can use this to make sure the websocket connection is still open and ready for sending / receiving messages.</p>
+<h3 id='operation-code'>Operation code</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Code</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>ping</td>
+<td>1</td>
+</tr>
+</tbody></table>
+<h3 id='call-parameters'>Call Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+</tr>
+</tbody></table>
+<h3 id='response-codes'>Response codes</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Code</th>
+<th>Result</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>pong</td>
+<td>1</td>
+<td>You connection is valid.</td>
+</tr>
+</tbody></table>
+<h3 id='response-parameters'>Response Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+</tr>
+</tbody></table>
+<h2 id='opcodes'>Opcodes</h2>
+<blockquote>
+<p>Expects the following JSON structure:</p>
+</blockquote>
+<pre><code class="highlight json"><span class="p">{</span><span class="w">
+  </span><span class="s2">"header"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
+  </span><span class="s2">"op"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<blockquote>
+<p>Returns the following JSON structure:</p>
+</blockquote>
+<pre><code class="highlight json"><span class="p">{</span><span class="w">
+  </span><span class="s2">"response_header"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
+  </span><span class="s2">"res"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"opcodes"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"logon"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"opcodes"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"..."</span><span class="p">:</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="s2">"response_codes"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"logon_success"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"response_codes"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"..."</span><span class="p">:</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>You can use this to dynamically load the list of supported operations with operation codes.</p>
+<h3 id='operation-code'>Operation code</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Code</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>get_opcodes</td>
+<td>2</td>
+</tr>
+</tbody></table>
+<h3 id='call-parameters'>Call Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+</tr>
+</tbody></table>
+<h3 id='response-codes'>Response codes</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Code</th>
+<th>Result</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>opcodes</td>
+<td>2</td>
+<td>You received a valid list of opcodes and response codes.</td>
+</tr>
+</tbody></table>
+<h3 id='response-parameters'>Response Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>opcodes</td>
+<td>{}</td>
+<td>A dictionary containing all supported opcodes: <strong>key</strong> - opcode name, <strong>value</strong> - opcode.</td>
+</tr>
+<tr>
+<td>response_codes</td>
+<td>{}</td>
+<td>A dictionary containing all supported response codes: <strong>key</strong> - response code name, <strong>value</strong> - response code.</td>
+</tr>
+</tbody></table>
 <h2 id='logon'>Logon</h2>
 <p>Some functionality requires you to send a logon request apart from connecting. Documenation for this calls explicitly says it is presumed you are logged in.</p>
 
 <p>This is performed automatically for you if you are reconnecting (returning to the site after less than 15 minutes). Otherwise, this cll needs to be made explicitly.</p>
 
-<!-- ```python
-```
-
-```shell
-``` -->
-
 <blockquote>
 <p>Expects the following JSON structure:</p>
 </blockquote>
 <pre><code class="highlight json"><span class="p">{</span><span class="w">
-  </span><span class="s2">"header"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"t"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CURRENT_EPOCH_MILLIS"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"api_key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"YOUR_API_KEY"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"api_version"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.0</span><span class="w">
-  </span><span class="p">},</span><span class="w">
+  </span><span class="s2">"header"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
   </span><span class="s2">"op"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
@@ -121,9 +278,7 @@ All websocket calls are expecting a json with the parameters listed for each cal
 <p>Returns the following JSON structure:</p>
 </blockquote>
 <pre><code class="highlight json"><span class="p">{</span><span class="w">
-  </span><span class="s2">"response_header"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"t"</span><span class="p">:</span><span class="w"> </span><span class="mi">1417011631016</span><span class="w">
-    </span><span class="p">},</span><span class="w">
+  </span><span class="s2">"response_header"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
   </span><span class="s2">"res"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
   </span><span class="s2">"session_key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"4"</span><span class="w">
 </span><span class="p">}</span><span class="w">
@@ -131,8 +286,18 @@ All websocket calls are expecting a json with the parameters listed for each cal
 
 <p>This authenticates you with the api server and allows to send all requests.</p>
 <h3 id='operation-code'>Operation code</h3>
-<p>login = 100</p>
-<h3 id='query-parameters'>Query Parameters</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Code</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>logon</td>
+<td>100</td>
+</tr>
+</tbody></table>
+<h3 id='call-parameters'>Call Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -171,6 +336,170 @@ All websocket calls are expecting a json with the parameters listed for each cal
 </tr>
 </tbody></table>
 
+          <h1 id='websocket-api-game-sources'>Websocket API: Game sources</h1>
+<p><aside class="notice">
+This section assumes you are connected as an instamrkt developer. If you do not have a developer&rsquo;s account, please <a href="https://developers.instamrkt.com">register here</a>.
+</aside></p>
+<h2 id='open-a-game-source'>Open a game source</h2>
+<blockquote>
+<p>Expects the following JSON structure:</p>
+</blockquote>
+<pre><code class="highlight json"><span class="p">{</span><span class="w">
+  </span><span class="s2">"header"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
+  </span><span class="s2">"op"</span><span class="p">:</span><span class="w"> </span><span class="mi">365</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"source_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">":YOUR_SOURCE_NAME"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<blockquote>
+<p>Returns the following JSON structure:</p>
+</blockquote>
+<pre><code class="highlight json"><span class="p">{</span><span class="w">
+  </span><span class="s2">"response_header"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
+  </span><span class="s2">"res"</span><span class="p">:</span><span class="w"> </span><span class="mi">335</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"source_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">":YOUR_SOURCE_ID"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>This called is used to register yourself as a game provider.</p>
+<h3 id='operation-code'>Operation code</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Code</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>open_game_source</td>
+<td>365</td>
+</tr>
+</tbody></table>
+<h3 id='call-parameters'>Call Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>source_name</td>
+<td>&ldquo;&rdquo;</td>
+<td>The name you want to assign to your source (your domain suggested).</td>
+</tr>
+</tbody></table>
+<h3 id='response-codes'>Response codes</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Code</th>
+<th>Result</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>game_source_opened</td>
+<td>335</td>
+<td>Your source has been registered. You can now open and host games.</td>
+</tr>
+</tbody></table>
+<h3 id='response-parameters'>Response Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>source_id</td>
+<td>null</td>
+<td>The new server-assigned source id with which you, as a game provider, will be identified.</td>
+</tr>
+</tbody></table>
+<h2 id='close-a-game-source'>Close a game source</h2>
+<blockquote>
+<p>Expects the following JSON structure:</p>
+</blockquote>
+<pre><code class="highlight json"><span class="p">{</span><span class="w">
+  </span><span class="s2">"header"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
+  </span><span class="s2">"op"</span><span class="p">:</span><span class="w"> </span><span class="mi">366</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"source_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">":YOUR_SOURCE_ID"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<blockquote>
+<p>Returns the following JSON structure:</p>
+</blockquote>
+<pre><code class="highlight json"><span class="p">{</span><span class="w">
+  </span><span class="s2">"response_header"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
+  </span><span class="s2">"res"</span><span class="p">:</span><span class="w"> </span><span class="mi">336</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"source_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">":YOUR_SOURCE_ID"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>This called is used to close a game source you are hosting. This means you will not be able to host games anymore.</p>
+
+<p><aside class="warning">
+This will automatically close all the games (and resolve pools accordingly) hosted by the source. Make sure you really want to send this request.
+</aside></p>
+<h3 id='operation-code'>Operation code</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Code</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>close_game_source</td>
+<td>366</td>
+</tr>
+</tbody></table>
+<h3 id='call-parameters'>Call Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>source_id</td>
+<td>null</td>
+<td>The source id assigned by the server upon source opening.</td>
+</tr>
+</tbody></table>
+<h3 id='response-codes'>Response codes</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Code</th>
+<th>Result</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>game_source_closed</td>
+<td>336</td>
+<td>Your source has been closed. No more games can be hosted for this source.</td>
+</tr>
+</tbody></table>
+<h3 id='response-parameters'>Response Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>source_id</td>
+<td>null</td>
+<td>Your source id.</td>
+</tr>
+</tbody></table>
+
+          <h1 id='websocket-api-games'>Websocket API: Games</h1>
+          <h1 id='websocket-api-betting-pools'>Websocket API: Betting pools</h1>
+          <h1 id='websocket-api-accounting'>Websocket API: Accounting</h1>
           <h1 id='rest-calls'>REST Calls</h1>
           <h1 id='sample-scenarios'>Sample scenarios</h1><h2 id='register-yourself-as-a-game-provider'>Register yourself as a game provider</h2><h2 id='open-and-start-a-game'>Open and start a game</h2><h2 id='open-pools'>Open pools</h2><h2 id='block--unblock-betting-in-pools'>Block / Unblock betting in pools</h2>
           <h1 id='terms-of-use'>Terms of use</h1>
