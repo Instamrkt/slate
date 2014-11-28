@@ -136,13 +136,162 @@ live_finish_at | null | The real life game finish time in epoch millis (only inf
 close_at | null | The close game time in epoch millis (if null, game close request needs to be sent explicitly).
 
 ## Create a game
+
 <aside class="notice">
 Only users listed as admins for the source are authorized for this call.
 </aside>
-## Cpen a game
+
+
+> Expects the following JSON structure:
+
+```json
+{
+  "header": {},
+  "op": 3701,
+  "source_id": "30cee1fa-fb20-41a6-a61c-0e0335abc2a9",
+  "game_name": "Argentina - Brazil",
+  "type": "football",
+  "currency": "EUR",
+  "create_at": 1417104170,
+  "open_at": 1417104170,
+  "live_start_at": 1417105170,
+  "live_finish_at": 1417106170
+}
+```
+
+
+> Returns the following JSON structure:
+
+```json
+{
+  "response_header": {},
+  "res": 3401,
+  "source_id": "30cee1fa-fb20-41a6-a61c-0e0335abc2a9",
+  "game_id": "30cee1fa-fb20-41a6-a61c-0e0335abc2a9",
+  "game_name": "Argentina - Brazil",
+  "type": "football",
+  "open_at": 1417104170,
+  "live_start_at": 1417105170,
+  "live_finish_at": 1417106170,
+  "close_at": null
+}
+```
+
+This registers the game in the system as an upcoming game. An <a href="#open-a-game">open game</a> request needs to be sent afterwards to open a game for betting.
+
+To allow betting, targets and actions need to be added to the game either with the <a href="#open-a-game">open game</a> request, or with an <a href="#update-game-details">update game details</a> request.
+
+### Operation code
+
+Name | Code
+--------- | -------
+create_game | 3701
+
+### Call Parameters
+
+Parameter | Default | Description
+--------- | ------- | -----------
+source_id | null | Your source id.
+game_name | null | The name you want to assign to your game, e.g. "Argentina - Brazil".
+type | null | The game type of your game, e.g. "football", "basketball", etc.
+open_at | now() | Game opening time (> now()) in epoch millis. No pool opening allowed before that time.
+close_at | now() | Game closing time (> open_at) in epoch millis. This will close the game at a given time. **Warning**: this will automatically resolve all the parimutuel pools running for the game. If not included (**recommended**), game close request has to be sent automatically.
+live_start_at | now() | Game real life starting time (> now()) in epoch millis. This can be different than open_at (e.g. you might want to allow betting before the game starts in real life). Serves **only** as an informative value.
+live_finish_at | now() | Game real life finishing time (> now()) in epoch millis. This can be different than close_at (e.g. you might want to close betting before the game finishes in real life). Serves **only** as an informative value.
+currency | null | The currency for which you want to allow betting for in the game.
+
+### Response codes
+
+Name | Code | Result
+--------- | ------- | -----------
+game_created | 3401 | Your game has been created and is listed as an upcoming game. You still need to open it for betting and add actions and targets.
+
+### Response Parameters
+
+Parameter | Default | Description
+--------- | ------- | -----------
+source_id | :YOUR_SOURCE_ID | Your source id.
+game_id | :YOUR_GAME_ID | The server-generated game id. Necessary for making all game-related calls.
+game_name | :YOUR_GAME_NAME | The game name you provided.
+type | :YOUR_GAME_TYPE | The game type you provided.
+open_at | request receival time | The open game time in epoch millis.
+live_start_at | request receival time | The real life game start time in epoch millis (only informative).
+live_finish_at | null | The real life game finish time in epoch millis (only informative).
+close_at | null | The close game time in epoch millis (if null, game close request needs to be sent explicitly).
+
+## Open a game
+
 <aside class="notice">
 Only users listed as admins for the source are authorized for this call.
 </aside>
+
+
+> Expects the following JSON structure:
+
+```json
+{
+  "header": {},
+  "op": 3702,
+  "actions": ["Goal", "Offside", ".."],
+  "targets": ["Argentina", "Brazil", "Argentina:1", "Argentina:2", "Brazil:7", ".."]
+}
+```
+
+
+> Returns the following JSON structure:
+
+```json
+{
+  "response_header": {},
+  "res": 3402,
+  "source_id": "30cee1fa-fb20-41a6-a61c-0e0335abc2a9",
+  "game_id": "30cee1fa-fb20-41a6-a61c-0e0335abc2a9",
+  "game_name": "Argentina - Brazil",
+  "type": "football",
+  "open_at": 1417104170,
+  "live_start_at": 1417105170,
+  "live_finish_at": 1417106170,
+  "close_at": null
+}
+```
+
+This opens a previously created upcoming game (with a <a href="#create-a-game">create game</a> request) for betting.
+
+### Operation code
+
+Name | Code
+--------- | -------
+open_game | 3702
+
+### Call Parameters
+
+Parameter | Default | Description
+--------- | ------- | -----------
+game_id | null | The game id for the game you want opened (sent in response to create_game request).
+actions | [] | List of actions that can happen in the game, e.g. "yellow-card", "goal", "offside", etc. Sent as a comma-separated string or an array.
+targets | [] | List of targets taking part in the game. Sent as a comma-separated string or an array. Targets can be infinitely nested. Nesting is indicated by including a ':' in the target. E.g. "Argentina:1" means "Argentina, player 1". Server automatically builds a nested structure (see the example to the right). You can send targets of different nesting levels. An event registered for Argentina:1 will resolve pools for Argentina:1 and Argentina (e.g. Messi scores - pools for Messi's goals and Argentina goals get resovled).
+
+### Response codes
+
+Name | Code | Result
+--------- | ------- | -----------
+game_created_and_opened | 340 | Your game has been opened. You can now open betting pools for the game. **Warning**: This is the same response as for the <a href="#create-and-open-a-game">create and open game</a> request. The state after processing both calls is semantically equivalent.
+
+### Response Parameters
+
+Parameter | Default | Description
+--------- | ------- | -----------
+source_id | :YOUR_SOURCE_ID | Your source id.
+game_id | :YOUR_GAME_ID | The server-generated game id. Necessary for making all game-related calls.
+game_name | :YOUR_GAME_NAME | The game name you provided.
+type | :YOUR_GAME_TYPE | The game type you provided.
+actions | {} | A dictionary containing the actions you listed. **key** - action id, **value** - action details (name).
+targets | {} | A nested, recursive dictionary containing the targets you listed. **key** - target id, **value** - target details (symbol, display name and _sub_ targets). Please look at the example on the right.
+open_at | request receival time | The open game time in epoch millis.
+live_start_at | request receival time | The real life game start time in epoch millis (only informative).
+live_finish_at | null | The real life game finish time in epoch millis (only informative).
+close_at | null | The close game time in epoch millis (if null, game close request needs to be sent explicitly).
+
 ## Become an admin for a game
 <aside class="notice">
 Only users listed as admins for the source are authorized for this call.
