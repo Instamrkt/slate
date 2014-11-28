@@ -2,8 +2,6 @@
 title: Instamrkt API Reference
 
 language_tabs:
-  - shell
-  - python
   - javascript
 
 toc_footers:

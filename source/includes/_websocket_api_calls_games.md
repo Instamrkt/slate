@@ -378,7 +378,7 @@ reason | :YOUR_GAME_ID | The reason why you couldn't become an admin. Sent **onl
 ```json
 {
   "header": {},
-  "op": 372,
+  "op": 373,
   "game_id": "30cee1fa-fb20-41a6-a61c-0e0335abc2a9"
 }
 ```
@@ -391,6 +391,7 @@ reason | :YOUR_GAME_ID | The reason why you couldn't become an admin. Sent **onl
     "response_header": {},
     "res": 342,
     "status": "game_in_progress_betting_active",
+    "game_id": "30cee1fa-fb20-41a6-a61c-0e0335abc2a9",
     "name": "Argentina - Brazil",
     "past_events": {
         "106a9151-2997-4c96-bc29-c020da54fa67": {
@@ -461,13 +462,13 @@ Obtain full details for a game with given id.
 
 Name | Code
 --------- | -------
-get_game_details | 373
+get_game_details | 372
 
 ### Call Parameters
 
 Parameter | Default | Description
 --------- | ------- | -----------
-game_id | null | The game id for which you want to obtain details for.
+game_id | null | The game id of which you want to obtain details.
 
 ### Response codes
 
@@ -499,6 +500,65 @@ currency | null | The currency for which you want to allow betting for in the ga
 <aside class="notice">
 Only users listed as admins for the source are authorized for this call.
 </aside>
+
+> Expects the following JSON structure:
+
+```json
+{
+  "header": {},
+  "op": 373,
+  "game_id": "30cee1fa-fb20-41a6-a61c-0e0335abc2a9",
+  "actions": ["Goal", "Offside"],
+  "targets": ["Argentina", "Brazil", "Argentina:1", "Argentina:2", "Brazil:7"]
+}
+```
+
+
+> Returns the following JSON structure:
+
+```json
+{
+    "response_header": {},
+    "res": 343,
+    "game_id": "30cee1fa-fb20-41a6-a61c-0e0335abc2a9"
+}
+```
+
+
+Update game details - add new targets or actions.
+
+This publishes the updated game details to users subscribed to the game.
+
+
+### Operation code
+
+Name | Code
+--------- | -------
+update_game_details | 373
+
+### Call Parameters
+
+Parameter | Default | Description
+--------- | ------- | -----------
+game_id | null | The game id of which you want to update details.
+actions | [] | List of actions that you want to add to the game, e.g. "yellow-card", "goal", "offside", etc. Sent as a comma-separated string or an array.
+targets | [] | List of targets that you want to add to the game. Sent as a comma-separated string or an array. Targets can be infinitely nested. Nesting is indicated by including a ':' in the target. E.g. "Argentina:1" means "Argentina, player 1". Server automatically builds a nested structure (see the example to the right). You can send targets of different nesting levels. An event registered for Argentina:1 will resolve pools for Argentina:1 and Argentina (e.g. Messi scores - pools for Messi's goals and Argentina goals get resovled).
+
+
+### Response codes
+
+Name | Code | Result
+--------- | ------- | -----------
+game_details_updated | 343 | You have updated the game details (confirmation).
+game_details | 342 | New game details are published to everyone subscribed to the game (including you). Check <a href="#get-game-details"> get game details</a> section for a list of response parameter for this message.
+
+### Response Parameters
+
+Parameter | Default | Description
+--------- | ------- | -----------
+game_id | :YOUR_GAME_ID | The game id you provided.
+
+
 ## Join game
 ## Leave game
 ## Close a game
