@@ -717,4 +717,66 @@ user_name | :USER_WHO_LEFT_NAME | The name of the user that left the game.
 <aside class="notice">
 Only users listed as admins for the source are authorized for this call.
 </aside>
+
+<aside class="warning">
+This will automatically close and resolve all the automatically resolvable pools opened in the game. It will block betting in all the pools that need to be resolved manually. Request has to be resent after these pools are resolved (if there are any). Make sure you really want to send this request.
+</aside>
+
+> Expects the following JSON structure:
+
+```json
+{
+  "header": {},
+  "op": 375,
+  "game_id": "30cee1fa-fb20-41a6-a61c-0e0335abc2a9"
+}
+```
+
+
+> Returns and publishes the following JSON structure:
+
+```json
+{
+    "response_header": {},
+    "res": 341,
+    "game_id": "30cee1fa-fb20-41a6-a61c-0e0335abc2a9"
+}
+```
+
+> Publishes bet_pool_resolved message for all resolved pools and betting_in_pool_blocked for all pools that need manual resolution.
+
+Close the game. This resolves all the automatic pools and blocks all the pools requiring manual resolution (if there are any).
+
+If there exist any pools which need manual resolution, the request needs to be **resent** after this is performed.
+
+After that, the game disappears from all the listings for running games.
+
+
+### Operation code
+
+Name | Code
+--------- | -------
+close_game | 375
+
+### Call Parameters
+
+Parameter | Default | Description
+--------- | ------- | -----------
+game_id | null | The game id of the game you want to close.
+
+### Response codes
+
+Name | Code | Result
+--------- | ------- | -----------
+game_closed | 341 | Game has been closed. No one can subscribe to it anymore. It doesn't show up in active games listings. Published to you and all other users subscribed to the game. **Only** sent if no manual pools remain unresolved.
+bet_pool_resolved | 362 | Published to all game subscribers for all automatically resolveable pools. heck <a href="#betting-pool-resolved"> betting pool resolved</a> section for a list of response parameter for this message.
+betting_in_pool_blocked | 368 | Published to all game subscribers for all manually resolveable pools. Check <a href="#betting-in-pool-blocked"> betting pool blocked</a> section for a list of response parameter for this message.
+
+### Response Parameters
+
+Parameter | Default | Description
+--------- | ------- | -----------
+game_id | :YOUR_GAME_ID | The game id you provided.
+
+
 ## List games for source
