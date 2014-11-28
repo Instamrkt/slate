@@ -369,7 +369,132 @@ game_id | :YOUR_GAME_ID | The game id you provided.
 reason | :YOUR_GAME_ID | The reason why you couldn't become an admin. Sent **only** with become_an_admin_for_game_fail response code.
 
 
+
+
 ## Get game details
+
+> Expects the following JSON structure:
+
+```json
+{
+  "header": {},
+  "op": 372,
+  "game_id": "30cee1fa-fb20-41a6-a61c-0e0335abc2a9"
+}
+```
+
+
+> Returns the following JSON structure:
+
+```json
+{
+    "response_header": {},
+    "res": 342,
+    "status": "game_in_progress_betting_active",
+    "name": "Argentina - Brazil",
+    "past_events": {
+        "106a9151-2997-4c96-bc29-c020da54fa67": {
+            "happened_at": 1417180267000,
+            "target_id": "argentina:1",
+            "action_id": "goal"
+        },
+        "13bc5390-d86c-45b8-8327-7b313b80103d": {
+            "happened_at": 1417180282000,
+            "target_id": "brazil:7",
+            "action_id": "offside"
+        }
+    },
+    "actions": {
+	  	"goal": {
+	  		"name": "Goal"
+	  	},
+	  	"offside": {
+	  		"name": "Offside"
+	  	}
+	  },
+    "currency": "DON",
+    "type": "4d24a1cb-5465-4ab3-befd-99fb39b7b796",
+    "targets": {
+		"brazil": {
+			"symbol": "bra",
+			"display_name": "Brazil",
+			"targets": {
+				"7": {
+					"symbol": "7",
+					"display_name": "7",
+					"targets": {}
+				}
+			}
+		},
+		"none": {
+			"symbol": "non",
+			"display_name": "None",
+			"targets": {}
+		},
+		"argentina": {
+			"symbol": "arg",
+			"display_name": "argentina",
+			"targets": {
+				"1": {
+					"symbol": "1",
+					"display_name": "1",
+					"targets": {}
+				},
+				"2": {
+					"symbol": "2",
+					"display_name": "2",
+					"targets": {}
+				}
+			}
+		}
+	},
+    "open_at": 1417104170,
+    "live_start_at": 1417105170,
+    "live_finish_at": null,
+    "close_at": null
+```
+
+
+Obtain full details for a game with given id.
+
+### Operation code
+
+Name | Code
+--------- | -------
+get_game_details | 373
+
+### Call Parameters
+
+Parameter | Default | Description
+--------- | ------- | -----------
+game_id | null | The game id for which you want to obtain details for.
+
+### Response codes
+
+Name | Code | Result
+--------- | ------- | -----------
+game_details | 342 | You have received the requested game details.
+
+### Response Parameters
+
+Parameter | Default | Description
+--------- | ------- | -----------
+game_id | :YOUR_GAME_ID | The game id you provided.
+game_name | :YOUR_GAME_NAME | The game name you provided.
+status | null | Current game status. Possible values: "betting_not_yet_active", "pre_game_betting_active", "game_in_progress_betting_active", "game_in_progress_betting_closed", "game_closed".
+type | :YOUR_GAME_TYPE | The uuid of the game type you provided.
+actions | {} | A dictionary containing the actions for the game. **key** - action id, **value** - action details (name).
+targets | {} | A nested, recursive dictionary containing the targets for the game. **key** - target id, **value** - target details (symbol, display name and _sub_ targets). Please look at the example on the right.
+past_events | {} | A dictionary containing all the events that happened in the game so far. **key** - event id, **value** - event details (happened_at, target_id, action_id).
+open_at | request receival time | The open game time in epoch millis.
+live_start_at | request receival time | The real life game start time in epoch millis (only informative).
+live_finish_at | null | The real life game finish time in epoch millis (only informative).
+close_at | null | The close game time in epoch millis (if null, game close request needs to be sent explicitly).
+currency | null | The currency for which you want to allow betting for in the game.
+
+
+
+
 ## Update game details
 <aside class="notice">
 Only users listed as admins for the source are authorized for this call.
