@@ -13,7 +13,7 @@
 
       <script>
         $(function() {
-          setupLanguages(["shell","python","javascript"]);
+          setupLanguages(["javascript"]);
         });
       </script>
   </head>
@@ -28,8 +28,6 @@
     <div class="tocify-wrapper">
       <img src="images/logo.png" />
         <div class="lang-selector">
-              <a href="#" data-language-name="shell">shell</a>
-              <a href="#" data-language-name="python">python</a>
               <a href="#" data-language-name="javascript">javascript</a>
         </div>
         <div class="search">
@@ -49,30 +47,11 @@
       <div class="content">
         <h1 id='introduction'>Introduction</h1>
 <p>This is an introduction to Instamrkt API.</p>
-<h1 id='general-overview'>General overview</h1>
+
+          <h1 id='general-overview'>General overview</h1>
 <p>This is a general overwiev and philosophy of Instamrkt API.</p>
-
+<h2 id='system-architecture'>System architecture</h2><h2 id='subscribing--publishing-games'>Subscribing / publishing (games)</h2><h2 id='registering-events-resolving-pools'>Registering events/ resolving pools</h2>
           <h1 id='authentication'>Authentication</h1>
-<blockquote>
-<p>To authorize, use this code:</p>
-</blockquote>
-<pre><code class="highlight ruby"><span class="nb">require</span> <span class="s1">'kittn'</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
-</code></pre>
-<pre><code class="highlight python"><span class="kn">import</span> <span class="nn">kittn</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
-</code></pre>
-<pre><code class="highlight shell"><span class="c"># With shell, you can just pass the correct header with each request</span>
-curl <span class="s2">"api_endpoint_here"</span>
-  -H <span class="s2">"Authorization: meowmeowmeow"</span>
-</code></pre>
-
-<blockquote>
-<p>Make sure to replace <code class="prettyprint">meowmeowmeow</code> with your API key.</p>
-</blockquote>
-
 <p>Instamrkt uses API keys to allow access to the API. You can register a new Instamrkt API key at our <a href="http://instamrkt.com/">developer portal</a>.</p>
 
 <p>Instamrkt expects for the API key to be included in all API requests to the server in a header that looks like the following:</p>
@@ -88,6 +67,15 @@ Remember — we care about security for your own good!
 </aside></p>
 
 <p><aside class="warning">If you&rsquo;re not using an administrator API key, note that some kittens will return 403 Forbidden if they are hidden for admins only.</aside></p>
+
+          <h1 id='authorization'>Authorization</h1><h2 id='privilege-levels'>Privilege levels</h2>
+<p>IMAGE OF WHAT INCLUDES WHAT AND WHO CAN GRANT WHAT</p>
+<h3 id='app-developer--game-source-owner'>App developer / Game Source owner</h3>
+<p>Priviliges list.</p>
+<h3 id='game-source-admin'>Game source admin</h3>
+<p>Priviliges list.</p>
+<h3 id='game-admin'>Game admin</h3>
+<p>Priviliges list.</p>
 
           <h1 id='websocket-api-general'>Websocket API: General</h1>
 <p><aside class="notice">
@@ -413,7 +401,7 @@ This section assumes you are connected as an instamrkt developer. If you do not 
 <tr>
 <td>source_id</td>
 <td>null</td>
-<td>The new server-assigned source id with which you, as a game provider, will be identified.</td>
+<td>The new server-assigned source id with which you, as a game provider, will be identified. Necessary for making all game source-related calls.</td>
 </tr>
 </tbody></table>
 <h2 id='close-a-game-source'>Close a game source</h2>
@@ -498,8 +486,1371 @@ This will automatically close all the games (and resolve pools accordingly) host
 </tbody></table>
 
           <h1 id='websocket-api-games'>Websocket API: Games</h1>
+<p><aside class="notice">
+This section assumes you have an active game source opened. If not, read on how to open it <a href="#open-a-game-source">here</a>.
+</aside></p>
+<h2 id='create-and-open-a-game'>Create and open a game</h2>
+<p><aside class="notice">
+Only users listed as admins for the source are authorized for this call.
+</aside></p>
+
+<blockquote>
+<p>Expects the following JSON structure:</p>
+</blockquote>
+<pre><code class="highlight json"><span class="p">{</span><span class="w">
+  </span><span class="s2">"header"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
+  </span><span class="s2">"op"</span><span class="p">:</span><span class="w"> </span><span class="mi">370</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"source_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"30cee1fa-fb20-41a6-a61c-0e0335abc2a9"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"game_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Argentina - Brazil"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"actions"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"Goal"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Offside"</span><span class="p">,</span><span class="w"> </span><span class="s2">".."</span><span class="p">],</span><span class="w">
+  </span><span class="s2">"targets"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"Argentina"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Brazil"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Argentina:1"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Argentina:2"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Brazil:7"</span><span class="p">,</span><span class="w"> </span><span class="s2">".."</span><span class="p">],</span><span class="w">
+  </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"football"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"EUR"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"create_at"</span><span class="p">:</span><span class="w"> </span><span class="mi">1417104170</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"open_at"</span><span class="p">:</span><span class="w"> </span><span class="mi">1417104170</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"live_start_at"</span><span class="p">:</span><span class="w"> </span><span class="mi">1417105170</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"live_finish_at"</span><span class="p">:</span><span class="w"> </span><span class="mi">1417106170</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<blockquote>
+<p>Returns the following JSON structure:</p>
+</blockquote>
+<pre><code class="highlight json"><span class="p">{</span><span class="w">
+  </span><span class="s2">"response_header"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
+  </span><span class="s2">"res"</span><span class="p">:</span><span class="w"> </span><span class="mi">340</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"source_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"30cee1fa-fb20-41a6-a61c-0e0335abc2a9"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"game_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"30cee1fa-fb20-41a6-a61c-0e0335abc2a9"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"actions"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"goal"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Goal"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"offside"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Offside"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="s2">"game_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Argentina - Brazil"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"football"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"open_at"</span><span class="p">:</span><span class="w"> </span><span class="mi">1417104170</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"live_start_at"</span><span class="p">:</span><span class="w"> </span><span class="mi">1417105170</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"live_finish_at"</span><span class="p">:</span><span class="w"> </span><span class="mi">1417106170</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"close_at"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"targets"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"brazil"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"bra"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"display_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Brazil"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"targets"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="s2">"7"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                    </span><span class="s2">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"7"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"display_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"7"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"targets"</span><span class="p">:</span><span class="w"> </span><span class="p">{}</span><span class="w">
+                </span><span class="p">}</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="s2">"none"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"non"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"display_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"None"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"targets"</span><span class="p">:</span><span class="w"> </span><span class="p">{}</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="s2">"argentina"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"arg"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"display_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"argentina"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"targets"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="s2">"1"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                    </span><span class="s2">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"display_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"targets"</span><span class="p">:</span><span class="w"> </span><span class="p">{}</span><span class="w">
+                </span><span class="p">},</span><span class="w">
+                </span><span class="s2">"2"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                    </span><span class="s2">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"display_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"targets"</span><span class="p">:</span><span class="w"> </span><span class="p">{}</span><span class="w">
+                </span><span class="p">}</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>This registers the game in the system and opens it automatically. Betting pools can now be opened for this game.</p>
+<h3 id='operation-code'>Operation code</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Code</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>create_and_open_game</td>
+<td>370</td>
+</tr>
+</tbody></table>
+<h3 id='call-parameters'>Call Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>source_id</td>
+<td>null</td>
+<td>Your source id.</td>
+</tr>
+<tr>
+<td>game_name</td>
+<td>null</td>
+<td>The name you want to assign to your game, e.g. &ldquo;Argentina - Brazil&rdquo;.</td>
+</tr>
+<tr>
+<td>type</td>
+<td>null</td>
+<td>The game type of your game, e.g. &ldquo;football&rdquo;, &ldquo;basketball&rdquo;, etc.</td>
+</tr>
+<tr>
+<td>actions</td>
+<td>[]</td>
+<td>List of actions that can happen in the game, e.g. &ldquo;yellow-card&rdquo;, &ldquo;goal&rdquo;, &ldquo;offside&rdquo;, etc. Sent as a comma-separated string or an array.</td>
+</tr>
+<tr>
+<td>targets</td>
+<td>[]</td>
+<td>List of targets taking part in the game. Sent as a comma-separated string or an array. Targets can be infinitely nested. Nesting is indicated by including a &lsquo;:&rsquo; in the target. E.g. &ldquo;Argentina:1&rdquo; means &ldquo;Argentina, player 1&rdquo;. Server automatically builds a nested structure (see the example to the right). You can send targets of different nesting levels. An event registered for Argentina:1 will resolve pools for Argentina:1 and Argentina (e.g. Messi scores - pools for Messi&rsquo;s goals and Argentina goals get resovled).</td>
+</tr>
+<tr>
+<td>open_at</td>
+<td>now()</td>
+<td>Game opening time (&gt; now()) in epoch millis. No pool opening allowed before that time.</td>
+</tr>
+<tr>
+<td>close_at</td>
+<td>now()</td>
+<td>Game closing time (&gt; open_at) in epoch millis. This will close the game at a given time. <strong>Warning</strong>: this will automatically resolve all the parimutuel pools running for the game. If not included (<strong>recommended</strong>), game close request has to be sent automatically.</td>
+</tr>
+<tr>
+<td>live_start_at</td>
+<td>now()</td>
+<td>Game real life starting time (&gt; now()) in epoch millis. This can be different than open_at (e.g. you might want to allow betting before the game starts in real life). Serves <strong>only</strong> as an informative value.</td>
+</tr>
+<tr>
+<td>live_finish_at</td>
+<td>now()</td>
+<td>Game real life finishing time (&gt; now()) in epoch millis. This can be different than close_at (e.g. you might want to close betting before the game finishes in real life). Serves <strong>only</strong> as an informative value.</td>
+</tr>
+<tr>
+<td>currency</td>
+<td>null</td>
+<td>The currency for which you want to allow betting for in the game.</td>
+</tr>
+</tbody></table>
+<h3 id='response-codes'>Response codes</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Code</th>
+<th>Result</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>game_created_and_opened</td>
+<td>340</td>
+<td>Your game has been created and opened. You can now open betting pools for the game.</td>
+</tr>
+</tbody></table>
+<h3 id='response-parameters'>Response Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>source_id</td>
+<td>:YOUR_SOURCE_ID</td>
+<td>Your source id.</td>
+</tr>
+<tr>
+<td>game_id</td>
+<td>:YOUR_GAME_ID</td>
+<td>The server-generated game id. Necessary for making all game-related calls.</td>
+</tr>
+<tr>
+<td>game_name</td>
+<td>:YOUR_GAME_NAME</td>
+<td>The game name you provided.</td>
+</tr>
+<tr>
+<td>type</td>
+<td>:YOUR_GAME_TYPE</td>
+<td>The game type you provided.</td>
+</tr>
+<tr>
+<td>actions</td>
+<td>{}</td>
+<td>A dictionary containing the actions you listed. <strong>key</strong> - action id, <strong>value</strong> - action details (name).</td>
+</tr>
+<tr>
+<td>targets</td>
+<td>{}</td>
+<td>A nested, recursive dictionary containing the targets you listed. <strong>key</strong> - target id, <strong>value</strong> - target details (symbol, display name and <em>sub</em> targets). Please look at the example on the right.</td>
+</tr>
+<tr>
+<td>open_at</td>
+<td>request receival time</td>
+<td>The open game time in epoch millis.</td>
+</tr>
+<tr>
+<td>live_start_at</td>
+<td>request receival time</td>
+<td>The real life game start time in epoch millis (only informative).</td>
+</tr>
+<tr>
+<td>live_finish_at</td>
+<td>null</td>
+<td>The real life game finish time in epoch millis (only informative).</td>
+</tr>
+<tr>
+<td>close_at</td>
+<td>null</td>
+<td>The close game time in epoch millis (if null, game close request needs to be sent explicitly).</td>
+</tr>
+</tbody></table>
+<h2 id='create-a-game'>Create a game</h2>
+<p><aside class="notice">
+Only users listed as admins for the source are authorized for this call.
+</aside></p>
+
+<blockquote>
+<p>Expects the following JSON structure:</p>
+</blockquote>
+<pre><code class="highlight json"><span class="p">{</span><span class="w">
+  </span><span class="s2">"header"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
+  </span><span class="s2">"op"</span><span class="p">:</span><span class="w"> </span><span class="mi">3701</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"source_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"30cee1fa-fb20-41a6-a61c-0e0335abc2a9"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"game_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Argentina - Brazil"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"football"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"EUR"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"create_at"</span><span class="p">:</span><span class="w"> </span><span class="mi">1417104170</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"open_at"</span><span class="p">:</span><span class="w"> </span><span class="mi">1417104170</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"live_start_at"</span><span class="p">:</span><span class="w"> </span><span class="mi">1417105170</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"live_finish_at"</span><span class="p">:</span><span class="w"> </span><span class="mi">1417106170</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<blockquote>
+<p>Returns the following JSON structure:</p>
+</blockquote>
+<pre><code class="highlight json"><span class="p">{</span><span class="w">
+  </span><span class="s2">"response_header"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
+  </span><span class="s2">"res"</span><span class="p">:</span><span class="w"> </span><span class="mi">3401</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"source_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"30cee1fa-fb20-41a6-a61c-0e0335abc2a9"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"game_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"30cee1fa-fb20-41a6-a61c-0e0335abc2a9"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"game_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Argentina - Brazil"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"football"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"open_at"</span><span class="p">:</span><span class="w"> </span><span class="mi">1417104170</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"live_start_at"</span><span class="p">:</span><span class="w"> </span><span class="mi">1417105170</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"live_finish_at"</span><span class="p">:</span><span class="w"> </span><span class="mi">1417106170</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"close_at"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>This registers the game in the system as an upcoming game. An <a href="#open-a-game">open game</a> request needs to be sent afterwards to open a game for betting.</p>
+
+<p>To allow betting, targets and actions need to be added to the game either with the <a href="#open-a-game">open game</a> request, or with an <a href="#update-game-details">update game details</a> request.</p>
+<h3 id='operation-code'>Operation code</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Code</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>create_game</td>
+<td>3701</td>
+</tr>
+</tbody></table>
+<h3 id='call-parameters'>Call Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>source_id</td>
+<td>null</td>
+<td>Your source id.</td>
+</tr>
+<tr>
+<td>game_name</td>
+<td>null</td>
+<td>The name you want to assign to your game, e.g. &ldquo;Argentina - Brazil&rdquo;.</td>
+</tr>
+<tr>
+<td>type</td>
+<td>null</td>
+<td>The game type of your game, e.g. &ldquo;football&rdquo;, &ldquo;basketball&rdquo;, etc.</td>
+</tr>
+<tr>
+<td>open_at</td>
+<td>now()</td>
+<td>Game opening time (&gt; now()) in epoch millis. No pool opening allowed before that time.</td>
+</tr>
+<tr>
+<td>close_at</td>
+<td>now()</td>
+<td>Game closing time (&gt; open_at) in epoch millis. This will close the game at a given time. <strong>Warning</strong>: this will automatically resolve all the parimutuel pools running for the game. If not included (<strong>recommended</strong>), game close request has to be sent automatically.</td>
+</tr>
+<tr>
+<td>live_start_at</td>
+<td>now()</td>
+<td>Game real life starting time (&gt; now()) in epoch millis. This can be different than open_at (e.g. you might want to allow betting before the game starts in real life). Serves <strong>only</strong> as an informative value.</td>
+</tr>
+<tr>
+<td>live_finish_at</td>
+<td>now()</td>
+<td>Game real life finishing time (&gt; now()) in epoch millis. This can be different than close_at (e.g. you might want to close betting before the game finishes in real life). Serves <strong>only</strong> as an informative value.</td>
+</tr>
+<tr>
+<td>currency</td>
+<td>null</td>
+<td>The currency for which you want to allow betting for in the game.</td>
+</tr>
+</tbody></table>
+<h3 id='response-codes'>Response codes</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Code</th>
+<th>Result</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>game_created</td>
+<td>3401</td>
+<td>Your game has been created and is listed as an upcoming game. You still need to open it for betting and add actions and targets.</td>
+</tr>
+</tbody></table>
+<h3 id='response-parameters'>Response Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>source_id</td>
+<td>:YOUR_SOURCE_ID</td>
+<td>Your source id.</td>
+</tr>
+<tr>
+<td>game_id</td>
+<td>:YOUR_GAME_ID</td>
+<td>The server-generated game id. Necessary for making all game-related calls.</td>
+</tr>
+<tr>
+<td>game_name</td>
+<td>:YOUR_GAME_NAME</td>
+<td>The game name you provided.</td>
+</tr>
+<tr>
+<td>type</td>
+<td>:YOUR_GAME_TYPE</td>
+<td>The game type you provided.</td>
+</tr>
+<tr>
+<td>open_at</td>
+<td>request receival time</td>
+<td>The open game time in epoch millis.</td>
+</tr>
+<tr>
+<td>live_start_at</td>
+<td>request receival time</td>
+<td>The real life game start time in epoch millis (only informative).</td>
+</tr>
+<tr>
+<td>live_finish_at</td>
+<td>null</td>
+<td>The real life game finish time in epoch millis (only informative).</td>
+</tr>
+<tr>
+<td>close_at</td>
+<td>null</td>
+<td>The close game time in epoch millis (if null, game close request needs to be sent explicitly).</td>
+</tr>
+</tbody></table>
+<h2 id='open-a-game'>Open a game</h2>
+<p><aside class="notice">
+Only users listed as admins for the source are authorized for this call.
+</aside></p>
+
+<blockquote>
+<p>Expects the following JSON structure:</p>
+</blockquote>
+<pre><code class="highlight json"><span class="p">{</span><span class="w">
+  </span><span class="s2">"header"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
+  </span><span class="s2">"op"</span><span class="p">:</span><span class="w"> </span><span class="mi">3702</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"actions"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"Goal"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Offside"</span><span class="p">,</span><span class="w"> </span><span class="s2">".."</span><span class="p">],</span><span class="w">
+  </span><span class="s2">"targets"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"Argentina"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Brazil"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Argentina:1"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Argentina:2"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Brazil:7"</span><span class="p">,</span><span class="w"> </span><span class="s2">".."</span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<blockquote>
+<p>Returns the following JSON structure:</p>
+</blockquote>
+<pre><code class="highlight json"><span class="p">{</span><span class="w">
+  </span><span class="s2">"response_header"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
+  </span><span class="s2">"res"</span><span class="p">:</span><span class="w"> </span><span class="mi">3402</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"source_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"30cee1fa-fb20-41a6-a61c-0e0335abc2a9"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"game_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"30cee1fa-fb20-41a6-a61c-0e0335abc2a9"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"game_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Argentina - Brazil"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"football"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"open_at"</span><span class="p">:</span><span class="w"> </span><span class="mi">1417104170</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"live_start_at"</span><span class="p">:</span><span class="w"> </span><span class="mi">1417105170</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"live_finish_at"</span><span class="p">:</span><span class="w"> </span><span class="mi">1417106170</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"close_at"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>This opens a previously created upcoming game (with a <a href="#create-a-game">create game</a> request) for betting.</p>
+<h3 id='operation-code'>Operation code</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Code</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>open_game</td>
+<td>3702</td>
+</tr>
+</tbody></table>
+<h3 id='call-parameters'>Call Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>game_id</td>
+<td>null</td>
+<td>The game id for the game you want opened (sent in response to create_game request).</td>
+</tr>
+<tr>
+<td>actions</td>
+<td>[]</td>
+<td>List of actions that can happen in the game, e.g. &ldquo;yellow-card&rdquo;, &ldquo;goal&rdquo;, &ldquo;offside&rdquo;, etc. Sent as a comma-separated string or an array.</td>
+</tr>
+<tr>
+<td>targets</td>
+<td>[]</td>
+<td>List of targets taking part in the game. Sent as a comma-separated string or an array. Targets can be infinitely nested. Nesting is indicated by including a &lsquo;:&rsquo; in the target. E.g. &ldquo;Argentina:1&rdquo; means &ldquo;Argentina, player 1&rdquo;. Server automatically builds a nested structure (see the example to the right). You can send targets of different nesting levels. An event registered for Argentina:1 will resolve pools for Argentina:1 and Argentina (e.g. Messi scores - pools for Messi&rsquo;s goals and Argentina goals get resovled).</td>
+</tr>
+</tbody></table>
+<h3 id='response-codes'>Response codes</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Code</th>
+<th>Result</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>game_created_and_opened</td>
+<td>340</td>
+<td>Your game has been opened. You can now open betting pools for the game. <strong>Warning</strong>: This is the same response as for the <a href="#create-and-open-a-game">create and open game</a> request. The state after processing both calls is semantically equivalent.</td>
+</tr>
+</tbody></table>
+<h3 id='response-parameters'>Response Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>source_id</td>
+<td>:YOUR_SOURCE_ID</td>
+<td>Your source id.</td>
+</tr>
+<tr>
+<td>game_id</td>
+<td>:YOUR_GAME_ID</td>
+<td>The server-generated game id. Necessary for making all game-related calls.</td>
+</tr>
+<tr>
+<td>game_name</td>
+<td>:YOUR_GAME_NAME</td>
+<td>The game name you provided.</td>
+</tr>
+<tr>
+<td>type</td>
+<td>:YOUR_GAME_TYPE</td>
+<td>The game type you provided.</td>
+</tr>
+<tr>
+<td>actions</td>
+<td>{}</td>
+<td>A dictionary containing the actions you listed. <strong>key</strong> - action id, <strong>value</strong> - action details (name).</td>
+</tr>
+<tr>
+<td>targets</td>
+<td>{}</td>
+<td>A nested, recursive dictionary containing the targets you listed. <strong>key</strong> - target id, <strong>value</strong> - target details (symbol, display name and <em>sub</em> targets). Please look at the example on the right.</td>
+</tr>
+<tr>
+<td>open_at</td>
+<td>request receival time</td>
+<td>The open game time in epoch millis.</td>
+</tr>
+<tr>
+<td>live_start_at</td>
+<td>request receival time</td>
+<td>The real life game start time in epoch millis (only informative).</td>
+</tr>
+<tr>
+<td>live_finish_at</td>
+<td>null</td>
+<td>The real life game finish time in epoch millis (only informative).</td>
+</tr>
+<tr>
+<td>close_at</td>
+<td>null</td>
+<td>The close game time in epoch millis (if null, game close request needs to be sent explicitly).</td>
+</tr>
+</tbody></table>
+<h2 id='become-an-admin-for-a-game'>Become an admin for a game</h2>
+<p><aside class="notice">
+Only the game source admin is allowed to send request as of now. Authorizing additional users to do that will come soon.
+</aside></p>
+
+<blockquote>
+<p>Expects the following JSON structure:</p>
+</blockquote>
+<pre><code class="highlight json"><span class="p">{</span><span class="w">
+  </span><span class="s2">"header"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
+  </span><span class="s2">"op"</span><span class="p">:</span><span class="w"> </span><span class="mi">616</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"game_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"30cee1fa-fb20-41a6-a61c-0e0335abc2a9"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<blockquote>
+<p>Returns the following JSON structure:</p>
+</blockquote>
+<pre><code class="highlight json"><span class="p">{</span><span class="w">
+  </span><span class="s2">"response_header"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
+  </span><span class="s2">"res"</span><span class="p">:</span><span class="w"> </span><span class="mi">640</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"game_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"30cee1fa-fb20-41a6-a61c-0e0335abc2a9"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<blockquote>
+<p>or</p>
+</blockquote>
+<pre><code class="highlight json"><span class="p">{</span><span class="w">
+  </span><span class="s2">"response_header"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
+  </span><span class="s2">"res"</span><span class="p">:</span><span class="w"> </span><span class="mi">645</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"game_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"30cee1fa-fb20-41a6-a61c-0e0335abc2a9"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"reason"</span><span class="p">:</span><span class="w"> </span><span class="s2">"This game already has enough admins."</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>Game creation and opening requires game-source level privileges. All other game related calls require explicitly asking for game-level privileges. These can be obtained through this call.</p>
+<h3 id='operation-code'>Operation code</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Code</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>become_an_admin_for_game</td>
+<td>616</td>
+</tr>
+</tbody></table>
+<h3 id='call-parameters'>Call Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>game_id</td>
+<td>null</td>
+<td>The game id for which you want to become an admin.</td>
+</tr>
+</tbody></table>
+<h3 id='response-codes'>Response codes</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Code</th>
+<th>Result</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>become_an_admin_for_game_success</td>
+<td>640</td>
+<td>You have become an admin for the game. You can create pools and register events.</td>
+</tr>
+<tr>
+<td>become_an_admin_for_game_fail</td>
+<td>645</td>
+<td>You have <strong>not</strong> become an admin for the game. This can happen in 2 cases: you have no privileges or the game already has enough admins.</td>
+</tr>
+</tbody></table>
+<h3 id='response-parameters'>Response Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>game_id</td>
+<td>:YOUR_GAME_ID</td>
+<td>The game id you provided.</td>
+</tr>
+<tr>
+<td>reason</td>
+<td>:YOUR_GAME_ID</td>
+<td>The reason why you couldn&rsquo;t become an admin. Sent <strong>only</strong> with become_an_admin_for_game_fail response code.</td>
+</tr>
+</tbody></table>
+<h2 id='get-game-details'>Get game details</h2>
+<blockquote>
+<p>Expects the following JSON structure:</p>
+</blockquote>
+<pre><code class="highlight json"><span class="p">{</span><span class="w">
+  </span><span class="s2">"header"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
+  </span><span class="s2">"op"</span><span class="p">:</span><span class="w"> </span><span class="mi">373</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"game_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"30cee1fa-fb20-41a6-a61c-0e0335abc2a9"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<blockquote>
+<p>Returns the following JSON structure:</p>
+</blockquote>
+<pre><code class="highlight json"><span class="p">{</span><span class="w">
+    </span><span class="s2">"response_header"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
+    </span><span class="s2">"res"</span><span class="p">:</span><span class="w"> </span><span class="mi">342</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"game_in_progress_betting_active"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"game_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"30cee1fa-fb20-41a6-a61c-0e0335abc2a9"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Argentina - Brazil"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"past_events"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"106a9151-2997-4c96-bc29-c020da54fa67"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"happened_at"</span><span class="p">:</span><span class="w"> </span><span class="mi">1417180267000</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"target_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"argentina:1"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"action_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"goal"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="s2">"13bc5390-d86c-45b8-8327-7b313b80103d"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"happened_at"</span><span class="p">:</span><span class="w"> </span><span class="mi">1417180282000</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"target_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"brazil:7"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"action_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"offside"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"actions"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"goal"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Goal"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="s2">"offside"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Offside"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"DON"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"4d24a1cb-5465-4ab3-befd-99fb39b7b796"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"targets"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"brazil"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"bra"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"display_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Brazil"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"targets"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="s2">"7"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                    </span><span class="s2">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"7"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"display_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"7"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"targets"</span><span class="p">:</span><span class="w"> </span><span class="p">{}</span><span class="w">
+                </span><span class="p">}</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="s2">"none"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"non"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"display_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"None"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"targets"</span><span class="p">:</span><span class="w"> </span><span class="p">{}</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="s2">"argentina"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"arg"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"display_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"argentina"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"targets"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="s2">"1"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                    </span><span class="s2">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"display_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"targets"</span><span class="p">:</span><span class="w"> </span><span class="p">{}</span><span class="w">
+                </span><span class="p">},</span><span class="w">
+                </span><span class="s2">"2"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                    </span><span class="s2">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"display_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"targets"</span><span class="p">:</span><span class="w"> </span><span class="p">{}</span><span class="w">
+                </span><span class="p">}</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"open_at"</span><span class="p">:</span><span class="w"> </span><span class="mi">1417104170</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"live_start_at"</span><span class="p">:</span><span class="w"> </span><span class="mi">1417105170</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"live_finish_at"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"close_at"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+</span></code></pre>
+
+<p>Obtain full details for a game with given id.</p>
+<h3 id='operation-code'>Operation code</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Code</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>get_game_details</td>
+<td>372</td>
+</tr>
+</tbody></table>
+<h3 id='call-parameters'>Call Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>game_id</td>
+<td>null</td>
+<td>The game id of the game which you want to obtain details for.</td>
+</tr>
+</tbody></table>
+<h3 id='response-codes'>Response codes</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Code</th>
+<th>Result</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>game_details</td>
+<td>342</td>
+<td>You have received the requested game details.</td>
+</tr>
+</tbody></table>
+<h3 id='response-parameters'>Response Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>game_id</td>
+<td>:YOUR_GAME_ID</td>
+<td>The game id you provided.</td>
+</tr>
+<tr>
+<td>game_name</td>
+<td>:YOUR_GAME_NAME</td>
+<td>The game name you provided.</td>
+</tr>
+<tr>
+<td>status</td>
+<td>null</td>
+<td>Current game status. Possible values: &ldquo;betting_not_yet_active&rdquo;, &ldquo;pre_game_betting_active&rdquo;, &ldquo;game_in_progress_betting_active&rdquo;, &ldquo;game_in_progress_betting_closed&rdquo;, &ldquo;game_closed&rdquo;.</td>
+</tr>
+<tr>
+<td>type</td>
+<td>:YOUR_GAME_TYPE</td>
+<td>The uuid of the game type you provided.</td>
+</tr>
+<tr>
+<td>actions</td>
+<td>{}</td>
+<td>A dictionary containing the actions for the game. <strong>key</strong> - action id, <strong>value</strong> - action details (name).</td>
+</tr>
+<tr>
+<td>targets</td>
+<td>{}</td>
+<td>A nested, recursive dictionary containing the targets for the game. <strong>key</strong> - target id, <strong>value</strong> - target details (symbol, display name and <em>sub</em> targets). Please look at the example on the right.</td>
+</tr>
+<tr>
+<td>past_events</td>
+<td>{}</td>
+<td>A dictionary containing all the events that happened in the game so far. <strong>key</strong> - event id, <strong>value</strong> - event details (happened_at, target_id, action_id).</td>
+</tr>
+<tr>
+<td>open_at</td>
+<td>request receival time</td>
+<td>The open game time in epoch millis.</td>
+</tr>
+<tr>
+<td>live_start_at</td>
+<td>request receival time</td>
+<td>The real life game start time in epoch millis (only informative).</td>
+</tr>
+<tr>
+<td>live_finish_at</td>
+<td>null</td>
+<td>The real life game finish time in epoch millis (only informative).</td>
+</tr>
+<tr>
+<td>close_at</td>
+<td>null</td>
+<td>The close game time in epoch millis (if null, game close request needs to be sent explicitly).</td>
+</tr>
+<tr>
+<td>currency</td>
+<td>null</td>
+<td>The currency for which you want to allow betting for in the game.</td>
+</tr>
+</tbody></table>
+<h2 id='update-game-details'>Update game details</h2>
+<p><aside class="notice">
+Only users listed as admins for the source are authorized for this call.
+</aside></p>
+
+<blockquote>
+<p>Expects the following JSON structure:</p>
+</blockquote>
+<pre><code class="highlight json"><span class="p">{</span><span class="w">
+  </span><span class="s2">"header"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
+  </span><span class="s2">"op"</span><span class="p">:</span><span class="w"> </span><span class="mi">373</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"game_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"30cee1fa-fb20-41a6-a61c-0e0335abc2a9"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"actions"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"Goal"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Offside"</span><span class="p">],</span><span class="w">
+  </span><span class="s2">"targets"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"Argentina"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Brazil"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Argentina:1"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Argentina:2"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Brazil:7"</span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<blockquote>
+<p>Returns the following JSON structure:</p>
+</blockquote>
+<pre><code class="highlight json"><span class="p">{</span><span class="w">
+    </span><span class="s2">"response_header"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
+    </span><span class="s2">"res"</span><span class="p">:</span><span class="w"> </span><span class="mi">343</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"game_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"30cee1fa-fb20-41a6-a61c-0e0335abc2a9"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>Update game details - add new targets or actions.</p>
+
+<p>This publishes the updated game details to users subscribed to the game.</p>
+<h3 id='operation-code'>Operation code</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Code</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>update_game_details</td>
+<td>373</td>
+</tr>
+</tbody></table>
+<h3 id='call-parameters'>Call Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>game_id</td>
+<td>null</td>
+<td>The game id of the game of which you want to update details.</td>
+</tr>
+<tr>
+<td>actions</td>
+<td>[]</td>
+<td>List of actions that you want to add to the game, e.g. &ldquo;yellow-card&rdquo;, &ldquo;goal&rdquo;, &ldquo;offside&rdquo;, etc. Sent as a comma-separated string or an array.</td>
+</tr>
+<tr>
+<td>targets</td>
+<td>[]</td>
+<td>List of targets that you want to add to the game. Sent as a comma-separated string or an array. Targets can be infinitely nested. Nesting is indicated by including a &lsquo;:&rsquo; in the target. E.g. &ldquo;Argentina:1&rdquo; means &ldquo;Argentina, player 1&rdquo;. Server automatically builds a nested structure (see the example to the right). You can send targets of different nesting levels. An event registered for Argentina:1 will resolve pools for Argentina:1 and Argentina (e.g. Messi scores - pools for Messi&rsquo;s goals and Argentina goals get resovled).</td>
+</tr>
+</tbody></table>
+<h3 id='response-codes'>Response codes</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Code</th>
+<th>Result</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>game_details_updated</td>
+<td>343</td>
+<td>You have updated the game details (confirmation).</td>
+</tr>
+<tr>
+<td>game_details</td>
+<td>342</td>
+<td>New game details are published to everyone subscribed to the game (including you). Check <a href="#get-game-details"> get game details</a> section for a list of response parameter for this message.</td>
+</tr>
+</tbody></table>
+<h3 id='response-parameters'>Response Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>game_id</td>
+<td>:YOUR_GAME_ID</td>
+<td>The game id you provided.</td>
+</tr>
+</tbody></table>
+<h2 id='join-game'>Join game</h2>
+<blockquote>
+<p>Expects the following JSON structure:</p>
+</blockquote>
+<pre><code class="highlight json"><span class="p">{</span><span class="w">
+  </span><span class="s2">"header"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
+  </span><span class="s2">"op"</span><span class="p">:</span><span class="w"> </span><span class="mi">363</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"game_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"30cee1fa-fb20-41a6-a61c-0e0335abc2a9"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<blockquote>
+<p>Returns the following JSON structure:</p>
+</blockquote>
+<pre><code class="highlight json"><span class="p">{</span><span class="w">
+    </span><span class="s2">"response_header"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
+    </span><span class="s2">"res"</span><span class="p">:</span><span class="w"> </span><span class="mi">333</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"game_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"30cee1fa-fb20-41a6-a61c-0e0335abc2a9"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<blockquote>
+<p>Publishes the following JSON structure:</p>
+</blockquote>
+<pre><code class="highlight json"><span class="p">{</span><span class="w">
+    </span><span class="s2">"response_header"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
+    </span><span class="s2">"res"</span><span class="p">:</span><span class="w"> </span><span class="mi">470</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"game_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"30cee1fa-fb20-41a6-a61c-0e0335abc2a9"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">17</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"user_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"the_foozle"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>Join the game. This subscribes you to all the events / notifications regarding a given game.</p>
+
+<p>This publishes the information you joined to all users subscribed to the game.</p>
+<h3 id='operation-code'>Operation code</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Code</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>join_game</td>
+<td>363</td>
+</tr>
+</tbody></table>
+<h3 id='call-parameters'>Call Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>game_id</td>
+<td>null</td>
+<td>The game id of the game you want to join.</td>
+</tr>
+</tbody></table>
+<h3 id='response-codes'>Response codes</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Code</th>
+<th>Result</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>game_joined</td>
+<td>333</td>
+<td>You have joined the game. You are now subscribed to all the notifications regarding it.</td>
+</tr>
+<tr>
+<td>user_joined_game</td>
+<td>470</td>
+<td>New user joined game. Published to all users subscribed to game.</td>
+</tr>
+</tbody></table>
+<h3 id='response-parameters-game_joined'>Response Parameters (game_joined)</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>game_id</td>
+<td>:YOUR_GAME_ID</td>
+<td>The game id you provided.</td>
+</tr>
+</tbody></table>
+<h3 id='response-parameters-user_joined_game'>Response Parameters (user_joined_game)</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>game_id</td>
+<td>:YOUR_GAME_ID</td>
+<td>The game id which was joined by a user.</td>
+</tr>
+<tr>
+<td>user_id</td>
+<td>:USER_WHO_JOINED_ID</td>
+<td>The id of the user that joined the game.</td>
+</tr>
+<tr>
+<td>user_name</td>
+<td>:USER_WHO_JOINED_NAME</td>
+<td>The name of the user that joined the game.</td>
+</tr>
+</tbody></table>
+<h2 id='leave-game'>Leave game</h2>
+<blockquote>
+<p>Expects the following JSON structure:</p>
+</blockquote>
+<pre><code class="highlight json"><span class="p">{</span><span class="w">
+  </span><span class="s2">"header"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
+  </span><span class="s2">"op"</span><span class="p">:</span><span class="w"> </span><span class="mi">364</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"game_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"30cee1fa-fb20-41a6-a61c-0e0335abc2a9"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<blockquote>
+<p>Returns the following JSON structure:</p>
+</blockquote>
+<pre><code class="highlight json"><span class="p">{</span><span class="w">
+    </span><span class="s2">"response_header"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
+    </span><span class="s2">"res"</span><span class="p">:</span><span class="w"> </span><span class="mi">334</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"game_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"30cee1fa-fb20-41a6-a61c-0e0335abc2a9"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<blockquote>
+<p>Publishes the following JSON structure:</p>
+</blockquote>
+<pre><code class="highlight json"><span class="p">{</span><span class="w">
+    </span><span class="s2">"response_header"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
+    </span><span class="s2">"res"</span><span class="p">:</span><span class="w"> </span><span class="mi">480</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"game_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"30cee1fa-fb20-41a6-a61c-0e0335abc2a9"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">17</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"user_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"the_foozle"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>Leave the game. This unsubscribes you from all the events / notifications regarding a given game.</p>
+
+<p>This publishes the information you left to all users subscribed to the game.</p>
+<h3 id='operation-code'>Operation code</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Code</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>leave_game</td>
+<td>364</td>
+</tr>
+</tbody></table>
+<h3 id='call-parameters'>Call Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>game_id</td>
+<td>null</td>
+<td>The game id of the game you want to leave.</td>
+</tr>
+</tbody></table>
+<h3 id='response-codes'>Response codes</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Code</th>
+<th>Result</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>game_left</td>
+<td>334</td>
+<td>You have left the game. You are now unsubscribed from all the notifications regarding it.</td>
+</tr>
+<tr>
+<td>user_left_game</td>
+<td>480</td>
+<td>User left game. Published to all users subscribed to game.</td>
+</tr>
+</tbody></table>
+<h3 id='response-parameters-game_joined'>Response Parameters (game_joined)</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>game_id</td>
+<td>:YOUR_GAME_ID</td>
+<td>The game id you provided.</td>
+</tr>
+</tbody></table>
+<h3 id='response-parameters-user_joined_game'>Response Parameters (user_joined_game)</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>game_id</td>
+<td>:YOUR_GAME_ID</td>
+<td>The game id which was left by a user.</td>
+</tr>
+<tr>
+<td>user_id</td>
+<td>:USER_WHO_LEFT_ID</td>
+<td>The id of the user that left the game.</td>
+</tr>
+<tr>
+<td>user_name</td>
+<td>:USER_WHO_LEFT_NAME</td>
+<td>The name of the user that left the game.</td>
+</tr>
+</tbody></table>
+<h2 id='close-a-game'>Close a game</h2>
+<p><aside class="notice">
+Only users listed as admins for the source are authorized for this call.
+</aside></p>
+
+<p><aside class="warning">
+This will automatically close and resolve all the automatically resolvable pools opened in the game. It will block betting in all the pools that need to be resolved manually. Request has to be resent after these pools are resolved (if there are any). Make sure you really want to send this request.
+</aside></p>
+
+<blockquote>
+<p>Expects the following JSON structure:</p>
+</blockquote>
+<pre><code class="highlight json"><span class="p">{</span><span class="w">
+  </span><span class="s2">"header"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
+  </span><span class="s2">"op"</span><span class="p">:</span><span class="w"> </span><span class="mi">375</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"game_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"30cee1fa-fb20-41a6-a61c-0e0335abc2a9"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<blockquote>
+<p>Returns and publishes the following JSON structure:</p>
+</blockquote>
+<pre><code class="highlight json"><span class="p">{</span><span class="w">
+    </span><span class="s2">"response_header"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
+    </span><span class="s2">"res"</span><span class="p">:</span><span class="w"> </span><span class="mi">341</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"game_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"30cee1fa-fb20-41a6-a61c-0e0335abc2a9"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<blockquote>
+<p>Publishes bet_pool_resolved message for all resolved pools and betting_in_pool_blocked for all pools that need manual resolution.</p>
+</blockquote>
+
+<p>Close the game. This resolves all the automatic pools and blocks all the pools requiring manual resolution (if there are any).</p>
+
+<p>If there exist any pools which need manual resolution, the request needs to be <strong>resent</strong> after this is performed.</p>
+
+<p>After that, the game disappears from all the listings for running games.</p>
+<h3 id='operation-code'>Operation code</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Code</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>close_game</td>
+<td>375</td>
+</tr>
+</tbody></table>
+<h3 id='call-parameters'>Call Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>game_id</td>
+<td>null</td>
+<td>The game id of the game you want to close.</td>
+</tr>
+</tbody></table>
+<h3 id='response-codes'>Response codes</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Code</th>
+<th>Result</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>game_closed</td>
+<td>341</td>
+<td>Game has been closed. No one can subscribe to it anymore. It doesn&rsquo;t show up in active games listings. Published to you and all other users subscribed to the game. <strong>Only</strong> sent if no manual pools remain unresolved.</td>
+</tr>
+<tr>
+<td>bet_pool_resolved</td>
+<td>362</td>
+<td>Published to all game subscribers for all automatically resolveable pools. heck <a href="#betting-pool-resolved"> betting pool resolved</a> section for a list of response parameter for this message.</td>
+</tr>
+<tr>
+<td>betting_in_pool_blocked</td>
+<td>368</td>
+<td>Published to all game subscribers for all manually resolveable pools. Check <a href="#betting-in-pool-blocked"> betting pool blocked</a> section for a list of response parameter for this message.</td>
+</tr>
+</tbody></table>
+<h3 id='response-parameters'>Response Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>game_id</td>
+<td>:YOUR_GAME_ID</td>
+<td>The game id you provided.</td>
+</tr>
+</tbody></table>
+<h2 id='list-games-for-source'>List games for source</h2>
+<blockquote>
+<p>Expects the following JSON structure:</p>
+</blockquote>
+<pre><code class="highlight json"><span class="p">{</span><span class="w">
+  </span><span class="s2">"header"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
+  </span><span class="s2">"op"</span><span class="p">:</span><span class="w"> </span><span class="mi">380</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"source_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"30cee1fa-fb20-41a6-a61c-0e0335abc2a9"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<blockquote>
+<p>Returns the following JSON structure:</p>
+</blockquote>
+<pre><code class="highlight json"><span class="p">{</span><span class="w">
+    </span><span class="s2">"response_header"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
+    </span><span class="s2">"res"</span><span class="p">:</span><span class="w"> </span><span class="mi">345</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"games"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"dc164a36-4b82-47a4-a2b4-be757a018c9e"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"game_in_progress_betting_active"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Argentina - Brazil"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"d57951c0-c5a6-4260-bc97-1f1065daece3"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"open_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1417188144748"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"close_at"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>Obtain full list of active games for a source with given id.</p>
+<h3 id='operation-code'>Operation code</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Code</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>list_games_for_source</td>
+<td>380</td>
+</tr>
+</tbody></table>
+<h3 id='call-parameters'>Call Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>source_id</td>
+<td>null</td>
+<td>Your source id.</td>
+</tr>
+</tbody></table>
+<h3 id='response-codes'>Response codes</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Code</th>
+<th>Result</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>games_list_for_source</td>
+<td>345</td>
+<td>You have received the list of games active for your source id.</td>
+</tr>
+</tbody></table>
+<h3 id='response-parameters'>Response Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>source_id</td>
+<td>:YOUR_SOURCE_ID</td>
+<td>Your source id.</td>
+</tr>
+<tr>
+<td>games</td>
+<td>{}</td>
+<td>A dictionary containing all the active games for your source. <strong>key</strong> - game id, <strong>value</strong> - game data(status (possible values: &ldquo;betting_not_yet_active&rdquo;, &ldquo;pre_game_betting_active&rdquo;, &ldquo;game_in_progress_betting_active&rdquo;, &ldquo;game_in_progress_betting_closed&rdquo;, &ldquo;game_closed&rdquo;), name, type, open_at, close_at).</td>
+</tr>
+</tbody></table>
+
           <h1 id='websocket-api-betting-pools'>Websocket API: Betting pools</h1>
           <h1 id='websocket-api-accounting'>Websocket API: Accounting</h1>
+          <h1 id='websocket-api-errors'>Websocket API: Errors</h1>
           <h1 id='rest-calls'>REST Calls</h1>
           <h1 id='sample-scenarios'>Sample scenarios</h1><h2 id='register-yourself-as-a-game-provider'>Register yourself as a game provider</h2><h2 id='open-and-start-a-game'>Open and start a game</h2><h2 id='open-pools'>Open pools</h2><h2 id='block--unblock-betting-in-pools'>Block / Unblock betting in pools</h2>
           <h1 id='terms-of-use'>Terms of use</h1>
@@ -563,8 +1914,6 @@ This will automatically close all the games (and resolve pools accordingly) host
       </div>
       <div class="dark-box">
           <div class="lang-selector">
-                <a href="#" data-language-name="shell">shell</a>
-                <a href="#" data-language-name="python">python</a>
                 <a href="#" data-language-name="javascript">javascript</a>
           </div>
       </div>
