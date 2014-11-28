@@ -13,6 +13,7 @@ toc_footers:
 
 includes:
   - authentication
+  - authorization
   - websocket_api_calls_general
   - websocket_api_calls_game_sources
   - websocket_api_calls_games

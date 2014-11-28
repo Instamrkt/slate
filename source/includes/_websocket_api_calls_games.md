@@ -1,9 +1,11 @@
 # Websocket API: Games
 
-
 <aside class="notice">
 This section assumes you have an active game source opened. If not, read on how to open it <a href="#open-a-game-source">here</a>.
 </aside>
+
+
+
 
 ## Create and open a game
 
@@ -135,6 +137,9 @@ live_start_at | request receival time | The real life game start time in epoch m
 live_finish_at | null | The real life game finish time in epoch millis (only informative).
 close_at | null | The close game time in epoch millis (if null, game close request needs to be sent explicitly).
 
+
+
+
 ## Create a game
 
 <aside class="notice">
@@ -219,6 +224,9 @@ live_start_at | request receival time | The real life game start time in epoch m
 live_finish_at | null | The real life game finish time in epoch millis (only informative).
 close_at | null | The close game time in epoch millis (if null, game close request needs to be sent explicitly).
 
+
+
+
 ## Open a game
 
 <aside class="notice">
@@ -292,10 +300,75 @@ live_start_at | request receival time | The real life game start time in epoch m
 live_finish_at | null | The real life game finish time in epoch millis (only informative).
 close_at | null | The close game time in epoch millis (if null, game close request needs to be sent explicitly).
 
+
+
+
 ## Become an admin for a game
 <aside class="notice">
-Only users listed as admins for the source are authorized for this call.
+Only the game source admin is allowed to send request as of now. Authorizing additional users to do that will come soon.
 </aside>
+
+> Expects the following JSON structure:
+
+```json
+{
+  "header": {},
+  "op": 616,
+  "game_id": "30cee1fa-fb20-41a6-a61c-0e0335abc2a9"
+}
+```
+
+
+> Returns the following JSON structure:
+
+```json
+{
+  "response_header": {},
+  "res": 640,
+  "game_id": "30cee1fa-fb20-41a6-a61c-0e0335abc2a9"
+}
+```
+
+> or
+
+```json
+{
+  "response_header": {},
+  "res": 645,
+  "game_id": "30cee1fa-fb20-41a6-a61c-0e0335abc2a9",
+  "reason": "This game already has enough admins."
+}
+```
+
+Game creation and opening requires game-source level privileges. All other game related calls require explicitly asking for game-level privileges. These can be obtained through this call.
+
+### Operation code
+
+Name | Code
+--------- | -------
+become_an_admin_for_game | 616
+
+### Call Parameters
+
+Parameter | Default | Description
+--------- | ------- | -----------
+game_id | null | The game id for which you want to become an admin.
+
+### Response codes
+
+Name | Code | Result
+--------- | ------- | -----------
+become_an_admin_for_game_success | 640 | You have become an admin for the game. You can create pools and register events.
+become_an_admin_for_game_fail | 645 | You have **not** become an admin for the game. This can happen in 2 cases: you have no privileges or the game already has enough admins.
+
+### Response Parameters
+
+Parameter | Default | Description
+--------- | ------- | -----------
+game_id | :YOUR_GAME_ID | The game id you provided.
+reason | :YOUR_GAME_ID | The reason why you couldn't become an admin. Sent **only** with become_an_admin_for_game_fail response code.
+
+
 ## Get game details
 ## Update game details
 <aside class="notice">
