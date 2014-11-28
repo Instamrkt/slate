@@ -10,6 +10,7 @@ toc_footers:
   - <a href='http://github.com/tripit/slate'>Documentation Powered by Slate</a>
 
 includes:
+  - general_overview
   - authentication
   - authorization
   - websocket_api_calls_general
@@ -30,7 +31,3 @@ search: true
 # Introduction
 
 This is an introduction to Instamrkt API.
-
-# General overview
-
-This is a general overwiev and philosophy of Instamrkt API.

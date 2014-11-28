@@ -468,7 +468,7 @@ get_game_details | 372
 
 Parameter | Default | Description
 --------- | ------- | -----------
-game_id | null | The game id of which you want to obtain details.
+game_id | null | The game id of the game which you want to obtain details for.
 
 ### Response codes
 
@@ -540,7 +540,7 @@ update_game_details | 373
 
 Parameter | Default | Description
 --------- | ------- | -----------
-game_id | null | The game id of which you want to update details.
+game_id | null | The game id of the game of which you want to update details.
 actions | [] | List of actions that you want to add to the game, e.g. "yellow-card", "goal", "offside", etc. Sent as a comma-separated string or an array.
 targets | [] | List of targets that you want to add to the game. Sent as a comma-separated string or an array. Targets can be infinitely nested. Nesting is indicated by including a ':' in the target. E.g. "Argentina:1" means "Argentina, player 1". Server automatically builds a nested structure (see the example to the right). You can send targets of different nesting levels. An event registered for Argentina:1 will resolve pools for Argentina:1 and Argentina (e.g. Messi scores - pools for Messi's goals and Argentina goals get resovled).
 
@@ -559,7 +559,83 @@ Parameter | Default | Description
 game_id | :YOUR_GAME_ID | The game id you provided.
 
 
+
+
 ## Join game
+
+> Expects the following JSON structure:
+
+```json
+{
+  "header": {},
+  "op": 363,
+  "game_id": "30cee1fa-fb20-41a6-a61c-0e0335abc2a9"
+}
+```
+
+
+> Returns the following JSON structure:
+
+```json
+{
+    "response_header": {},
+    "res": 333,
+    "game_id": "30cee1fa-fb20-41a6-a61c-0e0335abc2a9"
+}
+```
+
+> Publishes the following JSON structure:
+
+```json
+{
+    "response_header": {},
+    "res": 470,
+    "game_id": "30cee1fa-fb20-41a6-a61c-0e0335abc2a9",
+    "user_id": 17,
+    "user_name": "the_foozle"
+}
+```
+
+
+Join the game. This subscribes you to all the events / notifications regarding a given game.
+
+This publishes the information you joined to all users subscribed to the game.
+
+
+### Operation code
+
+Name | Code
+--------- | -------
+join_game | 363
+
+### Call Parameters
+
+Parameter | Default | Description
+--------- | ------- | -----------
+game_id | null | The game id of the game you want to join.
+
+### Response codes
+
+Name | Code | Result
+--------- | ------- | -----------
+game_joined | 333 | You have joined the game. You are now subscribed to all the notifications regarding it.
+user_joined_game | 470 | New user joined game. Published to all users subscribed to game.
+
+### Response Parameters (game_joined)
+
+Parameter | Default | Description
+--------- | ------- | -----------
+game_id | :YOUR_GAME_ID | The game id you provided.
+
+### Response Parameters (user_joined_game)
+
+Parameter | Default | Description
+--------- | ------- | -----------
+game_id | :YOUR_GAME_ID | The game id which was joined by a user.
+user_id | :USER_WHO_JOINED_ID | The id of the user that joined the game.
+user_name | :USER_WHO_JOINED_NAME | The name of the user that joined the game.
+
+
 ## Leave game
 ## Close a game
 <aside class="notice">
