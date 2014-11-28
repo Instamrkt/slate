@@ -637,6 +637,82 @@ user_name | :USER_WHO_JOINED_NAME | The name of the user that joined the game.
 
 
 ## Leave game
+
+> Expects the following JSON structure:
+
+```json
+{
+  "header": {},
+  "op": 364,
+  "game_id": "30cee1fa-fb20-41a6-a61c-0e0335abc2a9"
+}
+```
+
+
+> Returns the following JSON structure:
+
+```json
+{
+    "response_header": {},
+    "res": 334,
+    "game_id": "30cee1fa-fb20-41a6-a61c-0e0335abc2a9"
+}
+```
+
+> Publishes the following JSON structure:
+
+```json
+{
+    "response_header": {},
+    "res": 480,
+    "game_id": "30cee1fa-fb20-41a6-a61c-0e0335abc2a9",
+    "user_id": 17,
+    "user_name": "the_foozle"
+}
+```
+
+
+Leave the game. This unsubscribes you from all the events / notifications regarding a given game.
+
+This publishes the information you left to all users subscribed to the game.
+
+
+### Operation code
+
+Name | Code
+--------- | -------
+leave_game | 364
+
+### Call Parameters
+
+Parameter | Default | Description
+--------- | ------- | -----------
+game_id | null | The game id of the game you want to leave.
+
+### Response codes
+
+Name | Code | Result
+--------- | ------- | -----------
+game_left | 334 | You have left the game. You are now unsubscribed from all the notifications regarding it.
+user_left_game | 480 | User left game. Published to all users subscribed to game.
+
+### Response Parameters (game_joined)
+
+Parameter | Default | Description
+--------- | ------- | -----------
+game_id | :YOUR_GAME_ID | The game id you provided.
+
+### Response Parameters (user_joined_game)
+
+Parameter | Default | Description
+--------- | ------- | -----------
+game_id | :YOUR_GAME_ID | The game id which was left by a user.
+user_id | :USER_WHO_LEFT_ID | The id of the user that left the game.
+user_name | :USER_WHO_LEFT_NAME | The name of the user that left the game.
+
+
+
+
 ## Close a game
 <aside class="notice">
 Only users listed as admins for the source are authorized for this call.
