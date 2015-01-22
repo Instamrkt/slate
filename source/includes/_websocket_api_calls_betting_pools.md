@@ -646,6 +646,7 @@ pools_list | {} | A dictionary of pools opened for game in which you have placed
 }
 ```
 
+```json
 {
     "response_header": {},
     "res": 360,
@@ -678,6 +679,7 @@ pools_list | {} | A dictionary of pools opened for game in which you have placed
         }
     }
 }
+```
 
 Places a prediction for the specified target for the specified amount in the specified pool.
 
