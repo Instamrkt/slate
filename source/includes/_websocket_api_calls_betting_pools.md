@@ -1,1 +1,267 @@
 # Websocket API: Betting pools
+
+
+<aside class="notice">
+This section assumes you have an active game opened and running. If not, read on how to open it <a href="#open-a-game">here</a>.
+</aside>
+
+## Create and open betting pool
+
+<aside class="notice">
+Only users listed as admins for the game are authorized for this call.
+</aside>
+
+<aside class="success">
+This functionality is also provided automatically by instamrkt - pools are opened and resolved automatically.
+</aside>
+
+> Expects the following JSON structure:
+
+```json
+{
+    "header": {},
+    "op": 385,
+    "game_id": "30cee1fa-fb20-41a6-a61c-0e0335abc2a9",
+    "description": "Next Goal By Team",
+    "action": "Goal",
+    "targets": "argentina,brazil",
+    "pool_type": "1",
+    "start_at": "",
+    "finish_at": "",
+    "stop_accepting_bets_at": "",
+    "recreate_on_end": "False"
+}
+```
+
+
+> Returns the following JSON structure:
+
+```json
+{
+    "response_header": {},
+    "res": 352,
+    "game_id": "30cee1fa-fb20-41a6-a61c-0e0335abc2a9",
+    "pool_id": "30cee1fa-fb20-41a6-a61c-0e0335abc2a9",
+    "description": "Next Goal By Team",
+    "pool_type": 1,
+    "action": "goal",
+    "people_involved": 0,
+    "money_at_stake": 0.0,
+    "target_level": 1,
+    "targets": {
+        "brazil": {
+            "backing_people": 0,
+            "to_win_if_backed": 1.0,
+            "display_name": {
+                "symbol": "bra",
+                "display_name": "brazil"
+            },
+            "backing_money": 0.0
+        },
+        "none": {
+            "backing_people": 0,
+            "to_win_if_backed": 1.0,
+            "display_name": {
+                "symbol": "non",
+                "display_name": "none"
+            },
+            "backing_money": 0.0
+        },
+        "argentina": {
+            "backing_people": 0,
+            "to_win_if_backed": 1.0,
+            "display_name": {
+                "symbol": "arg",
+                "display_name": "argentina"
+            },
+            "backing_money": 0.0
+        }
+    },
+    "start_at": 1421928724803,
+    "finish_at": null,
+    "stop_accepting_bets_at": null
+}
+```
+
+This creates and opens a pool for predictions for people subscribed to the game in the system. Predictions can now be made in this pool. The successful call results in broadcasting the response to all users subscribed to the game.
+
+How to make a prediction is described <a href="#place-bet-in-betting-pool">here</a>.
+
+### Operation code
+
+Name | Code
+--------- | -------
+create_betting_pool | 385
+
+### Call Parameters
+
+Parameter | Default | Description
+--------- | ------- | -----------
+game_id | null | Game id for which the pool is to be opened.
+description | "" | The pool description - question which will be desplayed to users.
+action | "" | An action on which the prediction is made. Has to be in a set of actions available for game.
+targets | [] | List of targets on which predictions for actoin can happen. Has to be a subset of targets available for game. Sent as a comma-separated string or an array. Targets have to be of same level. That means "argentina, brazil" is correct, but "argentina, brazil:9" is not.
+pool_type | 1 | 1 - parimutuel event based, 2 - parimutuel time based, 3 - binary event based, 4 - binary time based.
+start_at | now() | Pool opening time (> now()) in epoch millis. If left blank, will be opened as soon as registered by the server. **As of now pools are opened as soon as this call is received by the server.**
+finish_at | null | Pool closing time (> open_at) in epoch millis. This will close the pool at a given time. **Warning**: this will automatically resolve th pool to **none**.
+stop_accepting_bets_at | null | Stop accepting bets at time (> now()) in epoch millis. This parameter is optional. Include if you want to close the pool after a certain time.
+recreate_on_end | False | Boolean value describing if pool is to be recreated anew upon resolution.
+
+### Response codes
+
+Name | Code | Result
+--------- | ------- | -----------
+betting_pool_created | 350 | Your pool has been created and is now opened for predictions.
+
+### Response Parameters
+
+Parameter | Default | Description
+--------- | ------- | -----------
+game_id | :YOUR_GAME_ID | The provided game id.
+pool_id | :YOUR_POOL_ID | The server-generated pool id. Necessary for making all pool-related calls.
+description | "" | The provided pool description - question which will be desplayed to users.
+pool_type | 1 | Provided pool type: 1 - parimutuel event based, 2 - parimutuel time based, 3 - binary event based, 4 - binary time based.
+action | "" | The provided action on which the prediction is made.
+people_involved | 0 | Number of people who already placed predictions in pool. Will be incremented on every prediction.
+money_at_stake | 0.0 | Amount of money already placed predictions in pool. Will be incremented on every prediction.
+target_level | 0 | The computed target level for sent targets. E.g. - 1 for "argentina, brazil", 2 for "argentina:9, brazil:7"
+targets | {} | A nested, recursive dictionary containing the targets you listed. **key** - target id, **value** - target details (symbol, display name and _sub_ targets). Please look at the example on the right.
+start_at | request receival time | The open pool time in epoch millis.
+live_start_at | request receival time | The real life game start time in epoch millis (only informative).
+finish_at | null | The passed pool closing time. (Relevant only for pools of type 2 and 4).
+stop_accepting_bets_at | null | Provided stop accepting bets at time (> now()) in epoch millis.
+
+
+## Resolve pool / register game event
+
+<aside class="notice">
+Only users listed as admins for the game are authorized for this call.
+</aside>
+
+<aside class="success">
+This functionality is also provided automatically by instamrkt - pools are opened and resolved automatically.
+</aside>
+
+> Expects the following JSON structure:
+
+```json
+{
+    "header": {},
+    "op": 395,
+    "action_id": "goal",
+    "target_id": "brazil",
+    "game_id": "1b9a4a42-0c8a-46c0-95ee-c1e649e16fce",
+    "happened_at": 1421933670549
+}
+```
+
+
+> Returns the following JSON structures:
+
+```json
+{
+    "response_header": {},
+    "res": 366,
+    "action_id": "goal",
+    "target_id": "brazil",
+    "target_display_name": "brazil",
+    "current_count": {
+        "brazil": "1"
+    },
+    "game_id": "1b9a4a42-0c8a-46c0-95ee-c1e649e16fce",
+    "happened_at": 1421933670549
+}
+```
+
+```json
+{
+    "resolved_at": 1421933670582,
+    "description": "Next Goal By Team",
+    "winning_target": "brazil",
+    "res": 362,
+    "pool_id": "7d48ecbc-cd97-41fa-94e8-ca0a8ff22629",
+    "invalidated_bettors": [],
+    "winners": {},
+    "losers": [],
+    "response_header": {
+        "t": 1421933670612
+    },
+    "game_id": "1b9a4a42-0c8a-46c0-95ee-c1e649e16fce",
+    "is_money_return": true
+}
+```
+
+This registers an event for a game (e.g. a goal, yellow card etc.). The event consists of an action and a target. This resolves all pools opened for action containing the target in its available to target. People who predicted the target win, all others lose.
+
+Events of higher levels resolve also pools for events of lower levels. E.g., an event "goal" for target "brazil:9", will resolve all pools opened for "goal" containing "brazil:9" **and** "brazil" in its targets.
+
+Pool resolution in turn will cause sending out a bet_pool_resolved message, also described below.
+
+### Operation code
+
+Name | Code
+--------- | -------
+register_game_event | 395
+
+### Call Parameters
+
+Parameter | Default | Description
+--------- | ------- | -----------
+game_id | null | Game id for which the pool is to be opened.
+description | "" | The pool description - question which will be desplayed to users.
+action_id | null | An action which happened in the game. Has to be contained in a set of actions available for game.
+target_id | null | An action which happened in the game. Has to be contained in a set of actions available for game.
+
+targets | [] | List of targets on which predictions for actoin can happen. Has to be a subset of targets available for game. Sent as a comma-separated string or an array. Targets have to be of same level. That means "argentina, brazil" is correct, but "argentina, brazil:9" is not.
+pool_type | 1 | 1 - parimutuel event based, 2 - parimutuel time based, 3 - binary event based, 4 - binary time based.
+start_at | now() | Pool opening time (> now()) in epoch millis. If left blank, will be opened as soon as registered by the server. **As of now pools are opened as soon as this call is received by the server.**
+finish_at | null | Pool closing time (> open_at) in epoch millis. This will close the pool at a given time. **Warning**: this will automatically resolve th pool to **none**.
+stop_accepting_bets_at | null | Stop accepting bets at time (> now()) in epoch millis. This parameter is optional. Include if you want to close the pool after a certain time.
+recreate_on_end | False | Boolean value describing if pool is to be recreated anew upon resolution.
+
+### Response codes
+
+Name | Code | Result
+--------- | ------- | -----------
+betting_pool_created | 350 | Your pool has been created and is now opened for predictions.
+
+### Response Parameters
+
+Parameter | Default | Description
+--------- | ------- | -----------
+game_id | :YOUR_GAME_ID | The provided game id.
+pool_id | :YOUR_POOL_ID | The server-generated pool id. Necessary for making all pool-related calls.
+description | "" | The provided pool description - question which will be desplayed to users.
+pool_type | 1 | Provided pool type: 1 - parimutuel event based, 2 - parimutuel time based, 3 - binary event based, 4 - binary time based.
+action | "" | The provided action on which the prediction is made.
+people_involved | 0 | Number of people who already placed predictions in pool. Will be incremented on every prediction.
+money_at_stake | 0.0 | Amount of money already placed predictions in pool. Will be incremented on every prediction.
+target_level | 0 | The computed target level for sent targets. E.g. - 1 for "argentina, brazil", 2 for "argentina:9, brazil:7"
+targets | {} | A nested, recursive dictionary containing the targets you listed. **key** - target id, **value** - target details (symbol, display name and _sub_ targets). Please look at the example on the right.
+start_at | request receival time | The open pool time in epoch millis.
+live_start_at | request receival time | The real life game start time in epoch millis (only informative).
+finish_at | null | The passed pool closing time. (Relevant only for pools of type 2 and 4).
+stop_accepting_bets_at | null | Provided stop accepting bets at time (> now()) in epoch millis.
+
+
+## List all pools for game
+
+## List my open pools for game
+
+## List my running pools for game
+
+## List my resolved pools for game
+
+## List my resolved pools for game
+
+## Place bet in betting pool
+
+## Get betting pool distribution
+
+## Block betting in a pool
+
+## Block betting for action
+
+## Allow betting in a pool
+
+## Allow betting for action
