@@ -621,6 +621,103 @@ pools_list | {} | A dictionary of pools opened for game in which you have placed
 ## Place bet in betting pool
 
 
+> Expects the following JSON structure:
+
+```json
+{
+    "header": {},
+    "op": 392,
+    "pool_id": "6cca4a84-d3e5-4d56-9f5e-acb50ecd5f1d",
+    "target": "brazil",
+    "amount": "1"
+}
+```
+
+
+> Returns the following JSON structures:
+
+```json
+{
+    "response_header": {},
+    "res": 356,
+    "pool_id": "6cca4a84-d3e5-4d56-9f5e-acb50ecd5f1d",
+    "bet_id": "c34bcc05-58ea-4294-9310-9f8cbd121e29",
+    "amount": "1"
+}
+```
+
+{
+    "response_header": {},
+    "res": 360,
+    "pool_id": "6cca4a84-d3e5-4d56-9f5e-acb50ecd5f1d",
+    "target_level": 1,
+    "distribution": {
+        "brazil": {
+            "bets": {
+                "c34bcc05-58ea-4294-9310-9f8cbd121e29": {
+                    "placed_at": 1421937458,
+                    "amount": 1.0,
+                    "user_id": 1
+                }
+            },
+            "multiplier": 1.0,
+            "display_name": "brazil",
+            "amount_total": 1.0
+        },
+        "none": {
+            "bets": {},
+            "multiplier": 1.0,
+            "display_name": "none",
+            "amount_total": 0.0
+        },
+        "netherlands": {
+            "bets": {},
+            "multiplier": 1.0,
+            "display_name": "netherlands",
+            "amount_total": 0.0
+        }
+    }
+}
+
+Places a prediction for the specified target for the specified amount in the specified pool.
+
+If user does not have sufficient available funds, an appropriate dedicated error message is returned.
+
+### Operation code
+
+Name | Code
+--------- | -------
+place_bet_in_betting_pool | 392
+
+### Call Parameters
+
+Parameter | Default | Description
+--------- | ------- | -----------
+pool_id | null | Pool id in which the prediction is to be placed.
+target | null | The target which you want to back.
+amount | 0.0 | Amount that you want to wager.
+
+### Response codes
+
+Name | Code | Result
+--------- | ------- | -----------
+bet_placed_in_betting_pool | 356 | You have successfully placed your prediction.
+new_betting_pool_bets_distribution | 360 | You have changed the pool distribution. This is broadcast to all game subscribers.
+
+### Response Parameters
+
+#### Placing confirmation
+
+Parameter | Default | Description
+--------- | ------- | -----------
+pool_id | :YOUR_POOL_ID | The pool id for which the prediction was placed.
+pool_id | :NEW_BET_ID | Server-generated bet id.
+target | null | The target which you have backed.
+amount | 0.0 | The amount which you have specified.
+
+#### New distribution
+
+Described in <a href="#get-betting-pool-distribution">this section</a>.
 
 ## Get betting pool distribution
 
