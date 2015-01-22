@@ -107,7 +107,7 @@ finish_at | null | Pool closing time (> open_at) in epoch millis. This will clos
 stop_accepting_bets_at | null | Stop accepting bets at time (> now()) in epoch millis. This parameter is optional. Include if you want to close the pool after a certain time.
 recreate_on_end | False | Boolean value describing if pool is to be recreated anew upon resolution.
 
-### Response codes
+### Response code
 
 Name | Code | Result
 --------- | ------- | -----------
@@ -193,7 +193,7 @@ This registers an event for a game (e.g. a goal, yellow card etc.). The event co
 
 Events of higher levels resolve also pools for events of lower levels. E.g., an event "goal" for target "brazil:9", will resolve all pools opened for "goal" containing "brazil:9" **and** "brazil" in its targets.
 
-Pool resolution in turn will cause sending out a bet_pool_resolved message, also described below.
+Pool resolution in turn will cause sending out a bet_pool_resolved message, also described below. It also sends out a new balance message to all users participating in a pool.
 
 ### Operation code
 
@@ -247,17 +247,380 @@ losers | [] | The list of user ids of losers in the pool.
 invalidated_bettors | [] | The list of user ids of people who placed their prediction too late (usually between the time of event happening and its registering by the server).
 resolved_at | event receival time | The time of pool resolution in epoch millis.
 
-## List all pools for game
+## List all open pools for game
+
+> Expects the following JSON structure:
+
+```json
+{
+    "header": {},
+    "op": 387,
+    "game_id": "1b9a4a42-0c8a-46c0-95ee-c1e649e16fce"
+}
+```
+
+
+> Returns the following JSON structure:
+
+```json
+{
+    "response_header": {},
+    "res": 3535,
+    "game_id": "1b9a4a42-0c8a-46c0-95ee-c1e649e16fce",
+    "pools_list": {
+        "0ec3850f-f862-4baf-bada-73394a68bbdd": {
+            "start_at": "1421933670629",
+            "description": "Next Goal By Team",
+            "money_at_stake": 0.0,
+            "finish_at": "None",
+            "distributions": {
+                "brazil": {
+                    "bets": {},
+                    "multiplier": 1,
+                    "amount_total": 0.0
+                },
+                "none": {
+                    "bets": {},
+                    "multiplier": 1,
+                    "amount_total": 0.0
+                },
+                "netherlands": {
+                    "bets": {},
+                    "multiplier": 1,
+                    "amount_total": 0.0
+                }
+            },
+            "target_level": 1,
+            "people_involved": 0,
+            "pool_id": "0ec3850f-f862-4baf-bada-73394a68bbdd",
+            "stop_accepting_bets_at": "None",
+            "type": 1,
+            "action_id": "goal"
+        },
+        "6cca4a84-d3e5-4d56-9f5e-acb50ecd5f1d": {
+            "start_at": "1421935990222",
+            "description": "Next Card By Team",
+            "money_at_stake": 0.0,
+            "finish_at": "None",
+            "distributions": {
+                "brazil": {
+                    "bets": {},
+                    "multiplier": 1,
+                    "amount_total": 0.0
+                },
+                "none": {
+                    "bets": {},
+                    "multiplier": 1,
+                    "amount_total": 0.0
+                },
+                "netherlands": {
+                    "bets": {},
+                    "multiplier": 1,
+                    "amount_total": 0.0
+                }
+            },
+            "target_level": 1,
+            "people_involved": 0,
+            "pool_id": "6cca4a84-d3e5-4d56-9f5e-acb50ecd5f1d",
+            "stop_accepting_bets_at": "None",
+            "type": 1,
+            "action_id": "card"
+        }
+    }
+```
+
+List all pools opened for predictions for a given game.
+
+### Operation code
+
+Name | Code
+--------- | -------
+list_all_betting_pools_for_game | 387
+
+### Call Parameters
+
+Parameter | Default | Description
+--------- | ------- | -----------
+game_id | null | Game id for which the pools are to be listed.
+
+### Response code
+
+Name | Code | Result
+--------- | ------- | -----------
+all_betting_pools_for_game | 3535 | Opened betting pools for game have been listed to you.
+
+### Response Parameters
+
+Parameter | Default | Description
+--------- | ------- | -----------
+game_id | :YOUR_GAME_ID | The game id for which the pools are listed.
+pools_list | {} | A dictionary of pools opened for game, **key** - pool id, **value** - pool details.
 
 ## List my open pools for game
 
+> Expects the following JSON structure:
+
+```json
+{
+    "header": {},
+    "op": 388,
+    "game_id": "1b9a4a42-0c8a-46c0-95ee-c1e649e16fce"
+}
+```
+
+
+> Returns the following JSON structure:
+
+```json
+{
+    "response_header": {},
+    "res": 353,
+    "game_id": "1b9a4a42-0c8a-46c0-95ee-c1e649e16fce",
+    "pools_list": {
+        "0ec3850f-f862-4baf-bada-73394a68bbdd": {
+            "start_at": "1421933670629",
+            "description": "Next Goal By Team",
+            "money_at_stake": 0.0,
+            "finish_at": "None",
+            "distributions": {
+                "brazil": {
+                    "bets": {},
+                    "multiplier": 1,
+                    "amount_total": 0.0
+                },
+                "none": {
+                    "bets": {},
+                    "multiplier": 1,
+                    "amount_total": 0.0
+                },
+                "netherlands": {
+                    "bets": {},
+                    "multiplier": 1,
+                    "amount_total": 0.0
+                }
+            },
+            "target_level": 1,
+            "people_involved": 0,
+            "pool_id": "0ec3850f-f862-4baf-bada-73394a68bbdd",
+            "stop_accepting_bets_at": "None",
+            "type": 1,
+            "action_id": "goal"
+        }
+    }
+```
+
+List all pools opened for predictions for a given game **in which you have not yet placed a prediction**.
+
+### Operation code
+
+Name | Code
+--------- | -------
+list_my_open_betting_pools_for_game | 388
+
+### Call Parameters
+
+Parameter | Default | Description
+--------- | ------- | -----------
+game_id | null | Game id for which the pools are to be listed.
+
+### Response code
+
+Name | Code | Result
+--------- | ------- | -----------
+you_open_pools_list_for_game | 353 | Opened betting pools for game in which you have not placed a prediction have been listed to you.
+
+### Response Parameters
+
+Parameter | Default | Description
+--------- | ------- | -----------
+game_id | :YOUR_GAME_ID | The game id for which the pools are listed.
+pools_list | {} | A dictionary of pools opened for game in which you have not placed a prediction, **key** - pool id, **value** - pool details.
+
+
 ## List my running pools for game
 
-## List my resolved pools for game
+> Expects the following JSON structure:
+
+```json
+{
+    "header": {},
+    "op": 389,
+    "game_id": "1b9a4a42-0c8a-46c0-95ee-c1e649e16fce"
+}
+```
+
+
+> Returns the following JSON structure:
+
+```json
+{
+    "response_header": {},
+    "res": 354,
+    "game_id": "1b9a4a42-0c8a-46c0-95ee-c1e649e16fce",
+    "pools_list": {
+        "6cca4a84-d3e5-4d56-9f5e-acb50ecd5f1d": {
+            "start_at": "1421935990222",
+            "money_at_stake": 1.0,
+            "finish_at": "None",
+            "distributions": {
+                "brazil": {
+                    "bets": {
+                        "c34bcc05-58ea-4294-9310-9f8cbd121e29": {
+                            "placed_at": 1421937458,
+                            "amount": 1.0,
+                            "user_id": 1
+                        }
+                    },
+                    "multiplier": 1.0,
+                    "amount_total": 1.0
+                },
+                "none": {
+                    "bets": {},
+                    "multiplier": 1,
+                    "amount_total": 0.0
+                },
+                "netherlands": {
+                    "bets": {},
+                    "multiplier": 1,
+                    "amount_total": 0.0
+                }
+            },
+            "name": "Next Card By Team",
+            "target_level": 1,
+            "people_involved": 1,
+            "user_backed": {
+                "brazil": 1.0
+            },
+            "stop_accepting_bets_at": "None",
+            "type": 1,
+            "action_id": "card"
+        }
+    }
+```
+
+List all pools opened for predictions for a given game **in which you have not yet placed a prediction**.
+
+### Operation code
+
+Name | Code
+--------- | -------
+list_my_running_pools_for_game | 389
+
+### Call Parameters
+
+Parameter | Default | Description
+--------- | ------- | -----------
+game_id | null | Game id for which the pools are to be listed.
+
+### Response code
+
+Name | Code | Result
+--------- | ------- | -----------
+your_running_pools_for_game | 354 | Opened betting pools for game in which you have placed a prediction have been listed to you.
+
+### Response Parameters
+
+Parameter | Default | Description
+--------- | ------- | -----------
+game_id | :YOUR_GAME_ID | The game id for which the pools are listed.
+pools_list | {} | A dictionary of pools opened for game in which you have placed a prediction, **key** - pool id, **value** - pool details with the option you backed indicated.
 
 ## List my resolved pools for game
+
+> Expects the following JSON structure:
+
+```json
+{
+    "header": {},
+    "op": 390,
+    "game_id": "1b9a4a42-0c8a-46c0-95ee-c1e649e16fce"
+}
+```
+
+
+> Returns the following JSON structure:
+
+```json
+{
+    "response_header": {},
+    "res": 355,
+    "pools_list": {
+        "6cca4a84-d3e5-4d56-9f5e-acb50ecd5f1d": {
+            "total_winnings": 0.0,
+            "resolved_at": 1421938211000,
+            "start_at": 1421935990000,
+            "description": "Next Goal By Team",
+            "winning_target": "brazil",
+            "distributions": {
+                "brazil": {
+                    "bets": {
+                        "c34bcc05-58ea-4294-9310-9f8cbd121e29": {
+                            "placed_at": 1421937458000,
+                            "amount": 1.0,
+                            "user_id": 1
+                        }
+                    },
+                    "multiplier": 1.0,
+                    "amount_total": 1.0
+                },
+                "none": {
+                    "bets": {},
+                    "multiplier": 0,
+                    "amount_total": 0.0
+                },
+                "netherlands": {
+                    "bets": {},
+                    "multiplier": 0,
+                    "amount_total": 0.0
+                }
+            },
+            "people_involved": 1,
+            "pool_type": 1,
+            "user_backed": {
+                "brazil": 1.0
+            },
+            "stop_accepting_bets_at": 1421938211000,
+            "game_name": "Netherlands - Brazil",
+            "money_at_stake": 1.0,
+            "game_id": "1b9a4a42-0c8a-46c0-95ee-c1e649e16fce",
+            "target_level": 1,
+            "action_id": "goal"
+        }
+    },
+    "game_id": "1b9a4a42-0c8a-46c0-95ee-c1e649e16fce"
+}
+```
+
+List all pools for a given game **in which you have placed a prediction** and the pool has been resolved.
+
+### Operation code
+
+Name | Code
+--------- | -------
+list_my_resolved_pools_for_game | 390
+
+### Call Parameters
+
+Parameter | Default | Description
+--------- | ------- | -----------
+game_id | null | Game id for which the pools are to be listed.
+
+### Response code
+
+Name | Code | Result
+--------- | ------- | -----------
+your_resolved_pools_for_game | 355 | Betting pools for game in which you had placed a prediction that had been resolved have been listed to you.
+
+### Response Parameters
+
+Parameter | Default | Description
+--------- | ------- | -----------
+game_id | :YOUR_GAME_ID | The game id for which the pools are listed.
+pools_list | {} | A dictionary of pools opened for game in which you have placed a prediction and that haved been resolved, **key** - pool id, **value** - pool details with the option you backed indicated.
 
 ## Place bet in betting pool
+
+
 
 ## Get betting pool distribution
 
