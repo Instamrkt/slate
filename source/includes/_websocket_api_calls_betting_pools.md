@@ -851,7 +851,7 @@ block_betting_in_betting_pool | 397
 
 Parameter | Default | Description
 --------- | ------- | -----------
-pool_id | null | Pool id for which distribution is to be returned.
+pool_id | null | Pool id which is supposed to be blocked.
 block_at | epoch_millis | Block pool at a later time - epoch_millis (> now()).
 
 ### Response code
@@ -874,6 +874,77 @@ blocked_at | epoch_millis | The timestamp indicating when the pool was blocked.
 Only users listed as admins for the game are authorized for this call.
 </aside>
 
+> Expects the following JSON structure:
+
+```json
+{
+    "header": {},
+    "op": 3975,
+    "game_id": "a183b2da-b561-4bc9-99b5-078e570e0117",
+    "action": "goal",
+    "block_at": null
+}
+```
+
+
+> Returns the following JSON structures:
+
+```json
+{
+    "response_header": {},
+    "res": 370,
+    "game_id": "a183b2da-b561-4bc9-99b5-078e570e0117",
+    "action": "goal",
+    "blocked_at": 1421942161542
+}
+```
+
+```json
+{
+    "response_header": {},
+    "res": 368,
+    "blocked_at": 1421942161542,
+    "pool_id": "a183b2da-b561-4bc9-99b5-078e570e0117"
+}
+```
+
+Blocks placing predictions in all pools for specified action in a specified game until unblocked (or pools resolved).
+
+### Operation code
+
+Name | Code
+--------- | -------
+block_betting_for_game_and_action | 3975
+
+### Call Parameters
+
+Parameter | Default | Description
+--------- | ------- | -----------
+game_id | null | Game id in which pools are to be blocked.
+action | null | Action for which pools are to be blocked.
+block_at | epoch_millis | Block pools at a later time - epoch_millis (> now()).
+
+### Response codes
+
+Name | Code | Result
+--------- | ------- | -----------
+betting_for_game_and_action_blocked | 370 | You have blocked given pools. This is broadcast to all game subscribers.
+betting_in_pool_blocked | 368 | You have blocked a given pool. This is broadcast to all game subscribers for all pools in game for given action.
+
+### Response Parameters
+
+#### Blocking confirmation
+
+Parameter | Default | Description
+--------- | ------- | -----------
+game_id | :YOUR_POOL_ID | The game id for game in which pools have been blocked.
+action | null | Action for which pools have been blocked.
+blocked_at | epoch_millis | The timestamp indicating when the pools were blocked.
+
+#### Blocked pool
+
+Described in <a href="#block-betting-in-a-pool">this section</a>.
+
 ## Allow betting in a pool
 
 <aside class="notice">
@@ -890,7 +961,6 @@ Only users listed as admins for the game are authorized for this call.
     "allow_at": null
 }
 ```
-
 
 > Returns the following JSON structure:
 
@@ -915,7 +985,7 @@ allow_betting_in_betting_pool | 398
 
 Parameter | Default | Description
 --------- | ------- | -----------
-pool_id | null | Pool id for which distribution is to be returned.
+pool_id | null | Pool id for which placing predictions is to be allowed.
 allow_at | epoch_millis | Allow betting pool at a later time - epoch_millis (> now()).
 
 ### Response code
@@ -936,3 +1006,74 @@ allowed_at | epoch_millis | The timestamp indicating when placing predictions in
 <aside class="notice">
 Only users listed as admins for the game are authorized for this call.
 </aside>
+
+> Expects the following JSON structure:
+
+```json
+{
+    "header": {},
+    "op": 3985,
+    "game_id": "a183b2da-b561-4bc9-99b5-078e570e0117",
+    "action": "goal",
+    "allow_at": null
+}
+```
+
+
+> Returns the following JSON structures:
+
+```json
+{
+    "response_header": {},
+    "res": 371,
+    "game_id": "a183b2da-b561-4bc9-99b5-078e570e0117",
+    "action": "goal",
+    "allowed_at": 1421942161542
+}
+```
+
+```json
+{
+    "response_header": {},
+    "res": 369,
+    "allowed_at": 1421942161542,
+    "pool_id": "a183b2da-b561-4bc9-99b5-078e570e0117"
+}
+```
+
+Allows for placing predictions in all pools for specified action in a specified game. Only necessary if action blocked previously.
+
+### Operation code
+
+Name | Code
+--------- | -------
+allow_betting_for_game_and_action | 3985
+
+### Call Parameters
+
+Parameter | Default | Description
+--------- | ------- | -----------
+game_id | null | Game id in which predictions in pools are to be allowed.
+action | null | Action for which predictions in pools are to be allowed.
+allow_at | epoch_millis | Allow for predcitions in pools at a later time - epoch_millis (> now()).
+
+### Response codes
+
+Name | Code | Result
+--------- | ------- | -----------
+betting_for_game_and_action_allowed | 371 | You have allowed for placing predictions in given pools. This is broadcast to all game subscribers.
+betting_in_pool_allowed | 369 | You have allowed for placing predictions in a given pool. This is broadcast to all game subscribers for all pools in game for given action.
+
+### Response Parameters
+
+#### Allowing confirmation
+
+Parameter | Default | Description
+--------- | ------- | -----------
+game_id | :YOUR_POOL_ID | The game id for game in which placing predictions in pools has been allowed.
+action | null | Action for which placing predictions in pools has been allowed.
+allowed_at | epoch_millis | The timestamp indicating when the placing predictions in pools was allowed.
+
+#### Unblocked pool
+
+Described in <a href="#allow-betting-in-a-pool">this section</a>.
