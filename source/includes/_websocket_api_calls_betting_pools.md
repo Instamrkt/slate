@@ -620,7 +620,6 @@ pools_list | {} | A dictionary of pools opened for game in which you have placed
 
 ## Place bet in betting pool
 
-
 > Expects the following JSON structure:
 
 ```json
@@ -722,6 +721,94 @@ amount | 0.0 | The amount which you have specified.
 Described in <a href="#get-betting-pool-distribution">this section</a>.
 
 ## Get betting pool distribution
+
+> Expects the following JSON structure:
+
+```json
+{
+    "header": {},
+    "op": 393,
+    "pool_id": "6cca4a84-d3e5-4d56-9f5e-acb50ecd5f1d"
+}
+```
+
+
+> Returns the following JSON structures:
+
+```json
+{
+    "response_header": {},
+    "res": 356,
+    "pool_id": "6cca4a84-d3e5-4d56-9f5e-acb50ecd5f1d",
+    "bet_id": "c34bcc05-58ea-4294-9310-9f8cbd121e29",
+    "amount": "1"
+}
+```
+
+```json
+{
+    "response_header": {},
+    "res": 360,
+    "pool_id": "6cca4a84-d3e5-4d56-9f5e-acb50ecd5f1d",
+    "target_level": 1,
+    "distribution": {
+        "brazil": {
+            "bets": {
+                "c34bcc05-58ea-4294-9310-9f8cbd121e29": {
+                    "placed_at": 1421937458,
+                    "amount": 1.0,
+                    "user_id": 1
+                }
+            },
+            "multiplier": 1.0,
+            "display_name": "brazil",
+            "amount_total": 1.0
+        },
+        "none": {
+            "bets": {},
+            "multiplier": 1.0,
+            "display_name": "none",
+            "amount_total": 0.0
+        },
+        "netherlands": {
+            "bets": {},
+            "multiplier": 1.0,
+            "display_name": "netherlands",
+            "amount_total": 0.0
+        }
+    }
+}
+```
+
+Places a prediction for the specified target for the specified amount in the specified pool.
+
+If user does not have sufficient available funds, an appropriate dedicated error message is returned.
+
+### Operation code
+
+Name | Code
+--------- | -------
+get_betting_pool_bets_distribution | 393
+
+### Call Parameters
+
+Parameter | Default | Description
+--------- | ------- | -----------
+pool_id | null | Pool id for which distribution is to be returned.
+
+### Response code
+
+Name | Code | Result
+--------- | ------- | -----------
+new_betting_pool_bets_distribution | 360 | You have received the pool distribution.
+
+### Response Parameters
+
+Parameter | Default | Description
+--------- | ------- | -----------
+pool_id | :YOUR_POOL_ID | The pool id for which the distribution was requested.
+target_level | 0 | The computed target level for sent targets. E.g. - 1 for "argentina, brazil", 2 for "argentina:9, brazil:7"
+distribution | {} | A distribution of current predictions. **key** - target_id, **value** - a dictionary will predictions for a given target (containing a list of all bets, with details, current target multiplier, display name and total amount backing the target).
 
 ## Block betting in a pool
 
