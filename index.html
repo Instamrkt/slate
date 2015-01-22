@@ -1849,6 +1849,1653 @@ This will automatically close and resolve all the automatically resolvable pools
 </tbody></table>
 
           <h1 id='websocket-api-betting-pools'>Websocket API: Betting pools</h1>
+<p><aside class="notice">
+This section assumes you have an active game opened and running. If not, read on how to open it <a href="#open-a-game">here</a>.
+</aside></p>
+<h2 id='create-and-open-betting-pool'>Create and open betting pool</h2>
+<p><aside class="notice">
+Only users listed as admins for the game are authorized for this call.
+</aside></p>
+
+<p><aside class="success">
+This functionality is also provided automatically by instamrkt - pools are opened and resolved automatically.
+</aside></p>
+
+<blockquote>
+<p>Expects the following JSON structure:</p>
+</blockquote>
+<pre><code class="highlight json"><span class="p">{</span><span class="w">
+    </span><span class="s2">"header"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
+    </span><span class="s2">"op"</span><span class="p">:</span><span class="w"> </span><span class="mi">385</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"game_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"30cee1fa-fb20-41a6-a61c-0e0335abc2a9"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Next Goal By Team"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Goal"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"targets"</span><span class="p">:</span><span class="w"> </span><span class="s2">"argentina,brazil"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"pool_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"start_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"finish_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"stop_accepting_bets_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"recreate_on_end"</span><span class="p">:</span><span class="w"> </span><span class="s2">"False"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<blockquote>
+<p>Returns the following JSON structure:</p>
+</blockquote>
+<pre><code class="highlight json"><span class="p">{</span><span class="w">
+    </span><span class="s2">"response_header"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
+    </span><span class="s2">"res"</span><span class="p">:</span><span class="w"> </span><span class="mi">352</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"game_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"30cee1fa-fb20-41a6-a61c-0e0335abc2a9"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"pool_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"30cee1fa-fb20-41a6-a61c-0e0335abc2a9"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Next Goal By Team"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"pool_type"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"goal"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"people_involved"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"money_at_stake"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"target_level"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"targets"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"brazil"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"backing_people"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"to_win_if_backed"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"display_name"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="s2">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"bra"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"display_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"brazil"</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="s2">"backing_money"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="s2">"none"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"backing_people"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"to_win_if_backed"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"display_name"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="s2">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"non"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"display_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"none"</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="s2">"backing_money"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="s2">"argentina"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"backing_people"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"to_win_if_backed"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"display_name"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="s2">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"arg"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"display_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"argentina"</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="s2">"backing_money"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"start_at"</span><span class="p">:</span><span class="w"> </span><span class="mi">1421928724803</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"finish_at"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"stop_accepting_bets_at"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>This creates and opens a pool for predictions for people subscribed to the game in the system. Predictions can now be made in this pool. The successful call results in broadcasting the response to all users subscribed to the game.</p>
+
+<p>How to make a prediction is described <a href="#place-bet-in-betting-pool">here</a>.</p>
+<h3 id='operation-code'>Operation code</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Code</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>create_betting_pool</td>
+<td>385</td>
+</tr>
+</tbody></table>
+<h3 id='call-parameters'>Call Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>game_id</td>
+<td>null</td>
+<td>Game id for which the pool is to be opened.</td>
+</tr>
+<tr>
+<td>description</td>
+<td>&ldquo;&rdquo;</td>
+<td>The pool description - question which will be desplayed to users.</td>
+</tr>
+<tr>
+<td>action</td>
+<td>&ldquo;&rdquo;</td>
+<td>An action on which the prediction is made. Has to be in a set of actions available for game.</td>
+</tr>
+<tr>
+<td>targets</td>
+<td>[]</td>
+<td>List of targets on which predictions for actoin can happen. Has to be a subset of targets available for game. Sent as a comma-separated string or an array. Targets have to be of same level. That means &ldquo;argentina, brazil&rdquo; is correct, but &ldquo;argentina, brazil:9&rdquo; is not.</td>
+</tr>
+<tr>
+<td>pool_type</td>
+<td>1</td>
+<td>1 - parimutuel event based, 2 - parimutuel time based, 3 - binary event based, 4 - binary time based.</td>
+</tr>
+<tr>
+<td>start_at</td>
+<td>now()</td>
+<td>Pool opening time (&gt; now()) in epoch millis. If left blank, will be opened as soon as registered by the server. <strong>As of now pools are opened as soon as this call is received by the server.</strong></td>
+</tr>
+<tr>
+<td>finish_at</td>
+<td>null</td>
+<td>Pool closing time (&gt; open_at) in epoch millis. This will close the pool at a given time. <strong>Warning</strong>: this will automatically resolve th pool to <strong>none</strong>.</td>
+</tr>
+<tr>
+<td>stop_accepting_bets_at</td>
+<td>null</td>
+<td>Stop accepting bets at time (&gt; now()) in epoch millis. This parameter is optional. Include if you want to close the pool after a certain time.</td>
+</tr>
+<tr>
+<td>recreate_on_end</td>
+<td>False</td>
+<td>Boolean value describing if pool is to be recreated anew upon resolution.</td>
+</tr>
+</tbody></table>
+<h3 id='response-code'>Response code</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Code</th>
+<th>Result</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>betting_pool_created</td>
+<td>350</td>
+<td>Your pool has been created and is now opened for predictions.</td>
+</tr>
+</tbody></table>
+<h3 id='response-parameters'>Response Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>game_id</td>
+<td>:YOUR_GAME_ID</td>
+<td>The provided game id.</td>
+</tr>
+<tr>
+<td>pool_id</td>
+<td>:YOUR_POOL_ID</td>
+<td>The server-generated pool id. Necessary for making all pool-related calls.</td>
+</tr>
+<tr>
+<td>description</td>
+<td>&ldquo;&rdquo;</td>
+<td>The provided pool description - question which will be desplayed to users.</td>
+</tr>
+<tr>
+<td>pool_type</td>
+<td>1</td>
+<td>Provided pool type: 1 - parimutuel event based, 2 - parimutuel time based, 3 - binary event based, 4 - binary time based.</td>
+</tr>
+<tr>
+<td>action</td>
+<td>&ldquo;&rdquo;</td>
+<td>The provided action on which the prediction is made.</td>
+</tr>
+<tr>
+<td>people_involved</td>
+<td>0</td>
+<td>Number of people who already placed predictions in pool. Will be incremented on every prediction.</td>
+</tr>
+<tr>
+<td>money_at_stake</td>
+<td>0.0</td>
+<td>Amount of money already placed predictions in pool. Will be incremented on every prediction.</td>
+</tr>
+<tr>
+<td>target_level</td>
+<td>0</td>
+<td>The computed target level for sent targets. E.g. - 1 for &ldquo;argentina, brazil&rdquo;, 2 for &ldquo;argentina:9, brazil:7&rdquo;</td>
+</tr>
+<tr>
+<td>targets</td>
+<td>{}</td>
+<td>A nested, recursive dictionary containing the targets you listed. <strong>key</strong> - target id, <strong>value</strong> - target details (symbol, display name and <em>sub</em> targets). Please look at the example on the right.</td>
+</tr>
+<tr>
+<td>start_at</td>
+<td>request receival time</td>
+<td>The open pool time in epoch millis.</td>
+</tr>
+<tr>
+<td>live_start_at</td>
+<td>request receival time</td>
+<td>The real life game start time in epoch millis (only informative).</td>
+</tr>
+<tr>
+<td>finish_at</td>
+<td>null</td>
+<td>The passed pool closing time. (Relevant only for pools of type 2 and 4).</td>
+</tr>
+<tr>
+<td>stop_accepting_bets_at</td>
+<td>null</td>
+<td>Provided stop accepting bets at time (&gt; now()) in epoch millis.</td>
+</tr>
+</tbody></table>
+<h2 id='resolve-pool--register-game-event'>Resolve pool / register game event</h2>
+<p><aside class="notice">
+Only users listed as admins for the game are authorized for this call.
+</aside></p>
+
+<p><aside class="success">
+This functionality is also provided automatically by instamrkt - pools are opened and resolved automatically.
+</aside></p>
+
+<blockquote>
+<p>Expects the following JSON structure:</p>
+</blockquote>
+<pre><code class="highlight json"><span class="p">{</span><span class="w">
+    </span><span class="s2">"header"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
+    </span><span class="s2">"op"</span><span class="p">:</span><span class="w"> </span><span class="mi">395</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"action_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"goal"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"target_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"brazil"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"game_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1b9a4a42-0c8a-46c0-95ee-c1e649e16fce"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"happened_at"</span><span class="p">:</span><span class="w"> </span><span class="mi">1421933670549</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<blockquote>
+<p>Returns the following JSON structures:</p>
+</blockquote>
+<pre><code class="highlight json"><span class="p">{</span><span class="w">
+    </span><span class="s2">"response_header"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
+    </span><span class="s2">"res"</span><span class="p">:</span><span class="w"> </span><span class="mi">366</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"action_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"goal"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"target_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"brazil"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"target_display_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"brazil"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"current_count"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"brazil"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"game_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1b9a4a42-0c8a-46c0-95ee-c1e649e16fce"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"happened_at"</span><span class="p">:</span><span class="w"> </span><span class="mi">1421933670549</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<pre><code class="highlight json"><span class="p">{</span><span class="w">
+    </span><span class="s2">"response_header"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
+    </span><span class="s2">"res"</span><span class="p">:</span><span class="w"> </span><span class="mi">362</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"pool_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"7d48ecbc-cd97-41fa-94e8-ca0a8ff22629"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"game_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1b9a4a42-0c8a-46c0-95ee-c1e649e16fce"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"winning_target"</span><span class="p">:</span><span class="w"> </span><span class="s2">"brazil"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Next Goal By Team"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"winners"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="s2">"3"</span><span class="p">:</span><span class="w"> </span><span class="mf">10.0</span><span class="p">},</span><span class="w">
+    </span><span class="s2">"losers"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">],</span><span class="w">
+    </span><span class="s2">"invalidated_bettors"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+    </span><span class="s2">"is_money_return"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"resolved_at"</span><span class="p">:</span><span class="w"> </span><span class="mi">1421933670582</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>This registers an event for a game (e.g. a goal, yellow card etc.). The event consists of an action and a target. This resolves all pools opened for action containing the target in its available to target. People who predicted the target win, all others lose.</p>
+
+<p>Events of higher levels resolve also pools for events of lower levels. E.g., an event &ldquo;goal&rdquo; for target &ldquo;brazil:9&rdquo;, will resolve all pools opened for &ldquo;goal&rdquo; containing &ldquo;brazil:9&rdquo; <strong>and</strong> &ldquo;brazil&rdquo; in its targets.</p>
+
+<p>Pool resolution in turn will cause sending out a bet_pool_resolved message, also described below. It also sends out a new balance message to all users participating in a pool.</p>
+<h3 id='operation-code'>Operation code</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Code</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>register_game_event</td>
+<td>395</td>
+</tr>
+</tbody></table>
+<h3 id='call-parameters'>Call Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>game_id</td>
+<td>null</td>
+<td>Game id for which the pool is to be opened.</td>
+</tr>
+<tr>
+<td>description</td>
+<td>&ldquo;&rdquo;</td>
+<td>The pool description - question which will be desplayed to users.</td>
+</tr>
+<tr>
+<td>action_id</td>
+<td>null</td>
+<td>An action which happened in the game. Has to be contained in a set of actions available for game.</td>
+</tr>
+<tr>
+<td>target_id</td>
+<td>null</td>
+<td>Target which performed the action. Has to be contained in a set of targets available for game. <strong>Furhtermore</strong>, has to be of maximum target level. E.g. if game contains targets such as &ldquo;brazil:9, argentina:9, brazil, argentina&rdquo;, only targets &ldquo;brazil:9, argentina:9&rdquo; will be accepted (a team cannot score a goal without a player scoring).</td>
+</tr>
+<tr>
+<td>game_id</td>
+<td>:YOUR_GAME_ID</td>
+<td>The game id for which event happened.</td>
+</tr>
+<tr>
+<td>happened_at</td>
+<td>null</td>
+<td>Epoch millis when event happened. If skipped, defaulted to message receival time.</td>
+</tr>
+</tbody></table>
+<h3 id='response-codes'>Response codes</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Code</th>
+<th>Result</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>new_game_event</td>
+<td>366</td>
+<td>Event was registered. Broadcast to all game subscribers too.</td>
+</tr>
+<tr>
+<td>bet_pool_resolved</td>
+<td>362</td>
+<td>Pool resolved. Sent for every pool for action and target. Broadcast to all game subscribers.</td>
+</tr>
+</tbody></table>
+<h3 id='response-parameters'>Response Parameters</h3><h4 id='new-game-event'>New game event</h4>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>game_id</td>
+<td>null</td>
+<td>Game id for which the pool is to be opened.</td>
+</tr>
+<tr>
+<td>description</td>
+<td>&ldquo;&rdquo;</td>
+<td>The pool description - question which will be desplayed to users.</td>
+</tr>
+<tr>
+<td>action_id</td>
+<td>null</td>
+<td>The provided action which happened in the game.</td>
+</tr>
+<tr>
+<td>target_id</td>
+<td>null</td>
+<td>The provided target which performed the action.</td>
+</tr>
+<tr>
+<td>target_display_name</td>
+<td>null</td>
+<td>The provided target&rsquo;s display name.</td>
+</tr>
+<tr>
+<td>current_count</td>
+<td>{}</td>
+<td>A dictionary containing current count for action in the game - <strong>key</strong> - target_id, <strong>value</strong> - count of action for target.</td>
+</tr>
+<tr>
+<td>game_id</td>
+<td>:YOUR_GAME_ID</td>
+<td>The provided game id for which event happened.</td>
+</tr>
+<tr>
+<td>happened_at</td>
+<td>null</td>
+<td>Epoch millis when event happened. If skipped, defaulted to message receival time.</td>
+</tr>
+</tbody></table>
+<h4 id='pool-resolved'>Pool resolved</h4>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>game_id</td>
+<td>:YOUR_GAME_ID</td>
+<td>The game id for which the pool was resolved.</td>
+</tr>
+<tr>
+<td>pool_id</td>
+<td>:YOUR_POOL_ID</td>
+<td>The resolved pool id.</td>
+</tr>
+<tr>
+<td>description</td>
+<td>&ldquo;&rdquo;</td>
+<td>The provided pool description.</td>
+</tr>
+<tr>
+<td>winning_target</td>
+<td>null</td>
+<td>The winning target for the pool (from the subset of targets available for pool).</td>
+</tr>
+<tr>
+<td>winners</td>
+<td>{}</td>
+<td>The dictionary containing all winners. <strong>key</strong> - user id, <strong>value</strong> - how much each user won (in propotion of what they input into the pool).</td>
+</tr>
+<tr>
+<td>losers</td>
+<td>[]</td>
+<td>The list of user ids of losers in the pool.</td>
+</tr>
+<tr>
+<td>invalidated_bettors</td>
+<td>[]</td>
+<td>The list of user ids of people who placed their prediction too late (usually between the time of event happening and its registering by the server).</td>
+</tr>
+<tr>
+<td>resolved_at</td>
+<td>event receival time</td>
+<td>The time of pool resolution in epoch millis.</td>
+</tr>
+</tbody></table>
+<h2 id='list-all-open-pools-for-game'>List all open pools for game</h2>
+<blockquote>
+<p>Expects the following JSON structure:</p>
+</blockquote>
+<pre><code class="highlight json"><span class="p">{</span><span class="w">
+    </span><span class="s2">"header"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
+    </span><span class="s2">"op"</span><span class="p">:</span><span class="w"> </span><span class="mi">387</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"game_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1b9a4a42-0c8a-46c0-95ee-c1e649e16fce"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<blockquote>
+<p>Returns the following JSON structure:</p>
+</blockquote>
+<pre><code class="highlight json"><span class="p">{</span><span class="w">
+    </span><span class="s2">"response_header"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
+    </span><span class="s2">"res"</span><span class="p">:</span><span class="w"> </span><span class="mi">3535</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"game_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1b9a4a42-0c8a-46c0-95ee-c1e649e16fce"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"pools_list"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"0ec3850f-f862-4baf-bada-73394a68bbdd"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"start_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1421933670629"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Next Goal By Team"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"money_at_stake"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"finish_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"None"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"distributions"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="s2">"brazil"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                    </span><span class="s2">"bets"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
+                    </span><span class="s2">"multiplier"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"amount_total"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="w">
+                </span><span class="p">},</span><span class="w">
+                </span><span class="s2">"none"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                    </span><span class="s2">"bets"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
+                    </span><span class="s2">"multiplier"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"amount_total"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="w">
+                </span><span class="p">},</span><span class="w">
+                </span><span class="s2">"netherlands"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                    </span><span class="s2">"bets"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
+                    </span><span class="s2">"multiplier"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"amount_total"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="w">
+                </span><span class="p">}</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="s2">"target_level"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"people_involved"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"pool_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0ec3850f-f862-4baf-bada-73394a68bbdd"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"stop_accepting_bets_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"None"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"action_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"goal"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="s2">"6cca4a84-d3e5-4d56-9f5e-acb50ecd5f1d"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"start_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1421935990222"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Next Card By Team"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"money_at_stake"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"finish_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"None"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"distributions"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="s2">"brazil"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                    </span><span class="s2">"bets"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
+                    </span><span class="s2">"multiplier"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"amount_total"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="w">
+                </span><span class="p">},</span><span class="w">
+                </span><span class="s2">"none"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                    </span><span class="s2">"bets"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
+                    </span><span class="s2">"multiplier"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"amount_total"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="w">
+                </span><span class="p">},</span><span class="w">
+                </span><span class="s2">"netherlands"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                    </span><span class="s2">"bets"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
+                    </span><span class="s2">"multiplier"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"amount_total"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="w">
+                </span><span class="p">}</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="s2">"target_level"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"people_involved"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"pool_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"6cca4a84-d3e5-4d56-9f5e-acb50ecd5f1d"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"stop_accepting_bets_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"None"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"action_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"card"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>List all pools opened for predictions for a given game.</p>
+<h3 id='operation-code'>Operation code</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Code</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>list_all_betting_pools_for_game</td>
+<td>387</td>
+</tr>
+</tbody></table>
+<h3 id='call-parameters'>Call Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>game_id</td>
+<td>null</td>
+<td>Game id for which the pools are to be listed.</td>
+</tr>
+</tbody></table>
+<h3 id='response-code'>Response code</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Code</th>
+<th>Result</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>all_betting_pools_for_game</td>
+<td>3535</td>
+<td>Opened betting pools for game have been listed to you.</td>
+</tr>
+</tbody></table>
+<h3 id='response-parameters'>Response Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>game_id</td>
+<td>:YOUR_GAME_ID</td>
+<td>The game id for which the pools are listed.</td>
+</tr>
+<tr>
+<td>pools_list</td>
+<td>{}</td>
+<td>A dictionary of pools opened for game, <strong>key</strong> - pool id, <strong>value</strong> - pool details.</td>
+</tr>
+</tbody></table>
+<h2 id='list-my-open-pools-for-game'>List my open pools for game</h2>
+<blockquote>
+<p>Expects the following JSON structure:</p>
+</blockquote>
+<pre><code class="highlight json"><span class="p">{</span><span class="w">
+    </span><span class="s2">"header"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
+    </span><span class="s2">"op"</span><span class="p">:</span><span class="w"> </span><span class="mi">388</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"game_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1b9a4a42-0c8a-46c0-95ee-c1e649e16fce"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<blockquote>
+<p>Returns the following JSON structure:</p>
+</blockquote>
+<pre><code class="highlight json"><span class="p">{</span><span class="w">
+    </span><span class="s2">"response_header"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
+    </span><span class="s2">"res"</span><span class="p">:</span><span class="w"> </span><span class="mi">353</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"game_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1b9a4a42-0c8a-46c0-95ee-c1e649e16fce"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"pools_list"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"0ec3850f-f862-4baf-bada-73394a68bbdd"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"start_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1421933670629"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Next Goal By Team"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"money_at_stake"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"finish_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"None"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"distributions"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="s2">"brazil"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                    </span><span class="s2">"bets"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
+                    </span><span class="s2">"multiplier"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"amount_total"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="w">
+                </span><span class="p">},</span><span class="w">
+                </span><span class="s2">"none"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                    </span><span class="s2">"bets"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
+                    </span><span class="s2">"multiplier"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"amount_total"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="w">
+                </span><span class="p">},</span><span class="w">
+                </span><span class="s2">"netherlands"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                    </span><span class="s2">"bets"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
+                    </span><span class="s2">"multiplier"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"amount_total"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="w">
+                </span><span class="p">}</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="s2">"target_level"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"people_involved"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"pool_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0ec3850f-f862-4baf-bada-73394a68bbdd"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"stop_accepting_bets_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"None"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"action_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"goal"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>List all pools opened for predictions for a given game <strong>in which you have not yet placed a prediction</strong>.</p>
+<h3 id='operation-code'>Operation code</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Code</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>list_my_open_betting_pools_for_game</td>
+<td>388</td>
+</tr>
+</tbody></table>
+<h3 id='call-parameters'>Call Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>game_id</td>
+<td>null</td>
+<td>Game id for which the pools are to be listed.</td>
+</tr>
+</tbody></table>
+<h3 id='response-code'>Response code</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Code</th>
+<th>Result</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>you_open_pools_list_for_game</td>
+<td>353</td>
+<td>Opened betting pools for game in which you have not placed a prediction have been listed to you.</td>
+</tr>
+</tbody></table>
+<h3 id='response-parameters'>Response Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>game_id</td>
+<td>:YOUR_GAME_ID</td>
+<td>The game id for which the pools are listed.</td>
+</tr>
+<tr>
+<td>pools_list</td>
+<td>{}</td>
+<td>A dictionary of pools opened for game in which you have not placed a prediction, <strong>key</strong> - pool id, <strong>value</strong> - pool details.</td>
+</tr>
+</tbody></table>
+<h2 id='list-my-running-pools-for-game'>List my running pools for game</h2>
+<blockquote>
+<p>Expects the following JSON structure:</p>
+</blockquote>
+<pre><code class="highlight json"><span class="p">{</span><span class="w">
+    </span><span class="s2">"header"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
+    </span><span class="s2">"op"</span><span class="p">:</span><span class="w"> </span><span class="mi">389</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"game_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1b9a4a42-0c8a-46c0-95ee-c1e649e16fce"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<blockquote>
+<p>Returns the following JSON structure:</p>
+</blockquote>
+<pre><code class="highlight json"><span class="p">{</span><span class="w">
+    </span><span class="s2">"response_header"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
+    </span><span class="s2">"res"</span><span class="p">:</span><span class="w"> </span><span class="mi">354</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"game_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1b9a4a42-0c8a-46c0-95ee-c1e649e16fce"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"pools_list"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"6cca4a84-d3e5-4d56-9f5e-acb50ecd5f1d"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"start_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1421935990222"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"money_at_stake"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"finish_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"None"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"distributions"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="s2">"brazil"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                    </span><span class="s2">"bets"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                        </span><span class="s2">"c34bcc05-58ea-4294-9310-9f8cbd121e29"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                            </span><span class="s2">"placed_at"</span><span class="p">:</span><span class="w"> </span><span class="mi">1421937458</span><span class="p">,</span><span class="w">
+                            </span><span class="s2">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w">
+                            </span><span class="s2">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
+                        </span><span class="p">}</span><span class="w">
+                    </span><span class="p">},</span><span class="w">
+                    </span><span class="s2">"multiplier"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"amount_total"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.0</span><span class="w">
+                </span><span class="p">},</span><span class="w">
+                </span><span class="s2">"none"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                    </span><span class="s2">"bets"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
+                    </span><span class="s2">"multiplier"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"amount_total"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="w">
+                </span><span class="p">},</span><span class="w">
+                </span><span class="s2">"netherlands"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                    </span><span class="s2">"bets"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
+                    </span><span class="s2">"multiplier"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"amount_total"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="w">
+                </span><span class="p">}</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Next Card By Team"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"target_level"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"people_involved"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"user_backed"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="s2">"brazil"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.0</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="s2">"stop_accepting_bets_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"None"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"action_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"card"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>List all pools opened for predictions for a given game <strong>in which you have not yet placed a prediction</strong>.</p>
+<h3 id='operation-code'>Operation code</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Code</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>list_my_running_pools_for_game</td>
+<td>389</td>
+</tr>
+</tbody></table>
+<h3 id='call-parameters'>Call Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>game_id</td>
+<td>null</td>
+<td>Game id for which the pools are to be listed.</td>
+</tr>
+</tbody></table>
+<h3 id='response-code'>Response code</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Code</th>
+<th>Result</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>your_running_pools_for_game</td>
+<td>354</td>
+<td>Opened betting pools for game in which you have placed a prediction have been listed to you.</td>
+</tr>
+</tbody></table>
+<h3 id='response-parameters'>Response Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>game_id</td>
+<td>:YOUR_GAME_ID</td>
+<td>The game id for which the pools are listed.</td>
+</tr>
+<tr>
+<td>pools_list</td>
+<td>{}</td>
+<td>A dictionary of pools opened for game in which you have placed a prediction, <strong>key</strong> - pool id, <strong>value</strong> - pool details with the option you backed indicated.</td>
+</tr>
+</tbody></table>
+<h2 id='list-my-resolved-pools-for-game'>List my resolved pools for game</h2>
+<blockquote>
+<p>Expects the following JSON structure:</p>
+</blockquote>
+<pre><code class="highlight json"><span class="p">{</span><span class="w">
+    </span><span class="s2">"header"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
+    </span><span class="s2">"op"</span><span class="p">:</span><span class="w"> </span><span class="mi">390</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"game_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1b9a4a42-0c8a-46c0-95ee-c1e649e16fce"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<blockquote>
+<p>Returns the following JSON structure:</p>
+</blockquote>
+<pre><code class="highlight json"><span class="p">{</span><span class="w">
+    </span><span class="s2">"response_header"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
+    </span><span class="s2">"res"</span><span class="p">:</span><span class="w"> </span><span class="mi">355</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"pools_list"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"6cca4a84-d3e5-4d56-9f5e-acb50ecd5f1d"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"total_winnings"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"resolved_at"</span><span class="p">:</span><span class="w"> </span><span class="mi">1421938211000</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"start_at"</span><span class="p">:</span><span class="w"> </span><span class="mi">1421935990000</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Next Goal By Team"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"winning_target"</span><span class="p">:</span><span class="w"> </span><span class="s2">"brazil"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"distributions"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="s2">"brazil"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                    </span><span class="s2">"bets"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                        </span><span class="s2">"c34bcc05-58ea-4294-9310-9f8cbd121e29"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                            </span><span class="s2">"placed_at"</span><span class="p">:</span><span class="w"> </span><span class="mi">1421937458000</span><span class="p">,</span><span class="w">
+                            </span><span class="s2">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w">
+                            </span><span class="s2">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
+                        </span><span class="p">}</span><span class="w">
+                    </span><span class="p">},</span><span class="w">
+                    </span><span class="s2">"multiplier"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"amount_total"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.0</span><span class="w">
+                </span><span class="p">},</span><span class="w">
+                </span><span class="s2">"none"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                    </span><span class="s2">"bets"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
+                    </span><span class="s2">"multiplier"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"amount_total"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="w">
+                </span><span class="p">},</span><span class="w">
+                </span><span class="s2">"netherlands"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                    </span><span class="s2">"bets"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
+                    </span><span class="s2">"multiplier"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"amount_total"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="w">
+                </span><span class="p">}</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="s2">"people_involved"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"pool_type"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"user_backed"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="s2">"brazil"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.0</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="s2">"stop_accepting_bets_at"</span><span class="p">:</span><span class="w"> </span><span class="mi">1421938211000</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"game_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Netherlands - Brazil"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"money_at_stake"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"game_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1b9a4a42-0c8a-46c0-95ee-c1e649e16fce"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"target_level"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"action_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"goal"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"game_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1b9a4a42-0c8a-46c0-95ee-c1e649e16fce"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>List all pools for a given game <strong>in which you have placed a prediction</strong> and the pool has been resolved.</p>
+<h3 id='operation-code'>Operation code</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Code</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>list_my_resolved_pools_for_game</td>
+<td>390</td>
+</tr>
+</tbody></table>
+<h3 id='call-parameters'>Call Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>game_id</td>
+<td>null</td>
+<td>Game id for which the pools are to be listed.</td>
+</tr>
+</tbody></table>
+<h3 id='response-code'>Response code</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Code</th>
+<th>Result</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>your_resolved_pools_for_game</td>
+<td>355</td>
+<td>Betting pools for game in which you had placed a prediction that had been resolved have been listed to you.</td>
+</tr>
+</tbody></table>
+<h3 id='response-parameters'>Response Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>game_id</td>
+<td>:YOUR_GAME_ID</td>
+<td>The game id for which the pools are listed.</td>
+</tr>
+<tr>
+<td>pools_list</td>
+<td>{}</td>
+<td>A dictionary of pools opened for game in which you have placed a prediction and that haved been resolved, <strong>key</strong> - pool id, <strong>value</strong> - pool details with the option you backed indicated.</td>
+</tr>
+</tbody></table>
+<h2 id='place-bet-in-betting-pool'>Place bet in betting pool</h2>
+<blockquote>
+<p>Expects the following JSON structure:</p>
+</blockquote>
+<pre><code class="highlight json"><span class="p">{</span><span class="w">
+    </span><span class="s2">"header"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
+    </span><span class="s2">"op"</span><span class="p">:</span><span class="w"> </span><span class="mi">392</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"pool_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"6cca4a84-d3e5-4d56-9f5e-acb50ecd5f1d"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"target"</span><span class="p">:</span><span class="w"> </span><span class="s2">"brazil"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"amount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<blockquote>
+<p>Returns the following JSON structures:</p>
+</blockquote>
+<pre><code class="highlight json"><span class="p">{</span><span class="w">
+    </span><span class="s2">"response_header"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
+    </span><span class="s2">"res"</span><span class="p">:</span><span class="w"> </span><span class="mi">356</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"pool_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"6cca4a84-d3e5-4d56-9f5e-acb50ecd5f1d"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"bet_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"c34bcc05-58ea-4294-9310-9f8cbd121e29"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"amount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<pre><code class="highlight json"><span class="p">{</span><span class="w">
+    </span><span class="s2">"response_header"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
+    </span><span class="s2">"res"</span><span class="p">:</span><span class="w"> </span><span class="mi">360</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"pool_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"6cca4a84-d3e5-4d56-9f5e-acb50ecd5f1d"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"target_level"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"distribution"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"brazil"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"bets"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="s2">"c34bcc05-58ea-4294-9310-9f8cbd121e29"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                    </span><span class="s2">"placed_at"</span><span class="p">:</span><span class="w"> </span><span class="mi">1421937458</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
+                </span><span class="p">}</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="s2">"multiplier"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"display_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"brazil"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"amount_total"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.0</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="s2">"none"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"bets"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
+            </span><span class="s2">"multiplier"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"display_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"none"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"amount_total"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="s2">"netherlands"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"bets"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
+            </span><span class="s2">"multiplier"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"display_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"netherlands"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"amount_total"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>Places a prediction for the specified target for the specified amount in the specified pool.</p>
+
+<p>If user does not have sufficient available funds, an appropriate dedicated error message is returned.</p>
+<h3 id='operation-code'>Operation code</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Code</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>place_bet_in_betting_pool</td>
+<td>392</td>
+</tr>
+</tbody></table>
+<h3 id='call-parameters'>Call Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>pool_id</td>
+<td>null</td>
+<td>Pool id in which the prediction is to be placed.</td>
+</tr>
+<tr>
+<td>target</td>
+<td>null</td>
+<td>The target which you want to back.</td>
+</tr>
+<tr>
+<td>amount</td>
+<td>0.0</td>
+<td>Amount that you want to wager.</td>
+</tr>
+</tbody></table>
+<h3 id='response-codes'>Response codes</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Code</th>
+<th>Result</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>bet_placed_in_betting_pool</td>
+<td>356</td>
+<td>You have successfully placed your prediction.</td>
+</tr>
+<tr>
+<td>new_betting_pool_bets_distribution</td>
+<td>360</td>
+<td>You have changed the pool distribution. This is broadcast to all game subscribers.</td>
+</tr>
+</tbody></table>
+<h3 id='response-parameters'>Response Parameters</h3><h4 id='placing-confirmation'>Placing confirmation</h4>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>pool_id</td>
+<td>:YOUR_POOL_ID</td>
+<td>The pool id for which the prediction was placed.</td>
+</tr>
+<tr>
+<td>pool_id</td>
+<td>:NEW_BET_ID</td>
+<td>Server-generated bet id.</td>
+</tr>
+<tr>
+<td>target</td>
+<td>null</td>
+<td>The target which you have backed.</td>
+</tr>
+<tr>
+<td>amount</td>
+<td>0.0</td>
+<td>The amount which you have specified.</td>
+</tr>
+</tbody></table>
+<h4 id='new-distribution'>New distribution</h4>
+<p>Described in <a href="#get-betting-pool-distribution">this section</a>.</p>
+<h2 id='get-betting-pool-distribution'>Get betting pool distribution</h2>
+<blockquote>
+<p>Expects the following JSON structure:</p>
+</blockquote>
+<pre><code class="highlight json"><span class="p">{</span><span class="w">
+    </span><span class="s2">"header"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
+    </span><span class="s2">"op"</span><span class="p">:</span><span class="w"> </span><span class="mi">393</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"pool_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"6cca4a84-d3e5-4d56-9f5e-acb50ecd5f1d"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<blockquote>
+<p>Returns the following JSON structures:</p>
+</blockquote>
+<pre><code class="highlight json"><span class="p">{</span><span class="w">
+    </span><span class="s2">"response_header"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
+    </span><span class="s2">"res"</span><span class="p">:</span><span class="w"> </span><span class="mi">356</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"pool_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"6cca4a84-d3e5-4d56-9f5e-acb50ecd5f1d"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"bet_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"c34bcc05-58ea-4294-9310-9f8cbd121e29"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"amount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<pre><code class="highlight json"><span class="p">{</span><span class="w">
+    </span><span class="s2">"response_header"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
+    </span><span class="s2">"res"</span><span class="p">:</span><span class="w"> </span><span class="mi">360</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"pool_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"6cca4a84-d3e5-4d56-9f5e-acb50ecd5f1d"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"target_level"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"distribution"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"brazil"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"bets"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="s2">"c34bcc05-58ea-4294-9310-9f8cbd121e29"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                    </span><span class="s2">"placed_at"</span><span class="p">:</span><span class="w"> </span><span class="mi">1421937458</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
+                </span><span class="p">}</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="s2">"multiplier"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"display_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"brazil"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"amount_total"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.0</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="s2">"none"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"bets"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
+            </span><span class="s2">"multiplier"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"display_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"none"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"amount_total"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="s2">"netherlands"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"bets"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
+            </span><span class="s2">"multiplier"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"display_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"netherlands"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"amount_total"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>Places a prediction for the specified target for the specified amount in the specified pool.</p>
+
+<p>If user does not have sufficient available funds, an appropriate dedicated error message is returned.</p>
+<h3 id='operation-code'>Operation code</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Code</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>get_betting_pool_bets_distribution</td>
+<td>393</td>
+</tr>
+</tbody></table>
+<h3 id='call-parameters'>Call Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>pool_id</td>
+<td>null</td>
+<td>Pool id for which distribution is to be returned.</td>
+</tr>
+</tbody></table>
+<h3 id='response-code'>Response code</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Code</th>
+<th>Result</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>new_betting_pool_bets_distribution</td>
+<td>360</td>
+<td>You have received the pool distribution.</td>
+</tr>
+</tbody></table>
+<h3 id='response-parameters'>Response Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>pool_id</td>
+<td>:YOUR_POOL_ID</td>
+<td>The pool id for which the distribution was requested.</td>
+</tr>
+<tr>
+<td>target_level</td>
+<td>0</td>
+<td>The computed target level for sent targets. E.g. - 1 for &ldquo;argentina, brazil&rdquo;, 2 for &ldquo;argentina:9, brazil:7&rdquo;</td>
+</tr>
+<tr>
+<td>distribution</td>
+<td>{}</td>
+<td>A distribution of current predictions. <strong>key</strong> - target_id, <strong>value</strong> - a dictionary will predictions for a given target (containing a list of all bets, with details, current target multiplier, display name and total amount backing the target).</td>
+</tr>
+</tbody></table>
+<h2 id='block-betting-in-a-pool'>Block betting in a pool</h2>
+<p><aside class="notice">
+Only users listed as admins for the game are authorized for this call.
+</aside></p>
+
+<blockquote>
+<p>Expects the following JSON structure:</p>
+</blockquote>
+<pre><code class="highlight json"><span class="p">{</span><span class="w">
+    </span><span class="s2">"header"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
+    </span><span class="s2">"op"</span><span class="p">:</span><span class="w"> </span><span class="mi">397</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"pool_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"a183b2da-b561-4bc9-99b5-078e570e0117"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"block_at"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<blockquote>
+<p>Returns the following JSON structure:</p>
+</blockquote>
+<pre><code class="highlight json"><span class="p">{</span><span class="w">
+    </span><span class="s2">"response_header"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
+    </span><span class="s2">"res"</span><span class="p">:</span><span class="w"> </span><span class="mi">368</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"blocked_at"</span><span class="p">:</span><span class="w"> </span><span class="mi">1421942161542</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"pool_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"a183b2da-b561-4bc9-99b5-078e570e0117"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>Blocks placing predictions in the specified pool until unblocked (or pool resolved).</p>
+<h3 id='operation-code'>Operation code</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Code</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>block_betting_in_betting_pool</td>
+<td>397</td>
+</tr>
+</tbody></table>
+<h3 id='call-parameters'>Call Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>pool_id</td>
+<td>null</td>
+<td>Pool id which is supposed to be blocked.</td>
+</tr>
+<tr>
+<td>block_at</td>
+<td>epoch_millis</td>
+<td>Block pool at a later time - epoch_millis (&gt; now()).</td>
+</tr>
+</tbody></table>
+<h3 id='response-code'>Response code</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Code</th>
+<th>Result</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>betting_in_pool_blocked</td>
+<td>368</td>
+<td>You have blocked a given pool. This is broadcast to all game subscribers.</td>
+</tr>
+</tbody></table>
+<h3 id='response-parameters'>Response Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>pool_id</td>
+<td>:YOUR_POOL_ID</td>
+<td>The pool id for pool which has been blocked.</td>
+</tr>
+<tr>
+<td>blocked_at</td>
+<td>epoch_millis</td>
+<td>The timestamp indicating when the pool was blocked.</td>
+</tr>
+</tbody></table>
+<h2 id='block-betting-for-action'>Block betting for action</h2>
+<p><aside class="notice">
+Only users listed as admins for the game are authorized for this call.
+</aside></p>
+
+<blockquote>
+<p>Expects the following JSON structure:</p>
+</blockquote>
+<pre><code class="highlight json"><span class="p">{</span><span class="w">
+    </span><span class="s2">"header"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
+    </span><span class="s2">"op"</span><span class="p">:</span><span class="w"> </span><span class="mi">3975</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"game_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"a183b2da-b561-4bc9-99b5-078e570e0117"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"goal"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"block_at"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<blockquote>
+<p>Returns the following JSON structures:</p>
+</blockquote>
+<pre><code class="highlight json"><span class="p">{</span><span class="w">
+    </span><span class="s2">"response_header"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
+    </span><span class="s2">"res"</span><span class="p">:</span><span class="w"> </span><span class="mi">370</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"game_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"a183b2da-b561-4bc9-99b5-078e570e0117"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"goal"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"blocked_at"</span><span class="p">:</span><span class="w"> </span><span class="mi">1421942161542</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<pre><code class="highlight json"><span class="p">{</span><span class="w">
+    </span><span class="s2">"response_header"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
+    </span><span class="s2">"res"</span><span class="p">:</span><span class="w"> </span><span class="mi">368</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"blocked_at"</span><span class="p">:</span><span class="w"> </span><span class="mi">1421942161542</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"pool_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"a183b2da-b561-4bc9-99b5-078e570e0117"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>Blocks placing predictions in all pools for specified action in a specified game until unblocked (or pools resolved).</p>
+<h3 id='operation-code'>Operation code</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Code</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>block_betting_for_game_and_action</td>
+<td>3975</td>
+</tr>
+</tbody></table>
+<h3 id='call-parameters'>Call Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>game_id</td>
+<td>null</td>
+<td>Game id in which pools are to be blocked.</td>
+</tr>
+<tr>
+<td>action</td>
+<td>null</td>
+<td>Action for which pools are to be blocked.</td>
+</tr>
+<tr>
+<td>block_at</td>
+<td>epoch_millis</td>
+<td>Block pools at a later time - epoch_millis (&gt; now()).</td>
+</tr>
+</tbody></table>
+<h3 id='response-codes'>Response codes</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Code</th>
+<th>Result</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>betting_for_game_and_action_blocked</td>
+<td>370</td>
+<td>You have blocked given pools. This is broadcast to all game subscribers.</td>
+</tr>
+<tr>
+<td>betting_in_pool_blocked</td>
+<td>368</td>
+<td>You have blocked a given pool. This is broadcast to all game subscribers for all pools in game for given action.</td>
+</tr>
+</tbody></table>
+<h3 id='response-parameters'>Response Parameters</h3><h4 id='blocking-confirmation'>Blocking confirmation</h4>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>game_id</td>
+<td>:YOUR_POOL_ID</td>
+<td>The game id for game in which pools have been blocked.</td>
+</tr>
+<tr>
+<td>action</td>
+<td>null</td>
+<td>Action for which pools have been blocked.</td>
+</tr>
+<tr>
+<td>blocked_at</td>
+<td>epoch_millis</td>
+<td>The timestamp indicating when the pools were blocked.</td>
+</tr>
+</tbody></table>
+<h4 id='blocked-pool'>Blocked pool</h4>
+<p>Described in <a href="#block-betting-in-a-pool">this section</a>.</p>
+<h2 id='allow-betting-in-a-pool'>Allow betting in a pool</h2>
+<p><aside class="notice">
+Only users listed as admins for the game are authorized for this call.
+</aside></p>
+
+<blockquote>
+<p>Expects the following JSON structure:</p>
+</blockquote>
+<pre><code class="highlight json"><span class="p">{</span><span class="w">
+    </span><span class="s2">"header"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
+    </span><span class="s2">"op"</span><span class="p">:</span><span class="w"> </span><span class="mi">398</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"pool_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"a183b2da-b561-4bc9-99b5-078e570e0117"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"allow_at"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<blockquote>
+<p>Returns the following JSON structure:</p>
+</blockquote>
+<pre><code class="highlight json"><span class="p">{</span><span class="w">
+    </span><span class="s2">"response_header"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
+    </span><span class="s2">"res"</span><span class="p">:</span><span class="w"> </span><span class="mi">369</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"allowed_at"</span><span class="p">:</span><span class="w"> </span><span class="mi">1421942161542</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"pool_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"a183b2da-b561-4bc9-99b5-078e570e0117"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>Allow for placing predictions in the specified pool. Needs to called only after explicitly blocking the pool.</p>
+<h3 id='operation-code'>Operation code</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Code</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>allow_betting_in_betting_pool</td>
+<td>398</td>
+</tr>
+</tbody></table>
+<h3 id='call-parameters'>Call Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>pool_id</td>
+<td>null</td>
+<td>Pool id for which placing predictions is to be allowed.</td>
+</tr>
+<tr>
+<td>allow_at</td>
+<td>epoch_millis</td>
+<td>Allow betting pool at a later time - epoch_millis (&gt; now()).</td>
+</tr>
+</tbody></table>
+<h3 id='response-code'>Response code</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Code</th>
+<th>Result</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>betting_in_pool_allowed</td>
+<td>369</td>
+<td>You have allowed for placing predictions in a given pool. This is broadcast to all game subscribers.</td>
+</tr>
+</tbody></table>
+<h3 id='response-parameters'>Response Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>pool_id</td>
+<td>:YOUR_POOL_ID</td>
+<td>The pool id for pool in which placing predictions has been allowed.</td>
+</tr>
+<tr>
+<td>allowed_at</td>
+<td>epoch_millis</td>
+<td>The timestamp indicating when placing predictions in the given pool was allowed.</td>
+</tr>
+</tbody></table>
+<h2 id='allow-betting-for-action'>Allow betting for action</h2>
+<p><aside class="notice">
+Only users listed as admins for the game are authorized for this call.
+</aside></p>
+
+<blockquote>
+<p>Expects the following JSON structure:</p>
+</blockquote>
+<pre><code class="highlight json"><span class="p">{</span><span class="w">
+    </span><span class="s2">"header"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
+    </span><span class="s2">"op"</span><span class="p">:</span><span class="w"> </span><span class="mi">3985</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"game_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"a183b2da-b561-4bc9-99b5-078e570e0117"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"goal"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"allow_at"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<blockquote>
+<p>Returns the following JSON structures:</p>
+</blockquote>
+<pre><code class="highlight json"><span class="p">{</span><span class="w">
+    </span><span class="s2">"response_header"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
+    </span><span class="s2">"res"</span><span class="p">:</span><span class="w"> </span><span class="mi">371</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"game_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"a183b2da-b561-4bc9-99b5-078e570e0117"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"goal"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"allowed_at"</span><span class="p">:</span><span class="w"> </span><span class="mi">1421942161542</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<pre><code class="highlight json"><span class="p">{</span><span class="w">
+    </span><span class="s2">"response_header"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
+    </span><span class="s2">"res"</span><span class="p">:</span><span class="w"> </span><span class="mi">369</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"allowed_at"</span><span class="p">:</span><span class="w"> </span><span class="mi">1421942161542</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"pool_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"a183b2da-b561-4bc9-99b5-078e570e0117"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>Allows for placing predictions in all pools for specified action in a specified game. Only necessary if action blocked previously.</p>
+<h3 id='operation-code'>Operation code</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Code</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>allow_betting_for_game_and_action</td>
+<td>3985</td>
+</tr>
+</tbody></table>
+<h3 id='call-parameters'>Call Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>game_id</td>
+<td>null</td>
+<td>Game id in which predictions in pools are to be allowed.</td>
+</tr>
+<tr>
+<td>action</td>
+<td>null</td>
+<td>Action for which predictions in pools are to be allowed.</td>
+</tr>
+<tr>
+<td>allow_at</td>
+<td>epoch_millis</td>
+<td>Allow for predcitions in pools at a later time - epoch_millis (&gt; now()).</td>
+</tr>
+</tbody></table>
+<h3 id='response-codes'>Response codes</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Code</th>
+<th>Result</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>betting_for_game_and_action_allowed</td>
+<td>371</td>
+<td>You have allowed for placing predictions in given pools. This is broadcast to all game subscribers.</td>
+</tr>
+<tr>
+<td>betting_in_pool_allowed</td>
+<td>369</td>
+<td>You have allowed for placing predictions in a given pool. This is broadcast to all game subscribers for all pools in game for given action.</td>
+</tr>
+</tbody></table>
+<h3 id='response-parameters'>Response Parameters</h3><h4 id='allowing-confirmation'>Allowing confirmation</h4>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>game_id</td>
+<td>:YOUR_POOL_ID</td>
+<td>The game id for game in which placing predictions in pools has been allowed.</td>
+</tr>
+<tr>
+<td>action</td>
+<td>null</td>
+<td>Action for which placing predictions in pools has been allowed.</td>
+</tr>
+<tr>
+<td>allowed_at</td>
+<td>epoch_millis</td>
+<td>The timestamp indicating when the placing predictions in pools was allowed.</td>
+</tr>
+</tbody></table>
+<h4 id='unblocked-pool'>Unblocked pool</h4>
+<p>Described in <a href="#allow-betting-in-a-pool">this section</a>.</p>
+
           <h1 id='websocket-api-accounting'>Websocket API: Accounting</h1>
           <h1 id='websocket-api-errors'>Websocket API: Errors</h1>
           <h1 id='rest-calls'>REST Calls</h1>
