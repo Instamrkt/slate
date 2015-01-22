@@ -175,19 +175,17 @@ This functionality is also provided automatically by instamrkt - pools are opene
 
 ```json
 {
-    "resolved_at": 1421933670582,
-    "description": "Next Goal By Team",
-    "winning_target": "brazil",
+    "response_header": {},
     "res": 362,
     "pool_id": "7d48ecbc-cd97-41fa-94e8-ca0a8ff22629",
-    "invalidated_bettors": [],
-    "winners": {},
-    "losers": [],
-    "response_header": {
-        "t": 1421933670612
-    },
     "game_id": "1b9a4a42-0c8a-46c0-95ee-c1e649e16fce",
-    "is_money_return": true
+    "winning_target": "brazil",
+    "description": "Next Goal By Team",
+    "winners": {"3": 10.0},
+    "losers": [1,2],
+    "invalidated_bettors": [],
+    "is_money_return": false,
+    "resolved_at": 1421933670582
 }
 ```
 
@@ -210,39 +208,44 @@ Parameter | Default | Description
 game_id | null | Game id for which the pool is to be opened.
 description | "" | The pool description - question which will be desplayed to users.
 action_id | null | An action which happened in the game. Has to be contained in a set of actions available for game.
-target_id | null | An action which happened in the game. Has to be contained in a set of actions available for game.
-
-targets | [] | List of targets on which predictions for actoin can happen. Has to be a subset of targets available for game. Sent as a comma-separated string or an array. Targets have to be of same level. That means "argentina, brazil" is correct, but "argentina, brazil:9" is not.
-pool_type | 1 | 1 - parimutuel event based, 2 - parimutuel time based, 3 - binary event based, 4 - binary time based.
-start_at | now() | Pool opening time (> now()) in epoch millis. If left blank, will be opened as soon as registered by the server. **As of now pools are opened as soon as this call is received by the server.**
-finish_at | null | Pool closing time (> open_at) in epoch millis. This will close the pool at a given time. **Warning**: this will automatically resolve th pool to **none**.
-stop_accepting_bets_at | null | Stop accepting bets at time (> now()) in epoch millis. This parameter is optional. Include if you want to close the pool after a certain time.
-recreate_on_end | False | Boolean value describing if pool is to be recreated anew upon resolution.
+target_id | null | Target which performed the action. Has to be contained in a set of targets available for game. **Furhtermore**, has to be of maximum target level. E.g. if game contains targets such as "brazil:9, argentina:9, brazil, argentina", only targets "brazil:9, argentina:9" will be accepted (a team cannot score a goal without a player scoring).
+game_id | :YOUR_GAME_ID | The game id for which event happened.
+happened_at | null | Epoch millis when event happened. If skipped, defaulted to message receival time.
 
 ### Response codes
 
 Name | Code | Result
 --------- | ------- | -----------
-betting_pool_created | 350 | Your pool has been created and is now opened for predictions.
+new_game_event | 366 | Event was registered. Broadcast to all game subscribers too.
+bet_pool_resolved | 362 | Pool resolved. Sent for every pool for action and target. Broadcast to all game subscribers.
 
 ### Response Parameters
 
+#### New game event
+
 Parameter | Default | Description
 --------- | ------- | -----------
-game_id | :YOUR_GAME_ID | The provided game id.
-pool_id | :YOUR_POOL_ID | The server-generated pool id. Necessary for making all pool-related calls.
-description | "" | The provided pool description - question which will be desplayed to users.
-pool_type | 1 | Provided pool type: 1 - parimutuel event based, 2 - parimutuel time based, 3 - binary event based, 4 - binary time based.
-action | "" | The provided action on which the prediction is made.
-people_involved | 0 | Number of people who already placed predictions in pool. Will be incremented on every prediction.
-money_at_stake | 0.0 | Amount of money already placed predictions in pool. Will be incremented on every prediction.
-target_level | 0 | The computed target level for sent targets. E.g. - 1 for "argentina, brazil", 2 for "argentina:9, brazil:7"
-targets | {} | A nested, recursive dictionary containing the targets you listed. **key** - target id, **value** - target details (symbol, display name and _sub_ targets). Please look at the example on the right.
-start_at | request receival time | The open pool time in epoch millis.
-live_start_at | request receival time | The real life game start time in epoch millis (only informative).
-finish_at | null | The passed pool closing time. (Relevant only for pools of type 2 and 4).
-stop_accepting_bets_at | null | Provided stop accepting bets at time (> now()) in epoch millis.
+game_id | null | Game id for which the pool is to be opened.
+description | "" | The pool description - question which will be desplayed to users.
+action_id | null | The provided action which happened in the game.
+target_id | null | The provided target which performed the action.
+target_display_name | null | The provided target's display name.
+current_count | {} | A dictionary containing current count for action in the game - **key** - target_id, **value** - count of action for target.
+game_id | :YOUR_GAME_ID | The provided game id for which event happened.
+happened_at | null | Epoch millis when event happened. If skipped, defaulted to message receival time.
 
+#### Pool resolved
+
+Parameter | Default | Description
+--------- | ------- | -----------
+game_id | :YOUR_GAME_ID | The game id for which the pool was resolved.
+pool_id | :YOUR_POOL_ID | The resolved pool id.
+description | "" | The provided pool description.
+winning_target | null | The winning target for the pool (from the subset of targets available for pool).
+winners | {} | The dictionary containing all winners. **key** - user id, **value** - how much each user won (in propotion of what they input into the pool).
+losers | [] | The list of user ids of losers in the pool.
+invalidated_bettors | [] | The list of user ids of people who placed their prediction too late (usually between the time of event happening and its registering by the server).
+resolved_at | event receival time | The time of pool resolution in epoch millis.
 
 ## List all pools for game
 
