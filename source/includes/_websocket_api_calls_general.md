@@ -8,10 +8,66 @@ All websocket calls are expecting a json with the parameters listed for each cal
 Each request needs to contain a valid header. Each response contains a response header. Both are described <a href="#headers">below</a>.
 </aside>
 
+## Connecting
+
+### Connection URL
+
+The connection url:
+**wss://instamrkt.com:9999
+?id=:YOUR_USER_ID
+&n=:YOUR_GENERATED_NONCE
+&h=:YOUR_SESSION_KEY
+&h=:YOUR_HEXDIGEST**
+
+### Obtaining id and the session key
+
+Both are included inside a json returned by a sign in request to the REST API.
+
+### Nonce and hexdigest
+
+```python
+import hashlib
+
+sha       = hashlib.sha256()
+
+sha.update(user_id)
+sha.update(nonce)
+sha.update(key)
+
+hexdigest = sha.hexdigest()
+```
+
+Nonce is the user provided random value, e.g. current timestamp in epoch millis.
+
+Digest is the concatenation of strings fed to the SHA256 algorithm in the following sequence:
+
+1. User id
+2. Nonce
+3. Session key
+
+A python example of how to generate one can be found on the right.
+
 ## Headers
 
 ### Header
+```json
+{
+  "session_key": "//not used currently",
+  "t": 1422006034742,
+  "api_version": 1.0
+}
+```
+
+Each client request needs to contain a header depicted on the right.
+
 ### Response header
+```json
+{
+  "t": 1422007246302
+}
+```
+
+Each response contains a header depicted on the right.
 
 ## Ping
 

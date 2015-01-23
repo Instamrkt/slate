@@ -3,9 +3,9 @@ title: Instamrkt API Reference
 
 language_tabs:
   - javascript
+  - python
 
 toc_footers:
-  - <a href='http://instamrkt.com/'>Sign Up for a Developer Key</a>
   - <a href='mailto:thatguy@instamrkt.com'>Unclear? Contact us.</a>
   - <a href='http://github.com/tripit/slate'>Documentation Powered by Slate</a>
 
@@ -31,4 +31,4 @@ search: true
 
 # Introduction
 
-This is an introduction to Instamrkt API.
+Below you can find a general overview of the system and the philosophy of Instamrkt and the API.
