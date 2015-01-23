@@ -13,6 +13,7 @@ includes:
   - general_overview
   - authentication
   - authorization
+  - rest_calls
   - websocket_api_calls_general
   - websocket_api_calls_game_sources
   - websocket_api_calls_games
@@ -20,10 +21,8 @@ includes:
   - websocket_api_calls_accounting
   - websocket_api_calls_chat
   - websocket_api_errors
-  - rest_calls
   - scenarios
   - terms
-  - errors
   - dictionary
 
 search: true
