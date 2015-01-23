@@ -23,6 +23,7 @@ includes:
   - scenarios
   - terms
   - errors
+  - dictionary
 
 search: true
 ---
