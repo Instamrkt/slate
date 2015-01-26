@@ -13,6 +13,15 @@ Passing parameters happens as follows:
 1. GET Request - add a parameter to the query string.
 2. POST Request - add a field to the post request.
 
+Response outcomes and sent response codes:
+
+Response | Code
+--------- | -------
+SUCCESS | 200
+UNAUTHORIZED | 401
+AUTH_REQUIRED | 403
+ERROR | 500
+
 ## Login
 
 > Sample request object:
@@ -108,7 +117,7 @@ $.get('/r/key', {
 })
 ```
 
-This is used to sign a user in.
+This is used to request a user's session key. The key is necessary to connect with the Websocket API server.
 
 ### URL
 `/r/key/`
@@ -148,7 +157,7 @@ $.post('/r/username', {
 });
 ```
 
-This is used to sign a user in.
+This is used to update a username of a signed in user. Password needs to be passed for confirmation.
 
 ### URL
 `/r/username/`
@@ -171,10 +180,89 @@ Parameter | Default | Description
 username | null | New username of the requesting user (= passed newUsername). Sent only on **successful** request.
 msg | null | Error message. Sent only on **unsuccessful** request.
 
-
-
 ## Password recovery
-## Password update
+
+> Sample request object:
+
+```javascript
+var $       = require('jquery');
+var cookies = require('cookie-getter');
+var _xsrf   = cookies('_xsrf');
+
+$.post('/r/update_password', {
+  '_xsrf': _xsrf,
+  'pass1': pass1,
+  'pass2': pass2,
+  'recoveryCode': recoveryCode,
+  'email': email
+}));
+```
+
+This is used to request password recovery. It results in sending out an email with a url in which you can provide a new password (with a recovery code hidden in it).
+
+### URL
+`/r/update_password/`
+
+### Request type
+
+`POST`
+
+### Request Parameters
+
+Parameter | Description
+--------- | -------
+user | Username for which password recovery is requested.
+
+### Response Parameters
+
+Parameter | Default | Description
+--------- | ------- | -----------
+msg | null | Error message. Sent only on **unsuccessful** request.
+
+## Password update (from recovery)
+
+
+> Sample request object:
+
+```javascript
+var $       = require('jquery');
+var cookies = require('cookie-getter');
+var _xsrf   = cookies('_xsrf');
+
+$.post('/r/update_password', {
+  '_xsrf': _xsrf,
+  'pass1': pass1,
+  'pass2': pass2,
+  'recoveryCode': recoveryCode,
+  'email': email
+}));
+```
+
+This is used to update password from recovery. Requires the generated and emailed recovery code and an email it was emailed to, since the cookie might not be set in this case (e.g. you are on the new machine and forgot a password).
+
+### URL
+`/r/update_password/`
+
+### Request type
+
+`POST`
+
+### Request Parameters
+
+Parameter | Description
+--------- | -------
+pass1 | New password.
+pass2 | New password confirmation.
+recoveryCode | The recovery code generated and included in the emailed url.
+email | The email to which the code generated code was sent (the email is also included in the emailed url).
+
+### Response Parameters
+
+Parameter | Default | Description
+--------- | ------- | -----------
+msg | null | Error message. Sent only on **unsuccessful** request.
+
+## Password update (general)
 
 ## Games history
 ## Games upcoming
