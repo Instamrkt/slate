@@ -189,23 +189,23 @@ var $       = require('jquery');
 var cookies = require('cookie-getter');
 var _xsrf   = cookies('_xsrf');
 
-$.post('/r/update_password', {
-  '_xsrf': _xsrf,
-  'pass1': pass1,
-  'pass2': pass2,
-  'recoveryCode': recoveryCode,
-  'email': email
+ $.get('/r/password/recover/', {
+  headers: {
+      'X-XSRFToken': _xsrf
+  },
+  'user': user
+})
 }));
 ```
 
 This is used to request password recovery. It results in sending out an email with a url in which you can provide a new password (with a recovery code hidden in it).
 
 ### URL
-`/r/update_password/`
+`/r/password/recover/`
 
 ### Request type
 
-`POST`
+`GER`
 
 ### Request Parameters
 
@@ -229,7 +229,7 @@ var $       = require('jquery');
 var cookies = require('cookie-getter');
 var _xsrf   = cookies('_xsrf');
 
-$.post('/r/update_password', {
+$.post('/r/password/update/from_recovery', {
   '_xsrf': _xsrf,
   'pass1': pass1,
   'pass2': pass2,
@@ -241,7 +241,7 @@ $.post('/r/update_password', {
 This is used to update password from recovery. Requires the generated and emailed recovery code and an email it was emailed to, since the cookie might not be set in this case (e.g. you are on the new machine and forgot a password).
 
 ### URL
-`/r/update_password/`
+`/r/password/update/from_recovery/`
 
 ### Request type
 
@@ -271,7 +271,7 @@ var $       = require('jquery');
 var cookies = require('cookie-getter');
 var _xsrf   = cookies('_xsrf');
 
-$.post('/r/password', {
+$.post('/r/password/update/', {
   '_xsrf': _xsrf,
   'passOld': passOld,
   'passNew1': passNew1,
@@ -282,7 +282,7 @@ $.post('/r/password', {
 This is used to update password from a form on the site / app screen.
 
 ### URL
-`/r/password/`
+`/r/password/update/`
 
 ### Request type
 
@@ -311,7 +311,7 @@ var $       = require('jquery');
 var cookies = require('cookie-getter');
 var _xsrf   = cookies('_xsrf')
 
-$.get('/r/games_history/', {
+$.get('/r/games/history/', {
   headers: {
       'X-XSRFToken': _xsrf
   }
@@ -321,7 +321,7 @@ $.get('/r/games_history/', {
 This is used to request a user's game history (all the games he has predicted in).
 
 ### URL
-`/r/games_history/`
+`/r/games/history/`
 
 ### Request type
 
@@ -348,7 +348,7 @@ var $       = require('jquery');
 var cookies = require('cookie-getter');
 var _xsrf   = cookies('_xsrf')
 
-$.get('/r/upcoming/', {
+$.get('/r/games/upcoming/', {
   headers: {
       'X-XSRFToken': _xsrf
   }
@@ -358,7 +358,7 @@ $.get('/r/upcoming/', {
 This is used to request upcoming games.
 
 ### URL
-`/r/upcoming/`
+`/r/games/upcoming/`
 
 ### Request type
 
