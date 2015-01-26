@@ -63,6 +63,47 @@ msg | null | Error message. Sent only on **unsuccessful** request.
 
 
 ## Oauthlogin
+
+> Sample request object:
+
+```javascript
+var $       = require('jquery');
+$.post('/r/login/oauth/', {
+  'oauth_id': oauth_id,
+  'oauth_token': oauth_token,
+  'oauth_email': oauth_email,
+  'oauth_provider': oauth_provider
+});
+```
+
+This is used to sign a user in.
+
+### URL
+`/r/login/oauth/`
+
+### Request type
+
+`POST`
+
+### Request Parameters
+
+Parameter | Description
+--------- | -------
+oauth_id | Oauth id.
+oauth_token | Oauth token.
+oauth_email | Oauth email (which the user will be registered with).
+oauth_provider | Oauth provider (facebook, google etc.).
+next | The page where user is supposed to be redirected after login. Will be appended to the generated redirect url. Optional.
+
+### Response Parameters
+
+Parameter | Default | Description
+--------- | ------- | -----------
+username | null | Username of the signed in user (= passed loginname). Sent only on **successful** request.
+id | null | Id of the signed in user. Necessary for Websocket API connection. Sent only on **successful** request.
+redirect_url | /i/play | Redirect url for a signedin user (presumably for an endpoint requiring authentication). Can be used only on **successful** request.
+msg | null | Error message. Sent only on **unsuccessful** request.
+
 ## Signup
 
 > Sample request object:
