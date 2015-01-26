@@ -310,6 +310,7 @@ msg | null | Error message. Sent only on **unsuccessful** request.
 var $       = require('jquery');
 var cookies = require('cookie-getter');
 var _xsrf   = cookies('_xsrf')
+
 $.get('/r/games_history/', {
   headers: {
       'X-XSRFToken': _xsrf
@@ -346,6 +347,7 @@ game_history | [] | A list of objects representing games. Each object contains t
 var $       = require('jquery');
 var cookies = require('cookie-getter');
 var _xsrf   = cookies('_xsrf')
+
 $.get('/r/upcoming/', {
   headers: {
       'X-XSRFToken': _xsrf
@@ -375,7 +377,119 @@ Parameter | Default | Description
 upcoming_games | [] | A list of objects representing games. Each object contains the following fields: id(game_uuid), source_id (for the source hosting the game), currency, live_start_at, game_type_id.
 
 ## Statistics
+
+> Sample request object:
+
+```javascript
+var $       = require('jquery');
+var cookies = require('cookie-getter');
+var _xsrf   = cookies('_xsrf')
+
+$.get('/r/statistics/', {
+  headers: {
+      'X-XSRFToken': _xsrf
+  }
+})
+```
+
+This is used to request user's personal statistics.
+
+### URL
+`/r/statistics/`
+
+### Request type
+
+`GET`
+
+### Request Parameters
+
+Parameter | Description
+--------- | -------
+- | -
+
+### Response Parameters
+
+Parameter | Default | Description
+--------- | ------- | -----------
+statistics | {} | A dictionary containing selected user's personal statistics. **key** - statistic name, **value** - statistic value. Sent statistics: total_bets_won, total_bets_lost, average_number_of_bets_per_game, average_points_won_per_game, average_reaction_time.
+
 ## Friends
+
+> Sample request object:
+
+```javascript
+var $       = require('jquery');
+var cookies = require('cookie-getter');
+var _xsrf   = cookies('_xsrf')
+
+$.get('/r/friends/', {
+  headers: {
+      'X-XSRFToken': _xsrf
+  }
+})
+```
+
+This is used to request user's personal statistics.
+
+### URL
+`/r/friends/`
+
+### Request type
+
+`GET`
+
+### Request Parameters
+
+Parameter | Description
+--------- | -------
+- | -
+
+### Response Parameters
+
+Parameter | Default | Description
+--------- | ------- | -----------
+friends | {} | A dictionary containing selected user's personal statistics. **key** - friend's user id, **value** - friend's name.
+
+
 ## Leaderboard
+
+
+> Sample request object:
+
+```javascript
+var $       = require('jquery');
+var cookies = require('cookie-getter');
+var _xsrf   = cookies('_xsrf')
+
+$.get('/r/leaderboard/', {
+  headers: {
+      'X-XSRFToken': _xsrf
+  }
+})
+```
+
+This is used to request a global **or** user's personal leaderboard. If user_id is included in the leaderboard, than a personal is sent.
+
+### URL
+`/r/leaderboard/`
+
+### Request type
+
+`GET`
+
+### Request Parameters
+
+Parameter | Description
+--------- | -------
+user_id | Requesting user id. If included - personal leaderboard sent, if skipped - global.
+
+### Response Parameters
+
+Parameter | Default | Description
+--------- | ------- | -----------
+type | null | 'global' or 'personal' - indicating which leaderboard is sent.
+leaderboard | [] | A list of objects. Every object has the form: **key** - points, **value** - user's name.
+
+
 
 
