@@ -264,8 +264,115 @@ msg | null | Error message. Sent only on **unsuccessful** request.
 
 ## Password update (general)
 
+> Sample request object:
+
+```javascript
+var $       = require('jquery');
+var cookies = require('cookie-getter');
+var _xsrf   = cookies('_xsrf');
+
+$.post('/r/password', {
+  '_xsrf': _xsrf,
+  'passOld': passOld,
+  'passNew1': passNew1,
+  'passNew2': passNew2,
+}));
+```
+
+This is used to update password from a form on the site / app screen.
+
+### URL
+`/r/password/`
+
+### Request type
+
+`POST`
+
+### Request Parameters
+
+Parameter | Description
+--------- | -------
+passNew1 | New password.
+passNew2 | New password confirmation.
+passOld | Old password to prove action is intentional (and not performed by someone else when actual users leaves an open form).
+
+### Response Parameters
+
+Parameter | Default | Description
+--------- | ------- | -----------
+msg | null | Error message. Sent only on **unsuccessful** request.
+
 ## Games history
+
+> Sample request object:
+
+```javascript
+var $       = require('jquery');
+var cookies = require('cookie-getter');
+var _xsrf   = cookies('_xsrf')
+$.get('/r/games_history/', {
+  headers: {
+      'X-XSRFToken': _xsrf
+  }
+})
+```
+
+This is used to request a user's game history (all the games he has predicted in).
+
+### URL
+`/r/games_history/`
+
+### Request type
+
+`GET`
+
+### Request Parameters
+
+Parameter | Description
+--------- | -------
+- | -
+
+### Response Parameters
+
+Parameter | Default | Description
+--------- | ------- | -----------
+game_history | [] | A list of objects representing games. Each object contains the following fields: id(uuid), name, type, open_at, close_at.
+
 ## Games upcoming
+
+> Sample request object:
+
+```javascript
+var $       = require('jquery');
+var cookies = require('cookie-getter');
+var _xsrf   = cookies('_xsrf')
+$.get('/r/upcoming/', {
+  headers: {
+      'X-XSRFToken': _xsrf
+  }
+})
+```
+
+This is used to request upcoming games.
+
+### URL
+`/r/upcoming/`
+
+### Request type
+
+`GET`
+
+### Request Parameters
+
+Parameter | Description
+--------- | -------
+- | -
+
+### Response Parameters
+
+Parameter | Default | Description
+--------- | ------- | -----------
+upcoming_games | [] | A list of objects representing games. Each object contains the following fields: id(game_uuid), source_id (for the source hosting the game), currency, live_start_at, game_type_id.
 
 ## Statistics
 ## Friends
