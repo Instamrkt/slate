@@ -245,7 +245,82 @@ A lot of requests also require you to include the &lsquo;im_user&rsquo; secure c
 <td>Error message. Sent only on <strong>unsuccessful</strong> request.</td>
 </tr>
 </tbody></table>
-<h2 id='oauthlogin'>Oauthlogin</h2><h2 id='signup'>Signup</h2>
+<h2 id='oauthlogin'>Oauthlogin</h2>
+<blockquote>
+<p>Sample request object:</p>
+</blockquote>
+<pre><code class="highlight javascript"><span class="kd">var</span> <span class="nx">$</span>       <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'jquery'</span><span class="p">);</span>
+<span class="nx">$</span><span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="s1">'/r/login/oauth/'</span><span class="p">,</span> <span class="p">{</span>
+  <span class="s1">'oauth_id'</span><span class="p">:</span> <span class="nx">oauth_id</span><span class="p">,</span>
+  <span class="s1">'oauth_token'</span><span class="p">:</span> <span class="nx">oauth_token</span><span class="p">,</span>
+  <span class="s1">'oauth_email'</span><span class="p">:</span> <span class="nx">oauth_email</span><span class="p">,</span>
+  <span class="s1">'oauth_provider'</span><span class="p">:</span> <span class="nx">oauth_provider</span>
+<span class="p">});</span>
+</code></pre>
+
+<p>This is used to sign a user in.</p>
+<h3 id='url'>URL</h3>
+<p><code class="prettyprint">/r/login/oauth/</code></p>
+<h3 id='request-type'>Request type</h3>
+<p><code class="prettyprint">POST</code></p>
+<h3 id='request-parameters'>Request Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>oauth_id</td>
+<td>Oauth id.</td>
+</tr>
+<tr>
+<td>oauth_token</td>
+<td>Oauth token.</td>
+</tr>
+<tr>
+<td>oauth_email</td>
+<td>Oauth email (which the user will be registered with).</td>
+</tr>
+<tr>
+<td>oauth_provider</td>
+<td>Oauth provider (facebook, google etc.).</td>
+</tr>
+<tr>
+<td>next</td>
+<td>The page where user is supposed to be redirected after login. Will be appended to the generated redirect url. Optional.</td>
+</tr>
+</tbody></table>
+<h3 id='response-parameters'>Response Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>username</td>
+<td>null</td>
+<td>Username of the signed in user (= passed loginname). Sent only on <strong>successful</strong> request.</td>
+</tr>
+<tr>
+<td>id</td>
+<td>null</td>
+<td>Id of the signed in user. Necessary for Websocket API connection. Sent only on <strong>successful</strong> request.</td>
+</tr>
+<tr>
+<td>redirect_url</td>
+<td>/i/play</td>
+<td>Redirect url for a signedin user (presumably for an endpoint requiring authentication). Can be used only on <strong>successful</strong> request.</td>
+</tr>
+<tr>
+<td>msg</td>
+<td>null</td>
+<td>Error message. Sent only on <strong>unsuccessful</strong> request.</td>
+</tr>
+</tbody></table>
+<h2 id='signup'>Signup</h2>
 <blockquote>
 <p>Sample request object:</p>
 </blockquote>
