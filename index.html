@@ -840,7 +840,7 @@ A lot of requests also require you to include the &lsquo;im_user&rsquo; secure c
 <td>A dictionary containing selected user&rsquo;s personal statistics. <strong>key</strong> - friend&rsquo;s user id, <strong>value</strong> - friend&rsquo;s name.</td>
 </tr>
 </tbody></table>
-<h2 id='leaderboard'>Leaderboard</h2>
+<h2 id='leaderboard-global'>Leaderboard (global)</h2>
 <blockquote>
 <p>Sample request object:</p>
 </blockquote>
@@ -848,16 +848,16 @@ A lot of requests also require you to include the &lsquo;im_user&rsquo; secure c
 <span class="kd">var</span> <span class="nx">cookies</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'cookie-getter'</span><span class="p">);</span>
 <span class="kd">var</span> <span class="nx">_xsrf</span>   <span class="o">=</span> <span class="nx">cookies</span><span class="p">(</span><span class="s1">'_xsrf'</span><span class="p">)</span>
 
-<span class="nx">$</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">'/r/leaderboard/'</span><span class="p">,</span> <span class="p">{</span>
+<span class="nx">$</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">'/r/leaderboard/global/'</span><span class="p">,</span> <span class="p">{</span>
   <span class="na">headers</span><span class="p">:</span> <span class="p">{</span>
       <span class="s1">'X-XSRFToken'</span><span class="p">:</span> <span class="nx">_xsrf</span>
   <span class="p">}</span>
 <span class="p">})</span>
 </code></pre>
 
-<p>This is used to request a global <strong>or</strong> user&rsquo;s personal leaderboard. If user_id is included in the leaderboard, than a personal is sent.</p>
+<p>This is used to request a global leaderboard.</p>
 <h3 id='url'>URL</h3>
-<p><code class="prettyprint">/r/leaderboard/</code></p>
+<p><code class="prettyprint">/r/leaderboard/global/</code></p>
 <h3 id='request-type'>Request type</h3>
 <p><code class="prettyprint">GET</code></p>
 <h3 id='request-parameters'>Request Parameters</h3>
@@ -868,8 +868,8 @@ A lot of requests also require you to include the &lsquo;im_user&rsquo; secure c
 </tr>
 </thead><tbody>
 <tr>
-<td>user_id</td>
-<td>Requesting user id. If included - personal leaderboard sent, if skipped - global.</td>
+<td>-</td>
+<td>-</td>
 </tr>
 </tbody></table>
 <h3 id='response-parameters'>Response Parameters</h3>
@@ -881,10 +881,52 @@ A lot of requests also require you to include the &lsquo;im_user&rsquo; secure c
 </tr>
 </thead><tbody>
 <tr>
-<td>type</td>
-<td>null</td>
-<td>&lsquo;global&rsquo; or &lsquo;personal&rsquo; - indicating which leaderboard is sent.</td>
+<td>leaderboard</td>
+<td>[]</td>
+<td>A list of objects. Every object has the form: <strong>key</strong> - points, <strong>value</strong> - user&rsquo;s name.</td>
 </tr>
+</tbody></table>
+<h2 id='leaderboard-personal'>Leaderboard (personal)</h2>
+<blockquote>
+<p>Sample request object:</p>
+</blockquote>
+<pre><code class="highlight javascript"><span class="kd">var</span> <span class="nx">$</span>       <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'jquery'</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">cookies</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'cookie-getter'</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">_xsrf</span>   <span class="o">=</span> <span class="nx">cookies</span><span class="p">(</span><span class="s1">'_xsrf'</span><span class="p">)</span>
+
+<span class="nx">$</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">'/r/leaderboard/personal/'</span><span class="p">,</span> <span class="p">{</span>
+  <span class="na">headers</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s1">'X-XSRFToken'</span><span class="p">:</span> <span class="nx">_xsrf</span>
+  <span class="p">},</span>
+  <span class="s1">'user_id'</span><span class="p">:</span> <span class="nx">user_id</span>
+<span class="p">})</span>
+</code></pre>
+
+<p>This is used to request a personal leaderboard.</p>
+<h3 id='url'>URL</h3>
+<p><code class="prettyprint">/r/leaderboard/personal/</code></p>
+<h3 id='request-type'>Request type</h3>
+<p><code class="prettyprint">GET</code></p>
+<h3 id='request-parameters'>Request Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>user_id</td>
+<td>User id for which personal leaderboard is requested.</td>
+</tr>
+</tbody></table>
+<h3 id='response-parameters'>Response Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
 <tr>
 <td>leaderboard</td>
 <td>[]</td>
@@ -1232,7 +1274,7 @@ This section assumes you are connected as an instamrkt developer. If you do not 
 </thead><tbody>
 <tr>
 <td>source_name</td>
-<td>&ldquo;&rdquo;</td>
+<td>null</td>
 <td>The name you want to assign to your source (your domain suggested).</td>
 </tr>
 </tbody></table>
@@ -1476,7 +1518,7 @@ Only users listed as admins for the source are authorized for this call.
 <tr>
 <td>targets</td>
 <td>[]</td>
-<td>List of targets taking part in the game. Sent as a comma-separated string or an array. Targets can be infinitely nested. Nesting is indicated by including a &lsquo;:&rsquo; in the target. E.g. &ldquo;Argentina:1&rdquo; means &ldquo;Argentina, player 1&rdquo;. Server automatically builds a nested structure (see the example to the right). You can send targets of different nesting levels. An event registered for Argentina:1 will resolve pools for Argentina:1 and Argentina (e.g. Messi scores - pools for Messi&rsquo;s goals and Argentina goals get resovled).</td>
+<td>List of targets taking part in the game. Sent as a comma-separated string or an array. Targets can be infinitely nested. Nesting is indicated by including a &lsquo;:&rsquo; in the target. E.g. &ldquo;Argentina:1&rdquo; means &ldquo;Argentina, player 1&rdquo;. Server automatically builds a nested structure (see the example to the right). You can send targets of different nesting levels. An event registered for Argentina:1 will resolve pools for Argentina:1 and Argentina (e.g. Messi scores - pools for Messi&rsquo;s goals and Argentina goals get resovled). <strong>IMPORTANT</strong>: target &lsquo;none&rsquo; will be added to the target list if skipped. It&rsquo;s necessary for automatic pool resolution.</td>
 </tr>
 <tr>
 <td>open_at</td>
@@ -2712,6 +2754,18 @@ This will automatically close and resolve all the automatically resolvable pools
 <p><aside class="notice">
 This section assumes you have an active game opened and running. If not, read on how to open it <a href="#open-a-game">here</a>.
 </aside></p>
+<h2 id='bet-pool-types'>Bet pool types</h2>
+<p>We have two bet pool types recognized by the system:</p>
+
+<ol>
+<li>Parimutuel pools.</li>
+<li>Binary pools.</li>
+</ol>
+
+<p>Parimutuel pools are pools with an arbitrary number of mutually exclusive targets, one of which is a target &lsquo;none&rsquo;. These pools are resolvable automatically. A sample parimutuel pool would look like this: &lsquo;Who will score the next goal?&rsquo; with targets: Brazil, Argentina, none.</p>
+
+<p>Binary pools are pools with two options for selection. They are designed with yes/no questions in mind but not limited to that. They are not automatically resolvable - game cannot be closed until all these pools are resolved.
+A sample binary pool would look like this: &lsquo;Will a brazilian player score today?&rsquo; with targets: yes, no. For these pools action is generated internally - the parameter can be skipped.</p>
 <h2 id='create-and-open-betting-pool'>Create and open betting pool</h2>
 <p><aside class="notice">
 Only users listed as admins for the game are authorized for this call.
@@ -2799,7 +2853,7 @@ This functionality is also provided automatically by instamrkt - pools are opene
 </tr>
 </thead><tbody>
 <tr>
-<td>create_betting_pool</td>
+<td>create_and_open_betting_pool</td>
 <td>385</td>
 </tr>
 </tbody></table>
@@ -2818,18 +2872,18 @@ This functionality is also provided automatically by instamrkt - pools are opene
 </tr>
 <tr>
 <td>description</td>
-<td>&ldquo;&rdquo;</td>
+<td>null</td>
 <td>The pool description - question which will be desplayed to users.</td>
 </tr>
 <tr>
 <td>action</td>
-<td>&ldquo;&rdquo;</td>
+<td>null</td>
 <td>An action on which the prediction is made. Has to be in a set of actions available for game.</td>
 </tr>
 <tr>
 <td>targets</td>
 <td>[]</td>
-<td>List of targets on which predictions for actoin can happen. Has to be a subset of targets available for game. Sent as a comma-separated string or an array. Targets have to be of same level. That means &ldquo;argentina, brazil&rdquo; is correct, but &ldquo;argentina, brazil:9&rdquo; is not.</td>
+<td>List of targets on which predictions for actoin can happen. Has to be a subset of targets available for game. Sent as a comma-separated string or an array. Targets have to be of same level. That means &ldquo;argentina, brazil&rdquo; is correct, but &ldquo;argentina, brazil:9&rdquo; is not. <strong>IMPORTANT</strong>: target &lsquo;none&rsquo; will be added to target list for parimutuel pools.</td>
 </tr>
 <tr>
 <td>pool_type</td>
@@ -2891,7 +2945,7 @@ This functionality is also provided automatically by instamrkt - pools are opene
 </tr>
 <tr>
 <td>description</td>
-<td>&ldquo;&rdquo;</td>
+<td>null</td>
 <td>The provided pool description - question which will be desplayed to users.</td>
 </tr>
 <tr>
@@ -2901,7 +2955,7 @@ This functionality is also provided automatically by instamrkt - pools are opene
 </tr>
 <tr>
 <td>action</td>
-<td>&ldquo;&rdquo;</td>
+<td>null</td>
 <td>The provided action on which the prediction is made.</td>
 </tr>
 <tr>
@@ -3002,7 +3056,7 @@ This functionality is also provided automatically by instamrkt - pools are opene
 
 <p>Events of higher levels resolve also pools for events of lower levels. E.g., an event &ldquo;goal&rdquo; for target &ldquo;brazil:9&rdquo;, will resolve all pools opened for &ldquo;goal&rdquo; containing &ldquo;brazil:9&rdquo; <strong>and</strong> &ldquo;brazil&rdquo; in its targets.</p>
 
-<p>Pool resolution in turn will cause sending out a bet_pool_resolved message, also described below. It also sends out a new balance message to all users participating in a pool.</p>
+<p>Pool resolution in turn will cause sending out a bet_pool_resolved message, also described below. It also sends out a <a href="#balance-update-server-message">new balance</a> message to all users participating in a pool.</p>
 <h3 id='operation-code'>Operation code</h3>
 <table><thead>
 <tr>
@@ -3142,7 +3196,90 @@ This functionality is also provided automatically by instamrkt - pools are opene
 </tr>
 <tr>
 <td>description</td>
-<td>&ldquo;&rdquo;</td>
+<td>null</td>
+<td>The provided pool description.</td>
+</tr>
+<tr>
+<td>winning_target</td>
+<td>null</td>
+<td>The winning target for the pool (from the subset of targets available for pool).</td>
+</tr>
+<tr>
+<td>winners</td>
+<td>{}</td>
+<td>The dictionary containing all winners. <strong>key</strong> - user id, <strong>value</strong> - how much each user won (in propotion of what they input into the pool).</td>
+</tr>
+<tr>
+<td>losers</td>
+<td>[]</td>
+<td>The list of user ids of losers in the pool.</td>
+</tr>
+<tr>
+<td>invalidated_bettors</td>
+<td>[]</td>
+<td>The list of user ids of people who placed their prediction too late (usually between the time of event happening and its registering by the server).</td>
+</tr>
+<tr>
+<td>resolved_at</td>
+<td>event receival time</td>
+<td>The time of pool resolution in epoch millis.</td>
+</tr>
+</tbody></table>
+<h2 id='pool-expired-server-message'>Pool expired (server message)</h2>
+<blockquote>
+<p>Returns the following JSON structure:</p>
+</blockquote>
+<pre><code class="highlight json"><span class="p">{</span><span class="w">
+    </span><span class="s2">"response_header"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
+    </span><span class="s2">"res"</span><span class="p">:</span><span class="w"> </span><span class="mi">363</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"pool_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"7d48ecbc-cd97-41fa-94e8-ca0a8ff22629"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"game_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1b9a4a42-0c8a-46c0-95ee-c1e649e16fce"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"winning_target"</span><span class="p">:</span><span class="w"> </span><span class="s2">"brazil"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Next Goal By Team"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"winners"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="s2">"3"</span><span class="p">:</span><span class="w"> </span><span class="mf">10.0</span><span class="p">},</span><span class="w">
+    </span><span class="s2">"losers"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">],</span><span class="w">
+    </span><span class="s2">"invalidated_bettors"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+    </span><span class="s2">"is_money_return"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"expired_at"</span><span class="p">:</span><span class="w"> </span><span class="mi">1421933670582</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>When a pool is created as a time-based and it expires (e.g.: &ldquo;Will Brazil score before 65:00?&rdquo;) that means the pool will be resolved with target &lsquo;none&rsquo;. That means people who predicted this target are victorious. The message broadcast to all game subscribers.</p>
+<h3 id='response-codes'>Response codes</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Code</th>
+<th>Result</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>bet_pool_expored</td>
+<td>363</td>
+<td>Pool expired (resolved to &lsquo;none&rsquo;). Sent for every pool for action and target. Broadcast to all game subscribers.</td>
+</tr>
+</tbody></table>
+<h3 id='response-parameters'>Response Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>game_id</td>
+<td>:YOUR_GAME_ID</td>
+<td>The game id for which the pool was resolved.</td>
+</tr>
+<tr>
+<td>pool_id</td>
+<td>:YOUR_POOL_ID</td>
+<td>The resolved pool id.</td>
+</tr>
+<tr>
+<td>description</td>
+<td>null</td>
 <td>The provided pool description.</td>
 </tr>
 <tr>
@@ -4545,10 +4682,8 @@ Only users listed as admins for the game are authorized for this call.
 <pre><code class="highlight json"><span class="p">{</span><span class="w">
     </span><span class="s2">"response_header"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
     </span><span class="s2">"res"</span><span class="p">:</span><span class="w"> </span><span class="mi">840</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"user_exposure"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"DON"</span><span class="p">:</span><span class="w"> </span><span class="mf">10.0</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"USD"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="w">
-    </span><span class="p">}</span><span class="w">
+    </span><span class="s2">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"DON"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"exposure"</span><span class="p">:</span><span class="w"> </span><span class="mf">10.0</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
@@ -4592,9 +4727,14 @@ Only users listed as admins for the game are authorized for this call.
 </tr>
 </thead><tbody>
 <tr>
-<td>user_exposure</td>
-<td>{}</td>
-<td>A dictionary of exposures in all supported currencies; <strong>key</strong> - currency, <strong>value</strong> - exposure in the currency</td>
+<td>exposure</td>
+<td>null</td>
+<td>Amount of exposure in a given currency.</td>
+</tr>
+<tr>
+<td>currency</td>
+<td>null</td>
+<td>Requested currency.</td>
 </tr>
 </tbody></table>
 <h2 id='balance-update-server-message'>Balance update (server message)</h2>
@@ -4607,11 +4747,10 @@ This is an <strong>unsolicited</strong> server message, pushed at the user throu
 </blockquote>
 <pre><code class="highlight json"><span class="p">{</span><span class="w">
     </span><span class="s2">"response_header"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
-    </span><span class="s2">"res"</span><span class="p">:</span><span class="w"> </span><span class="mi">840</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"user_exposure"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"DON"</span><span class="p">:</span><span class="w"> </span><span class="mf">10.0</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"USD"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="w">
-    </span><span class="p">}</span><span class="w">
+    </span><span class="s2">"res"</span><span class="p">:</span><span class="w"> </span><span class="mi">815</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"current_balance"</span><span class="p">:</span><span class="w"> </span><span class="mf">1000.0</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"available_balance"</span><span class="p">:</span><span class="w"> </span><span class="mf">1000.0</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"DON"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
@@ -4749,7 +4888,7 @@ This is an <strong>unsolicited</strong> server message, pushed at the user throu
 </thead><tbody>
 <tr>
 <td>text</td>
-<td>&ldquo;&rdquo;</td>
+<td>null</td>
 <td>The text you want to send.</td>
 </tr>
 <tr>
@@ -4782,7 +4921,7 @@ This is an <strong>unsolicited</strong> server message, pushed at the user throu
 </thead><tbody>
 <tr>
 <td>text</td>
-<td>&ldquo;&rdquo;</td>
+<td>null</td>
 <td>Your message text.</td>
 </tr>
 <tr>
@@ -4835,7 +4974,7 @@ This is an <strong>unsolicited</strong> server message, pushed at the user throu
 </thead><tbody>
 <tr>
 <td>text</td>
-<td>&ldquo;&rdquo;</td>
+<td>null</td>
 <td>Error explanation.</td>
 </tr>
 </tbody></table>
@@ -4854,6 +4993,10 @@ This is an <strong>unsolicited</strong> server message, pushed at the user throu
           <h1 id='terms-of-use'>Terms of use</h1>
           <h1 id='dictionary'>Dictionary</h1><h2 id='instamrkt-source-uuid'>Instamrkt source uuid</h2>
 <p>It&rsquo;s <strong>1d963264-b4f4-4f52-aa42-1bf76e4df381</strong>.</p>
+<h2 id='ids'>Ids</h2>
+<p>All object ids are in the form of unique uuids.</p>
+<h2 id='bet--prediction'>Bet / prediction</h2>
+<p>We use these terms interchangeably. It basically means placing a some of the held currency in a prediction pool and backing a selected target with that amount. The money will be returned (multiplied by a multiplier resulting from a pool distribution) if the pool is resolved with that target (target performs the action).</p>
 
       </div>
       <div class="dark-box">
