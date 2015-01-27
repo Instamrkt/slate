@@ -131,10 +131,8 @@ available_balance | 0.0 | Available balance of the requestor.
 {
     "response_header": {},
     "res": 840,
-    "user_exposure": {
-        "DON": 10.0,
-        "USD": 0.0
-    }
+    "currency": "DON",
+    "exposure": 10.0
 }
 ```
 
@@ -162,7 +160,8 @@ your_exposure | 840 | You have retrieved your exposure.
 
 Parameter | Default | Description
 --------- | ------- | -----------
-user_exposure | {} | A dictionary of exposures in all supported currencies; **key** - currency, **value** - exposure in the currency
+exposure | null | Amount of exposure in a given currency.
+currency | null | Requested currency.
 
 
 ## Balance update (server message)
@@ -177,11 +176,10 @@ This is an **unsolicited** server message, pushed at the user through the websoc
 ```json
 {
     "response_header": {},
-    "res": 840,
-    "user_exposure": {
-        "DON": 10.0,
-        "USD": 0.0
-    }
+    "res": 815,
+    "current_balance": 1000.0,
+    "available_balance": 1000.0,
+    "currency": "DON"
 }
 ```
 

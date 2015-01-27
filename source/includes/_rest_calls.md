@@ -492,7 +492,7 @@ Parameter | Default | Description
 friends | {} | A dictionary containing selected user's personal statistics. **key** - friend's user id, **value** - friend's name.
 
 
-## Leaderboard
+## Leaderboard (global)
 
 
 > Sample request object:
@@ -502,17 +502,17 @@ var $       = require('jquery');
 var cookies = require('cookie-getter');
 var _xsrf   = cookies('_xsrf')
 
-$.get('/r/leaderboard/', {
+$.get('/r/leaderboard/global/', {
   headers: {
       'X-XSRFToken': _xsrf
   }
 })
 ```
 
-This is used to request a global **or** user's personal leaderboard. If user_id is included in the leaderboard, than a personal is sent.
+This is used to request a global leaderboard.
 
 ### URL
-`/r/leaderboard/`
+`/r/leaderboard/global/`
 
 ### Request type
 
@@ -522,15 +522,51 @@ This is used to request a global **or** user's personal leaderboard. If user_id 
 
 Parameter | Description
 --------- | -------
-user_id | Requesting user id. If included - personal leaderboard sent, if skipped - global.
+- | -
 
 ### Response Parameters
 
 Parameter | Default | Description
 --------- | ------- | -----------
-type | null | 'global' or 'personal' - indicating which leaderboard is sent.
 leaderboard | [] | A list of objects. Every object has the form: **key** - points, **value** - user's name.
 
 
 
+## Leaderboard (personal)
 
+
+> Sample request object:
+
+```javascript
+var $       = require('jquery');
+var cookies = require('cookie-getter');
+var _xsrf   = cookies('_xsrf')
+
+$.get('/r/leaderboard/personal/', {
+  headers: {
+      'X-XSRFToken': _xsrf
+  },
+  'user_id': user_id
+})
+```
+
+This is used to request a personal leaderboard.
+
+### URL
+`/r/leaderboard/personal/`
+
+### Request type
+
+`GET`
+
+### Request Parameters
+
+Parameter | Description
+--------- | -------
+user_id | User id for which personal leaderboard is requested.
+
+### Response Parameters
+
+Parameter | Default | Description
+--------- | ------- | -----------
+leaderboard | [] | A list of objects. Every object has the form: **key** - points, **value** - user's name.

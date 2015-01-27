@@ -103,7 +103,7 @@ How to make a prediction is described <a href="#place-bet-in-betting-pool">here<
 
 Name | Code
 --------- | -------
-create_betting_pool | 385
+create_and_open_betting_pool | 385
 
 ### Call Parameters
 
@@ -112,7 +112,7 @@ Parameter | Default | Description
 game_id | null | Game id for which the pool is to be opened.
 description | null | The pool description - question which will be desplayed to users.
 action | null | An action on which the prediction is made. Has to be in a set of actions available for game.
-targets | [] | List of targets on which predictions for actoin can happen. Has to be a subset of targets available for game. Sent as a comma-separated string or an array. Targets have to be of same level. That means "argentina, brazil" is correct, but "argentina, brazil:9" is not.
+targets | [] | List of targets on which predictions for actoin can happen. Has to be a subset of targets available for game. Sent as a comma-separated string or an array. Targets have to be of same level. That means "argentina, brazil" is correct, but "argentina, brazil:9" is not. **IMPORTANT**: target 'none' will be added to target list for parimutuel pools.
 pool_type | 1 | 1 - parimutuel event based, 2 - parimutuel time based, 3 - binary event based, 4 - binary time based.
 start_at | now() | Pool opening time (> now()) in epoch millis. If left blank, will be opened as soon as registered by the server. **As of now pools are opened as soon as this call is received by the server.**
 finish_at | null | Pool closing time (> open_at) in epoch millis. This will close the pool at a given time. **Warning**: this will automatically resolve th pool to **none**.
@@ -205,7 +205,7 @@ This registers an event for a game (e.g. a goal, yellow card etc.). The event co
 
 Events of higher levels resolve also pools for events of lower levels. E.g., an event "goal" for target "brazil:9", will resolve all pools opened for "goal" containing "brazil:9" **and** "brazil" in its targets.
 
-Pool resolution in turn will cause sending out a bet_pool_resolved message, also described below. It also sends out a new balance message to all users participating in a pool.
+Pool resolution in turn will cause sending out a bet_pool_resolved message, also described below. It also sends out a <a href="#balance-update-server-message">new balance</a> message to all users participating in a pool.
 
 ### Operation code
 
