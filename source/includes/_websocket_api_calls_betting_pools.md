@@ -5,6 +5,18 @@
 This section assumes you have an active game opened and running. If not, read on how to open it <a href="#open-a-game">here</a>.
 </aside>
 
+## Bet pool types
+
+We have two bet pool types recognized by the system:
+
+1. Parimutuel pools.
+2. Binary pools.
+
+Parimutuel pools are pools with an arbitrary number of mutually exclusive targets, one of which is a target 'none'. These pools are resolvable automatically. A sample parimutuel pool would look like this: 'Who will score the next goal?' with targets: Brazil, Argentina, none.
+
+Binary pools are pools with two options for selection. They are designed with yes/no questions in mind but not limited to that. They are not automatically resolvable - game cannot be closed until all these pools are resolved.
+A sample binary pool would look like this: 'Will a brazilian player score today?' with targets: yes, no. For these pools action is generated internally - the parameter can be skipped.
+
 ## Create and open betting pool
 
 <aside class="notice">
