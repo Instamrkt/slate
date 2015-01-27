@@ -110,8 +110,8 @@ create_betting_pool | 385
 Parameter | Default | Description
 --------- | ------- | -----------
 game_id | null | Game id for which the pool is to be opened.
-description | "" | The pool description - question which will be desplayed to users.
-action | "" | An action on which the prediction is made. Has to be in a set of actions available for game.
+description | null | The pool description - question which will be desplayed to users.
+action | null | An action on which the prediction is made. Has to be in a set of actions available for game.
 targets | [] | List of targets on which predictions for actoin can happen. Has to be a subset of targets available for game. Sent as a comma-separated string or an array. Targets have to be of same level. That means "argentina, brazil" is correct, but "argentina, brazil:9" is not.
 pool_type | 1 | 1 - parimutuel event based, 2 - parimutuel time based, 3 - binary event based, 4 - binary time based.
 start_at | now() | Pool opening time (> now()) in epoch millis. If left blank, will be opened as soon as registered by the server. **As of now pools are opened as soon as this call is received by the server.**
@@ -131,9 +131,9 @@ Parameter | Default | Description
 --------- | ------- | -----------
 game_id | :YOUR_GAME_ID | The provided game id.
 pool_id | :YOUR_POOL_ID | The server-generated pool id. Necessary for making all pool-related calls.
-description | "" | The provided pool description - question which will be desplayed to users.
+description | null | The provided pool description - question which will be desplayed to users.
 pool_type | 1 | Provided pool type: 1 - parimutuel event based, 2 - parimutuel time based, 3 - binary event based, 4 - binary time based.
-action | "" | The provided action on which the prediction is made.
+action | null | The provided action on which the prediction is made.
 people_involved | 0 | Number of people who already placed predictions in pool. Will be incremented on every prediction.
 money_at_stake | 0.0 | Amount of money already placed predictions in pool. Will be incremented on every prediction.
 target_level | 0 | The computed target level for sent targets. E.g. - 1 for "argentina, brazil", 2 for "argentina:9, brazil:7"
@@ -252,12 +252,55 @@ Parameter | Default | Description
 --------- | ------- | -----------
 game_id | :YOUR_GAME_ID | The game id for which the pool was resolved.
 pool_id | :YOUR_POOL_ID | The resolved pool id.
-description | "" | The provided pool description.
+description | null | The provided pool description.
 winning_target | null | The winning target for the pool (from the subset of targets available for pool).
 winners | {} | The dictionary containing all winners. **key** - user id, **value** - how much each user won (in propotion of what they input into the pool).
 losers | [] | The list of user ids of losers in the pool.
 invalidated_bettors | [] | The list of user ids of people who placed their prediction too late (usually between the time of event happening and its registering by the server).
 resolved_at | event receival time | The time of pool resolution in epoch millis.
+
+## Pool expired (server message)
+
+
+> Returns the following JSON structure:
+
+```json
+{
+    "response_header": {},
+    "res": 363,
+    "pool_id": "7d48ecbc-cd97-41fa-94e8-ca0a8ff22629",
+    "game_id": "1b9a4a42-0c8a-46c0-95ee-c1e649e16fce",
+    "winning_target": "brazil",
+    "description": "Next Goal By Team",
+    "winners": {"3": 10.0},
+    "losers": [1,2],
+    "invalidated_bettors": [],
+    "is_money_return": false,
+    "expired_at": 1421933670582
+}
+```
+
+When a pool is created as a time-based and it expires (e.g.: "Will Brazil score before 65:00?") that means the pool will be resolved with target 'none'. That means people who predicted this target are victorious. The message broadcast to all game subscribers.
+
+### Response codes
+
+Name | Code | Result
+--------- | ------- | -----------
+bet_pool_expored | 363 | Pool expired (resolved to 'none'). Sent for every pool for action and target. Broadcast to all game subscribers.
+
+### Response Parameters
+
+Parameter | Default | Description
+--------- | ------- | -----------
+game_id | :YOUR_GAME_ID | The game id for which the pool was resolved.
+pool_id | :YOUR_POOL_ID | The resolved pool id.
+description | null | The provided pool description.
+winning_target | null | The winning target for the pool (from the subset of targets available for pool).
+winners | {} | The dictionary containing all winners. **key** - user id, **value** - how much each user won (in propotion of what they input into the pool).
+losers | [] | The list of user ids of losers in the pool.
+invalidated_bettors | [] | The list of user ids of people who placed their prediction too late (usually between the time of event happening and its registering by the server).
+resolved_at | event receival time | The time of pool resolution in epoch millis.
+
 
 ## List all open pools for game
 

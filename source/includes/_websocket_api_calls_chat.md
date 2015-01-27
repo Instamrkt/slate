@@ -84,7 +84,7 @@ text_message | 900
 
 Parameter | Default | Description
 --------- | ------- | -----------
-text | "" | The text you want to send.
+text | null | The text you want to send.
 targets | null | An array with string of game ids, or a single string containing a game id to which the message is to be broadcast. Single target recommended.
 
 ### Response codes
@@ -97,5 +97,5 @@ new_text_message | 901 | New text message. Broadcast to all users subscribed to 
 
 Parameter | Default | Description
 --------- | ------- | -----------
-text | "" | Your message text.
+text | null | Your message text.
 sender | :YOUR_USERNAME | Sender's username. Recommended display: "sender: text".

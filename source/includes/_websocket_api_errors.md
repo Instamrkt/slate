@@ -29,4 +29,4 @@ error | 666 | Your requested operation has resulted in an error.
 
 Parameter | Default | Description
 --------- | ------- | -----------
-text| "" | Error explanation.
+text| null | Error explanation.

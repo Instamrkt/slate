@@ -40,7 +40,7 @@ open_game_source | 365
 
 Parameter | Default | Description
 --------- | ------- | -----------
-source_name | "" | The name you want to assign to your source (your domain suggested).
+source_name | null | The name you want to assign to your source (your domain suggested).
 
 ### Response codes
 
