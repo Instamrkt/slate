@@ -48,7 +48,7 @@ This is used to sign a user in.
 
 Parameter | Description
 --------- | -------
-loginname | Login of the user attempting to sign in.
+username | Login of the user attempting to sign in.
 password | Password of the user attempting to sign in.
 next | The page where user is supposed to be redirected after login. Will be appended to the generated redirect url. Optional.
 
@@ -69,10 +69,10 @@ msg | null | Error message. Sent only on **unsuccessful** request.
 ```javascript
 var $       = require('jquery');
 $.post('/r/login/oauth/', {
-  'oauth_id': oauth_id,
-  'oauth_token': oauth_token,
-  'oauth_email': oauth_email,
-  'oauth_provider': oauth_provider
+  'oauthId': oauth_id,
+  'oauthToken': oauthToken,
+  'oauthEmail': oauthEmail,
+  'oauthProvider': oauthProvider
 });
 ```
 
@@ -89,17 +89,17 @@ This is used to sign a user in.
 
 Parameter | Description
 --------- | -------
-oauth_id | Oauth id.
-oauth_token | Oauth token.
-oauth_email | Oauth email (which the user will be registered with).
-oauth_provider | Oauth provider (facebook, google etc.).
+oauthId | Oauth id.
+oauthToken | Oauth token.
+oauthEmail | Oauth email (which the user will be registered with).
+oauthProvider | Oauth provider (facebook, google etc.).
 next | The page where user is supposed to be redirected after login. Will be appended to the generated redirect url. Optional.
 
 ### Response Parameters
 
 Parameter | Default | Description
 --------- | ------- | -----------
-username | null | Username of the signed in user (= passed loginname). Sent only on **successful** request.
+username | null | Username of the signed in user. Sent only on **successful** request.
 id | null | Id of the signed in user. Necessary for Websocket API connection. Sent only on **successful** request.
 redirect_url | /i/play | Redirect url for a signedin user (presumably for an endpoint requiring authentication). Can be used only on **successful** request.
 msg | null | Error message. Sent only on **unsuccessful** request.
@@ -154,7 +154,7 @@ $.get('/r/key', {
   headers: {
       'X-XSRFToken': _xsrf
   },
-  'user_id': user_id,
+  'userId': userId,
 })
 ```
 
@@ -171,7 +171,7 @@ This is used to request a user's session key. The key is necessary to connect wi
 
 Parameter | Description
 --------- | -------
-user_id | Id of the signed in user for which the key is requested.
+userId | Id of the signed in user for which the key is requested.
 
 ### Response Parameters
 
@@ -192,8 +192,7 @@ var _xsrf   = cookies('_xsrf');
 
 $.post('/r/username', {
 	'_xsrf': _xsrf,
-  'username': username,
-  'email': email,
+  'usernameNew': username,
   'password': password
 });
 ```
@@ -211,14 +210,14 @@ This is used to update a username of a signed in user. Password needs to be pass
 
 Parameter | Description
 --------- | -------
-newUsername | New Username sign in.
+usernameNew | New Username sign in.
 password | Password of the user attempting to change the login (his id derived from the secure im_user cookie attached).
 
 ### Response Parameters
 
 Parameter | Default | Description
 --------- | ------- | -----------
-username | null | New username of the requesting user (= passed newUsername). Sent only on **successful** request.
+username | null | New username of the requesting user (= passed usernameNew). Sent only on **successful** request.
 msg | null | Error message. Sent only on **unsuccessful** request.
 
 ## Password recovery
@@ -234,7 +233,7 @@ var _xsrf   = cookies('_xsrf');
   headers: {
       'X-XSRFToken': _xsrf
   },
-  'user': user
+  'username': username
 })
 }));
 ```
@@ -252,7 +251,7 @@ This is used to request password recovery. It results in sending out an email wi
 
 Parameter | Description
 --------- | -------
-user | Username for which password recovery is requested.
+username | Username for which password recovery is requested.
 
 ### Response Parameters
 
@@ -272,8 +271,8 @@ var _xsrf   = cookies('_xsrf');
 
 $.post('/r/password/update/from_recovery', {
   '_xsrf': _xsrf,
-  'pass1': pass1,
-  'pass2': pass2,
+  'password1': password1,
+  'password2': password2,
   'recoveryCode': recoveryCode,
   'email': email
 }));
@@ -292,8 +291,8 @@ This is used to update password from recovery. Requires the generated and emaile
 
 Parameter | Description
 --------- | -------
-pass1 | New password.
-pass2 | New password confirmation.
+password1 | New password.
+password2 | New password confirmation.
 recoveryCode | The recovery code generated and included in the emailed url.
 email | The email to which the code generated code was sent (the email is also included in the emailed url).
 
@@ -314,9 +313,9 @@ var _xsrf   = cookies('_xsrf');
 
 $.post('/r/password/update/', {
   '_xsrf': _xsrf,
-  'passOld': passOld,
-  'passNew1': passNew1,
-  'passNew2': passNew2,
+  'passwordOld': passwordOld,
+  'passwordNew1': passwordNew1,
+  'passwordNew2': passwordNew2,
 }));
 ```
 
@@ -333,9 +332,9 @@ This is used to update password from a form on the site / app screen.
 
 Parameter | Description
 --------- | -------
-passNew1 | New password.
-passNew2 | New password confirmation.
-passOld | Old password to prove action is intentional (and not performed by someone else when actual users leaves an open form).
+passwordNew1 | New password.
+passwordNew2 | New password confirmation.
+passwordOld | Old password to prove action is intentional (and not performed by someone else when actual users leaves an open form).
 
 ### Response Parameters
 
@@ -546,7 +545,7 @@ $.get('/r/leaderboard/personal/', {
   headers: {
       'X-XSRFToken': _xsrf
   },
-  'user_id': user_id
+  'userId': userId
 })
 ```
 
@@ -563,7 +562,7 @@ This is used to request a personal leaderboard.
 
 Parameter | Description
 --------- | -------
-user_id | User id for which personal leaderboard is requested.
+userId | User id for which personal leaderboard is requested.
 
 ### Response Parameters
 
