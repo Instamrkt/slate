@@ -252,6 +252,7 @@ Parameter | Description
 --------- | -------
 usernameNew | New Username sign in.
 password | Password of the user attempting to change the login (his id derived from the secure im_user cookie attached).
+userId | User's id for which password is to be updated.
 
 ### Response Parameters
 
@@ -273,7 +274,7 @@ var _xsrf   = cookies('_xsrf');
   headers: {
       'X-XSRFToken': _xsrf
   },
-  'username': username
+  'username': usernameOrEmail
 })
 }));
 ```
@@ -291,7 +292,7 @@ This is used to request password recovery. It results in sending out an email wi
 
 Parameter | Description
 --------- | -------
-username | Username for which password recovery is requested.
+username | Username or email of the user for whom password recovery is requested.
 
 ### Response Parameters
 
@@ -356,6 +357,7 @@ $.post('/r/password/update/', {
   'passwordOld': passwordOld,
   'passwordNew1': passwordNew1,
   'passwordNew2': passwordNew2,
+  'userId': userId
 }));
 ```
 
@@ -375,6 +377,7 @@ Parameter | Description
 passwordNew1 | New password.
 passwordNew2 | New password confirmation.
 passwordOld | Old password to prove action is intentional (and not performed by someone else when actual users leaves an open form).
+userId | Id of the user whose the password is to be updated.
 
 ### Response Parameters
 
@@ -394,7 +397,8 @@ var _xsrf   = cookies('_xsrf')
 $.get('/r/games/history/', {
   headers: {
       'X-XSRFToken': _xsrf
-  }
+  },
+  'userId': userId
 })
 ```
 
@@ -411,7 +415,7 @@ This is used to request a user's game history (all the games he has predicted in
 
 Parameter | Description
 --------- | -------
-- | -
+userId | Id of the user whose game history is to be retrieved.
 
 ### Response Parameters
 
