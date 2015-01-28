@@ -59,6 +59,8 @@
 <li>REST API</li>
 <li>Websocket API</li>
 </ol>
+
+<p>The Websocket API is used for distributing all real-time game-related information. Everything else can (and should) be obtainable through the REST API.</p>
 <h2 id='system-architecture'>System architecture</h2>
 <p><img alt="System architecture" src="images/architecture.png" /></p>
 
@@ -699,7 +701,7 @@ A lot of requests also require you to include the &lsquo;im_user&rsquo; secure c
 <tr>
 <td>game_history</td>
 <td>[]</td>
-<td>A list of objects representing games. Each object contains the following fields: id(uuid), name, type, open_at, close_at.</td>
+<td>A list of objects representing games. Each object contains the following fields: id, name, type, open_at, close_at.</td>
 </tr>
 </tbody></table>
 <h2 id='games-upcoming'>Games upcoming</h2>
@@ -745,7 +747,7 @@ A lot of requests also require you to include the &lsquo;im_user&rsquo; secure c
 <tr>
 <td>upcoming_games</td>
 <td>[]</td>
-<td>A list of objects representing games. Each object contains the following fields: id(game_uuid), source_id (for the source hosting the game), currency, live_start_at, game_type_id.</td>
+<td>A list of objects representing games. Each object contains the following fields: id, source_id (for the source hosting the game), currency, live_start_at, game_type_id.</td>
 </tr>
 </tbody></table>
 <h2 id='statistics'>Statistics</h2>
