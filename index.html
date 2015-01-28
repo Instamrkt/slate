@@ -146,7 +146,7 @@ Every rest call (except for signup and login) requires a server generated xsrf t
 </aside></p>
 
 <p><aside class="notice">
-A lot of requests also require you to include the &lsquo;im_user&rsquo; secure cookie.
+All request that require personal information require a userId parameter which is checked against a secure cookie.
 </aside></p>
 
 <p>Passing parameters happens as follows:</p>
@@ -206,7 +206,7 @@ A lot of requests also require you to include the &lsquo;im_user&rsquo; secure c
 </tr>
 </thead><tbody>
 <tr>
-<td>loginname</td>
+<td>username</td>
 <td>Login of the user attempting to sign in.</td>
 </tr>
 <tr>
@@ -253,10 +253,10 @@ A lot of requests also require you to include the &lsquo;im_user&rsquo; secure c
 </blockquote>
 <pre><code class="highlight javascript"><span class="kd">var</span> <span class="nx">$</span>       <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'jquery'</span><span class="p">);</span>
 <span class="nx">$</span><span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="s1">'/r/login/oauth/'</span><span class="p">,</span> <span class="p">{</span>
-  <span class="s1">'oauth_id'</span><span class="p">:</span> <span class="nx">oauth_id</span><span class="p">,</span>
-  <span class="s1">'oauth_token'</span><span class="p">:</span> <span class="nx">oauth_token</span><span class="p">,</span>
-  <span class="s1">'oauth_email'</span><span class="p">:</span> <span class="nx">oauth_email</span><span class="p">,</span>
-  <span class="s1">'oauth_provider'</span><span class="p">:</span> <span class="nx">oauth_provider</span>
+  <span class="s1">'oauthId'</span><span class="p">:</span> <span class="nx">oauth_id</span><span class="p">,</span>
+  <span class="s1">'oauthToken'</span><span class="p">:</span> <span class="nx">oauthToken</span><span class="p">,</span>
+  <span class="s1">'oauthEmail'</span><span class="p">:</span> <span class="nx">oauthEmail</span><span class="p">,</span>
+  <span class="s1">'oauthProvider'</span><span class="p">:</span> <span class="nx">oauthProvider</span>
 <span class="p">});</span>
 </code></pre>
 
@@ -273,19 +273,19 @@ A lot of requests also require you to include the &lsquo;im_user&rsquo; secure c
 </tr>
 </thead><tbody>
 <tr>
-<td>oauth_id</td>
+<td>oauthId</td>
 <td>Oauth id.</td>
 </tr>
 <tr>
-<td>oauth_token</td>
+<td>oauthToken</td>
 <td>Oauth token.</td>
 </tr>
 <tr>
-<td>oauth_email</td>
+<td>oauthEmail</td>
 <td>Oauth email (which the user will be registered with).</td>
 </tr>
 <tr>
-<td>oauth_provider</td>
+<td>oauthProvider</td>
 <td>Oauth provider (facebook, google etc.).</td>
 </tr>
 <tr>
@@ -304,7 +304,7 @@ A lot of requests also require you to include the &lsquo;im_user&rsquo; secure c
 <tr>
 <td>username</td>
 <td>null</td>
-<td>Username of the signed in user (= passed loginname). Sent only on <strong>successful</strong> request.</td>
+<td>Username of the signed in user. Sent only on <strong>successful</strong> request.</td>
 </tr>
 <tr>
 <td>id</td>
@@ -399,7 +399,7 @@ A lot of requests also require you to include the &lsquo;im_user&rsquo; secure c
   <span class="na">headers</span><span class="p">:</span> <span class="p">{</span>
       <span class="s1">'X-XSRFToken'</span><span class="p">:</span> <span class="nx">_xsrf</span>
   <span class="p">},</span>
-  <span class="s1">'user_id'</span><span class="p">:</span> <span class="nx">user_id</span><span class="p">,</span>
+  <span class="s1">'userId'</span><span class="p">:</span> <span class="nx">userId</span><span class="p">,</span>
 <span class="p">})</span>
 </code></pre>
 
@@ -416,7 +416,7 @@ A lot of requests also require you to include the &lsquo;im_user&rsquo; secure c
 </tr>
 </thead><tbody>
 <tr>
-<td>user_id</td>
+<td>userId</td>
 <td>Id of the signed in user for which the key is requested.</td>
 </tr>
 </tbody></table>
@@ -439,7 +439,59 @@ A lot of requests also require you to include the &lsquo;im_user&rsquo; secure c
 <td>Error message. Sent only on <strong>unsuccessful</strong> request.</td>
 </tr>
 </tbody></table>
-<h2 id='username-update'>Username update</h2>
+<h2 id='get-username'>Get Username</h2>
+<blockquote>
+<p>Sample request object:</p>
+</blockquote>
+<pre><code class="highlight javascript"><span class="kd">var</span> <span class="nx">$</span>       <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'jquery'</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">cookies</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'cookie-getter'</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">_xsrf</span>   <span class="o">=</span> <span class="nx">cookies</span><span class="p">(</span><span class="s1">'_xsrf'</span><span class="p">);</span>
+
+<span class="nx">$</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">'/r/username'</span><span class="p">,</span> <span class="p">{</span>
+  <span class="na">headers</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s1">'X-XSRFToken'</span><span class="p">:</span> <span class="nx">_xsrf</span>
+  <span class="p">},</span>
+  <span class="s1">'userId'</span><span class="p">:</span> <span class="nx">userId</span>
+<span class="p">});</span>
+</code></pre>
+
+<p>This is used to retrieve a username of a signed in user.</p>
+<h3 id='url'>URL</h3>
+<p><code class="prettyprint">/r/username/</code></p>
+<h3 id='request-type'>Request type</h3>
+<p><code class="prettyprint">GET</code></p>
+<h3 id='request-parameters'>Request Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>userId</td>
+<td>userId for which username is to be retrieved.</td>
+</tr>
+</tbody></table>
+<h3 id='response-parameters'>Response Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>username</td>
+<td>null</td>
+<td>New username of the requesting user (= passed usernameNew). Sent only on <strong>successful</strong> request.</td>
+</tr>
+<tr>
+<td>msg</td>
+<td>null</td>
+<td>Error message. Sent only on <strong>unsuccessful</strong> request.</td>
+</tr>
+</tbody></table>
+<h2 id='set-username'>Set Username</h2>
 <blockquote>
 <p>Sample request object:</p>
 </blockquote>
@@ -449,9 +501,9 @@ A lot of requests also require you to include the &lsquo;im_user&rsquo; secure c
 
 <span class="nx">$</span><span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="s1">'/r/username'</span><span class="p">,</span> <span class="p">{</span>
     <span class="s1">'_xsrf'</span><span class="p">:</span> <span class="nx">_xsrf</span><span class="p">,</span>
-  <span class="s1">'username'</span><span class="p">:</span> <span class="nx">username</span><span class="p">,</span>
-  <span class="s1">'email'</span><span class="p">:</span> <span class="nx">email</span><span class="p">,</span>
-  <span class="s1">'password'</span><span class="p">:</span> <span class="nx">password</span>
+  <span class="s1">'usernameNew'</span><span class="p">:</span> <span class="nx">username</span><span class="p">,</span>
+  <span class="s1">'password'</span><span class="p">:</span> <span class="nx">password</span><span class="p">,</span>
+  <span class="s1">'userId'</span><span class="p">:</span> <span class="nx">userId</span>
 <span class="p">});</span>
 </code></pre>
 
@@ -468,12 +520,16 @@ A lot of requests also require you to include the &lsquo;im_user&rsquo; secure c
 </tr>
 </thead><tbody>
 <tr>
-<td>newUsername</td>
+<td>usernameNew</td>
 <td>New Username sign in.</td>
 </tr>
 <tr>
 <td>password</td>
 <td>Password of the user attempting to change the login (his id derived from the secure im_user cookie attached).</td>
+</tr>
+<tr>
+<td>userId</td>
+<td>User&rsquo;s id for which password is to be updated.</td>
 </tr>
 </tbody></table>
 <h3 id='response-parameters'>Response Parameters</h3>
@@ -487,7 +543,7 @@ A lot of requests also require you to include the &lsquo;im_user&rsquo; secure c
 <tr>
 <td>username</td>
 <td>null</td>
-<td>New username of the requesting user (= passed newUsername). Sent only on <strong>successful</strong> request.</td>
+<td>New username of the requesting user (= passed usernameNew). Sent only on <strong>successful</strong> request.</td>
 </tr>
 <tr>
 <td>msg</td>
@@ -507,7 +563,7 @@ A lot of requests also require you to include the &lsquo;im_user&rsquo; secure c
   <span class="na">headers</span><span class="p">:</span> <span class="p">{</span>
       <span class="s1">'X-XSRFToken'</span><span class="p">:</span> <span class="nx">_xsrf</span>
   <span class="p">},</span>
-  <span class="s1">'user'</span><span class="p">:</span> <span class="nx">user</span>
+  <span class="s1">'username'</span><span class="p">:</span> <span class="nx">usernameOrEmail</span>
 <span class="p">})</span>
 <span class="p">}));</span>
 </code></pre>
@@ -525,8 +581,8 @@ A lot of requests also require you to include the &lsquo;im_user&rsquo; secure c
 </tr>
 </thead><tbody>
 <tr>
-<td>user</td>
-<td>Username for which password recovery is requested.</td>
+<td>username</td>
+<td>Username or email of the user for whom password recovery is requested.</td>
 </tr>
 </tbody></table>
 <h3 id='response-parameters'>Response Parameters</h3>
@@ -553,8 +609,8 @@ A lot of requests also require you to include the &lsquo;im_user&rsquo; secure c
 
 <span class="nx">$</span><span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="s1">'/r/password/update/from_recovery'</span><span class="p">,</span> <span class="p">{</span>
   <span class="s1">'_xsrf'</span><span class="p">:</span> <span class="nx">_xsrf</span><span class="p">,</span>
-  <span class="s1">'pass1'</span><span class="p">:</span> <span class="nx">pass1</span><span class="p">,</span>
-  <span class="s1">'pass2'</span><span class="p">:</span> <span class="nx">pass2</span><span class="p">,</span>
+  <span class="s1">'password1'</span><span class="p">:</span> <span class="nx">password1</span><span class="p">,</span>
+  <span class="s1">'password2'</span><span class="p">:</span> <span class="nx">password2</span><span class="p">,</span>
   <span class="s1">'recoveryCode'</span><span class="p">:</span> <span class="nx">recoveryCode</span><span class="p">,</span>
   <span class="s1">'email'</span><span class="p">:</span> <span class="nx">email</span>
 <span class="p">}));</span>
@@ -573,11 +629,11 @@ A lot of requests also require you to include the &lsquo;im_user&rsquo; secure c
 </tr>
 </thead><tbody>
 <tr>
-<td>pass1</td>
+<td>password1</td>
 <td>New password.</td>
 </tr>
 <tr>
-<td>pass2</td>
+<td>password2</td>
 <td>New password confirmation.</td>
 </tr>
 <tr>
@@ -613,9 +669,10 @@ A lot of requests also require you to include the &lsquo;im_user&rsquo; secure c
 
 <span class="nx">$</span><span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="s1">'/r/password/update/'</span><span class="p">,</span> <span class="p">{</span>
   <span class="s1">'_xsrf'</span><span class="p">:</span> <span class="nx">_xsrf</span><span class="p">,</span>
-  <span class="s1">'passOld'</span><span class="p">:</span> <span class="nx">passOld</span><span class="p">,</span>
-  <span class="s1">'passNew1'</span><span class="p">:</span> <span class="nx">passNew1</span><span class="p">,</span>
-  <span class="s1">'passNew2'</span><span class="p">:</span> <span class="nx">passNew2</span><span class="p">,</span>
+  <span class="s1">'passwordOld'</span><span class="p">:</span> <span class="nx">passwordOld</span><span class="p">,</span>
+  <span class="s1">'passwordNew1'</span><span class="p">:</span> <span class="nx">passwordNew1</span><span class="p">,</span>
+  <span class="s1">'passwordNew2'</span><span class="p">:</span> <span class="nx">passwordNew2</span><span class="p">,</span>
+  <span class="s1">'userId'</span><span class="p">:</span> <span class="nx">userId</span>
 <span class="p">}));</span>
 </code></pre>
 
@@ -632,16 +689,20 @@ A lot of requests also require you to include the &lsquo;im_user&rsquo; secure c
 </tr>
 </thead><tbody>
 <tr>
-<td>passNew1</td>
+<td>passwordNew1</td>
 <td>New password.</td>
 </tr>
 <tr>
-<td>passNew2</td>
+<td>passwordNew2</td>
 <td>New password confirmation.</td>
 </tr>
 <tr>
-<td>passOld</td>
+<td>passwordOld</td>
 <td>Old password to prove action is intentional (and not performed by someone else when actual users leaves an open form).</td>
+</tr>
+<tr>
+<td>userId</td>
+<td>Id of the user whose the password is to be updated.</td>
 </tr>
 </tbody></table>
 <h3 id='response-parameters'>Response Parameters</h3>
@@ -669,7 +730,8 @@ A lot of requests also require you to include the &lsquo;im_user&rsquo; secure c
 <span class="nx">$</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">'/r/games/history/'</span><span class="p">,</span> <span class="p">{</span>
   <span class="na">headers</span><span class="p">:</span> <span class="p">{</span>
       <span class="s1">'X-XSRFToken'</span><span class="p">:</span> <span class="nx">_xsrf</span>
-  <span class="p">}</span>
+  <span class="p">},</span>
+  <span class="s1">'userId'</span><span class="p">:</span> <span class="nx">userId</span>
 <span class="p">})</span>
 </code></pre>
 
@@ -686,8 +748,8 @@ A lot of requests also require you to include the &lsquo;im_user&rsquo; secure c
 </tr>
 </thead><tbody>
 <tr>
-<td>-</td>
-<td>-</td>
+<td>userId</td>
+<td>Id of the user whose game history is to be retrieved.</td>
 </tr>
 </tbody></table>
 <h3 id='response-parameters'>Response Parameters</h3>
@@ -761,7 +823,8 @@ A lot of requests also require you to include the &lsquo;im_user&rsquo; secure c
 <span class="nx">$</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">'/r/statistics/'</span><span class="p">,</span> <span class="p">{</span>
   <span class="na">headers</span><span class="p">:</span> <span class="p">{</span>
       <span class="s1">'X-XSRFToken'</span><span class="p">:</span> <span class="nx">_xsrf</span>
-  <span class="p">}</span>
+  <span class="p">},</span>
+  <span class="s1">'userId'</span><span class="p">:</span> <span class="nx">userId</span>
 <span class="p">})</span>
 </code></pre>
 
@@ -778,8 +841,8 @@ A lot of requests also require you to include the &lsquo;im_user&rsquo; secure c
 </tr>
 </thead><tbody>
 <tr>
-<td>-</td>
-<td>-</td>
+<td>userId</td>
+<td>Id of the user whose statistics are to be retrieved.</td>
 </tr>
 </tbody></table>
 <h3 id='response-parameters'>Response Parameters</h3>
@@ -807,7 +870,8 @@ A lot of requests also require you to include the &lsquo;im_user&rsquo; secure c
 <span class="nx">$</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">'/r/friends/'</span><span class="p">,</span> <span class="p">{</span>
   <span class="na">headers</span><span class="p">:</span> <span class="p">{</span>
       <span class="s1">'X-XSRFToken'</span><span class="p">:</span> <span class="nx">_xsrf</span>
-  <span class="p">}</span>
+  <span class="p">},</span>
+  <span class="s1">'userId'</span><span class="p">:</span> <span class="nx">userId</span>
 <span class="p">})</span>
 </code></pre>
 
@@ -824,8 +888,8 @@ A lot of requests also require you to include the &lsquo;im_user&rsquo; secure c
 </tr>
 </thead><tbody>
 <tr>
-<td>-</td>
-<td>-</td>
+<td>userId</td>
+<td>Id of the user whose friends are to be retrieved.</td>
 </tr>
 </tbody></table>
 <h3 id='response-parameters'>Response Parameters</h3>
@@ -900,7 +964,7 @@ A lot of requests also require you to include the &lsquo;im_user&rsquo; secure c
   <span class="na">headers</span><span class="p">:</span> <span class="p">{</span>
       <span class="s1">'X-XSRFToken'</span><span class="p">:</span> <span class="nx">_xsrf</span>
   <span class="p">},</span>
-  <span class="s1">'user_id'</span><span class="p">:</span> <span class="nx">user_id</span>
+  <span class="s1">'userId'</span><span class="p">:</span> <span class="nx">userId</span>
 <span class="p">})</span>
 </code></pre>
 
@@ -917,7 +981,7 @@ A lot of requests also require you to include the &lsquo;im_user&rsquo; secure c
 </tr>
 </thead><tbody>
 <tr>
-<td>user_id</td>
+<td>userId</td>
 <td>User id for which personal leaderboard is requested.</td>
 </tr>
 </tbody></table>
