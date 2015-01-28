@@ -9,6 +9,8 @@ The Instamrkt API is roughly divided into two parts:
 1. REST API
 2. Websocket API
 
+The Websocket API is used for distributing all real-time game-related information. Everything else can (and should) be obtainable through the REST API.
+
 
 ## System architecture
 

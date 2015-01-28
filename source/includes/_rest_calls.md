@@ -378,7 +378,7 @@ Parameter | Description
 
 Parameter | Default | Description
 --------- | ------- | -----------
-game_history | [] | A list of objects representing games. Each object contains the following fields: id(uuid), name, type, open_at, close_at.
+game_history | [] | A list of objects representing games. Each object contains the following fields: id, name, type, open_at, close_at.
 
 ## Games upcoming
 
@@ -415,7 +415,7 @@ Parameter | Description
 
 Parameter | Default | Description
 --------- | ------- | -----------
-upcoming_games | [] | A list of objects representing games. Each object contains the following fields: id(game_uuid), source_id (for the source hosting the game), currency, live_start_at, game_type_id.
+upcoming_games | [] | A list of objects representing games. Each object contains the following fields: id, source_id (for the source hosting the game), currency, live_start_at, game_type_id.
 
 ## Statistics
 
