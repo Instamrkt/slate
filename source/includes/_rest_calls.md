@@ -5,7 +5,7 @@ Every rest call (except for signup and login) requires a server generated xsrf t
 </aside>
 
 <aside class="notice">
-A lot of requests also require you to include the 'im_user' secure cookie.
+All request that require personal information require a userId parameter which is checked against a secure cookie.
 </aside>
 
 Passing parameters happens as follows:
@@ -180,8 +180,47 @@ Parameter | Default | Description
 key | null | The requested key for the user. Sent only on **successful** request.
 msg | null | Error message. Sent only on **unsuccessful** request.
 
+## Get Username
 
-## Username update
+> Sample request object:
+
+```javascript
+var $       = require('jquery');
+var cookies = require('cookie-getter');
+var _xsrf   = cookies('_xsrf');
+
+$.get('/r/username', {
+  headers: {
+    'X-XSRFToken': _xsrf
+  },
+  'userId': userId
+});
+```
+
+This is used to retrieve a username of a signed in user.
+
+### URL
+`/r/username/`
+
+### Request type
+
+`GET`
+
+### Request Parameters
+
+Parameter | Description
+--------- | -------
+userId | userId for which username is to be retrieved.
+
+### Response Parameters
+
+Parameter | Default | Description
+--------- | ------- | -----------
+username | null | New username of the requesting user (= passed usernameNew). Sent only on **successful** request.
+msg | null | Error message. Sent only on **unsuccessful** request.
+
+
+## Set Username
 
 > Sample request object:
 
@@ -193,7 +232,8 @@ var _xsrf   = cookies('_xsrf');
 $.post('/r/username', {
 	'_xsrf': _xsrf,
   'usernameNew': username,
-  'password': password
+  'password': password,
+  'userId': userId
 });
 ```
 
