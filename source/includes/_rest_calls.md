@@ -472,7 +472,8 @@ var _xsrf   = cookies('_xsrf')
 $.get('/r/statistics/', {
   headers: {
       'X-XSRFToken': _xsrf
-  }
+  },
+  'userId': userId
 })
 ```
 
@@ -489,7 +490,7 @@ This is used to request user's personal statistics.
 
 Parameter | Description
 --------- | -------
-- | -
+userId | Id of the user whose statistics are to be retrieved.
 
 ### Response Parameters
 
@@ -509,7 +510,8 @@ var _xsrf   = cookies('_xsrf')
 $.get('/r/friends/', {
   headers: {
       'X-XSRFToken': _xsrf
-  }
+  },
+  'userId': userId
 })
 ```
 
@@ -526,7 +528,7 @@ This is used to request user's personal statistics.
 
 Parameter | Description
 --------- | -------
-- | -
+userId | Id of the user whose friends are to be retrieved.
 
 ### Response Parameters
 
