@@ -116,6 +116,7 @@ targets | [] | List of targets on which predictions for actoin can happen. Has t
 pool_type | 1 | 1 - parimutuel event based, 2 - parimutuel time based, 3 - binary event based, 4 - binary time based.
 start_at | now() | Pool opening time (> now()) in epoch millis. If left blank, will be opened as soon as registered by the server. **As of now pools are opened as soon as this call is received by the server.**
 finish_at | null | Pool closing time (> open_at) in epoch millis. This will close the pool at a given time. **Warning**: this will automatically resolve th pool to **none**.
+is_blocked | false | Is betting in pool now blocked.
 stop_accepting_bets_at | null | Stop accepting bets at time (> now()) in epoch millis. This parameter is optional. Include if you want to close the pool after a certain time.
 recreate_on_end | False | Boolean value describing if pool is to be recreated anew upon resolution.
 
@@ -141,6 +142,7 @@ targets | {} | A nested, recursive dictionary containing the targets you listed.
 start_at | request receival time | The open pool time in epoch millis.
 live_start_at | request receival time | The real life game start time in epoch millis (only informative).
 finish_at | null | The passed pool closing time. (Relevant only for pools of type 2 and 4).
+is_blocked | false | Is betting in pool now blocked.
 stop_accepting_bets_at | null | Provided stop accepting bets at time (> now()) in epoch millis.
 
 
@@ -328,6 +330,7 @@ resolved_at | event receival time | The time of pool resolution in epoch millis.
             "description": "Next Goal By Team",
             "money_at_stake": 0.0,
             "finish_at": "None",
+            "is_blocked": false,
             "distributions": {
                 "brazil": {
                     "bets": {},
@@ -357,6 +360,7 @@ resolved_at | event receival time | The time of pool resolution in epoch millis.
             "description": "Next Card By Team",
             "money_at_stake": 0.0,
             "finish_at": "None",
+            "is_blocked": false,
             "distributions": {
                 "brazil": {
                     "bets": {},
@@ -437,6 +441,7 @@ pools_list | {} | A dictionary of pools opened for game, **key** - pool id, **va
             "description": "Next Goal By Team",
             "money_at_stake": 0.0,
             "finish_at": "None",
+            "is_blocked": false,
             "distributions": {
                 "brazil": {
                     "bets": {},
@@ -517,6 +522,7 @@ pools_list | {} | A dictionary of pools opened for game in which you have not pl
             "start_at": "1421935990222",
             "money_at_stake": 1.0,
             "finish_at": "None",
+            "is_blocked": false,
             "distributions": {
                 "brazil": {
                     "bets": {
