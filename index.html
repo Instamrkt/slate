@@ -2967,6 +2967,11 @@ This functionality is also provided automatically by instamrkt - pools are opene
 <td>Pool closing time (&gt; open_at) in epoch millis. This will close the pool at a given time. <strong>Warning</strong>: this will automatically resolve th pool to <strong>none</strong>.</td>
 </tr>
 <tr>
+<td>is_blocked</td>
+<td>false</td>
+<td>Is betting in pool now blocked.</td>
+</tr>
+<tr>
 <td>stop_accepting_bets_at</td>
 <td>null</td>
 <td>Stop accepting bets at time (&gt; now()) in epoch millis. This parameter is optional. Include if you want to close the pool after a certain time.</td>
@@ -3058,6 +3063,11 @@ This functionality is also provided automatically by instamrkt - pools are opene
 <td>finish_at</td>
 <td>null</td>
 <td>The passed pool closing time. (Relevant only for pools of type 2 and 4).</td>
+</tr>
+<tr>
+<td>is_blocked</td>
+<td>false</td>
+<td>Is betting in pool now blocked.</td>
 </tr>
 <tr>
 <td>stop_accepting_bets_at</td>
@@ -3398,6 +3408,7 @@ This functionality is also provided automatically by instamrkt - pools are opene
             </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Next Goal By Team"</span><span class="p">,</span><span class="w">
             </span><span class="s2">"money_at_stake"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w">
             </span><span class="s2">"finish_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"None"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"is_blocked"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
             </span><span class="s2">"distributions"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
                 </span><span class="s2">"brazil"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
                     </span><span class="s2">"bets"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
@@ -3427,6 +3438,7 @@ This functionality is also provided automatically by instamrkt - pools are opene
             </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Next Card By Team"</span><span class="p">,</span><span class="w">
             </span><span class="s2">"money_at_stake"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w">
             </span><span class="s2">"finish_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"None"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"is_blocked"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
             </span><span class="s2">"distributions"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
                 </span><span class="s2">"brazil"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
                     </span><span class="s2">"bets"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
@@ -3538,6 +3550,7 @@ This functionality is also provided automatically by instamrkt - pools are opene
             </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Next Goal By Team"</span><span class="p">,</span><span class="w">
             </span><span class="s2">"money_at_stake"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w">
             </span><span class="s2">"finish_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"None"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"is_blocked"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
             </span><span class="s2">"distributions"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
                 </span><span class="s2">"brazil"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
                     </span><span class="s2">"bets"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
@@ -3648,6 +3661,7 @@ This functionality is also provided automatically by instamrkt - pools are opene
             </span><span class="s2">"start_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1421935990222"</span><span class="p">,</span><span class="w">
             </span><span class="s2">"money_at_stake"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w">
             </span><span class="s2">"finish_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"None"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"is_blocked"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
             </span><span class="s2">"distributions"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
                 </span><span class="s2">"brazil"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
                     </span><span class="s2">"bets"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
