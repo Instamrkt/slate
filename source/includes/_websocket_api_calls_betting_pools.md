@@ -60,6 +60,7 @@ This functionality is also provided automatically by instamrkt - pools are opene
     "people_involved": 0,
     "money_at_stake": 0.0,
     "target_level": 1,
+    "is_blocked": false,
     "targets": {
         "brazil": {
             "backing_people": 0,
