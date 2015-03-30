@@ -2874,6 +2874,7 @@ This functionality is also provided automatically by instamrkt - pools are opene
     </span><span class="s2">"money_at_stake"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w">
     </span><span class="s2">"target_level"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
     </span><span class="s2">"is_blocked"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"is_hot"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
     </span><span class="s2">"targets"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
         </span><span class="s2">"brazil"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
             </span><span class="s2">"backing_people"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
@@ -2973,6 +2974,11 @@ This functionality is also provided automatically by instamrkt - pools are opene
 <td>Is betting in pool now blocked.</td>
 </tr>
 <tr>
+<td>is_hot</td>
+<td>false</td>
+<td>Is betting pool marked as &ldquo;HOT&rdquo;.</td>
+</tr>
+<tr>
 <td>stop_accepting_bets_at</td>
 <td>null</td>
 <td>Stop accepting bets at time (&gt; now()) in epoch millis. This parameter is optional. Include if you want to close the pool after a certain time.</td>
@@ -3069,6 +3075,11 @@ This functionality is also provided automatically by instamrkt - pools are opene
 <td>is_blocked</td>
 <td>false</td>
 <td>Is betting in pool now blocked.</td>
+</tr>
+<tr>
+<td>is_hot</td>
+<td>false</td>
+<td>Is betting pool now marked as &ldquo;HOT&rdquo;.</td>
 </tr>
 <tr>
 <td>stop_accepting_bets_at</td>
@@ -3410,6 +3421,7 @@ This functionality is also provided automatically by instamrkt - pools are opene
             </span><span class="s2">"money_at_stake"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w">
             </span><span class="s2">"finish_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"None"</span><span class="p">,</span><span class="w">
             </span><span class="s2">"is_blocked"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"is_hot"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
             </span><span class="s2">"distributions"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
                 </span><span class="s2">"brazil"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
                     </span><span class="s2">"bets"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
@@ -3440,6 +3452,7 @@ This functionality is also provided automatically by instamrkt - pools are opene
             </span><span class="s2">"money_at_stake"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w">
             </span><span class="s2">"finish_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"None"</span><span class="p">,</span><span class="w">
             </span><span class="s2">"is_blocked"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"is_hot"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
             </span><span class="s2">"distributions"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
                 </span><span class="s2">"brazil"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
                     </span><span class="s2">"bets"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
@@ -3552,6 +3565,7 @@ This functionality is also provided automatically by instamrkt - pools are opene
             </span><span class="s2">"money_at_stake"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w">
             </span><span class="s2">"finish_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"None"</span><span class="p">,</span><span class="w">
             </span><span class="s2">"is_blocked"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"is_hot"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
             </span><span class="s2">"distributions"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
                 </span><span class="s2">"brazil"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
                     </span><span class="s2">"bets"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
@@ -3663,6 +3677,7 @@ This functionality is also provided automatically by instamrkt - pools are opene
             </span><span class="s2">"money_at_stake"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w">
             </span><span class="s2">"finish_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"None"</span><span class="p">,</span><span class="w">
             </span><span class="s2">"is_blocked"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"is_hot"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
             </span><span class="s2">"distributions"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
                 </span><span class="s2">"brazil"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
                     </span><span class="s2">"bets"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -4573,6 +4588,207 @@ Only users listed as admins for the game are authorized for this call.
 </tbody></table>
 <h4 id='unblocked-pool'>Unblocked pool</h4>
 <p>Described in <a href="#allow-betting-in-a-pool">this section</a>.</p>
+<h2 id='suggest-hot-pool'>Suggest hot pool</h2>
+<p><aside class="notice">
+Only users listed as admins for the game are authorized for this call.
+</aside></p>
+
+<blockquote>
+<p>Expects the following JSON structure:</p>
+</blockquote>
+<pre><code class="highlight json"><span class="p">{</span><span class="w">
+    </span><span class="s2">"header"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
+    </span><span class="s2">"op"</span><span class="p">:</span><span class="w"> </span><span class="mi">396</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"pool_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"a183b2da-b561-4bc9-99b5-078e570e0117"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"likely_to_happen_at"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<blockquote>
+<p>Returns the following JSON structure:</p>
+</blockquote>
+<pre><code class="highlight json"><span class="p">{</span><span class="w">
+    </span><span class="s2">"response_header"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
+    </span><span class="s2">"res"</span><span class="p">:</span><span class="w"> </span><span class="mi">367</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"hot_since"</span><span class="p">:</span><span class="w"> </span><span class="mi">1421942161542</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"pool_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"a183b2da-b561-4bc9-99b5-078e570e0117"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>Marks pool as hot at <em>likely_to_happen_at</em> time. Allows clients to move pool up the list or put a special label on it.</p>
+<h3 id='operation-code'>Operation code</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Code</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>suggest_hot_betting_pool</td>
+<td>396</td>
+</tr>
+</tbody></table>
+<h3 id='call-parameters'>Call Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>pool_id</td>
+<td>null</td>
+<td>Pool id for which placing predictions is to be allowed.</td>
+</tr>
+<tr>
+<td>likely_to_happen_at</td>
+<td>epoch_millis</td>
+<td>At what time (epoch_millis) broadcas new hot pool message to clients.</td>
+</tr>
+</tbody></table>
+<h3 id='response-code'>Response code</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Code</th>
+<th>Result</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>hot_betting_pool_suggested</td>
+<td>367</td>
+<td>You have marked pool as <em>hot</em>. All clients subscribed to game notified.</td>
+</tr>
+</tbody></table>
+<h3 id='response-parameters'>Response Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>pool_id</td>
+<td>:YOUR_POOL_ID</td>
+<td>The pool id for pool which has been marked as hot.</td>
+</tr>
+<tr>
+<td>hot_since</td>
+<td>likely_to_happen_at</td>
+<td>Since when the pool is marked as hot.</td>
+</tr>
+</tbody></table>
+<h2 id='suggest-hot-pool-for-action-and-target'>Suggest hot pool for action and target</h2>
+<p><aside class="notice">
+Only users listed as admins for the game are authorized for this call.
+</aside></p>
+
+<blockquote>
+<p>Expects the following JSON structure:</p>
+</blockquote>
+<pre><code class="highlight json"><span class="p">{</span><span class="w">
+    </span><span class="s2">"header"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
+    </span><span class="s2">"op"</span><span class="p">:</span><span class="w"> </span><span class="mi">3961</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"game_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"a183b2da-b561-4bc9-99b5-078e570e0117"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"action_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"goal"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"target_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"brazil"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"likely_to_happen_at"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<blockquote>
+<p>Returns the following JSON structures:</p>
+</blockquote>
+<pre><code class="highlight json"><span class="p">{</span><span class="w">
+    </span><span class="s2">"response_header"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
+    </span><span class="s2">"res"</span><span class="p">:</span><span class="w"> </span><span class="mi">367</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"hot_since"</span><span class="p">:</span><span class="w"> </span><span class="mi">1421942161542</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"pool_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"a183b2da-b561-4bc9-99b5-078e570e0117"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>Marks <em>every</em> pool relevant for game and action and target as hot at <em>likely_to_happen_at</em> time. Allows clients to move pool up the list or put a special label on it.</p>
+<h3 id='operation-code'>Operation code</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Code</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>suggest_hot_betting_pool_for_action_and_target</td>
+<td>3961</td>
+</tr>
+</tbody></table>
+<h3 id='call-parameters'>Call Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>game_id</td>
+<td>null</td>
+<td>Game id in which the pools are to be marked hot.</td>
+</tr>
+<tr>
+<td>action_id</td>
+<td>null</td>
+<td>Action for which the pools are to be marked hot.</td>
+</tr>
+<tr>
+<td>target_id</td>
+<td>null</td>
+<td>Target for which the pools are to be marked hot.</td>
+</tr>
+<tr>
+<td>likely_to_happen_at</td>
+<td>epoch_millis</td>
+<td>At what time (epoch_millis) broadcas new hot pool message(s) to clients.</td>
+</tr>
+</tbody></table>
+<h3 id='response-codes'>Response codes</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Code</th>
+<th>Result</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>betting_for_game_and_action_allowed</td>
+<td>371</td>
+<td>You have allowed for placing predictions in given pools. This is broadcast to all game subscribers.</td>
+</tr>
+<tr>
+<td>betting_in_pool_allowed</td>
+<td>369</td>
+<td>You have allowed for placing predictions in a given pool. This is broadcast to all game subscribers for all pools in game for given action.</td>
+</tr>
+</tbody></table>
+<h3 id='response-parameters'>Response Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>pool_id</td>
+<td>:YOUR_POOL_ID</td>
+<td>The pool id for pool which has been marked as hot.</td>
+</tr>
+<tr>
+<td>hot_since</td>
+<td>likely_to_happen_at</td>
+<td>Since when the pool is marked as hot.</td>
+</tr>
+</tbody></table>
 
           <h1 id='websocket-api-accounting'>Websocket API: Accounting</h1><h2 id='current-balance'>Current balance</h2>
 <blockquote>
