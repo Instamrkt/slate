@@ -61,6 +61,7 @@ This functionality is also provided automatically by instamrkt - pools are opene
     "money_at_stake": 0.0,
     "target_level": 1,
     "is_blocked": false,
+    "is_hot": false,
     "targets": {
         "brazil": {
             "backing_people": 0,
@@ -118,6 +119,7 @@ pool_type | 1 | 1 - parimutuel event based, 2 - parimutuel time based, 3 - binar
 start_at | now() | Pool opening time (> now()) in epoch millis. If left blank, will be opened as soon as registered by the server. **As of now pools are opened as soon as this call is received by the server.**
 finish_at | null | Pool closing time (> open_at) in epoch millis. This will close the pool at a given time. **Warning**: this will automatically resolve th pool to **none**.
 is_blocked | false | Is betting in pool now blocked.
+is_hot | false | Is betting pool marked as "HOT".
 stop_accepting_bets_at | null | Stop accepting bets at time (> now()) in epoch millis. This parameter is optional. Include if you want to close the pool after a certain time.
 recreate_on_end | False | Boolean value describing if pool is to be recreated anew upon resolution.
 
@@ -144,6 +146,7 @@ start_at | request receival time | The open pool time in epoch millis.
 live_start_at | request receival time | The real life game start time in epoch millis (only informative).
 finish_at | null | The passed pool closing time. (Relevant only for pools of type 2 and 4).
 is_blocked | false | Is betting in pool now blocked.
+is_hot | false | Is betting pool now marked as "HOT".
 stop_accepting_bets_at | null | Provided stop accepting bets at time (> now()) in epoch millis.
 
 
@@ -332,6 +335,7 @@ resolved_at | event receival time | The time of pool resolution in epoch millis.
             "money_at_stake": 0.0,
             "finish_at": "None",
             "is_blocked": false,
+            "is_hot": false,
             "distributions": {
                 "brazil": {
                     "bets": {},
@@ -362,6 +366,7 @@ resolved_at | event receival time | The time of pool resolution in epoch millis.
             "money_at_stake": 0.0,
             "finish_at": "None",
             "is_blocked": false,
+            "is_hot": false,
             "distributions": {
                 "brazil": {
                     "bets": {},
@@ -443,6 +448,7 @@ pools_list | {} | A dictionary of pools opened for game, **key** - pool id, **va
             "money_at_stake": 0.0,
             "finish_at": "None",
             "is_blocked": false,
+            "is_hot": false,
             "distributions": {
                 "brazil": {
                     "bets": {},
@@ -524,6 +530,7 @@ pools_list | {} | A dictionary of pools opened for game in which you have not pl
             "money_at_stake": 1.0,
             "finish_at": "None",
             "is_blocked": false,
+            "is_hot": false,
             "distributions": {
                 "brazil": {
                     "bets": {
@@ -1139,3 +1146,120 @@ allowed_at | epoch_millis | The timestamp indicating when the placing prediction
 #### Unblocked pool
 
 Described in <a href="#allow-betting-in-a-pool">this section</a>.
+
+## Suggest hot pool
+
+<aside class="notice">
+Only users listed as admins for the game are authorized for this call.
+</aside>
+
+> Expects the following JSON structure:
+
+```json
+{
+    "header": {},
+    "op": 396,
+    "pool_id": "a183b2da-b561-4bc9-99b5-078e570e0117",
+    "likely_to_happen_at": null
+}
+```
+
+> Returns the following JSON structure:
+
+```json
+{
+    "response_header": {},
+    "res": 367,
+    "hot_since": 1421942161542,
+    "pool_id": "a183b2da-b561-4bc9-99b5-078e570e0117"
+}
+```
+
+Marks pool as hot at _likely_to_happen_at_ time. Allows clients to move pool up the list or put a special label on it.
+
+### Operation code
+
+Name | Code
+--------- | -------
+suggest_hot_betting_pool | 396
+
+### Call Parameters
+
+Parameter | Default | Description
+--------- | ------- | -----------
+pool_id | null | Pool id for which placing predictions is to be allowed.
+likely_to_happen_at | epoch_millis | At what time (epoch_millis) broadcas new hot pool message to clients.
+
+### Response code
+
+Name | Code | Result
+--------- | ------- | -----------
+hot_betting_pool_suggested | 367 | You have marked pool as *hot*. All clients subscribed to game notified.
+
+### Response Parameters
+
+Parameter | Default | Description
+--------- | ------- | -----------
+pool_id | :YOUR_POOL_ID | The pool id for pool which has been marked as hot.
+hot_since | likely_to_happen_at | Since when the pool is marked as hot.
+
+## Suggest hot pool for action and target
+
+<aside class="notice">
+Only users listed as admins for the game are authorized for this call.
+</aside>
+
+> Expects the following JSON structure:
+
+```json
+{
+    "header": {},
+    "op": 3961,
+    "game_id": "a183b2da-b561-4bc9-99b5-078e570e0117",
+    "action_id": "goal",
+    "target_id": "brazil",
+    "likely_to_happen_at": null
+}
+```
+
+> Returns the following JSON structures:
+
+```json
+{
+    "response_header": {},
+    "res": 367,
+    "hot_since": 1421942161542,
+    "pool_id": "a183b2da-b561-4bc9-99b5-078e570e0117"
+}
+```
+
+Marks *every* pool relevant for game and action and target as hot at _likely_to_happen_at_ time. Allows clients to move pool up the list or put a special label on it.
+
+### Operation code
+
+Name | Code
+--------- | -------
+suggest_hot_betting_pool_for_action_and_target | 3961
+
+### Call Parameters
+
+Parameter | Default | Description
+--------- | ------- | -----------
+game_id | null | Game id in which the pools are to be marked hot.
+action_id | null | Action for which the pools are to be marked hot.
+target_id | null | Target for which the pools are to be marked hot.
+likely_to_happen_at | epoch_millis | At what time (epoch_millis) broadcas new hot pool message(s) to clients.
+
+### Response codes
+
+Name | Code | Result
+--------- | ------- | -----------
+betting_for_game_and_action_allowed | 371 | You have allowed for placing predictions in given pools. This is broadcast to all game subscribers.
+betting_in_pool_allowed | 369 | You have allowed for placing predictions in a given pool. This is broadcast to all game subscribers for all pools in game for given action.
+
+### Response Parameters
+
+Parameter | Default | Description
+--------- | ------- | -----------
+pool_id | :YOUR_POOL_ID | The pool id for pool which has been marked as hot.
+hot_since | likely_to_happen_at | Since when the pool is marked as hot.
