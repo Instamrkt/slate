@@ -81,7 +81,7 @@
 <p>The designed user flow is as follows:</p>
 
 <ol>
-<li>User logs in through the website / app with the signup credentials he provided (username + password + (optionally) a 2fa token) or with an externally-provided token (Facebook login). This is performed through the REST API. The call returns a user id and a session key necessary to connect to the Websocket API Server.</li>
+<li>User logs in through the website / app with the signup credentials he provided (username + password + (optionally) a 2fa token) or with an externally-provided token (Facebook login). This is performed through the REST API. The call sets and returns cookies for user id (&ldquo;im_user&rdquo;) and a session key (&ldquo;session_key&rdquo;) necessary to connect to the Websocket API Server.</li>
 <li>User gets to the game screen / page and using the obtained session key <a href="#connecting"> connects</a> to the Websocket API.</li>
 <li>User is now connected to the API and can subscribe to games to receive push updates about them and place predictions.</li>
 </ol>
@@ -93,9 +93,9 @@
 Remember — we care about security for your own good!
 </aside></p>
 
-<p>All <strong>REST Api</strong> calls require the presence of an encrypted cookie, which is generated for user upon successful sign in.</p>
+<p>All <strong>REST Api</strong> calls require the presence of an encrypted cookie, which is generated for user upon successful sign in / sign up and returned as a cookie.</p>
 
-<p>All <strong>Websocket Api</strong> calls require the presence of a session key, which is returned to the user upon successful sign in.</p>
+<p>All <strong>Websocket Api</strong> calls require the presence of a session key, which is returned to the user as a cookie (&ldquo;session_key&rdquo;) upon successful sign in / sign up and returned as a cookie.</p>
 
 <p>To perform a successful signin, one of the following is necessary:</p>
 
@@ -381,57 +381,6 @@ All request that require personal information require a userId parameter which i
 <td>redirect_url</td>
 <td>/i/play</td>
 <td>Redirect url for a signedin user (presumably for an endpoint requiring authentication). Can be used only on <strong>successful</strong> request.</td>
-</tr>
-<tr>
-<td>msg</td>
-<td>null</td>
-<td>Error message. Sent only on <strong>unsuccessful</strong> request.</td>
-</tr>
-</tbody></table>
-<h2 id='session-key'>Session key</h2>
-<blockquote>
-<p>Sample request object:</p>
-</blockquote>
-<pre><code class="highlight javascript"><span class="kd">var</span> <span class="nx">$</span>       <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'jquery'</span><span class="p">);</span>
-<span class="kd">var</span> <span class="nx">cookies</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'cookie-getter'</span><span class="p">);</span>
-<span class="kd">var</span> <span class="nx">_xsrf</span>   <span class="o">=</span> <span class="nx">cookies</span><span class="p">(</span><span class="s1">'_xsrf'</span><span class="p">)</span>
-<span class="nx">$</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">'/r/key'</span><span class="p">,</span> <span class="p">{</span>
-  <span class="na">headers</span><span class="p">:</span> <span class="p">{</span>
-      <span class="s1">'X-XSRFToken'</span><span class="p">:</span> <span class="nx">_xsrf</span>
-  <span class="p">},</span>
-  <span class="s1">'userId'</span><span class="p">:</span> <span class="nx">userId</span><span class="p">,</span>
-<span class="p">})</span>
-</code></pre>
-
-<p>This is used to request a user&rsquo;s session key. The key is necessary to connect with the Websocket API server.</p>
-<h3 id='url'>URL</h3>
-<p><code class="prettyprint">/r/key/</code></p>
-<h3 id='request-type'>Request type</h3>
-<p><code class="prettyprint">GET</code></p>
-<h3 id='request-parameters'>Request Parameters</h3>
-<table><thead>
-<tr>
-<th>Parameter</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>userId</td>
-<td>Id of the signed in user for which the key is requested.</td>
-</tr>
-</tbody></table>
-<h3 id='response-parameters'>Response Parameters</h3>
-<table><thead>
-<tr>
-<th>Parameter</th>
-<th>Default</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>key</td>
-<td>null</td>
-<td>The requested key for the user. Sent only on <strong>successful</strong> request.</td>
 </tr>
 <tr>
 <td>msg</td>
@@ -1013,10 +962,9 @@ Each request needs to contain a valid header. Each response contains a response 
 <strong>wss://instamrkt.com:9999
 ?id=:YOUR_USER_ID
 &amp;n=:YOUR_GENERATED_NONCE
-&amp;h=:YOUR_SESSION_KEY
 &amp;h=:YOUR_HEXDIGEST</strong></p>
 <h3 id='obtaining-id-and-the-session-key'>Obtaining id and the session key</h3>
-<p>Both are included inside a json returned by a sign in request to the REST API.</p>
+<p>Both are set and returned as cookies by a sign in or sign up requests to the REST API.</p>
 <h3 id='nonce-and-hexdigest'>Nonce and hexdigest</h3><pre><code class="highlight python"><span class="kn">import</span> <span class="nn">hashlib</span>
 
 <span class="n">sha</span>       <span class="o">=</span> <span class="n">hashlib</span><span class="o">.</span><span class="n">sha256</span><span class="p">()</span>
