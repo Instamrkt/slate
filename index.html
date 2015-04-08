@@ -1477,7 +1477,8 @@ Only users listed as admins for the source are authorized for this call.
   </span><span class="s2">"create_at"</span><span class="p">:</span><span class="w"> </span><span class="mi">1417104170</span><span class="p">,</span><span class="w">
   </span><span class="s2">"open_at"</span><span class="p">:</span><span class="w"> </span><span class="mi">1417104170</span><span class="p">,</span><span class="w">
   </span><span class="s2">"live_start_at"</span><span class="p">:</span><span class="w"> </span><span class="mi">1417105170</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"live_finish_at"</span><span class="p">:</span><span class="w"> </span><span class="mi">1417106170</span><span class="w">
+  </span><span class="s2">"live_finish_at"</span><span class="p">:</span><span class="w"> </span><span class="mi">1417106170</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"hashtag"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#ArgBra"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
@@ -1503,6 +1504,7 @@ Only users listed as admins for the source are authorized for this call.
   </span><span class="s2">"live_start_at"</span><span class="p">:</span><span class="w"> </span><span class="mi">1417105170</span><span class="p">,</span><span class="w">
   </span><span class="s2">"live_finish_at"</span><span class="p">:</span><span class="w"> </span><span class="mi">1417106170</span><span class="p">,</span><span class="w">
   </span><span class="s2">"close_at"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"hashtag"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#ArgBra"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"targets"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
         </span><span class="s2">"brazil"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
             </span><span class="s2">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"bra"</span><span class="p">,</span><span class="w">
@@ -1609,7 +1611,12 @@ Only users listed as admins for the source are authorized for this call.
 <tr>
 <td>currency</td>
 <td>null</td>
-<td>The currency for which you want to allow betting for in the game.</td>
+<td>The currency for the game.</td>
+</tr>
+<tr>
+<td>hashtag</td>
+<td>null</td>
+<td>The social media hashtag to be associated with the game. If skipped will be generated from game name.</td>
 </tr>
 </tbody></table>
 <h3 id='response-codes'>Response codes</h3>
@@ -1684,6 +1691,11 @@ Only users listed as admins for the source are authorized for this call.
 <td>null</td>
 <td>The close game time in epoch millis (if null, game close request needs to be sent explicitly).</td>
 </tr>
+<tr>
+<td>hashtag</td>
+<td>null</td>
+<td>The social media hashtag to be associated with the game. If skipped will be generated from game name.</td>
+</tr>
 </tbody></table>
 <h2 id='create-a-game'>Create a game</h2>
 <p><aside class="notice">
@@ -1703,8 +1715,9 @@ Only users listed as admins for the source are authorized for this call.
   </span><span class="s2">"create_at"</span><span class="p">:</span><span class="w"> </span><span class="mi">1417104170</span><span class="p">,</span><span class="w">
   </span><span class="s2">"open_at"</span><span class="p">:</span><span class="w"> </span><span class="mi">1417104170</span><span class="p">,</span><span class="w">
   </span><span class="s2">"live_start_at"</span><span class="p">:</span><span class="w"> </span><span class="mi">1417105170</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"live_finish_at"</span><span class="p">:</span><span class="w"> </span><span class="mi">1417106170</span><span class="w">
-</span><span class="p">}</span><span class="w">
+  </span><span class="s2">"live_finish_at"</span><span class="p">:</span><span class="w"> </span><span class="mi">1417106170</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"hashtag"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#ArgBra"</span><span class="p">,</span><span class="w">
+</span><span class="err">}</span><span class="w">
 </span></code></pre>
 
 <blockquote>
@@ -1720,8 +1733,9 @@ Only users listed as admins for the source are authorized for this call.
   </span><span class="s2">"open_at"</span><span class="p">:</span><span class="w"> </span><span class="mi">1417104170</span><span class="p">,</span><span class="w">
   </span><span class="s2">"live_start_at"</span><span class="p">:</span><span class="w"> </span><span class="mi">1417105170</span><span class="p">,</span><span class="w">
   </span><span class="s2">"live_finish_at"</span><span class="p">:</span><span class="w"> </span><span class="mi">1417106170</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"close_at"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
-</span><span class="p">}</span><span class="w">
+  </span><span class="s2">"close_at"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"hashtag"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#ArgBra"</span><span class="p">,</span><span class="w">
+</span><span class="err">}</span><span class="w">
 </span></code></pre>
 
 <p>This registers the game in the system as an upcoming game. An <a href="#open-a-game">open game</a> request needs to be sent afterwards to open a game for betting.</p>
@@ -1787,6 +1801,11 @@ Only users listed as admins for the source are authorized for this call.
 <td>null</td>
 <td>The currency for which you want to allow betting for in the game.</td>
 </tr>
+<tr>
+<td>hashtag</td>
+<td>null</td>
+<td>The social media hashtag to be associated with the game. If skipped will be generated from game name.</td>
+</tr>
 </tbody></table>
 <h3 id='response-codes'>Response codes</h3>
 <table><thead>
@@ -1849,6 +1868,11 @@ Only users listed as admins for the source are authorized for this call.
 <td>close_at</td>
 <td>null</td>
 <td>The close game time in epoch millis (if null, game close request needs to be sent explicitly).</td>
+</tr>
+<tr>
+<td>hashtag</td>
+<td>null</td>
+<td>The social media hashtag to be associated with the game. If skipped will be generated from game name.</td>
 </tr>
 </tbody></table>
 <h2 id='open-a-game'>Open a game</h2>
@@ -2115,6 +2139,7 @@ Only the game source admin is allowed to send request as of now. Authorizing add
     </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"game_in_progress_betting_active"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"game_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"30cee1fa-fb20-41a6-a61c-0e0335abc2a9"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Argentina - Brazil"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"hashtag"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#ArgBra"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"past_events"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
         </span><span class="s2">"106a9151-2997-4c96-bc29-c020da54fa67"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
             </span><span class="s2">"happened_at"</span><span class="p">:</span><span class="w"> </span><span class="mi">1417180267000</span><span class="p">,</span><span class="w">
@@ -2285,6 +2310,11 @@ Only the game source admin is allowed to send request as of now. Authorizing add
 <td>currency</td>
 <td>null</td>
 <td>The currency for which you want to allow betting for in the game.</td>
+</tr>
+<tr>
+<td>hashtag</td>
+<td>null</td>
+<td>The social media hashtag to be associated with the game. If skipped will be generated from game name.</td>
 </tr>
 </tbody></table>
 <h2 id='update-game-details'>Update game details</h2>
