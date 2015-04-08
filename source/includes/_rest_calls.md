@@ -143,43 +143,6 @@ user_id | null | Id of the signed up user. Necessary for Websocket API connectio
 redirect_url | /i/play | Redirect url for a signedin user (presumably for an endpoint requiring authentication). Can be used only on **successful** request.
 msg | null | Error message. Sent only on **unsuccessful** request.
 
-## Session key
-> Sample request object:
-
-```javascript
-var $       = require('jquery');
-var cookies = require('cookie-getter');
-var _xsrf   = cookies('_xsrf')
-$.get('/r/key', {
-  headers: {
-      'X-XSRFToken': _xsrf
-  },
-  'userId': userId,
-})
-```
-
-This is used to request a user's session key. The key is necessary to connect with the Websocket API server.
-
-### URL
-`/r/key/`
-
-### Request type
-
-`GET`
-
-### Request Parameters
-
-Parameter | Description
---------- | -------
-userId | Id of the signed in user for which the key is requested.
-
-### Response Parameters
-
-Parameter | Default | Description
---------- | ------- | -----------
-key | null | The requested key for the user. Sent only on **successful** request.
-msg | null | Error message. Sent only on **unsuccessful** request.
-
 ## Get Username
 
 > Sample request object:

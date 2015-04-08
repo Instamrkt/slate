@@ -16,12 +16,11 @@ The connection url:
 **wss://instamrkt.com:9999
 ?id=:YOUR_USER_ID
 &n=:YOUR_GENERATED_NONCE
-&h=:YOUR_SESSION_KEY
 &h=:YOUR_HEXDIGEST**
 
 ### Obtaining id and the session key
 
-Both are included inside a json returned by a sign in request to the REST API.
+Both are set and returned as cookies by a sign in or sign up requests to the REST API.
 
 ### Nonce and hexdigest
 
