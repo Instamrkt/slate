@@ -29,7 +29,8 @@ Only users listed as admins for the source are authorized for this call.
   "create_at": 1417104170,
   "open_at": 1417104170,
   "live_start_at": 1417105170,
-  "live_finish_at": 1417106170
+  "live_finish_at": 1417106170,
+  "hashtag": "#ArgBra"
 }
 ```
 
@@ -56,6 +57,7 @@ Only users listed as admins for the source are authorized for this call.
   "live_start_at": 1417105170,
   "live_finish_at": 1417106170,
   "close_at": null,
+  "hashtag": "#ArgBra",
   "targets": {
 		"brazil": {
 			"symbol": "bra",
@@ -114,7 +116,8 @@ open_at | now() | Game opening time (> now()) in epoch millis. No pool opening a
 close_at | now() | Game closing time (> open_at) in epoch millis. This will close the game at a given time. **Warning**: this will automatically resolve all the parimutuel pools running for the game. If not included (**recommended**), game close request has to be sent automatically.
 live_start_at | now() | Game real life starting time (> now()) in epoch millis. This can be different than open_at (e.g. you might want to allow betting before the game starts in real life). Serves **only** as an informative value.
 live_finish_at | now() | Game real life finishing time (> now()) in epoch millis. This can be different than close_at (e.g. you might want to close betting before the game finishes in real life). Serves **only** as an informative value.
-currency | null | The currency for which you want to allow betting for in the game.
+currency | null | The currency for the game.
+hashtag | null | The social media hashtag to be associated with the game. If skipped will be generated from game name.
 
 ### Response codes
 
@@ -136,8 +139,7 @@ open_at | request receival time | The open game time in epoch millis.
 live_start_at | request receival time | The real life game start time in epoch millis (only informative).
 live_finish_at | null | The real life game finish time in epoch millis (only informative).
 close_at | null | The close game time in epoch millis (if null, game close request needs to be sent explicitly).
-
-
+hashtag | null | The social media hashtag to be associated with the game. If skipped will be generated from game name.
 
 
 ## Create a game
@@ -160,7 +162,8 @@ Only users listed as admins for the source are authorized for this call.
   "create_at": 1417104170,
   "open_at": 1417104170,
   "live_start_at": 1417105170,
-  "live_finish_at": 1417106170
+  "live_finish_at": 1417106170,
+  "hashtag": "#ArgBra",
 }
 ```
 
@@ -178,7 +181,8 @@ Only users listed as admins for the source are authorized for this call.
   "open_at": 1417104170,
   "live_start_at": 1417105170,
   "live_finish_at": 1417106170,
-  "close_at": null
+  "close_at": null,
+  "hashtag": "#ArgBra",
 }
 ```
 
@@ -204,6 +208,7 @@ close_at | now() | Game closing time (> open_at) in epoch millis. This will clos
 live_start_at | now() | Game real life starting time (> now()) in epoch millis. This can be different than open_at (e.g. you might want to allow betting before the game starts in real life). Serves **only** as an informative value.
 live_finish_at | now() | Game real life finishing time (> now()) in epoch millis. This can be different than close_at (e.g. you might want to close betting before the game finishes in real life). Serves **only** as an informative value.
 currency | null | The currency for which you want to allow betting for in the game.
+hashtag | null | The social media hashtag to be associated with the game. If skipped will be generated from game name.
 
 ### Response codes
 
@@ -223,7 +228,7 @@ open_at | request receival time | The open game time in epoch millis.
 live_start_at | request receival time | The real life game start time in epoch millis (only informative).
 live_finish_at | null | The real life game finish time in epoch millis (only informative).
 close_at | null | The close game time in epoch millis (if null, game close request needs to be sent explicitly).
-
+hashtag | null | The social media hashtag to be associated with the game. If skipped will be generated from game name.
 
 
 
@@ -393,6 +398,7 @@ reason | :YOUR_GAME_ID | The reason why you couldn't become an admin. Sent **onl
     "status": "game_in_progress_betting_active",
     "game_id": "30cee1fa-fb20-41a6-a61c-0e0335abc2a9",
     "name": "Argentina - Brazil",
+    "hashtag": "#ArgBra",
     "past_events": {
         "106a9151-2997-4c96-bc29-c020da54fa67": {
             "happened_at": 1417180267000,
@@ -492,7 +498,7 @@ live_start_at | request receival time | The real life game start time in epoch m
 live_finish_at | null | The real life game finish time in epoch millis (only informative).
 close_at | null | The close game time in epoch millis (if null, game close request needs to be sent explicitly).
 currency | null | The currency for which you want to allow betting for in the game.
-
+hashtag | null | The social media hashtag to be associated with the game. If skipped will be generated from game name.
 
 
 
