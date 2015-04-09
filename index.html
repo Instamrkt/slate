@@ -3111,7 +3111,7 @@ This functionality is also provided automatically by instamrkt - pools are opene
     </span><span class="s2">"winning_target"</span><span class="p">:</span><span class="w"> </span><span class="s2">"brazil"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Next Goal By Team"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"winners"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="s2">"3"</span><span class="p">:</span><span class="w"> </span><span class="mf">10.0</span><span class="p">},</span><span class="w">
-    </span><span class="s2">"losers"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">],</span><span class="w">
+    </span><span class="s2">"losers"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="s2">"1"</span><span class="p">:</span><span class="w"> </span><span class="mf">7.0</span><span class="p">,</span><span class="w"> </span><span class="s2">"2"</span><span class="p">:</span><span class="w"> </span><span class="mf">3.0</span><span class="p">},</span><span class="w">
     </span><span class="s2">"invalidated_bettors"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
     </span><span class="s2">"is_money_return"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
     </span><span class="s2">"resolved_at"</span><span class="p">:</span><span class="w"> </span><span class="mi">1421933670582</span><span class="w">
@@ -3277,8 +3277,8 @@ This functionality is also provided automatically by instamrkt - pools are opene
 </tr>
 <tr>
 <td>losers</td>
-<td>[]</td>
-<td>The list of user ids of losers in the pool.</td>
+<td>{}</td>
+<td>The dictionary containing all losers. <strong>key</strong> - user id, <strong>value</strong> - how much each user lost (in propotion of what they input into the pool).</td>
 </tr>
 <tr>
 <td>invalidated_bettors</td>
@@ -3303,7 +3303,7 @@ This functionality is also provided automatically by instamrkt - pools are opene
     </span><span class="s2">"winning_target"</span><span class="p">:</span><span class="w"> </span><span class="s2">"brazil"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Next Goal By Team"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"winners"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="s2">"3"</span><span class="p">:</span><span class="w"> </span><span class="mf">10.0</span><span class="p">},</span><span class="w">
-    </span><span class="s2">"losers"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">],</span><span class="w">
+    </span><span class="s2">"losers"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="s2">"1"</span><span class="p">:</span><span class="w"> </span><span class="mf">7.0</span><span class="p">,</span><span class="w"> </span><span class="s2">"2"</span><span class="p">:</span><span class="w"> </span><span class="mf">3.0</span><span class="p">},</span><span class="w">
     </span><span class="s2">"invalidated_bettors"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
     </span><span class="s2">"is_money_return"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
     </span><span class="s2">"expired_at"</span><span class="p">:</span><span class="w"> </span><span class="mi">1421933670582</span><span class="w">
@@ -3360,8 +3360,8 @@ This functionality is also provided automatically by instamrkt - pools are opene
 </tr>
 <tr>
 <td>losers</td>
-<td>[]</td>
-<td>The list of user ids of losers in the pool.</td>
+<td>{}</td>
+<td>The dictionary containing all losers. <strong>key</strong> - user id, <strong>value</strong> - how much each user lost (in propotion of what they input into the pool).</td>
 </tr>
 <tr>
 <td>invalidated_bettors</td>
