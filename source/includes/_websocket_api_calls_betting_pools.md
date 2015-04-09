@@ -200,7 +200,7 @@ This functionality is also provided automatically by instamrkt - pools are opene
     "winning_target": "brazil",
     "description": "Next Goal By Team",
     "winners": {"3": 10.0},
-    "losers": [1,2],
+    "losers": {"1": 7.0, "2": 3.0},
     "invalidated_bettors": [],
     "is_money_return": false,
     "resolved_at": 1421933670582
@@ -261,7 +261,7 @@ pool_id | :YOUR_POOL_ID | The resolved pool id.
 description | null | The provided pool description.
 winning_target | null | The winning target for the pool (from the subset of targets available for pool).
 winners | {} | The dictionary containing all winners. **key** - user id, **value** - how much each user won (in propotion of what they input into the pool).
-losers | [] | The list of user ids of losers in the pool.
+losers | {} | The dictionary containing all losers. **key** - user id, **value** - how much each user lost (in propotion of what they input into the pool).
 invalidated_bettors | [] | The list of user ids of people who placed their prediction too late (usually between the time of event happening and its registering by the server).
 resolved_at | event receival time | The time of pool resolution in epoch millis.
 
@@ -279,7 +279,7 @@ resolved_at | event receival time | The time of pool resolution in epoch millis.
     "winning_target": "brazil",
     "description": "Next Goal By Team",
     "winners": {"3": 10.0},
-    "losers": [1,2],
+    "losers": {"1": 7.0, "2": 3.0},
     "invalidated_bettors": [],
     "is_money_return": false,
     "expired_at": 1421933670582
@@ -303,7 +303,7 @@ pool_id | :YOUR_POOL_ID | The resolved pool id.
 description | null | The provided pool description.
 winning_target | null | The winning target for the pool (from the subset of targets available for pool).
 winners | {} | The dictionary containing all winners. **key** - user id, **value** - how much each user won (in propotion of what they input into the pool).
-losers | [] | The list of user ids of losers in the pool.
+losers | {} | The dictionary containing all losers. **key** - user id, **value** - how much each user lost (in propotion of what they input into the pool).
 invalidated_bettors | [] | The list of user ids of people who placed their prediction too late (usually between the time of event happening and its registering by the server).
 resolved_at | event receival time | The time of pool resolution in epoch millis.
 
