@@ -328,8 +328,8 @@ resolved_at | event receival time | The time of pool resolution in epoch millis.
     "response_header": {},
     "res": 3535,
     "game_id": "1b9a4a42-0c8a-46c0-95ee-c1e649e16fce",
-    "pools_list": {
-        "0ec3850f-f862-4baf-bada-73394a68bbdd": {
+    "pools_list": [
+        {
             "start_at": "1421933670629",
             "description": "Next Goal By Team",
             "money_at_stake": 0.0,
@@ -360,7 +360,7 @@ resolved_at | event receival time | The time of pool resolution in epoch millis.
             "type": 1,
             "action_id": "goal"
         },
-        "6cca4a84-d3e5-4d56-9f5e-acb50ecd5f1d": {
+        {
             "start_at": "1421935990222",
             "description": "Next Card By Team",
             "money_at_stake": 0.0,
@@ -391,7 +391,7 @@ resolved_at | event receival time | The time of pool resolution in epoch millis.
             "type": 1,
             "action_id": "card"
         }
-    }
+    ]
 ```
 
 List all pools opened for predictions for a given game.
@@ -419,7 +419,7 @@ all_betting_pools_for_game | 3535 | Opened betting pools for game have been list
 Parameter | Default | Description
 --------- | ------- | -----------
 game_id | :YOUR_GAME_ID | The game id for which the pools are listed.
-pools_list | {} | A dictionary of pools opened for game, **key** - pool id, **value** - pool details.
+pools_list | [] | A list of pools opened for game.
 
 ## List my open pools for game
 
@@ -441,8 +441,8 @@ pools_list | {} | A dictionary of pools opened for game, **key** - pool id, **va
     "response_header": {},
     "res": 353,
     "game_id": "1b9a4a42-0c8a-46c0-95ee-c1e649e16fce",
-    "pools_list": {
-        "0ec3850f-f862-4baf-bada-73394a68bbdd": {
+    "pools_list": [
+        {
             "start_at": "1421933670629",
             "description": "Next Goal By Team",
             "money_at_stake": 0.0,
@@ -473,7 +473,7 @@ pools_list | {} | A dictionary of pools opened for game, **key** - pool id, **va
             "type": 1,
             "action_id": "goal"
         }
-    }
+    ]
 ```
 
 List all pools opened for predictions for a given game **in which you have not yet placed a prediction**.
@@ -501,7 +501,7 @@ you_open_pools_list_for_game | 353 | Opened betting pools for game in which you 
 Parameter | Default | Description
 --------- | ------- | -----------
 game_id | :YOUR_GAME_ID | The game id for which the pools are listed.
-pools_list | {} | A dictionary of pools opened for game in which you have not placed a prediction, **key** - pool id, **value** - pool details.
+pools_list | [] | A lost of pools opened for game in which you have not placed a prediction.
 
 
 ## List my running pools for game
@@ -524,9 +524,10 @@ pools_list | {} | A dictionary of pools opened for game in which you have not pl
     "response_header": {},
     "res": 354,
     "game_id": "1b9a4a42-0c8a-46c0-95ee-c1e649e16fce",
-    "pools_list": {
-        "6cca4a84-d3e5-4d56-9f5e-acb50ecd5f1d": {
-            "start_at": "1421935990222",
+    "pools_list": [
+        {
+            "pool_id": "6cca4a84-d3e5-4d56-9f5e-acb50ecd5f1d",
+            start_at": "1421935990222",
             "money_at_stake": 1.0,
             "finish_at": "None",
             "is_blocked": false,
@@ -564,7 +565,7 @@ pools_list | {} | A dictionary of pools opened for game in which you have not pl
             "type": 1,
             "action_id": "card"
         }
-    }
+    ]
 ```
 
 List all pools opened for predictions for a given game **in which you have not yet placed a prediction**.
@@ -592,7 +593,7 @@ your_running_pools_for_game | 354 | Opened betting pools for game in which you h
 Parameter | Default | Description
 --------- | ------- | -----------
 game_id | :YOUR_GAME_ID | The game id for which the pools are listed.
-pools_list | {} | A dictionary of pools opened for game in which you have placed a prediction, **key** - pool id, **value** - pool details with the option you backed indicated.
+pools_list | [] | A list of pools opened for game in which you have placed a prediction.
 
 ## List my resolved pools for game
 
@@ -613,8 +614,9 @@ pools_list | {} | A dictionary of pools opened for game in which you have placed
 {
     "response_header": {},
     "res": 355,
-    "pools_list": {
-        "6cca4a84-d3e5-4d56-9f5e-acb50ecd5f1d": {
+    "pools_list": [
+        {
+            "pool_id": 6cca4a84-d3e5-4d56-9f5e-acb50ecd5f1d,
             "total_winnings": 0.0,
             "resolved_at": 1421938211000,
             "start_at": 1421935990000,
@@ -655,7 +657,7 @@ pools_list | {} | A dictionary of pools opened for game in which you have placed
             "target_level": 1,
             "action_id": "goal"
         }
-    },
+    ],
     "game_id": "1b9a4a42-0c8a-46c0-95ee-c1e649e16fce"
 }
 ```
@@ -685,7 +687,7 @@ your_resolved_pools_for_game | 355 | Betting pools for game in which you had pla
 Parameter | Default | Description
 --------- | ------- | -----------
 game_id | :YOUR_GAME_ID | The game id for which the pools are listed.
-pools_list | {} | A dictionary of pools opened for game in which you have placed a prediction and that haved been resolved, **key** - pool id, **value** - pool details with the option you backed indicated.
+pools_list | [] | A list of pools opened for game in which you have placed a prediction and that haved been resolved.
 
 ## Place bet in betting pool
 
