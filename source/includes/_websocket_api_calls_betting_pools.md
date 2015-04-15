@@ -35,7 +35,7 @@ This functionality is also provided automatically by instamrkt - pools are opene
     "op": 385,
     "game_id": "30cee1fa-fb20-41a6-a61c-0e0335abc2a9",
     "description": "Next Goal By Team",
-    "action": "Goal",
+    "action_id": "Goal",
     "targets": "argentina,brazil",
     "pool_type": "1",
     "start_at": "",
@@ -56,7 +56,7 @@ This functionality is also provided automatically by instamrkt - pools are opene
     "pool_id": "30cee1fa-fb20-41a6-a61c-0e0335abc2a9",
     "description": "Next Goal By Team",
     "pool_type": 1,
-    "action": "goal",
+    "action_id": "goal",
     "people_involved": 0,
     "money_at_stake": 0.0,
     "target_level": 1,
@@ -113,7 +113,7 @@ Parameter | Default | Description
 --------- | ------- | -----------
 game_id | null | Game id for which the pool is to be opened.
 description | null | The pool description - question which will be desplayed to users.
-action | null | An action on which the prediction is made. Has to be in a set of actions available for game.
+action_id | null | An action on which the prediction is made. Has to be in a set of actions available for game.
 targets | [] | List of targets on which predictions for actoin can happen. Has to be a subset of targets available for game. Sent as a comma-separated string or an array. Targets have to be of same level. That means "argentina, brazil" is correct, but "argentina, brazil:9" is not. **IMPORTANT**: target 'none' will be added to target list for parimutuel pools.
 pool_type | 1 | 1 - parimutuel event based, 2 - parimutuel time based, 3 - binary event based, 4 - binary time based.
 start_at | now() | Pool opening time (> now()) in epoch millis. If left blank, will be opened as soon as registered by the server. **As of now pools are opened as soon as this call is received by the server.**
@@ -137,7 +137,7 @@ game_id | :YOUR_GAME_ID | The provided game id.
 pool_id | :YOUR_POOL_ID | The server-generated pool id. Necessary for making all pool-related calls.
 description | null | The provided pool description - question which will be desplayed to users.
 pool_type | 1 | Provided pool type: 1 - parimutuel event based, 2 - parimutuel time based, 3 - binary event based, 4 - binary time based.
-action | null | The provided action on which the prediction is made.
+action_id | null | The provided action on which the prediction is made.
 people_involved | 0 | Number of people who already placed predictions in pool. Will be incremented on every prediction.
 money_at_stake | 0.0 | Amount of money already placed predictions in pool. Will be incremented on every prediction.
 target_level | 0 | The computed target level for sent targets. E.g. - 1 for "argentina, brazil", 2 for "argentina:9, brazil:7"
@@ -527,7 +527,7 @@ pools_list | [] | A lost of pools opened for game in which you have not placed a
     "pools_list": [
         {
             "pool_id": "6cca4a84-d3e5-4d56-9f5e-acb50ecd5f1d",
-            start_at": "1421935990222",
+            "start_at": "1421935990222",
             "money_at_stake": 1.0,
             "finish_at": "None",
             "is_blocked": false,
@@ -616,7 +616,7 @@ pools_list | [] | A list of pools opened for game in which you have placed a pre
     "res": 355,
     "pools_list": [
         {
-            "pool_id": 6cca4a84-d3e5-4d56-9f5e-acb50ecd5f1d,
+            "pool_id": "6cca4a84-d3e5-4d56-9f5e-acb50ecd5f1d",
             "total_winnings": 0.0,
             "resolved_at": 1421938211000,
             "start_at": 1421935990000,
@@ -952,7 +952,7 @@ Only users listed as admins for the game are authorized for this call.
     "header": {},
     "op": 3975,
     "game_id": "a183b2da-b561-4bc9-99b5-078e570e0117",
-    "action": "goal",
+    "action_id": "goal",
     "block_at": null
 }
 ```
@@ -965,7 +965,7 @@ Only users listed as admins for the game are authorized for this call.
     "response_header": {},
     "res": 370,
     "game_id": "a183b2da-b561-4bc9-99b5-078e570e0117",
-    "action": "goal",
+    "action_id": "goal",
     "blocked_at": 1421942161542
 }
 ```
@@ -992,7 +992,7 @@ block_betting_for_game_and_action | 3975
 Parameter | Default | Description
 --------- | ------- | -----------
 game_id | null | Game id in which pools are to be blocked.
-action | null | Action for which pools are to be blocked.
+action_id | null | Action for which pools are to be blocked.
 block_at | epoch_millis | Block pools at a later time - epoch_millis (> now()).
 
 ### Response codes
@@ -1009,7 +1009,7 @@ betting_in_pool_blocked | 368 | You have blocked a given pool. This is broadcast
 Parameter | Default | Description
 --------- | ------- | -----------
 game_id | :YOUR_POOL_ID | The game id for game in which pools have been blocked.
-action | null | Action for which pools have been blocked.
+action_id | null | Action for which pools have been blocked.
 blocked_at | epoch_millis | The timestamp indicating when the pools were blocked.
 
 #### Blocked pool
@@ -1085,7 +1085,7 @@ Only users listed as admins for the game are authorized for this call.
     "header": {},
     "op": 3985,
     "game_id": "a183b2da-b561-4bc9-99b5-078e570e0117",
-    "action": "goal",
+    "action_id": "goal",
     "allow_at": null
 }
 ```
@@ -1098,7 +1098,7 @@ Only users listed as admins for the game are authorized for this call.
     "response_header": {},
     "res": 371,
     "game_id": "a183b2da-b561-4bc9-99b5-078e570e0117",
-    "action": "goal",
+    "action_id": "goal",
     "allowed_at": 1421942161542
 }
 ```
@@ -1125,7 +1125,7 @@ allow_betting_for_game_and_action | 3985
 Parameter | Default | Description
 --------- | ------- | -----------
 game_id | null | Game id in which predictions in pools are to be allowed.
-action | null | Action for which predictions in pools are to be allowed.
+action_id | null | Action for which predictions in pools are to be allowed.
 allow_at | epoch_millis | Allow for predcitions in pools at a later time - epoch_millis (> now()).
 
 ### Response codes
@@ -1142,7 +1142,7 @@ betting_in_pool_allowed | 369 | You have allowed for placing predictions in a gi
 Parameter | Default | Description
 --------- | ------- | -----------
 game_id | :YOUR_POOL_ID | The game id for game in which placing predictions in pools has been allowed.
-action | null | Action for which placing predictions in pools has been allowed.
+action_id | null | Action for which placing predictions in pools has been allowed.
 allowed_at | epoch_millis | The timestamp indicating when the placing predictions in pools was allowed.
 
 #### Unblocked pool

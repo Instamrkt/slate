@@ -43,14 +43,16 @@ Only users listed as admins for the source are authorized for this call.
   "res": 340,
   "source_id": "30cee1fa-fb20-41a6-a61c-0e0335abc2a9",
   "game_id": "30cee1fa-fb20-41a6-a61c-0e0335abc2a9",
-  "actions": {
-  	"goal": {
+  "actions": [
+  	{
+      "action_id": "goal",
   		"name": "Goal"
   	},
-  	"offside": {
-  		"name": "Offside"
-  	}
-  },
+  	{
+      "action_id": "offside",
+      "name": "Offside"
+    },
+  ],
   "game_name": "Argentina - Brazil",
   "type": "football",
   "open_at": 1417104170,
@@ -58,40 +60,46 @@ Only users listed as admins for the source are authorized for this call.
   "live_finish_at": 1417106170,
   "close_at": null,
   "hashtag": "#ArgBra",
-  "targets": {
-		"brazil": {
+  "targets": [
+		{
+      "target_id": "brazil",
 			"symbol": "bra",
 			"display_name": "Brazil",
-			"targets": {
-				"7": {
+			"targets": [
+				{
+          "target_id": "brazil:7",
 					"symbol": "7",
 					"display_name": "7",
-					"targets": {}
+					"targets": []
 				}
-			}
-		},
-		"none": {
+			]
+    },
+		{
+      "target_id": "none",
 			"symbol": "non",
 			"display_name": "None",
-			"targets": {}
+			"targets": []
 		},
-		"argentina": {
+		{
+      "target_id": "argentina",
 			"symbol": "arg",
-			"display_name": "argentina",
-			"targets": {
-				"1": {
+			"display_name": "Argentina",
+			"targets": [
+				{
+          "target_id": "argentina:1",
 					"symbol": "1",
 					"display_name": "1",
-					"targets": {}
+					"targets": []
 				},
-				"2": {
+				{
+          "target_id": "argentina:2",
 					"symbol": "2",
 					"display_name": "2",
-					"targets": {}
+					"targets": []
 				}
-			}
+			]
 		}
-	}
+	]
 }
 ```
 
@@ -133,8 +141,8 @@ source_id | :YOUR_SOURCE_ID | Your source id.
 game_id | :YOUR_GAME_ID | The server-generated game id. Necessary for making all game-related calls.
 game_name | :YOUR_GAME_NAME | The game name you provided.
 type | :YOUR_GAME_TYPE | The game type you provided.
-actions | {} | A dictionary containing the actions you listed. **key** - action id, **value** - action details (name).
-targets | {} | A nested, recursive dictionary containing the targets you listed. **key** - target id, **value** - target details (symbol, display name and _sub_ targets). Please look at the example on the right.
+actions | [] | A list containing the actions ({'action_id:', 'name':}) for the game.
+targets | [] | A nested, recursive list containing the targets you listed. (target id, symbol, display name and _sub_ targets). Please look at the example on the right.
 open_at | request receival time | The open game time in epoch millis.
 live_start_at | request receival time | The real life game start time in epoch millis (only informative).
 live_finish_at | null | The real life game finish time in epoch millis (only informative).
@@ -163,7 +171,7 @@ Only users listed as admins for the source are authorized for this call.
   "open_at": 1417104170,
   "live_start_at": 1417105170,
   "live_finish_at": 1417106170,
-  "hashtag": "#ArgBra",
+  "hashtag": "#ArgBra"
 }
 ```
 
@@ -182,7 +190,7 @@ Only users listed as admins for the source are authorized for this call.
   "live_start_at": 1417105170,
   "live_finish_at": 1417106170,
   "close_at": null,
-  "hashtag": "#ArgBra",
+  "hashtag": "#ArgBra"
 }
 ```
 
@@ -298,8 +306,8 @@ source_id | :YOUR_SOURCE_ID | Your source id.
 game_id | :YOUR_GAME_ID | The server-generated game id. Necessary for making all game-related calls.
 game_name | :YOUR_GAME_NAME | The game name you provided.
 type | :YOUR_GAME_TYPE | The game type you provided.
-actions | {} | A dictionary containing the actions you listed. **key** - action id, **value** - action details (name).
-targets | {} | A nested, recursive dictionary containing the targets you listed. **key** - target id, **value** - target details (symbol, display name and _sub_ targets). Please look at the example on the right.
+actions | [] | A list containing the actions ({'action_id:', 'name':}) for the game.
+targets | [] | A nested, recursive list containing the targets you listed. (target id, symbol, display name and _sub_ targets). Please look at the example on the right.
 open_at | request receival time | The open game time in epoch millis.
 live_start_at | request receival time | The real life game start time in epoch millis (only informative).
 live_finish_at | null | The real life game finish time in epoch millis (only informative).
@@ -411,50 +419,58 @@ reason | :YOUR_GAME_ID | The reason why you couldn't become an admin. Sent **onl
             "action_id": "offside"
         }
     },
-    "actions": {
-	  	"goal": {
-	  		"name": "Goal"
-	  	},
-	  	"offside": {
-	  		"name": "Offside"
-	  	}
-	  },
+    "actions": [
+	  	{
+        "action_id": "offside",
+        "name": "Offside"
+      },
+	  	{
+        "action_id": "goal",
+        "name": "Goal"
+      },
+	  ],
     "currency": "DON",
     "type": "4d24a1cb-5465-4ab3-befd-99fb39b7b796",
-    "targets": {
-		"brazil": {
-			"symbol": "bra",
-			"display_name": "Brazil",
-			"targets": {
-				"7": {
-					"symbol": "7",
-					"display_name": "7",
-					"targets": {}
-				}
-			}
-		},
-		"none": {
-			"symbol": "non",
-			"display_name": "None",
-			"targets": {}
-		},
-		"argentina": {
-			"symbol": "arg",
-			"display_name": "argentina",
-			"targets": {
-				"1": {
-					"symbol": "1",
-					"display_name": "1",
-					"targets": {}
-				},
-				"2": {
-					"symbol": "2",
-					"display_name": "2",
-					"targets": {}
-				}
-			}
-		}
-	},
+    "targets": [
+      {
+        "target_id": "brazil",
+        "symbol": "bra",
+        "display_name": "Brazil",
+        "targets": [
+          {
+            "target_id": "brazil:7",
+            "symbol": "7",
+            "display_name": "7",
+            "targets": []
+          }
+        ]
+      },
+      {
+        "target_id": "none",
+        "symbol": "non",
+        "display_name": "None",
+        "targets": []
+      },
+      {
+        "target_id": "argentina",
+        "symbol": "arg",
+        "display_name": "Argentina",
+        "targets": [
+          {
+            "target_id": "argentina:1",
+            "symbol": "1",
+            "display_name": "1",
+            "targets": []
+          },
+          {
+            "target_id": "argentina:2",
+            "symbol": "2",
+            "display_name": "2",
+            "targets": []
+          }
+        ]
+      }
+    ],
     "open_at": 1417104170,
     "live_start_at": 1417105170,
     "live_finish_at": null,
@@ -490,8 +506,8 @@ game_id | :YOUR_GAME_ID | The game id you provided.
 game_name | :YOUR_GAME_NAME | The game name you provided.
 status | null | Current game status. Possible values: "betting_not_yet_active", "pre_game_betting_active", "game_in_progress_betting_active", "game_in_progress_betting_closed", "game_closed".
 type | :YOUR_GAME_TYPE | The uuid of the game type you provided.
-actions | {} | A dictionary containing the actions for the game. **key** - action id, **value** - action details (name).
-targets | {} | A nested, recursive dictionary containing the targets for the game. **key** - target id, **value** - target details (symbol, display name and _sub_ targets). Please look at the example on the right.
+actions | [] | A list containing the actions ({'action_id:', 'name':}) for the game.
+targets | [] | A nested, recursive list containing the targets you listed. (target id, symbol, display name and _sub_ targets). Please look at the example on the right.
 past_events | {} | A dictionary containing all the events that happened in the game so far. **key** - event id, **value** - event details (happened_at, target_id, action_id).
 open_at | request receival time | The open game time in epoch millis.
 live_start_at | request receival time | The real life game start time in epoch millis (only informative).
