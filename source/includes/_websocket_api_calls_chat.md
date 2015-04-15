@@ -21,6 +21,7 @@
   "res": 901,
   "sender": "vinnie",
   "text": "This is a message."
+  "received_at": 1421928724803
 }
 ```
 
@@ -51,3 +52,4 @@ Parameter | Default | Description
 --------- | ------- | -----------
 text | null | Your message text.
 sender | :YOUR_USERNAME | Sender's username. Recommended display: "sender: text".
+received_at | epoch_millis | When the message was received by the server.
