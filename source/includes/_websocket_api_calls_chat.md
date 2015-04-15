@@ -53,3 +53,4 @@ Parameter | Default | Description
 text | null | Your message text.
 sender | :YOUR_USERNAME | Sender's username. Recommended display: "sender: text".
 received_at | epoch_millis | When the message was received by the server.
+channel | null | The specified channel id to which the message is broadcast. Can be e.g. equal to a game_id for a game specific chat.
