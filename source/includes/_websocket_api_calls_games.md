@@ -407,7 +407,17 @@ reason | :YOUR_GAME_ID | The reason why you couldn't become an admin. Sent **onl
     "game_id": "30cee1fa-fb20-41a6-a61c-0e0335abc2a9",
     "name": "Argentina - Brazil",
     "hashtag": "#ArgBra",
-    "past_events": {
+    "game_state": [
+        {
+            "argentina": "1",
+            "action_id": "goal"
+        },
+        {
+            "brazil": "1",
+            "action_id": "offside"
+        }
+    ],
+    "past_events": [
         "106a9151-2997-4c96-bc29-c020da54fa67": {
             "happened_at": 1417180267000,
             "target_id": "argentina:1",
@@ -418,7 +428,7 @@ reason | :YOUR_GAME_ID | The reason why you couldn't become an admin. Sent **onl
             "target_id": "brazil:7",
             "action_id": "offside"
         }
-    },
+    ],
     "actions": [
 	  	{
         "action_id": "offside",
@@ -508,7 +518,8 @@ status | null | Current game status. Possible values: "betting_not_yet_active", 
 type | :YOUR_GAME_TYPE | The uuid of the game type you provided.
 actions | [] | A list containing the actions ({'action_id:', 'name':}) for the game.
 targets | [] | A nested, recursive list containing the targets you listed. (target id, symbol, display name and _sub_ targets). Please look at the example on the right.
-past_events | {} | A dictionary containing all the events that happened in the game so far. **key** - event id, **value** - event details (happened_at, target_id, action_id).
+game_state | [] | A list of objects surving the purpose of displaying game state. Sorted according to a game_type specific action priority list. E.g for game_type _football_ the list looks as follows: ['goal', 'red-card', 'yellow-card', 'corner-kick', 'offside', 'foul', 'shot']. Counts for all other actions, not specified in priority list (e.g throw-ins), come at the end in random order.
+past_events | [] | A list containing all the events that happened in the game so far. Sorted by happened_at, newest (youngest) on top of the list.
 open_at | request receival time | The open game time in epoch millis.
 live_start_at | request receival time | The real life game start time in epoch millis (only informative).
 live_finish_at | null | The real life game finish time in epoch millis (only informative).
