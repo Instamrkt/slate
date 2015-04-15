@@ -2096,18 +2096,28 @@ Only the game source admin is allowed to send request as of now. Authorizing add
     </span><span class="s2">"game_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"30cee1fa-fb20-41a6-a61c-0e0335abc2a9"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Argentina - Brazil"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"hashtag"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#ArgBra"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"past_events"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"106a9151-2997-4c96-bc29-c020da54fa67"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"game_state"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"argentina"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"action_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"goal"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"brazil"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"action_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"offside"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="s2">"past_events"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="s2">"106a9151-2997-4c96-bc29-c020da54fa67"</span><span class="err">:</span><span class="w"> </span><span class="p">{</span><span class="w">
             </span><span class="s2">"happened_at"</span><span class="p">:</span><span class="w"> </span><span class="mi">1417180267000</span><span class="p">,</span><span class="w">
             </span><span class="s2">"target_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"argentina:1"</span><span class="p">,</span><span class="w">
             </span><span class="s2">"action_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"goal"</span><span class="w">
         </span><span class="p">},</span><span class="w">
-        </span><span class="s2">"13bc5390-d86c-45b8-8327-7b313b80103d"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"13bc5390-d86c-45b8-8327-7b313b80103d"</span><span class="err">:</span><span class="w"> </span><span class="p">{</span><span class="w">
             </span><span class="s2">"happened_at"</span><span class="p">:</span><span class="w"> </span><span class="mi">1417180282000</span><span class="p">,</span><span class="w">
             </span><span class="s2">"target_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"brazil:7"</span><span class="p">,</span><span class="w">
             </span><span class="s2">"action_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"offside"</span><span class="w">
         </span><span class="p">}</span><span class="w">
-    </span><span class="p">},</span><span class="w">
+    </span><span class="p">],</span><span class="w">
     </span><span class="s2">"actions"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
         </span><span class="p">{</span><span class="w">
         </span><span class="s2">"action_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"offside"</span><span class="p">,</span><span class="w">
@@ -2246,9 +2256,14 @@ Only the game source admin is allowed to send request as of now. Authorizing add
 <td>A nested, recursive list containing the targets you listed. (target id, symbol, display name and <em>sub</em> targets). Please look at the example on the right.</td>
 </tr>
 <tr>
+<td>game_state</td>
+<td>[]</td>
+<td>A list of objects surving the purpose of displaying game state. Sorted according to a game_type specific action priority list. E.g for game_type <em>football</em> the list looks as follows: [&lsquo;goal&rsquo;, &lsquo;red-card&rsquo;, &lsquo;yellow-card&rsquo;, &lsquo;corner-kick&rsquo;, &lsquo;offside&rsquo;, &lsquo;foul&rsquo;, &lsquo;shot&rsquo;]. Counts for all other actions, not specified in priority list (e.g throw-ins), come at the end in random order.</td>
+</tr>
+<tr>
 <td>past_events</td>
-<td>{}</td>
-<td>A dictionary containing all the events that happened in the game so far. <strong>key</strong> - event id, <strong>value</strong> - event details (happened_at, target_id, action_id).</td>
+<td>[]</td>
+<td>A list containing all the events that happened in the game so far. Sorted by happened_at, newest (youngest) on top of the list.</td>
 </tr>
 <tr>
 <td>open_at</td>
