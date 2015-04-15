@@ -1438,14 +1438,16 @@ Only users listed as admins for the source are authorized for this call.
   </span><span class="s2">"res"</span><span class="p">:</span><span class="w"> </span><span class="mi">340</span><span class="p">,</span><span class="w">
   </span><span class="s2">"source_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"30cee1fa-fb20-41a6-a61c-0e0335abc2a9"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"game_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"30cee1fa-fb20-41a6-a61c-0e0335abc2a9"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"actions"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"goal"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+  </span><span class="s2">"actions"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"action_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"goal"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Goal"</span><span class="w">
     </span><span class="p">},</span><span class="w">
-    </span><span class="s2">"offside"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Offside"</span><span class="w">
-    </span><span class="p">}</span><span class="w">
-  </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"action_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"offside"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Offside"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+  </span><span class="p">],</span><span class="w">
   </span><span class="s2">"game_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Argentina - Brazil"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"football"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"open_at"</span><span class="p">:</span><span class="w"> </span><span class="mi">1417104170</span><span class="p">,</span><span class="w">
@@ -1453,40 +1455,46 @@ Only users listed as admins for the source are authorized for this call.
   </span><span class="s2">"live_finish_at"</span><span class="p">:</span><span class="w"> </span><span class="mi">1417106170</span><span class="p">,</span><span class="w">
   </span><span class="s2">"close_at"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
   </span><span class="s2">"hashtag"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#ArgBra"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"targets"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"brazil"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+  </span><span class="s2">"targets"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"target_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"brazil"</span><span class="p">,</span><span class="w">
             </span><span class="s2">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"bra"</span><span class="p">,</span><span class="w">
             </span><span class="s2">"display_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Brazil"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"targets"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                </span><span class="s2">"7"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"targets"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                </span><span class="p">{</span><span class="w">
+          </span><span class="s2">"target_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"brazil:7"</span><span class="p">,</span><span class="w">
                     </span><span class="s2">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"7"</span><span class="p">,</span><span class="w">
                     </span><span class="s2">"display_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"7"</span><span class="p">,</span><span class="w">
-                    </span><span class="s2">"targets"</span><span class="p">:</span><span class="w"> </span><span class="p">{}</span><span class="w">
+                    </span><span class="s2">"targets"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
                 </span><span class="p">}</span><span class="w">
-            </span><span class="p">}</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-        </span><span class="s2">"none"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="p">]</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"target_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"none"</span><span class="p">,</span><span class="w">
             </span><span class="s2">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"non"</span><span class="p">,</span><span class="w">
             </span><span class="s2">"display_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"None"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"targets"</span><span class="p">:</span><span class="w"> </span><span class="p">{}</span><span class="w">
+            </span><span class="s2">"targets"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
         </span><span class="p">},</span><span class="w">
-        </span><span class="s2">"argentina"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"target_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"argentina"</span><span class="p">,</span><span class="w">
             </span><span class="s2">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"arg"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"display_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"argentina"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"targets"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                </span><span class="s2">"1"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"display_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Argentina"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"targets"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                </span><span class="p">{</span><span class="w">
+          </span><span class="s2">"target_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"argentina:1"</span><span class="p">,</span><span class="w">
                     </span><span class="s2">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
                     </span><span class="s2">"display_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
-                    </span><span class="s2">"targets"</span><span class="p">:</span><span class="w"> </span><span class="p">{}</span><span class="w">
+                    </span><span class="s2">"targets"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
                 </span><span class="p">},</span><span class="w">
-                </span><span class="s2">"2"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="p">{</span><span class="w">
+          </span><span class="s2">"target_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"argentina:2"</span><span class="p">,</span><span class="w">
                     </span><span class="s2">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2"</span><span class="p">,</span><span class="w">
                     </span><span class="s2">"display_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2"</span><span class="p">,</span><span class="w">
-                    </span><span class="s2">"targets"</span><span class="p">:</span><span class="w"> </span><span class="p">{}</span><span class="w">
+                    </span><span class="s2">"targets"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
                 </span><span class="p">}</span><span class="w">
-            </span><span class="p">}</span><span class="w">
+            </span><span class="p">]</span><span class="w">
         </span><span class="p">}</span><span class="w">
-    </span><span class="p">}</span><span class="w">
+    </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
@@ -1611,13 +1619,13 @@ Only users listed as admins for the source are authorized for this call.
 </tr>
 <tr>
 <td>actions</td>
-<td>{}</td>
-<td>A dictionary containing the actions you listed. <strong>key</strong> - action id, <strong>value</strong> - action details (name).</td>
+<td>[]</td>
+<td>A list containing the actions ({&lsquo;action_id:&rsquo;, &lsquo;name&rsquo;:}) for the game.</td>
 </tr>
 <tr>
 <td>targets</td>
-<td>{}</td>
-<td>A nested, recursive dictionary containing the targets you listed. <strong>key</strong> - target id, <strong>value</strong> - target details (symbol, display name and <em>sub</em> targets). Please look at the example on the right.</td>
+<td>[]</td>
+<td>A nested, recursive list containing the targets you listed. (target id, symbol, display name and <em>sub</em> targets). Please look at the example on the right.</td>
 </tr>
 <tr>
 <td>open_at</td>
@@ -1664,8 +1672,8 @@ Only users listed as admins for the source are authorized for this call.
   </span><span class="s2">"open_at"</span><span class="p">:</span><span class="w"> </span><span class="mi">1417104170</span><span class="p">,</span><span class="w">
   </span><span class="s2">"live_start_at"</span><span class="p">:</span><span class="w"> </span><span class="mi">1417105170</span><span class="p">,</span><span class="w">
   </span><span class="s2">"live_finish_at"</span><span class="p">:</span><span class="w"> </span><span class="mi">1417106170</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"hashtag"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#ArgBra"</span><span class="p">,</span><span class="w">
-</span><span class="err">}</span><span class="w">
+  </span><span class="s2">"hashtag"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#ArgBra"</span><span class="w">
+</span><span class="p">}</span><span class="w">
 </span></code></pre>
 
 <blockquote>
@@ -1682,8 +1690,8 @@ Only users listed as admins for the source are authorized for this call.
   </span><span class="s2">"live_start_at"</span><span class="p">:</span><span class="w"> </span><span class="mi">1417105170</span><span class="p">,</span><span class="w">
   </span><span class="s2">"live_finish_at"</span><span class="p">:</span><span class="w"> </span><span class="mi">1417106170</span><span class="p">,</span><span class="w">
   </span><span class="s2">"close_at"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"hashtag"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#ArgBra"</span><span class="p">,</span><span class="w">
-</span><span class="err">}</span><span class="w">
+  </span><span class="s2">"hashtag"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#ArgBra"</span><span class="w">
+</span><span class="p">}</span><span class="w">
 </span></code></pre>
 
 <p>This registers the game in the system as an upcoming game. An <a href="#open-a-game">open game</a> request needs to be sent afterwards to open a game for betting.</p>
@@ -1937,13 +1945,13 @@ Only users listed as admins for the source are authorized for this call.
 </tr>
 <tr>
 <td>actions</td>
-<td>{}</td>
-<td>A dictionary containing the actions you listed. <strong>key</strong> - action id, <strong>value</strong> - action details (name).</td>
+<td>[]</td>
+<td>A list containing the actions ({&lsquo;action_id:&rsquo;, &lsquo;name&rsquo;:}) for the game.</td>
 </tr>
 <tr>
 <td>targets</td>
-<td>{}</td>
-<td>A nested, recursive dictionary containing the targets you listed. <strong>key</strong> - target id, <strong>value</strong> - target details (symbol, display name and <em>sub</em> targets). Please look at the example on the right.</td>
+<td>[]</td>
+<td>A nested, recursive list containing the targets you listed. (target id, symbol, display name and <em>sub</em> targets). Please look at the example on the right.</td>
 </tr>
 <tr>
 <td>open_at</td>
@@ -2100,50 +2108,58 @@ Only the game source admin is allowed to send request as of now. Authorizing add
             </span><span class="s2">"action_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"offside"</span><span class="w">
         </span><span class="p">}</span><span class="w">
     </span><span class="p">},</span><span class="w">
-    </span><span class="s2">"actions"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"goal"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Goal"</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-        </span><span class="s2">"offside"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Offside"</span><span class="w">
-        </span><span class="p">}</span><span class="w">
+    </span><span class="s2">"actions"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"action_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"offside"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Offside"</span><span class="w">
       </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"action_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"goal"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Goal"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="p">],</span><span class="w">
     </span><span class="s2">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"DON"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"4d24a1cb-5465-4ab3-befd-99fb39b7b796"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"targets"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"brazil"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="s2">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"bra"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"display_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Brazil"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"targets"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                </span><span class="s2">"7"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                    </span><span class="s2">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"7"</span><span class="p">,</span><span class="w">
-                    </span><span class="s2">"display_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"7"</span><span class="p">,</span><span class="w">
-                    </span><span class="s2">"targets"</span><span class="p">:</span><span class="w"> </span><span class="p">{}</span><span class="w">
-                </span><span class="p">}</span><span class="w">
-            </span><span class="p">}</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-        </span><span class="s2">"none"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="s2">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"non"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"display_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"None"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"targets"</span><span class="p">:</span><span class="w"> </span><span class="p">{}</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-        </span><span class="s2">"argentina"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="s2">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"arg"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"display_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"argentina"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"targets"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                </span><span class="s2">"1"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                    </span><span class="s2">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
-                    </span><span class="s2">"display_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
-                    </span><span class="s2">"targets"</span><span class="p">:</span><span class="w"> </span><span class="p">{}</span><span class="w">
-                </span><span class="p">},</span><span class="w">
-                </span><span class="s2">"2"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                    </span><span class="s2">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2"</span><span class="p">,</span><span class="w">
-                    </span><span class="s2">"display_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2"</span><span class="p">,</span><span class="w">
-                    </span><span class="s2">"targets"</span><span class="p">:</span><span class="w"> </span><span class="p">{}</span><span class="w">
-                </span><span class="p">}</span><span class="w">
-            </span><span class="p">}</span><span class="w">
-        </span><span class="p">}</span><span class="w">
-    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"targets"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"target_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"brazil"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"bra"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"display_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Brazil"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"targets"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"target_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"brazil:7"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"7"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"display_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"7"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"targets"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
+          </span><span class="p">}</span><span class="w">
+        </span><span class="p">]</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"target_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"none"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"non"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"display_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"None"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"targets"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"target_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"argentina"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"arg"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"display_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Argentina"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"targets"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"target_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"argentina:1"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"display_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"targets"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
+          </span><span class="p">},</span><span class="w">
+          </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"target_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"argentina:2"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"display_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"targets"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
+          </span><span class="p">}</span><span class="w">
+        </span><span class="p">]</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">],</span><span class="w">
     </span><span class="s2">"open_at"</span><span class="p">:</span><span class="w"> </span><span class="mi">1417104170</span><span class="p">,</span><span class="w">
     </span><span class="s2">"live_start_at"</span><span class="p">:</span><span class="w"> </span><span class="mi">1417105170</span><span class="p">,</span><span class="w">
     </span><span class="s2">"live_finish_at"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
@@ -2221,13 +2237,13 @@ Only the game source admin is allowed to send request as of now. Authorizing add
 </tr>
 <tr>
 <td>actions</td>
-<td>{}</td>
-<td>A dictionary containing the actions for the game. <strong>key</strong> - action id, <strong>value</strong> - action details (name).</td>
+<td>[]</td>
+<td>A list containing the actions ({&lsquo;action_id:&rsquo;, &lsquo;name&rsquo;:}) for the game.</td>
 </tr>
 <tr>
 <td>targets</td>
-<td>{}</td>
-<td>A nested, recursive dictionary containing the targets for the game. <strong>key</strong> - target id, <strong>value</strong> - target details (symbol, display name and <em>sub</em> targets). Please look at the example on the right.</td>
+<td>[]</td>
+<td>A nested, recursive list containing the targets you listed. (target id, symbol, display name and <em>sub</em> targets). Please look at the example on the right.</td>
 </tr>
 <tr>
 <td>past_events</td>
@@ -2827,7 +2843,7 @@ This functionality is also provided automatically by instamrkt - pools are opene
     </span><span class="s2">"op"</span><span class="p">:</span><span class="w"> </span><span class="mi">385</span><span class="p">,</span><span class="w">
     </span><span class="s2">"game_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"30cee1fa-fb20-41a6-a61c-0e0335abc2a9"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Next Goal By Team"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Goal"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"action_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Goal"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"targets"</span><span class="p">:</span><span class="w"> </span><span class="s2">"argentina,brazil"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"pool_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"start_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
@@ -2847,7 +2863,7 @@ This functionality is also provided automatically by instamrkt - pools are opene
     </span><span class="s2">"pool_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"30cee1fa-fb20-41a6-a61c-0e0335abc2a9"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Next Goal By Team"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"pool_type"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"goal"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"action_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"goal"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"people_involved"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
     </span><span class="s2">"money_at_stake"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w">
     </span><span class="s2">"target_level"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
@@ -2922,7 +2938,7 @@ This functionality is also provided automatically by instamrkt - pools are opene
 <td>The pool description - question which will be desplayed to users.</td>
 </tr>
 <tr>
-<td>action</td>
+<td>action_id</td>
 <td>null</td>
 <td>An action on which the prediction is made. Has to be in a set of actions available for game.</td>
 </tr>
@@ -3010,7 +3026,7 @@ This functionality is also provided automatically by instamrkt - pools are opene
 <td>Provided pool type: 1 - parimutuel event based, 2 - parimutuel time based, 3 - binary event based, 4 - binary time based.</td>
 </tr>
 <tr>
-<td>action</td>
+<td>action_id</td>
 <td>null</td>
 <td>The provided action on which the prediction is made.</td>
 </tr>
@@ -3652,44 +3668,44 @@ This functionality is also provided automatically by instamrkt - pools are opene
     </span><span class="s2">"pools_list"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
         </span><span class="p">{</span><span class="w">
             </span><span class="s2">"pool_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"6cca4a84-d3e5-4d56-9f5e-acb50ecd5f1d"</span><span class="p">,</span><span class="w">
-            </span><span class="err">start_at</span><span class="s2">": "</span><span class="err">1421935990222</span><span class="s2">",
-            "</span><span class="err">money_at_stake</span><span class="s2">": 1.0,
-            "</span><span class="err">finish_at</span><span class="s2">": "</span><span class="err">None</span><span class="s2">",
-            "</span><span class="err">is_blocked</span><span class="s2">": false,
-            "</span><span class="err">is_hot</span><span class="s2">": false,
-            "</span><span class="err">distributions</span><span class="s2">": {
-                "</span><span class="err">brazil</span><span class="s2">": {
-                    "</span><span class="err">bets</span><span class="s2">": {
-                        "</span><span class="err">c34bcc05-58ea-4294-9310-9f8cbd121e29</span><span class="s2">": {
-                            "</span><span class="err">placed_at</span><span class="s2">": 1421937458,
-                            "</span><span class="err">amount</span><span class="s2">": 1.0,
-                            "</span><span class="err">user_id</span><span class="s2">": 1
-                        }
-                    },
-                    "</span><span class="err">multiplier</span><span class="s2">": 1.0,
-                    "</span><span class="err">amount_total</span><span class="s2">": 1.0
-                },
-                "</span><span class="err">none</span><span class="s2">": {
-                    "</span><span class="err">bets</span><span class="s2">": {},
-                    "</span><span class="err">multiplier</span><span class="s2">": 1,
-                    "</span><span class="err">amount_total</span><span class="s2">": 0.0
-                },
-                "</span><span class="err">netherlands</span><span class="s2">": {
-                    "</span><span class="err">bets</span><span class="s2">": {},
-                    "</span><span class="err">multiplier</span><span class="s2">": 1,
-                    "</span><span class="err">amount_total</span><span class="s2">": 0.0
-                }
-            },
-            "</span><span class="err">name</span><span class="s2">": "</span><span class="err">Next</span><span class="w"> </span><span class="err">Card</span><span class="w"> </span><span class="err">By</span><span class="w"> </span><span class="err">Team</span><span class="s2">",
-            "</span><span class="err">target_level</span><span class="s2">": 1,
-            "</span><span class="err">people_involved</span><span class="s2">": 1,
-            "</span><span class="err">user_backed</span><span class="s2">": {
-                "</span><span class="err">brazil</span><span class="s2">": 1.0
-            },
-            "</span><span class="err">stop_accepting_bets_at</span><span class="s2">": "</span><span class="err">None</span><span class="s2">",
-            "</span><span class="err">type</span><span class="s2">": 1,
-            "</span><span class="err">action_id</span><span class="s2">": "</span><span class="err">card"</span><span class="w">
-        </span><span class="err">}</span><span class="w">
+            </span><span class="s2">"start_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1421935990222"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"money_at_stake"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"finish_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"None"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"is_blocked"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"is_hot"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"distributions"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="s2">"brazil"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                    </span><span class="s2">"bets"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                        </span><span class="s2">"c34bcc05-58ea-4294-9310-9f8cbd121e29"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                            </span><span class="s2">"placed_at"</span><span class="p">:</span><span class="w"> </span><span class="mi">1421937458</span><span class="p">,</span><span class="w">
+                            </span><span class="s2">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w">
+                            </span><span class="s2">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
+                        </span><span class="p">}</span><span class="w">
+                    </span><span class="p">},</span><span class="w">
+                    </span><span class="s2">"multiplier"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"amount_total"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.0</span><span class="w">
+                </span><span class="p">},</span><span class="w">
+                </span><span class="s2">"none"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                    </span><span class="s2">"bets"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
+                    </span><span class="s2">"multiplier"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"amount_total"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="w">
+                </span><span class="p">},</span><span class="w">
+                </span><span class="s2">"netherlands"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                    </span><span class="s2">"bets"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
+                    </span><span class="s2">"multiplier"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"amount_total"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="w">
+                </span><span class="p">}</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Next Card By Team"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"target_level"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"people_involved"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"user_backed"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="s2">"brazil"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.0</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="s2">"stop_accepting_bets_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"None"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"action_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"card"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
     </span><span class="p">]</span><span class="w">
 </span></code></pre>
 
@@ -3772,7 +3788,7 @@ This functionality is also provided automatically by instamrkt - pools are opene
     </span><span class="s2">"res"</span><span class="p">:</span><span class="w"> </span><span class="mi">355</span><span class="p">,</span><span class="w">
     </span><span class="s2">"pools_list"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
         </span><span class="p">{</span><span class="w">
-            </span><span class="s2">"pool_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">6</span><span class="err">cca</span><span class="mi">4</span><span class="err">a</span><span class="mi">84</span><span class="err">-d</span><span class="mi">3</span><span class="err">e</span><span class="mi">5-4</span><span class="err">d</span><span class="mi">56-9</span><span class="err">f</span><span class="mi">5</span><span class="err">e-acb</span><span class="mi">50</span><span class="err">ecd</span><span class="mi">5</span><span class="err">f</span><span class="mi">1</span><span class="err">d</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"pool_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"6cca4a84-d3e5-4d56-9f5e-acb50ecd5f1d"</span><span class="p">,</span><span class="w">
             </span><span class="s2">"total_winnings"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w">
             </span><span class="s2">"resolved_at"</span><span class="p">:</span><span class="w"> </span><span class="mi">1421938211000</span><span class="p">,</span><span class="w">
             </span><span class="s2">"start_at"</span><span class="p">:</span><span class="w"> </span><span class="mi">1421935990000</span><span class="p">,</span><span class="w">
@@ -4252,7 +4268,7 @@ Only users listed as admins for the game are authorized for this call.
     </span><span class="s2">"header"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
     </span><span class="s2">"op"</span><span class="p">:</span><span class="w"> </span><span class="mi">3975</span><span class="p">,</span><span class="w">
     </span><span class="s2">"game_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"a183b2da-b561-4bc9-99b5-078e570e0117"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"goal"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"action_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"goal"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"block_at"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
@@ -4264,7 +4280,7 @@ Only users listed as admins for the game are authorized for this call.
     </span><span class="s2">"response_header"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
     </span><span class="s2">"res"</span><span class="p">:</span><span class="w"> </span><span class="mi">370</span><span class="p">,</span><span class="w">
     </span><span class="s2">"game_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"a183b2da-b561-4bc9-99b5-078e570e0117"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"goal"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"action_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"goal"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"blocked_at"</span><span class="p">:</span><span class="w"> </span><span class="mi">1421942161542</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
@@ -4303,7 +4319,7 @@ Only users listed as admins for the game are authorized for this call.
 <td>Game id in which pools are to be blocked.</td>
 </tr>
 <tr>
-<td>action</td>
+<td>action_id</td>
 <td>null</td>
 <td>Action for which pools are to be blocked.</td>
 </tr>
@@ -4346,7 +4362,7 @@ Only users listed as admins for the game are authorized for this call.
 <td>The game id for game in which pools have been blocked.</td>
 </tr>
 <tr>
-<td>action</td>
+<td>action_id</td>
 <td>null</td>
 <td>Action for which pools have been blocked.</td>
 </tr>
@@ -4462,7 +4478,7 @@ Only users listed as admins for the game are authorized for this call.
     </span><span class="s2">"header"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
     </span><span class="s2">"op"</span><span class="p">:</span><span class="w"> </span><span class="mi">3985</span><span class="p">,</span><span class="w">
     </span><span class="s2">"game_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"a183b2da-b561-4bc9-99b5-078e570e0117"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"goal"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"action_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"goal"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"allow_at"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
@@ -4474,7 +4490,7 @@ Only users listed as admins for the game are authorized for this call.
     </span><span class="s2">"response_header"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
     </span><span class="s2">"res"</span><span class="p">:</span><span class="w"> </span><span class="mi">371</span><span class="p">,</span><span class="w">
     </span><span class="s2">"game_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"a183b2da-b561-4bc9-99b5-078e570e0117"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"goal"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"action_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"goal"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"allowed_at"</span><span class="p">:</span><span class="w"> </span><span class="mi">1421942161542</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
@@ -4513,7 +4529,7 @@ Only users listed as admins for the game are authorized for this call.
 <td>Game id in which predictions in pools are to be allowed.</td>
 </tr>
 <tr>
-<td>action</td>
+<td>action_id</td>
 <td>null</td>
 <td>Action for which predictions in pools are to be allowed.</td>
 </tr>
@@ -4556,7 +4572,7 @@ Only users listed as admins for the game are authorized for this call.
 <td>The game id for game in which placing predictions in pools has been allowed.</td>
 </tr>
 <tr>
-<td>action</td>
+<td>action_id</td>
 <td>null</td>
 <td>Action for which placing predictions in pools has been allowed.</td>
 </tr>
@@ -5088,57 +5104,9 @@ This is an <strong>unsolicited</strong> server message, pushed at the user throu
 </blockquote>
 <pre><code class="highlight json"><span class="p">{</span><span class="w">
   </span><span class="s2">"response_header"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
-  </span><span class="s2">"res"</span><span class="p">:</span><span class="w"> </span><span class="mi">340</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"source_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"30cee1fa-fb20-41a6-a61c-0e0335abc2a9"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"game_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"30cee1fa-fb20-41a6-a61c-0e0335abc2a9"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"actions"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"goal"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Goal"</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="s2">"offside"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Offside"</span><span class="w">
-    </span><span class="p">}</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="s2">"game_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Argentina - Brazil"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"football"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"open_at"</span><span class="p">:</span><span class="w"> </span><span class="mi">1417104170</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"live_start_at"</span><span class="p">:</span><span class="w"> </span><span class="mi">1417105170</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"live_finish_at"</span><span class="p">:</span><span class="w"> </span><span class="mi">1417106170</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"close_at"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"targets"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"brazil"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="s2">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"bra"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"display_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Brazil"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"targets"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                </span><span class="s2">"7"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                    </span><span class="s2">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"7"</span><span class="p">,</span><span class="w">
-                    </span><span class="s2">"display_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"7"</span><span class="p">,</span><span class="w">
-                    </span><span class="s2">"targets"</span><span class="p">:</span><span class="w"> </span><span class="p">{}</span><span class="w">
-                </span><span class="p">}</span><span class="w">
-            </span><span class="p">}</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-        </span><span class="s2">"none"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="s2">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"non"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"display_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"None"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"targets"</span><span class="p">:</span><span class="w"> </span><span class="p">{}</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-        </span><span class="s2">"argentina"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="s2">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"arg"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"display_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"argentina"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"targets"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                </span><span class="s2">"1"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                    </span><span class="s2">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
-                    </span><span class="s2">"display_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
-                    </span><span class="s2">"targets"</span><span class="p">:</span><span class="w"> </span><span class="p">{}</span><span class="w">
-                </span><span class="p">},</span><span class="w">
-                </span><span class="s2">"2"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                    </span><span class="s2">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2"</span><span class="p">,</span><span class="w">
-                    </span><span class="s2">"display_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2"</span><span class="p">,</span><span class="w">
-                    </span><span class="s2">"targets"</span><span class="p">:</span><span class="w"> </span><span class="p">{}</span><span class="w">
-                </span><span class="p">}</span><span class="w">
-            </span><span class="p">}</span><span class="w">
-        </span><span class="p">}</span><span class="w">
-    </span><span class="p">}</span><span class="w">
+  </span><span class="s2">"res"</span><span class="p">:</span><span class="w"> </span><span class="mi">901</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"sender"</span><span class="p">:</span><span class="w"> </span><span class="s2">"vinnie"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"text"</span><span class="p">:</span><span class="w"> </span><span class="s2">"This is a message."</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
