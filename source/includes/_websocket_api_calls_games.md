@@ -418,12 +418,14 @@ reason | :YOUR_GAME_ID | The reason why you couldn't become an admin. Sent **onl
         }
     ],
     "past_events": [
-        "106a9151-2997-4c96-bc29-c020da54fa67": {
+        {
+            "event_id": "106a9151-2997-4c96-bc29-c020da54fa67",
             "happened_at": 1417180267000,
             "target_id": "argentina:1",
             "action_id": "goal"
         },
-        "13bc5390-d86c-45b8-8327-7b313b80103d": {
+        {
+            "event_id": "13bc5390-d86c-45b8-8327-7b313b80103d",
             "happened_at": 1417180282000,
             "target_id": "brazil:7",
             "action_id": "offside"
