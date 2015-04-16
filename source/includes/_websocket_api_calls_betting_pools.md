@@ -755,7 +755,7 @@ pools_list | [] | A list of pools opened for game in which you have placed a pre
     "response_header": {},
     "res": 356,
     "pool_id": "6cca4a84-d3e5-4d56-9f5e-acb50ecd5f1d",
-    "bet_id": ""c34bcc05-58ea-4294-9310-9f8cbd121e29"",
+    "bet_id": "c34bcc05-58ea-4294-9310-9f8cbd121e29",
     "amount": "1"
 }
 ```
@@ -862,7 +862,7 @@ Described in <a href="#get-betting-pool-distribution">this section</a>.
     "response_header": {},
     "res": 356,
     "pool_id": "6cca4a84-d3e5-4d56-9f5e-acb50ecd5f1d",
-    "bet_id": ""c34bcc05-58ea-4294-9310-9f8cbd121e29"",
+    "bet_id": "c34bcc05-58ea-4294-9310-9f8cbd121e29",
     "amount": "1"
 }
 ```
