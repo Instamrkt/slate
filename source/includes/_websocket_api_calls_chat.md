@@ -20,8 +20,9 @@
   "response_header": {},
   "res": 901,
   "sender": "vinnie",
-  "text": "This is a message."
-  "received_at": 1421928724803
+  "text": "This is a message.",
+  "received_at": 1421928724803,
+  "channel": "69c623bf-046a-43b6-8de5-a0b3ae9b142e"
 }
 ```
 
