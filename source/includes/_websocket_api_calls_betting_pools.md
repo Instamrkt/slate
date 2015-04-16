@@ -55,42 +55,39 @@ This functionality is also provided automatically by instamrkt - pools are opene
     "game_id": "30cee1fa-fb20-41a6-a61c-0e0335abc2a9",
     "pool_id": "30cee1fa-fb20-41a6-a61c-0e0335abc2a9",
     "description": "Next Goal By Team",
-    "pool_type": 1,
+    "type": 1,
     "action_id": "goal",
     "people_involved": 0,
     "money_at_stake": 0.0,
     "target_level": 1,
     "is_blocked": false,
     "is_hot": false,
-    "targets": {
-        "brazil": {
+    "distribution": [
+        {
+            "target_id": "brazil",
             "backing_people": 0,
             "to_win_if_backed": 1.0,
-            "display_name": {
-                "symbol": "bra",
-                "display_name": "brazil"
-            },
-            "backing_money": 0.0
+            "display_name": "brazil",
+            "backing_money": 0.0,
+            "bets": []
         },
-        "none": {
+        {
+            "target_id": "none",
             "backing_people": 0,
             "to_win_if_backed": 1.0,
-            "display_name": {
-                "symbol": "non",
-                "display_name": "none"
-            },
-            "backing_money": 0.0
+            "display_name": "brazil",
+            "backing_money": 0.0,
+            "bets": []
         },
-        "argentina": {
+        {
+            "target_id": "argentina",
             "backing_people": 0,
             "to_win_if_backed": 1.0,
-            "display_name": {
-                "symbol": "arg",
-                "display_name": "argentina"
-            },
-            "backing_money": 0.0
+            "display_name": "brazil",
+            "backing_money": 0.0,
+            "bets": []
         }
-    },
+    ],
     "start_at": 1421928724803,
     "finish_at": null,
     "stop_accepting_bets_at": null
@@ -115,7 +112,7 @@ game_id | null | Game id for which the pool is to be opened.
 description | null | The pool description - question which will be desplayed to users.
 action_id | null | An action on which the prediction is made. Has to be in a set of actions available for game.
 targets | [] | List of targets on which predictions for actoin can happen. Has to be a subset of targets available for game. Sent as a comma-separated string or an array. Targets have to be of same level. That means "argentina, brazil" is correct, but "argentina, brazil:9" is not. **IMPORTANT**: target 'none' will be added to target list for parimutuel pools.
-pool_type | 1 | 1 - parimutuel event based, 2 - parimutuel time based, 3 - binary event based, 4 - binary time based.
+type | 1 | 1 - parimutuel event based, 2 - parimutuel time based, 3 - binary event based, 4 - binary time based.
 start_at | now() | Pool opening time (> now()) in epoch millis. If left blank, will be opened as soon as registered by the server. **As of now pools are opened as soon as this call is received by the server.**
 finish_at | null | Pool closing time (> open_at) in epoch millis. This will close the pool at a given time. **Warning**: this will automatically resolve th pool to **none**.
 is_blocked | false | Is betting in pool now blocked.
@@ -141,7 +138,7 @@ action_id | null | The provided action on which the prediction is made.
 people_involved | 0 | Number of people who already placed predictions in pool. Will be incremented on every prediction.
 money_at_stake | 0.0 | Amount of money already placed predictions in pool. Will be incremented on every prediction.
 target_level | 0 | The computed target level for sent targets. E.g. - 1 for "argentina, brazil", 2 for "argentina:9, brazil:7"
-targets | {} | A nested, recursive dictionary containing the targets you listed. **key** - target id, **value** - target details (symbol, display name and _sub_ targets). Please look at the example on the right.
+distribution | [] | A list of current predictions, each an object with predictions for a given target (containing a list of all bets, with details, current target multiplier, display name and total amount backing the target).
 start_at | request receival time | The open pool time in epoch millis.
 live_start_at | request receival time | The real life game start time in epoch millis (only informative).
 finish_at | null | The passed pool closing time. (Relevant only for pools of type 2 and 4).
@@ -336,23 +333,32 @@ resolved_at | event receival time | The time of pool resolution in epoch millis.
             "finish_at": "None",
             "is_blocked": false,
             "is_hot": false,
-            "distributions": {
-                "brazil": {
-                    "bets": {},
-                    "multiplier": 1,
-                    "amount_total": 0.0
+            "distribution": [
+                {
+                    "target_id": "brazil",
+                    "backing_people": 0,
+                    "to_win_if_backed": 1.0,
+                    "display_name": "brazil",
+                    "backing_money": 0.0,
+                    "bets": []
                 },
-                "none": {
-                    "bets": {},
-                    "multiplier": 1,
-                    "amount_total": 0.0
+                {
+                    "target_id": "none",
+                    "backing_people": 0,
+                    "to_win_if_backed": 1.0,
+                    "display_name": "brazil",
+                    "backing_money": 0.0,
+                    "bets": []
                 },
-                "netherlands": {
-                    "bets": {},
-                    "multiplier": 1,
-                    "amount_total": 0.0
+                {
+                    "target_id": "netherlands",
+                    "backing_people": 0,
+                    "to_win_if_backed": 1.0,
+                    "display_name": "brazil",
+                    "backing_money": 0.0,
+                    "bets": []
                 }
-            },
+            ],
             "target_level": 1,
             "people_involved": 0,
             "pool_id": "0ec3850f-f862-4baf-bada-73394a68bbdd",
@@ -367,23 +373,32 @@ resolved_at | event receival time | The time of pool resolution in epoch millis.
             "finish_at": "None",
             "is_blocked": false,
             "is_hot": false,
-            "distributions": {
-                "brazil": {
-                    "bets": {},
-                    "multiplier": 1,
-                    "amount_total": 0.0
+            "distribution": [
+                {
+                    "target_id": "brazil",
+                    "backing_people": 0,
+                    "to_win_if_backed": 1.0,
+                    "display_name": "brazil",
+                    "backing_money": 0.0,
+                    "bets": []
                 },
-                "none": {
-                    "bets": {},
-                    "multiplier": 1,
-                    "amount_total": 0.0
+                {
+                    "target_id": "none",
+                    "backing_people": 0,
+                    "to_win_if_backed": 1.0,
+                    "display_name": "brazil",
+                    "backing_money": 0.0,
+                    "bets": []
                 },
-                "netherlands": {
-                    "bets": {},
-                    "multiplier": 1,
-                    "amount_total": 0.0
+                {
+                    "target_id": "netherlands",
+                    "backing_people": 0,
+                    "to_win_if_backed": 1.0,
+                    "display_name": "brazil",
+                    "backing_money": 0.0,
+                    "bets": []
                 }
-            },
+            ],
             "target_level": 1,
             "people_involved": 0,
             "pool_id": "6cca4a84-d3e5-4d56-9f5e-acb50ecd5f1d",
@@ -449,23 +464,32 @@ pools_list | [] | A list of pools opened for game.
             "finish_at": "None",
             "is_blocked": false,
             "is_hot": false,
-            "distributions": {
-                "brazil": {
-                    "bets": {},
-                    "multiplier": 1,
-                    "amount_total": 0.0
+            "distribution": [
+                {
+                    "target_id": "brazil",
+                    "backing_people": 0,
+                    "to_win_if_backed": 1.0,
+                    "display_name": "brazil",
+                    "backing_money": 0.0,
+                    "bets": []
                 },
-                "none": {
-                    "bets": {},
-                    "multiplier": 1,
-                    "amount_total": 0.0
+                {
+                    "target_id": "none",
+                    "backing_people": 0,
+                    "to_win_if_backed": 1.0,
+                    "display_name": "brazil",
+                    "backing_money": 0.0,
+                    "bets": []
                 },
-                "netherlands": {
-                    "bets": {},
-                    "multiplier": 1,
-                    "amount_total": 0.0
+                {
+                    "target_id": "netherlands",
+                    "backing_people": 0,
+                    "to_win_if_backed": 1.0,
+                    "display_name": "brazil",
+                    "backing_money": 0.0,
+                    "bets": []
                 }
-            },
+            ],
             "target_level": 1,
             "people_involved": 0,
             "pool_id": "0ec3850f-f862-4baf-bada-73394a68bbdd",
@@ -532,29 +556,39 @@ pools_list | [] | A lost of pools opened for game in which you have not placed a
             "finish_at": "None",
             "is_blocked": false,
             "is_hot": false,
-            "distributions": {
-                "brazil": {
-                    "bets": {
-                        "c34bcc05-58ea-4294-9310-9f8cbd121e29": {
+            "distribution": [
+                {
+                    "target_id": "brazil",
+                    "backing_people": 0,
+                    "to_win_if_backed": 1.0,
+                    "display_name": "brazil",
+                    "backing_money": 1.0,
+                    "bets": [
+                        {
+                            "bet_id": "c34bcc05-58ea-4294-9310-9f8cbd121e29",
                             "placed_at": 1421937458,
                             "amount": 1.0,
                             "user_id": 1
                         }
-                    },
-                    "multiplier": 1.0,
-                    "amount_total": 1.0
+                    ]
                 },
-                "none": {
-                    "bets": {},
-                    "multiplier": 1,
-                    "amount_total": 0.0
+                {
+                    "target_id": "none",
+                    "backing_people": 0,
+                    "to_win_if_backed": 1.0,
+                    "display_name": "brazil",
+                    "backing_money": 0.0,
+                    "bets": []
                 },
-                "netherlands": {
-                    "bets": {},
-                    "multiplier": 1,
-                    "amount_total": 0.0
+                {
+                    "target_id": "netherlands",
+                    "backing_people": 0,
+                    "to_win_if_backed": 1.0,
+                    "display_name": "brazil",
+                    "backing_money": 0.0,
+                    "bets": []
                 }
-            },
+            ],
             "name": "Next Card By Team",
             "target_level": 1,
             "people_involved": 1,
@@ -622,29 +656,39 @@ pools_list | [] | A list of pools opened for game in which you have placed a pre
             "start_at": 1421935990000,
             "description": "Next Goal By Team",
             "winning_target": "brazil",
-            "distributions": {
-                "brazil": {
-                    "bets": {
-                        "c34bcc05-58ea-4294-9310-9f8cbd121e29": {
-                            "placed_at": 1421937458000,
+            "distribution":[
+                {
+                    "target_id": "brazil",
+                    "backing_people": 0,
+                    "to_win_if_backed": 1.0,
+                    "display_name": "brazil",
+                    "backing_money": 1.0,
+                    "bets": [
+                        {
+                            "bet_id": "c34bcc05-58ea-4294-9310-9f8cbd121e29",
+                            "placed_at": 1421937458,
                             "amount": 1.0,
                             "user_id": 1
                         }
-                    },
-                    "multiplier": 1.0,
-                    "amount_total": 1.0
+                    ]
                 },
-                "none": {
-                    "bets": {},
-                    "multiplier": 0,
-                    "amount_total": 0.0
+                {
+                    "target_id": "none",
+                    "backing_people": 0,
+                    "to_win_if_backed": 1.0,
+                    "display_name": "brazil",
+                    "backing_money": 0.0,
+                    "bets": []
                 },
-                "netherlands": {
-                    "bets": {},
-                    "multiplier": 0,
-                    "amount_total": 0.0
+                {
+                    "target_id": "netherlands",
+                    "backing_people": 0,
+                    "to_win_if_backed": 1.0,
+                    "display_name": "brazil",
+                    "backing_money": 0.0,
+                    "bets": []
                 }
-            },
+            ],
             "people_involved": 1,
             "pool_type": 1,
             "user_backed": {
@@ -711,7 +755,7 @@ pools_list | [] | A list of pools opened for game in which you have placed a pre
     "response_header": {},
     "res": 356,
     "pool_id": "6cca4a84-d3e5-4d56-9f5e-acb50ecd5f1d",
-    "bet_id": "c34bcc05-58ea-4294-9310-9f8cbd121e29",
+    "bet_id": ""c34bcc05-58ea-4294-9310-9f8cbd121e29"",
     "amount": "1"
 }
 ```
@@ -722,32 +766,39 @@ pools_list | [] | A list of pools opened for game in which you have placed a pre
     "res": 360,
     "pool_id": "6cca4a84-d3e5-4d56-9f5e-acb50ecd5f1d",
     "target_level": 1,
-    "distribution": {
-        "brazil": {
-            "bets": {
-                "c34bcc05-58ea-4294-9310-9f8cbd121e29": {
+    "distribution": [
+        {
+            "target_id": "brazil",
+            "backing_people": 0,
+            "to_win_if_backed": 1.0,
+            "display_name": "brazil",
+            "backing_money": 1.0,
+            "bets": [
+                {
+                    "bet_id": "c34bcc05-58ea-4294-9310-9f8cbd121e29",
                     "placed_at": 1421937458,
                     "amount": 1.0,
                     "user_id": 1
                 }
-            },
-            "multiplier": 1.0,
+            ]
+        },
+        {
+            "target_id": "none",
+            "backing_people": 0,
+            "to_win_if_backed": 1.0,
             "display_name": "brazil",
-            "amount_total": 1.0
+            "backing_money": 0.0,
+            "bets": []
         },
-        "none": {
-            "bets": {},
-            "multiplier": 1.0,
-            "display_name": "none",
-            "amount_total": 0.0
-        },
-        "netherlands": {
-            "bets": {},
-            "multiplier": 1.0,
-            "display_name": "netherlands",
-            "amount_total": 0.0
+        {
+            "target_id": "netherlands",
+            "backing_people": 0,
+            "to_win_if_backed": 1.0,
+            "display_name": "brazil",
+            "backing_money": 0.0,
+            "bets": []
         }
-    }
+    ]
 }
 ```
 
@@ -811,7 +862,7 @@ Described in <a href="#get-betting-pool-distribution">this section</a>.
     "response_header": {},
     "res": 356,
     "pool_id": "6cca4a84-d3e5-4d56-9f5e-acb50ecd5f1d",
-    "bet_id": "c34bcc05-58ea-4294-9310-9f8cbd121e29",
+    "bet_id": ""c34bcc05-58ea-4294-9310-9f8cbd121e29"",
     "amount": "1"
 }
 ```
@@ -822,32 +873,39 @@ Described in <a href="#get-betting-pool-distribution">this section</a>.
     "res": 360,
     "pool_id": "6cca4a84-d3e5-4d56-9f5e-acb50ecd5f1d",
     "target_level": 1,
-    "distribution": {
-        "brazil": {
-            "bets": {
-                "c34bcc05-58ea-4294-9310-9f8cbd121e29": {
+    "distribution": [
+        {
+            "target_id": "brazil",
+            "backing_people": 0,
+            "to_win_if_backed": 1.0,
+            "display_name": "brazil",
+            "backing_money": 1.0,
+            "bets": [
+                {
+                    "bet_id": "c34bcc05-58ea-4294-9310-9f8cbd121e29",
                     "placed_at": 1421937458,
                     "amount": 1.0,
                     "user_id": 1
                 }
-            },
-            "multiplier": 1.0,
+            ]
+        },
+        {
+            "target_id": "none",
+            "backing_people": 0,
+            "to_win_if_backed": 1.0,
             "display_name": "brazil",
-            "amount_total": 1.0
+            "backing_money": 0.0,
+            "bets": []
         },
-        "none": {
-            "bets": {},
-            "multiplier": 1.0,
-            "display_name": "none",
-            "amount_total": 0.0
-        },
-        "netherlands": {
-            "bets": {},
-            "multiplier": 1.0,
-            "display_name": "netherlands",
-            "amount_total": 0.0
+        {
+            "target_id": "netherlands",
+            "backing_people": 0,
+            "to_win_if_backed": 1.0,
+            "display_name": "brazil",
+            "backing_money": 0.0,
+            "bets": []
         }
-    }
+    ]
 }
 ```
 
@@ -879,7 +937,7 @@ Parameter | Default | Description
 --------- | ------- | -----------
 pool_id | :YOUR_POOL_ID | The pool id for which the distribution was requested.
 target_level | 0 | The computed target level for sent targets. E.g. - 1 for "argentina, brazil", 2 for "argentina:9, brazil:7"
-distribution | {} | A distribution of current predictions. **key** - target_id, **value** - a dictionary will predictions for a given target (containing a list of all bets, with details, current target multiplier, display name and total amount backing the target).
+distribution | [] | A list of current predictions, each an object with predictions for a given target (containing a list of all bets, with details, current target multiplier, display name and total amount backing the target).
 
 ## Block betting in a pool
 
