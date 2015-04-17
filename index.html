@@ -1047,7 +1047,7 @@ Each request needs to contain a valid header. Each response contains a response 
 <td>-</td>
 </tr>
 </tbody></table>
-<h3 id='response-codes'>Response codes</h3>
+<h3 id='response-code'>Response code</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -1131,7 +1131,7 @@ Each request needs to contain a valid header. Each response contains a response 
 <td>-</td>
 </tr>
 </tbody></table>
-<h3 id='response-codes'>Response codes</h3>
+<h3 id='response-code'>Response code</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -1292,7 +1292,7 @@ This section assumes you are connected as an instamrkt developer. If you do not 
 <td>The name you want to assign to your source (your domain suggested).</td>
 </tr>
 </tbody></table>
-<h3 id='response-codes'>Response codes</h3>
+<h3 id='response-code'>Response code</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -1372,7 +1372,7 @@ This will automatically close all the games (and resolve pools accordingly) host
 <td>The source id assigned by the server upon source opening.</td>
 </tr>
 </tbody></table>
-<h3 id='response-codes'>Response codes</h3>
+<h3 id='response-code'>Response code</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -1575,7 +1575,7 @@ Only users listed as admins for the source are authorized for this call.
 <td>The social media hashtag to be associated with the game. If skipped will be generated from game name.</td>
 </tr>
 </tbody></table>
-<h3 id='response-codes'>Response codes</h3>
+<h3 id='response-code'>Response code</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -1763,7 +1763,7 @@ Only users listed as admins for the source are authorized for this call.
 <td>The social media hashtag to be associated with the game. If skipped will be generated from game name.</td>
 </tr>
 </tbody></table>
-<h3 id='response-codes'>Response codes</h3>
+<h3 id='response-code'>Response code</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -1901,7 +1901,7 @@ Only users listed as admins for the source are authorized for this call.
 <td>List of targets taking part in the game. Sent as a comma-separated string or an array. Targets can be infinitely nested. Nesting is indicated by including a &lsquo;:&rsquo; in the target. E.g. &ldquo;Argentina:1&rdquo; means &ldquo;Argentina, player 1&rdquo;. Server automatically builds a nested structure (see the example to the right). You can send targets of different nesting levels. An event registered for Argentina:1 will resolve pools for Argentina:1 and Argentina (e.g. Messi scores - pools for Messi&rsquo;s goals and Argentina goals get resovled).</td>
 </tr>
 </tbody></table>
-<h3 id='response-codes'>Response codes</h3>
+<h3 id='response-code'>Response code</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -2037,7 +2037,7 @@ Only the game source admin is allowed to send request as of now. Authorizing add
 <td>The game id for which you want to become an admin.</td>
 </tr>
 </tbody></table>
-<h3 id='response-codes'>Response codes</h3>
+<h3 id='response-code'>Response code</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -2793,7 +2793,7 @@ This will automatically close and resolve all the automatically resolvable pools
 <td>Your source id.</td>
 </tr>
 </tbody></table>
-<h3 id='response-codes'>Response codes</h3>
+<h3 id='response-code'>Response code</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -2871,13 +2871,24 @@ This functionality is also provided automatically by instamrkt - pools are opene
 </span></code></pre>
 
 <blockquote>
-<p>Returns the following JSON structure:</p>
+<p>Returns the following JSON structures:</p>
 </blockquote>
+<pre><code class="highlight json"><span class="p">{</span><span class="w">
+    </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Next Goal By Team"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"res"</span><span class="p">:</span><span class="w"> </span><span class="mi">350</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"pool_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"f2dd90e9-50ba-4c23-8161-2541ecd6720c"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"response_header"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"t"</span><span class="p">:</span><span class="w"> </span><span class="mi">1429260818762</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"game_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"30cee1fa-fb20-41a6-a61c-0e0335abc2a9"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
 <pre><code class="highlight json"><span class="p">{</span><span class="w">
     </span><span class="s2">"response_header"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
     </span><span class="s2">"res"</span><span class="p">:</span><span class="w"> </span><span class="mi">352</span><span class="p">,</span><span class="w">
     </span><span class="s2">"game_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"30cee1fa-fb20-41a6-a61c-0e0335abc2a9"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"pool_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"30cee1fa-fb20-41a6-a61c-0e0335abc2a9"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"pool_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"f2dd90e9-50ba-4c23-8161-2541ecd6720c"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Next Goal By Team"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
     </span><span class="s2">"action_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"goal"</span><span class="p">,</span><span class="w">
@@ -2918,7 +2929,7 @@ This functionality is also provided automatically by instamrkt - pools are opene
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
-<p>This creates and opens a pool for predictions for people subscribed to the game in the system. Predictions can now be made in this pool. The successful call results in broadcasting the response to all users subscribed to the game.</p>
+<p>This creates and opens a pool for predictions for people subscribed to the game in the system. Predictions can now be made in this pool. The successful call results in broadcasting the response to all users subscribed to the game. The creator also gets a separate confirmation message.</p>
 
 <p>How to make a prediction is described <a href="#place-bet-in-betting-pool">here</a>.</p>
 <h3 id='operation-code'>Operation code</h3>
@@ -2997,7 +3008,7 @@ This functionality is also provided automatically by instamrkt - pools are opene
 <td>Boolean value describing if pool is to be recreated anew upon resolution.</td>
 </tr>
 </tbody></table>
-<h3 id='response-code'>Response code</h3>
+<h3 id='response-codes'>Response codes</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -3008,10 +3019,15 @@ This functionality is also provided automatically by instamrkt - pools are opene
 <tr>
 <td>betting_pool_created</td>
 <td>350</td>
-<td>Your pool has been created and is now opened for predictions.</td>
+<td>Your confirmation.</td>
+</tr>
+<tr>
+<td>new_betting_pool</td>
+<td>352</td>
+<td>New pool has been created and is now opened for predictions (broadcast to all users subscribed to game).</td>
 </tr>
 </tbody></table>
-<h3 id='response-parameters'>Response Parameters</h3>
+<h3 id='response-parameters'>Response Parameters</h3><h4 id='betting-pool-created'>Betting pool created</h4>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -3035,7 +3051,36 @@ This functionality is also provided automatically by instamrkt - pools are opene
 <td>The provided pool description - question which will be desplayed to users.</td>
 </tr>
 <tr>
-<td>pool_type</td>
+<td>type</td>
+<td>1</td>
+<td>Provided pool type: 1 - parimutuel event based, 2 - parimutuel time based, 3 - binary event based, 4 - binary time based.</td>
+</tr>
+</tbody></table>
+<h4 id='new-petting-pool'>New petting pool</h4>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>game_id</td>
+<td>:YOUR_GAME_ID</td>
+<td>The provided game id.</td>
+</tr>
+<tr>
+<td>pool_id</td>
+<td>:YOUR_POOL_ID</td>
+<td>The server-generated pool id. Necessary for making all pool-related calls.</td>
+</tr>
+<tr>
+<td>description</td>
+<td>null</td>
+<td>The provided pool description - question which will be desplayed to users.</td>
+</tr>
+<tr>
+<td>type</td>
 <td>1</td>
 <td>Provided pool type: 1 - parimutuel event based, 2 - parimutuel time based, 3 - binary event based, 4 - binary time based.</td>
 </tr>
@@ -3341,7 +3386,7 @@ This functionality is also provided automatically by instamrkt - pools are opene
 </span></code></pre>
 
 <p>When a pool is created as a time-based and it expires (e.g.: &ldquo;Will Brazil score before 65:00?&rdquo;) that means the pool will be resolved with target &lsquo;none&rsquo;. That means people who predicted this target are victorious. The message broadcast to all game subscribers.</p>
-<h3 id='response-codes'>Response codes</h3>
+<h3 id='response-code'>Response code</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -5219,7 +5264,7 @@ This is an <strong>unsolicited</strong> server message, pushed at the user throu
 <td>An array with string of game ids, or a single string containing a game id to which the message is to be broadcast. Single target recommended.</td>
 </tr>
 </tbody></table>
-<h3 id='response-codes'>Response codes</h3>
+<h3 id='response-code'>Response code</h3>
 <table><thead>
 <tr>
 <th>Name</th>
