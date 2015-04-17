@@ -127,7 +127,7 @@ live_finish_at | now() | Game real life finishing time (> now()) in epoch millis
 currency | null | The currency for the game.
 hashtag | null | The social media hashtag to be associated with the game. If skipped will be generated from game name.
 
-### Response codes
+### Response code
 
 Name | Code | Result
 --------- | ------- | -----------
@@ -218,7 +218,7 @@ live_finish_at | now() | Game real life finishing time (> now()) in epoch millis
 currency | null | The currency for which you want to allow betting for in the game.
 hashtag | null | The social media hashtag to be associated with the game. If skipped will be generated from game name.
 
-### Response codes
+### Response code
 
 Name | Code | Result
 --------- | ------- | -----------
@@ -292,7 +292,7 @@ game_id | null | The game id for the game you want opened (sent in response to c
 actions | [] | List of actions that can happen in the game, e.g. "yellow-card", "goal", "offside", etc. Sent as a comma-separated string or an array.
 targets | [] | List of targets taking part in the game. Sent as a comma-separated string or an array. Targets can be infinitely nested. Nesting is indicated by including a ':' in the target. E.g. "Argentina:1" means "Argentina, player 1". Server automatically builds a nested structure (see the example to the right). You can send targets of different nesting levels. An event registered for Argentina:1 will resolve pools for Argentina:1 and Argentina (e.g. Messi scores - pools for Messi's goals and Argentina goals get resovled).
 
-### Response codes
+### Response code
 
 Name | Code | Result
 --------- | ------- | -----------
@@ -367,7 +367,7 @@ Parameter | Default | Description
 --------- | ------- | -----------
 game_id | null | The game id for which you want to become an admin.
 
-### Response codes
+### Response code
 
 Name | Code | Result
 --------- | ------- | -----------
@@ -859,7 +859,7 @@ Parameter | Default | Description
 --------- | ------- | -----------
 source_id | null | Your source id.
 
-### Response codes
+### Response code
 
 Name | Code | Result
 --------- | ------- | -----------

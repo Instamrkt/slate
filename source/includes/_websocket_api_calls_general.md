@@ -103,7 +103,7 @@ Parameter | Default | Description
 --------- | ------- | -----------
 - | - | -
 
-### Response codes
+### Response code
 
 Name | Code | Result
 --------- | ------- | -----------
@@ -162,7 +162,7 @@ Parameter | Default | Description
 --------- | ------- | -----------
 - | - | -
 
-### Response codes
+### Response code
 
 Name | Code | Result
 --------- | ------- | -----------

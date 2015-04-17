@@ -41,7 +41,7 @@ Parameter | Default | Description
 text | null | The text you want to send.
 targets | null | An array with string of game ids, or a single string containing a game id to which the message is to be broadcast. Single target recommended.
 
-### Response codes
+### Response code
 
 Name | Code | Result
 --------- | ------- | -----------

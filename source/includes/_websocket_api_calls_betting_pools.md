@@ -46,14 +46,27 @@ This functionality is also provided automatically by instamrkt - pools are opene
 ```
 
 
-> Returns the following JSON structure:
+> Returns the following JSON structures:
+
+```json
+{
+    "description": "Next Goal By Team",
+    "res": 350,
+    "pool_id": "f2dd90e9-50ba-4c23-8161-2541ecd6720c",
+    "response_header": {
+        "t": 1429260818762
+    },
+    "game_id": "30cee1fa-fb20-41a6-a61c-0e0335abc2a9",
+    "type": 1
+}
+```
 
 ```json
 {
     "response_header": {},
     "res": 352,
     "game_id": "30cee1fa-fb20-41a6-a61c-0e0335abc2a9",
-    "pool_id": "30cee1fa-fb20-41a6-a61c-0e0335abc2a9",
+    "pool_id": "f2dd90e9-50ba-4c23-8161-2541ecd6720c",
     "description": "Next Goal By Team",
     "type": 1,
     "action_id": "goal",
@@ -94,7 +107,7 @@ This functionality is also provided automatically by instamrkt - pools are opene
 }
 ```
 
-This creates and opens a pool for predictions for people subscribed to the game in the system. Predictions can now be made in this pool. The successful call results in broadcasting the response to all users subscribed to the game.
+This creates and opens a pool for predictions for people subscribed to the game in the system. Predictions can now be made in this pool. The successful call results in broadcasting the response to all users subscribed to the game. The creator also gets a separate confirmation message.
 
 How to make a prediction is described <a href="#place-bet-in-betting-pool">here</a>.
 
@@ -120,20 +133,32 @@ is_hot | false | Is betting pool marked as "HOT".
 stop_accepting_bets_at | null | Stop accepting bets at time (> now()) in epoch millis. This parameter is optional. Include if you want to close the pool after a certain time.
 recreate_on_end | False | Boolean value describing if pool is to be recreated anew upon resolution.
 
-### Response code
+### Response codes
 
 Name | Code | Result
 --------- | ------- | -----------
-betting_pool_created | 350 | Your pool has been created and is now opened for predictions.
+betting_pool_created | 350 | Your confirmation.
+new_betting_pool | 352 | New pool has been created and is now opened for predictions (broadcast to all users subscribed to game).
 
 ### Response Parameters
+
+#### Betting pool created
 
 Parameter | Default | Description
 --------- | ------- | -----------
 game_id | :YOUR_GAME_ID | The provided game id.
 pool_id | :YOUR_POOL_ID | The server-generated pool id. Necessary for making all pool-related calls.
 description | null | The provided pool description - question which will be desplayed to users.
-pool_type | 1 | Provided pool type: 1 - parimutuel event based, 2 - parimutuel time based, 3 - binary event based, 4 - binary time based.
+type | 1 | Provided pool type: 1 - parimutuel event based, 2 - parimutuel time based, 3 - binary event based, 4 - binary time based.
+
+#### New petting pool
+
+Parameter | Default | Description
+--------- | ------- | -----------
+game_id | :YOUR_GAME_ID | The provided game id.
+pool_id | :YOUR_POOL_ID | The server-generated pool id. Necessary for making all pool-related calls.
+description | null | The provided pool description - question which will be desplayed to users.
+type | 1 | Provided pool type: 1 - parimutuel event based, 2 - parimutuel time based, 3 - binary event based, 4 - binary time based.
 action_id | null | The provided action on which the prediction is made.
 people_involved | 0 | Number of people who already placed predictions in pool. Will be incremented on every prediction.
 money_at_stake | 0.0 | Amount of money already placed predictions in pool. Will be incremented on every prediction.
@@ -285,7 +310,7 @@ resolved_at | event receival time | The time of pool resolution in epoch millis.
 
 When a pool is created as a time-based and it expires (e.g.: "Will Brazil score before 65:00?") that means the pool will be resolved with target 'none'. That means people who predicted this target are victorious. The message broadcast to all game subscribers.
 
-### Response codes
+### Response code
 
 Name | Code | Result
 --------- | ------- | -----------

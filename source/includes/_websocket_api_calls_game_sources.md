@@ -42,7 +42,7 @@ Parameter | Default | Description
 --------- | ------- | -----------
 source_name | null | The name you want to assign to your source (your domain suggested).
 
-### Response codes
+### Response code
 
 Name | Code | Result
 --------- | ------- | -----------
@@ -97,7 +97,7 @@ Parameter | Default | Description
 --------- | ------- | -----------
 source_id | null | The source id assigned by the server upon source opening.
 
-### Response codes
+### Response code
 
 Name | Code | Result
 --------- | ------- | -----------
