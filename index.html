@@ -1498,7 +1498,7 @@ Only users listed as admins for the source are authorized for this call.
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
-<p>This registers the game in the system and opens it automatically. Betting pools can now be opened for this game.</p>
+<p>This registers the game in the system and opens it automatically. Betting pools can now be opened for this game. Broadcasts the game created and opened message to all users connected through a given game source.</p>
 <h3 id='operation-code'>Operation code</h3>
 <table><thead>
 <tr>
@@ -1694,9 +1694,9 @@ Only users listed as admins for the source are authorized for this call.
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
-<p>This registers the game in the system as an upcoming game. An <a href="#open-a-game">open game</a> request needs to be sent afterwards to open a game for betting.</p>
+<p>This registers the game in the system as an upcoming game. An <a href="#open-a-game">open game</a> request needs to be sent afterwards to open a game for betting. Broadcasts the game created message to all users connected through a given game source.</p>
 
-<p>To allow betting, targets and actions need to be added to the game either with the <a href="#open-a-game">open game</a> request, or with an <a href="#update-game-details">update game details</a> request.</p>
+<p>To allow making predictions, targets and actions need to be added to the game either with the <a href="#open-a-game">open game</a> request.</p>
 <h3 id='operation-code'>Operation code</h3>
 <table><thead>
 <tr>
@@ -1864,7 +1864,8 @@ Only users listed as admins for the source are authorized for this call.
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
-<p>This opens a previously created upcoming game (with a <a href="#create-a-game">create game</a> request) for betting.</p>
+<p>This opens a previously created upcoming game (with a <a href="#create-a-game">create game</a> request) for making predictions.
+Broadcasts the game opened message to all users connected through a given game source.</p>
 <h3 id='operation-code'>Operation code</h3>
 <table><thead>
 <tr>
@@ -1910,9 +1911,9 @@ Only users listed as admins for the source are authorized for this call.
 </tr>
 </thead><tbody>
 <tr>
-<td>game_created_and_opened</td>
-<td>340</td>
-<td>Your game has been opened. You can now open betting pools for the game. <strong>Warning</strong>: This is the same response as for the <a href="#create-and-open-a-game">create and open game</a> request. The state after processing both calls is semantically equivalent.</td>
+<td>game_opened</td>
+<td>3402</td>
+<td>Your game has been opened. You can now open betting pools for the game. <strong>Warning</strong>: This is the same response as for the <a href="#create-and-open-a-game">create and open game</a> request (except for the response code). The state after processing both calls is semantically equivalent.</td>
 </tr>
 </tbody></table>
 <h3 id='response-parameters'>Response Parameters</h3>
@@ -2892,8 +2893,8 @@ This functionality is also provided automatically by instamrkt - pools are opene
     </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Next Goal By Team"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
     </span><span class="s2">"action_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"goal"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"people_involved"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"money_at_stake"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"participants"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"amount_total"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w">
     </span><span class="s2">"target_level"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
     </span><span class="s2">"is_blocked"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
     </span><span class="s2">"is_hot"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
@@ -3090,12 +3091,12 @@ This functionality is also provided automatically by instamrkt - pools are opene
 <td>The provided action on which the prediction is made.</td>
 </tr>
 <tr>
-<td>people_involved</td>
+<td>participants</td>
 <td>0</td>
 <td>Number of people who already placed predictions in pool. Will be incremented on every prediction.</td>
 </tr>
 <tr>
-<td>money_at_stake</td>
+<td>amount_total</td>
 <td>0.0</td>
 <td>Amount of money already placed predictions in pool. Will be incremented on every prediction.</td>
 </tr>
@@ -3471,7 +3472,7 @@ This functionality is also provided automatically by instamrkt - pools are opene
         </span><span class="p">{</span><span class="w">
             </span><span class="s2">"start_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1421933670629"</span><span class="p">,</span><span class="w">
             </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Next Goal By Team"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"money_at_stake"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"amount_total"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w">
             </span><span class="s2">"finish_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"None"</span><span class="p">,</span><span class="w">
             </span><span class="s2">"is_blocked"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
             </span><span class="s2">"is_hot"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
@@ -3502,7 +3503,7 @@ This functionality is also provided automatically by instamrkt - pools are opene
                 </span><span class="p">}</span><span class="w">
             </span><span class="p">],</span><span class="w">
             </span><span class="s2">"target_level"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"people_involved"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"participants"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
             </span><span class="s2">"pool_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0ec3850f-f862-4baf-bada-73394a68bbdd"</span><span class="p">,</span><span class="w">
             </span><span class="s2">"stop_accepting_bets_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"None"</span><span class="p">,</span><span class="w">
             </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
@@ -3511,7 +3512,7 @@ This functionality is also provided automatically by instamrkt - pools are opene
         </span><span class="p">{</span><span class="w">
             </span><span class="s2">"start_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1421935990222"</span><span class="p">,</span><span class="w">
             </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Next Card By Team"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"money_at_stake"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"amount_total"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w">
             </span><span class="s2">"finish_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"None"</span><span class="p">,</span><span class="w">
             </span><span class="s2">"is_blocked"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
             </span><span class="s2">"is_hot"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
@@ -3542,7 +3543,7 @@ This functionality is also provided automatically by instamrkt - pools are opene
                 </span><span class="p">}</span><span class="w">
             </span><span class="p">],</span><span class="w">
             </span><span class="s2">"target_level"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"people_involved"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"participants"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
             </span><span class="s2">"pool_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"6cca4a84-d3e5-4d56-9f5e-acb50ecd5f1d"</span><span class="p">,</span><span class="w">
             </span><span class="s2">"stop_accepting_bets_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"None"</span><span class="p">,</span><span class="w">
             </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
@@ -3633,7 +3634,7 @@ This functionality is also provided automatically by instamrkt - pools are opene
         </span><span class="p">{</span><span class="w">
             </span><span class="s2">"start_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1421933670629"</span><span class="p">,</span><span class="w">
             </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Next Goal By Team"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"money_at_stake"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"amount_total"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w">
             </span><span class="s2">"finish_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"None"</span><span class="p">,</span><span class="w">
             </span><span class="s2">"is_blocked"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
             </span><span class="s2">"is_hot"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
@@ -3664,7 +3665,7 @@ This functionality is also provided automatically by instamrkt - pools are opene
                 </span><span class="p">}</span><span class="w">
             </span><span class="p">],</span><span class="w">
             </span><span class="s2">"target_level"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"people_involved"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"participants"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
             </span><span class="s2">"pool_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0ec3850f-f862-4baf-bada-73394a68bbdd"</span><span class="p">,</span><span class="w">
             </span><span class="s2">"stop_accepting_bets_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"None"</span><span class="p">,</span><span class="w">
             </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
@@ -3755,7 +3756,7 @@ This functionality is also provided automatically by instamrkt - pools are opene
         </span><span class="p">{</span><span class="w">
             </span><span class="s2">"pool_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"6cca4a84-d3e5-4d56-9f5e-acb50ecd5f1d"</span><span class="p">,</span><span class="w">
             </span><span class="s2">"start_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1421935990222"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"money_at_stake"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"amount_total"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w">
             </span><span class="s2">"finish_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"None"</span><span class="p">,</span><span class="w">
             </span><span class="s2">"is_blocked"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
             </span><span class="s2">"is_hot"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
@@ -3794,7 +3795,7 @@ This functionality is also provided automatically by instamrkt - pools are opene
             </span><span class="p">],</span><span class="w">
             </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Next Card By Team"</span><span class="p">,</span><span class="w">
             </span><span class="s2">"target_level"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"people_involved"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"participants"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
             </span><span class="s2">"user_backed"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
                 </span><span class="s2">"brazil"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.0</span><span class="w">
             </span><span class="p">},</span><span class="w">
@@ -3923,14 +3924,14 @@ This functionality is also provided automatically by instamrkt - pools are opene
                     </span><span class="s2">"bets"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
                 </span><span class="p">}</span><span class="w">
             </span><span class="p">],</span><span class="w">
-            </span><span class="s2">"people_involved"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"participants"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
             </span><span class="s2">"pool_type"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
             </span><span class="s2">"user_backed"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
                 </span><span class="s2">"brazil"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.0</span><span class="w">
             </span><span class="p">},</span><span class="w">
             </span><span class="s2">"stop_accepting_bets_at"</span><span class="p">:</span><span class="w"> </span><span class="mi">1421938211000</span><span class="p">,</span><span class="w">
             </span><span class="s2">"game_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Netherlands - Brazil"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"money_at_stake"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"amount_total"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w">
             </span><span class="s2">"game_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1b9a4a42-0c8a-46c0-95ee-c1e649e16fce"</span><span class="p">,</span><span class="w">
             </span><span class="s2">"target_level"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
             </span><span class="s2">"action_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"goal"</span><span class="w">
