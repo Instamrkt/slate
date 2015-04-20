@@ -103,7 +103,7 @@ Only users listed as admins for the source are authorized for this call.
 }
 ```
 
-This registers the game in the system and opens it automatically. Betting pools can now be opened for this game.
+This registers the game in the system and opens it automatically. Betting pools can now be opened for this game. Broadcasts the game created and opened message to all users connected through a given game source.
 
 ### Operation code
 
@@ -156,7 +156,6 @@ hashtag | null | The social media hashtag to be associated with the game. If ski
 Only users listed as admins for the source are authorized for this call.
 </aside>
 
-
 > Expects the following JSON structure:
 
 ```json
@@ -194,9 +193,11 @@ Only users listed as admins for the source are authorized for this call.
 }
 ```
 
-This registers the game in the system as an upcoming game. An <a href="#open-a-game">open game</a> request needs to be sent afterwards to open a game for betting.
+This registers the game in the system as an upcoming game. An <a href="#open-a-game">open game</a> request needs to be sent afterwards to open a game for betting. Broadcasts the game created message to all users connected through a given game source.
 
-To allow betting, targets and actions need to be added to the game either with the <a href="#open-a-game">open game</a> request, or with an <a href="#update-game-details">update game details</a> request.
+
+To allow making predictions, targets and actions need to be added to the game either with the <a href="#open-a-game">open game</a> request.
+
 
 ### Operation code
 
@@ -246,7 +247,6 @@ hashtag | null | The social media hashtag to be associated with the game. If ski
 Only users listed as admins for the source are authorized for this call.
 </aside>
 
-
 > Expects the following JSON structure:
 
 ```json
@@ -276,7 +276,9 @@ Only users listed as admins for the source are authorized for this call.
 }
 ```
 
-This opens a previously created upcoming game (with a <a href="#create-a-game">create game</a> request) for betting.
+This opens a previously created upcoming game (with a <a href="#create-a-game">create game</a> request) for making predictions.
+Broadcasts the game opened message to all users connected through a given game source.
+
 
 ### Operation code
 
@@ -296,7 +298,7 @@ targets | [] | List of targets taking part in the game. Sent as a comma-separate
 
 Name | Code | Result
 --------- | ------- | -----------
-game_created_and_opened | 340 | Your game has been opened. You can now open betting pools for the game. **Warning**: This is the same response as for the <a href="#create-and-open-a-game">create and open game</a> request. The state after processing both calls is semantically equivalent.
+game_opened | 3402 | Your game has been opened. You can now open betting pools for the game. **Warning**: This is the same response as for the <a href="#create-and-open-a-game">create and open game</a> request (except for the response code). The state after processing both calls is semantically equivalent.
 
 ### Response Parameters
 
@@ -312,7 +314,6 @@ open_at | request receival time | The open game time in epoch millis.
 live_start_at | request receival time | The real life game start time in epoch millis (only informative).
 live_finish_at | null | The real life game finish time in epoch millis (only informative).
 close_at | null | The close game time in epoch millis (if null, game close request needs to be sent explicitly).
-
 
 
 
