@@ -70,8 +70,8 @@ This functionality is also provided automatically by instamrkt - pools are opene
     "description": "Next Goal By Team",
     "type": 1,
     "action_id": "goal",
-    "people_involved": 0,
-    "money_at_stake": 0.0,
+    "participants": 0,
+    "amount_total": 0.0,
     "target_level": 1,
     "is_blocked": false,
     "is_hot": false,
@@ -160,8 +160,8 @@ pool_id | :YOUR_POOL_ID | The server-generated pool id. Necessary for making all
 description | null | The provided pool description - question which will be desplayed to users.
 type | 1 | Provided pool type: 1 - parimutuel event based, 2 - parimutuel time based, 3 - binary event based, 4 - binary time based.
 action_id | null | The provided action on which the prediction is made.
-people_involved | 0 | Number of people who already placed predictions in pool. Will be incremented on every prediction.
-money_at_stake | 0.0 | Amount of money already placed predictions in pool. Will be incremented on every prediction.
+participants | 0 | Number of people who already placed predictions in pool. Will be incremented on every prediction.
+amount_total | 0.0 | Amount of money already placed predictions in pool. Will be incremented on every prediction.
 target_level | 0 | The computed target level for sent targets. E.g. - 1 for "argentina, brazil", 2 for "argentina:9, brazil:7"
 distribution | [] | A list of current predictions, each an object with predictions for a given target (containing a list of all bets, with details, current target multiplier, display name and total amount backing the target).
 start_at | request receival time | The open pool time in epoch millis.
@@ -354,7 +354,7 @@ resolved_at | event receival time | The time of pool resolution in epoch millis.
         {
             "start_at": "1421933670629",
             "description": "Next Goal By Team",
-            "money_at_stake": 0.0,
+            "amount_total": 0.0,
             "finish_at": "None",
             "is_blocked": false,
             "is_hot": false,
@@ -385,7 +385,7 @@ resolved_at | event receival time | The time of pool resolution in epoch millis.
                 }
             ],
             "target_level": 1,
-            "people_involved": 0,
+            "participants": 0,
             "pool_id": "0ec3850f-f862-4baf-bada-73394a68bbdd",
             "stop_accepting_bets_at": "None",
             "type": 1,
@@ -394,7 +394,7 @@ resolved_at | event receival time | The time of pool resolution in epoch millis.
         {
             "start_at": "1421935990222",
             "description": "Next Card By Team",
-            "money_at_stake": 0.0,
+            "amount_total": 0.0,
             "finish_at": "None",
             "is_blocked": false,
             "is_hot": false,
@@ -425,7 +425,7 @@ resolved_at | event receival time | The time of pool resolution in epoch millis.
                 }
             ],
             "target_level": 1,
-            "people_involved": 0,
+            "participants": 0,
             "pool_id": "6cca4a84-d3e5-4d56-9f5e-acb50ecd5f1d",
             "stop_accepting_bets_at": "None",
             "type": 1,
@@ -485,7 +485,7 @@ pools_list | [] | A list of pools opened for game.
         {
             "start_at": "1421933670629",
             "description": "Next Goal By Team",
-            "money_at_stake": 0.0,
+            "amount_total": 0.0,
             "finish_at": "None",
             "is_blocked": false,
             "is_hot": false,
@@ -516,7 +516,7 @@ pools_list | [] | A list of pools opened for game.
                 }
             ],
             "target_level": 1,
-            "people_involved": 0,
+            "participants": 0,
             "pool_id": "0ec3850f-f862-4baf-bada-73394a68bbdd",
             "stop_accepting_bets_at": "None",
             "type": 1,
@@ -577,7 +577,7 @@ pools_list | [] | A lost of pools opened for game in which you have not placed a
         {
             "pool_id": "6cca4a84-d3e5-4d56-9f5e-acb50ecd5f1d",
             "start_at": "1421935990222",
-            "money_at_stake": 1.0,
+            "amount_total": 1.0,
             "finish_at": "None",
             "is_blocked": false,
             "is_hot": false,
@@ -616,7 +616,7 @@ pools_list | [] | A lost of pools opened for game in which you have not placed a
             ],
             "name": "Next Card By Team",
             "target_level": 1,
-            "people_involved": 1,
+            "participants": 1,
             "user_backed": {
                 "brazil": 1.0
             },
@@ -714,14 +714,14 @@ pools_list | [] | A list of pools opened for game in which you have placed a pre
                     "bets": []
                 }
             ],
-            "people_involved": 1,
+            "participants": 1,
             "pool_type": 1,
             "user_backed": {
                 "brazil": 1.0
             },
             "stop_accepting_bets_at": 1421938211000,
             "game_name": "Netherlands - Brazil",
-            "money_at_stake": 1.0,
+            "amount_total": 1.0,
             "game_id": "1b9a4a42-0c8a-46c0-95ee-c1e649e16fce",
             "target_level": 1,
             "action_id": "goal"
