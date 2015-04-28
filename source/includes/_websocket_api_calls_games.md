@@ -521,7 +521,7 @@ status | null | Current game status. Possible values: "betting_not_yet_active", 
 type | :YOUR_GAME_TYPE | The uuid of the game type you provided.
 actions | [] | A list containing the actions ({'action_id:', 'name':}) for the game.
 targets | [] | A nested, recursive list containing the targets you listed. (target id, symbol, display name and _sub_ targets). Please look at the example on the right.
-game_state | [] | A list of objects surving the purpose of displaying game state. Sorted according to a game_type specific action priority list. E.g for game_type _football_ the list looks as follows: ['goal', 'red-card', 'yellow-card', 'corner-kick', 'offside', 'foul', 'shot']. Counts for all other actions, not specified in priority list (e.g throw-ins), come at the end in random order.
+game_state | [] | A list of objects serving the purpose of displaying game state. Sorted according to a game_type specific action priority list. E.g for game_type _football_ the list looks as follows: ['goal', 'red-card', 'yellow-card', 'corner-kick', 'offside', 'foul', 'shot']. Counts for all other actions, not specified in priority list (e.g throw-ins), come at the end in random order.
 past_events | [] | A list containing all the events that happened in the game so far. Sorted by happened_at, newest (youngest) on top of the list.
 open_at | request receival time | The open game time in epoch millis.
 live_start_at | request receival time | The real life game start time in epoch millis (only informative).
