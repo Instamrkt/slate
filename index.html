@@ -81,7 +81,7 @@
 <p>The designed user flow is as follows:</p>
 
 <ol>
-<li>User logs in through the website / app with the signup credentials he provided (username + password + (optionally) a 2fa token) or with an externally-provided token (Facebook login). This is performed through the REST API. The call sets and returns cookies for user id (&ldquo;im_user&rdquo;) and a session key (&ldquo;session_key&rdquo;) necessary to connect to the Websocket API Server.</li>
+<li>User logs in through the website / app with the signup credentials he provided (username + password + (optionally) a 2fa token) or with an externally-provided token (Facebook login). This is performed through the REST API. The call sets and returns cookies for user id (&ldquo;im_user&rdquo;) and a session key (&ldquo;user_session_key&rdquo;) necessary to connect to the Websocket API Server. If it is an admin login the call returns &ldquo;admin_session_key&rdquo;.</li>
 <li>User gets to the game screen / page and using the obtained session key <a href="#connecting"> connects</a> to the Websocket API.</li>
 <li>User is now connected to the API and can subscribe to games to receive push updates about them and place predictions.</li>
 </ol>
@@ -95,7 +95,7 @@ Remember — we care about security for your own good!
 
 <p>All <strong>REST Api</strong> calls require the presence of an encrypted cookie, which is generated for user upon successful sign in / sign up and returned as a cookie.</p>
 
-<p>All <strong>Websocket Api</strong> calls require the presence of a session key, which is returned to the user as a cookie (&ldquo;session_key&rdquo;) upon successful sign in / sign up and returned as a cookie.</p>
+<p>All <strong>Websocket Api</strong> calls require the presence of a session key, which is returned to the user in a response to a successful logon /signup message and also set as a cookie - <em>&ldquo;user_session_key&rdquo;</em>.</p>
 
 <p>To perform a successful signin, one of the following is necessary:</p>
 
