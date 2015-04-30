@@ -38,7 +38,7 @@ Event server is the source of events that can potentially resolve pools or simpl
 
 The designed user flow is as follows:
 
-1. User logs in through the website / app with the signup credentials he provided (username + password + (optionally) a 2fa token) or with an externally-provided token (Facebook login). This is performed through the REST API. The call sets and returns cookies for user id ("im_user") and a session key ("user_session_key") necessary to connect to the Websocket API Server. If it is an admin login the call returns "admin_session_key".
+1. User logs in through the website / app with the signup credentials he provided (username + password + (optionally) a 2fa token) or with an externally-provided token (Facebook login). This is performed through the REST API. The call sets cookies for user id ("im_user") and a session key ("user_session_key") necessary to connect to the Websocket API Server. It also includes them as fields in the response to the REST request as "id" and "user_session_key" respectively. If it is an admin login the call returns "admin_session_key".
 2. User gets to the game screen / page and using the obtained session key <a href="#connecting"> connects</a> to the Websocket API.
 3. User is now connected to the API and can subscribe to games to receive push updates about them and place predictions.
 
