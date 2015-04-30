@@ -6,7 +6,7 @@ Remember — we care about security for your own good!
 
 All **REST Api** calls require the presence of an encrypted cookie, which is generated for user upon successful sign in / sign up and returned as a cookie.
 
-All **Websocket Api** calls require the presence of a session key, which is returned to the user as a cookie ("session_key") upon successful sign in / sign up and returned as a cookie.
+All **Websocket Api** calls require the presence of a session key, which is returned to the user in a response to a successful logon /signup message and also set as a cookie - *"user_session_key"*.
 
 To perform a successful signin, one of the following is necessary:
 
