@@ -30,8 +30,8 @@ ERROR | 500
 var $       = require('jquery');
 $.post('/r/login', {
   'username': username,
-  'email': email,
   'password': password
+  'next': ''
 });
 ```
 
