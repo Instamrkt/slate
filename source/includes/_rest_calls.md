@@ -8,6 +8,11 @@ Every rest call (except for signup and login) requires a server generated xsrf t
 All request that require personal information require a userId parameter which is checked against a secure cookie.
 </aside>
 
+<aside class="notice">
+All responses are of type `application/json`.
+</aside>
+
+
 Passing parameters happens as follows:
 
 1. GET Request - add a parameter to the query string.
