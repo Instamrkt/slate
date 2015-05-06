@@ -188,8 +188,8 @@ All request that require personal information require a userId parameter which i
 <pre><code class="highlight javascript"><span class="kd">var</span> <span class="nx">$</span>       <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'jquery'</span><span class="p">);</span>
 <span class="nx">$</span><span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="s1">'/r/login'</span><span class="p">,</span> <span class="p">{</span>
   <span class="s1">'username'</span><span class="p">:</span> <span class="nx">username</span><span class="p">,</span>
-  <span class="s1">'email'</span><span class="p">:</span> <span class="nx">email</span><span class="p">,</span>
   <span class="s1">'password'</span><span class="p">:</span> <span class="nx">password</span>
+  <span class="s1">'next'</span><span class="p">:</span> <span class="s1">''</span>
 <span class="p">});</span>
 </code></pre>
 
