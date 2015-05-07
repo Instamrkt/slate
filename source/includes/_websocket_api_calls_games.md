@@ -30,7 +30,8 @@ Only users listed as admins for the source are authorized for this call.
   "open_at": 1417104170,
   "live_start_at": 1417105170,
   "live_finish_at": 1417106170,
-  "hashtag": "#ArgBra"
+  "hashtag": "#ArgBra",
+  "image_url": "http://yoursite.com/yourimage.jpg"
 }
 ```
 
@@ -126,6 +127,7 @@ live_start_at | now() | Game real life starting time (> now()) in epoch millis. 
 live_finish_at | now() | Game real life finishing time (> now()) in epoch millis. This can be different than close_at (e.g. you might want to close betting before the game finishes in real life). Serves **only** as an informative value.
 currency | null | The currency for the game.
 hashtag | null | The social media hashtag to be associated with the game. If skipped will be generated from game name.
+image_url | null | The image you want to be associated and displayed with a game (e.g. as a background).
 
 ### Response code
 
@@ -170,7 +172,8 @@ Only users listed as admins for the source are authorized for this call.
   "open_at": 1417104170,
   "live_start_at": 1417105170,
   "live_finish_at": 1417106170,
-  "hashtag": "#ArgBra"
+  "hashtag": "#ArgBra",
+  "image_url": "http://yoursite.com/yourimage.jpg"
 }
 ```
 
@@ -218,6 +221,7 @@ live_start_at | now() | Game real life starting time (> now()) in epoch millis. 
 live_finish_at | now() | Game real life finishing time (> now()) in epoch millis. This can be different than close_at (e.g. you might want to close betting before the game finishes in real life). Serves **only** as an informative value.
 currency | null | The currency for which you want to allow betting for in the game.
 hashtag | null | The social media hashtag to be associated with the game. If skipped will be generated from game name.
+image_url | null | The image you want to be associated and displayed with a game (e.g. as a background).
 
 ### Response code
 
@@ -408,6 +412,7 @@ reason | :YOUR_GAME_ID | The reason why you couldn't become an admin. Sent **onl
     "game_id": "30cee1fa-fb20-41a6-a61c-0e0335abc2a9",
     "name": "Argentina - Brazil",
     "hashtag": "#ArgBra",
+    "image_url": "http://yoursite.com/yourimage.jpg",
     "game_state": [
         {
             "argentina": "1",
@@ -529,6 +534,7 @@ live_finish_at | null | The real life game finish time in epoch millis (only inf
 close_at | null | The close game time in epoch millis (if null, game close request needs to be sent explicitly).
 currency | null | The currency for which you want to allow betting for in the game.
 hashtag | null | The social media hashtag to be associated with the game. If skipped will be generated from game name.
+image_url | null | The image associated and displayed with a game (e.g. as a background).
 
 
 
@@ -545,7 +551,8 @@ Only users listed as admins for the source are authorized for this call.
   "op": 373,
   "game_id": "30cee1fa-fb20-41a6-a61c-0e0335abc2a9",
   "actions": ["Goal", "Offside"],
-  "targets": ["Argentina", "Brazil", "Argentina:1", "Argentina:2", "Brazil:7"]
+  "targets": ["Argentina", "Brazil", "Argentina:1", "Argentina:2", "Brazil:7"],
+  "image_url": "http://yoursite.com/yourimage.jpg"
 }
 ```
 
@@ -579,6 +586,7 @@ Parameter | Default | Description
 game_id | null | The game id of the game of which you want to update details.
 actions | [] | List of actions that you want to add to the game, e.g. "yellow-card", "goal", "offside", etc. Sent as a comma-separated string or an array.
 targets | [] | List of targets that you want to add to the game. Sent as a comma-separated string or an array. Targets can be infinitely nested. Nesting is indicated by including a ':' in the target. E.g. "Argentina:1" means "Argentina, player 1". Server automatically builds a nested structure (see the example to the right). You can send targets of different nesting levels. An event registered for Argentina:1 will resolve pools for Argentina:1 and Argentina (e.g. Messi scores - pools for Messi's goals and Argentina goals get resovled).
+image_url | null | The updated image you want to be associated and displayed with a game (e.g. as a background).
 
 
 ### Response codes
