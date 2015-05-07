@@ -1430,7 +1430,8 @@ Only users listed as admins for the source are authorized for this call.
   </span><span class="s2">"open_at"</span><span class="p">:</span><span class="w"> </span><span class="mi">1417104170</span><span class="p">,</span><span class="w">
   </span><span class="s2">"live_start_at"</span><span class="p">:</span><span class="w"> </span><span class="mi">1417105170</span><span class="p">,</span><span class="w">
   </span><span class="s2">"live_finish_at"</span><span class="p">:</span><span class="w"> </span><span class="mi">1417106170</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"hashtag"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#ArgBra"</span><span class="w">
+  </span><span class="s2">"hashtag"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#ArgBra"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"image_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://yoursite.com/yourimage.jpg"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
@@ -1578,6 +1579,11 @@ Only users listed as admins for the source are authorized for this call.
 <td>null</td>
 <td>The social media hashtag to be associated with the game. If skipped will be generated from game name.</td>
 </tr>
+<tr>
+<td>image_url</td>
+<td>null</td>
+<td>The image you want to be associated and displayed with a game (e.g. as a background).</td>
+</tr>
 </tbody></table>
 <h3 id='response-code'>Response code</h3>
 <table><thead>
@@ -1676,7 +1682,8 @@ Only users listed as admins for the source are authorized for this call.
   </span><span class="s2">"open_at"</span><span class="p">:</span><span class="w"> </span><span class="mi">1417104170</span><span class="p">,</span><span class="w">
   </span><span class="s2">"live_start_at"</span><span class="p">:</span><span class="w"> </span><span class="mi">1417105170</span><span class="p">,</span><span class="w">
   </span><span class="s2">"live_finish_at"</span><span class="p">:</span><span class="w"> </span><span class="mi">1417106170</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"hashtag"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#ArgBra"</span><span class="w">
+  </span><span class="s2">"hashtag"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#ArgBra"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"image_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://yoursite.com/yourimage.jpg"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
@@ -1765,6 +1772,11 @@ Only users listed as admins for the source are authorized for this call.
 <td>hashtag</td>
 <td>null</td>
 <td>The social media hashtag to be associated with the game. If skipped will be generated from game name.</td>
+</tr>
+<tr>
+<td>image_url</td>
+<td>null</td>
+<td>The image you want to be associated and displayed with a game (e.g. as a background).</td>
 </tr>
 </tbody></table>
 <h3 id='response-code'>Response code</h3>
@@ -2101,6 +2113,7 @@ Only the game source admin is allowed to send request as of now. Authorizing add
     </span><span class="s2">"game_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"30cee1fa-fb20-41a6-a61c-0e0335abc2a9"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Argentina - Brazil"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"hashtag"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#ArgBra"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"image_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://yoursite.com/yourimage.jpg"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"game_state"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
         </span><span class="p">{</span><span class="w">
             </span><span class="s2">"argentina"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
@@ -2302,6 +2315,11 @@ Only the game source admin is allowed to send request as of now. Authorizing add
 <td>null</td>
 <td>The social media hashtag to be associated with the game. If skipped will be generated from game name.</td>
 </tr>
+<tr>
+<td>image_url</td>
+<td>null</td>
+<td>The image associated and displayed with a game (e.g. as a background).</td>
+</tr>
 </tbody></table>
 <h2 id='update-game-details'>Update game details</h2>
 <p><aside class="notice">
@@ -2316,7 +2334,8 @@ Only users listed as admins for the source are authorized for this call.
   </span><span class="s2">"op"</span><span class="p">:</span><span class="w"> </span><span class="mi">373</span><span class="p">,</span><span class="w">
   </span><span class="s2">"game_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"30cee1fa-fb20-41a6-a61c-0e0335abc2a9"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"actions"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"Goal"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Offside"</span><span class="p">],</span><span class="w">
-  </span><span class="s2">"targets"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"Argentina"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Brazil"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Argentina:1"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Argentina:2"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Brazil:7"</span><span class="p">]</span><span class="w">
+  </span><span class="s2">"targets"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"Argentina"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Brazil"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Argentina:1"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Argentina:2"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Brazil:7"</span><span class="p">],</span><span class="w">
+  </span><span class="s2">"image_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://yoursite.com/yourimage.jpg"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
@@ -2367,6 +2386,11 @@ Only users listed as admins for the source are authorized for this call.
 <td>targets</td>
 <td>[]</td>
 <td>List of targets that you want to add to the game. Sent as a comma-separated string or an array. Targets can be infinitely nested. Nesting is indicated by including a &lsquo;:&rsquo; in the target. E.g. &ldquo;Argentina:1&rdquo; means &ldquo;Argentina, player 1&rdquo;. Server automatically builds a nested structure (see the example to the right). You can send targets of different nesting levels. An event registered for Argentina:1 will resolve pools for Argentina:1 and Argentina (e.g. Messi scores - pools for Messi&rsquo;s goals and Argentina goals get resovled).</td>
+</tr>
+<tr>
+<td>image_url</td>
+<td>null</td>
+<td>The updated image you want to be associated and displayed with a game (e.g. as a background).</td>
 </tr>
 </tbody></table>
 <h3 id='response-codes'>Response codes</h3>
