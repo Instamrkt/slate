@@ -20,7 +20,7 @@ The connection url:
 
 ### Obtaining id and the session key
 
-Both are set and returned as cookies by a sign in or sign up requests to the REST API.
+Both the user_session_key and id are returned in cookies for HTTP users and also returned in the JSON from login or signup REST requests. 
 
 ### Nonce and hexdigest
 
