@@ -12,7 +12,6 @@ toc_footers:
 includes:
   - general_overview
   - authentication
-	- getting_started_with_the_instamrkt_api
   - authorization
   - rest_calls
   - websocket_api_calls_general
