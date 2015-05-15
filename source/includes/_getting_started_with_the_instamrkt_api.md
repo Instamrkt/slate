@@ -17,9 +17,11 @@ It is worth noting that games are not unique by name - only by id. That is, you 
 
 A *pool* defined by a **pool_id** is a single question about an *event* in the game - e.g. "Will Federer's next serve be an ace?" is a pool. The  *pool_id* is a globally unique string. 
 
-This is a good time to introduce the concepts of *actions* and *targets*. Every *pool* contains at MOST 1 *action* and 2 or more *targets*. In the previous example of "Will Federer's next serve be an ace?" In this case the options available to the user would be "Yes" and "No". These are targets. Federer's ace is the action. A more complex pool structure might allow the user to choose from a set of targets (team members for example). Something like "Who will get substituted next?" with options available to the user of "Messi, Neymar, Suarez, None". In this case "Messi, Neymar, Suarez" are targets. "None" is a special target appended to all *parimutuel* pools that indicates "None of these choices". It is up to you whether or not to display the "None" target. 
+This is a good time to introduce the concepts of *actions* and *targets*. Every *pool* contains at MOST 1 *action* and 2 or more *targets*. In the previous example of "Will Federer's next serve be an ace?" In this case the options available to the user would be "Yes" and "No". These are targets. Federer's ace is the action. 
 
-Instamrkt supports several types of pools but the basic distinctions are between *parimutuel* and *binary*. 
+A more complex pool structure might allow the user to choose from a set of targets (team members for example). Something like "Who will get substituted next?" with options available to the user of "Messi, Neymar, Suarez, None". In this case "Messi, Neymar, Suarez" are targets. "None" is a special target appended to all *parimutuel* pools that indicates "None of these choices". It is up to you whether or not to display the "None" target. 
+
+Instamrkt supports several variations of pools but the basic distinctions are between *parimutuel* and *binary*. 
 
 **Parimutuel**
 Parimutuel pools are defined by having multiple targets (usually more than 2) and the "None" target which allows a user to choose the target for the specified action. 
