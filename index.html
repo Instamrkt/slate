@@ -89,6 +89,113 @@
 
 <p>Please check our <a href="#sample-scenarios">Sample scenarios</a> section for examples of more detailed game flow.</p>
 
+          <h1 id='getting-started-with-the-instamrkt-api-1-0'>Getting started with the Instamrkt API (1.0)</h1><h2 id='overview'>Overview</h2>
+<p>We use the word &ldquo;user&rdquo; to mean the end user of your app/site/device and &ldquo;you&rdquo; to mean the developer implenenting your app/site/device and integrating with Instamrkt.  </p>
+<h3 id='introduction'>Introduction</h3>
+<p>Instamrkt is an API based prediction market with 2 modes of operation. Both the REST version of the API and the websocket mode support similary functionality but with different operational characteristics. Websockets are push based while REST must be polled to retrieve updates. </p>
+
+<p>Regardless of the connection mechanism much of the terminology is the same so let&rsquo;s start with that. </p>
+<h3 id='basic-terminology'>Basic terminology</h3>
+<p>Every registerd site or app has a unique <em>source</em> defined by a <strong>source_id</strong> that identifies the owner of the games underneath it. It serves as a top level grouping for all games that happen underneath it. The <strong>source_id</strong> is a globally unique string. </p>
+
+<p>A <em>game</em> defined by a <strong>game_id</strong> is a single game (full game, not set or half or quarter or period) - e.g. Chelsea v. Man United, Federer v. Nadal, Knicks v. Nets. The <strong>game_id</strong> is a globally unique string. </p>
+
+<p>It is worth noting that games are not unique by name - only by id. That is, you could have 2 games called &ldquo;World Cup Game 3&rdquo; each with a different id. Names matter, don&rsquo;t do this, it&rsquo;s confusing for everybody.  </p>
+
+<p>A <em>pool</em> defined by a <strong>pool_id</strong> is a single question about an <em>event</em> in the game - e.g. &ldquo;Will Federer&rsquo;s next serve be an ace?&rdquo; is a pool. The  <em>pool_id</em> is a globally unique string. </p>
+
+<p>This is a good time to introduce the concepts of <em>actions</em> and <em>targets</em>. Every <em>pool</em> contains at MOST 1 <em>action</em> and 2 or more <em>targets</em>. In the previous example of &ldquo;Will Federer&rsquo;s next serve be an ace?&rdquo; In this case the options available to the user would be &ldquo;Yes&rdquo; and &ldquo;No&rdquo;. These are targets. Federer&rsquo;s ace is the action. A more complex pool structure might allow the user to choose from a set of targets (team members for example). Something like &ldquo;Who will get substituted next?&rdquo; with options available to the user of &ldquo;Messi, Neymar, Suarez, None&rdquo;. In this case &ldquo;Messi, Neymar, Suarez&rdquo; are targets. &ldquo;None&rdquo; is a special target appended to all <em>parimutuel</em> pools that indicates &ldquo;None of these choices&rdquo;. It is up to you whether or not to display the &ldquo;None&rdquo; target. </p>
+
+<p>Instamrkt supports several types of pools but the basic distinctions are between <em>parimutuel</em> and <em>binary</em>. </p>
+
+<p><strong>Parimutuel</strong>
+Parimutuel pools are defined by having multiple targets (usually more than 2) and the &ldquo;None&rdquo; target which allows a user to choose the target for the specified action. </p>
+
+<p><strong>Binary</strong>
+Binary pools only have two targets which are &ldquo;yes&rdquo; and &ldquo;no&rdquo;. A user may choose only those options when submitting a prediction. A synthetic ID is generated for the &ldquo;yes&rdquo; option while the no option target is &ldquo;None&rdquo;.</p>
+<h3 id='what-happens-to-unresolved-predictions'>What happens to unresolved predictions?</h3>
+<p>COMING <strong>TODO</strong></p>
+<h3 id='the-flow-of-your-application'>The flow of your application</h3>
+<p><strong>Login</strong></p>
+
+<p><em>We assume that you have signed up (registered) on the Instamrkt.com site already - either directly on our site or by using an embedded script.</em></p>
+
+<p>Make a <a href="#loin">REST request to login to Instamrkt</a> by passing username, password and optionally a next parameter indicating a URL to redirect to after login. </p>
+
+<p><strong>Websocket Connection</strong></p>
+
+<p>Using the <em>user_session_key</em> and <em>user_id</em> a conection to the websocket may now be established. </p>
+
+<p>To connect to the websocket create the connection string as follows:
+Create and HMAC using SHA256 of (id, nonce, user_session_key) where <em>id</em> is the user_id returned from the login message, <em>nonce</em> is a random string (we use current UTC epoch time in milliseconds) and <em>user_session_key</em> is the value of the same name returned in the login or signup request. </p>
+
+<p><strong>Retrieving Game Lists</strong></p>
+
+<p>Each source identified by its <em>source_id</em> is its own encapsulated universe of games. Games are not shareable across sources. The reason for this is to separate games for different users of the platform. </p>
+
+<p><strong>You must kow the source_id for the source you are trying to display games for.</strong> </p>
+
+<p>There is currently no way to get a list of sources. You are provided with a unique source_id when you sign up for the platform. You do not need to keep the source_id a secret. </p>
+
+<p>For testing you can use Instamrkt development source_id which is:
+<code class="prettyprint">c295ecdc-9194-428a-8353-20513856cda1</code></p>
+
+<p>Using your source_id or the Instamrkt development id make a websocket request for all available games in that source by sending message <a href="#list-games-for-source">list_games_for_source (code 380)</a> to the server. </p>
+
+<p>The response will be a list of games that are currently open to receive predictions. </p>
+
+<p>To get a list of all upcoming games please use the REST call to <a href="#games-upcoming">list upcoming games</a></p>
+
+<p><strong>Subscribing to a game</strong> </p>
+
+<p>You will not receive game related messages until you have <a href="#join-game">subscribed to a game</a></p>
+
+<p>From the list of returned games choose the <em>game_id</em> you wish to join and send message <a href="#join-game">join_game (code 363)</a>. When you receive a successful response you will start to receive all updates for that game. Note that joining a game triggers the server to notify all other users in your source that a new user (you) has joined the game. Please see the <a href="#join-game#">join_game</a> published message for more information.  </p>
+
+<p><strong>Getting available pools</strong> </p>
+
+<p>Pools can be in one of three states. </p>
+
+<ol>
+<li>Open (Available)</li>
+<li>Running</li>
+<li>Closed (Resolved)</li>
+</ol>
+
+<p><strong>Open</strong></p>
+
+<p>Open pools are pools in which a user has not yet made a prediction. You can obtain a list of open pools by sending message <a href="#list-all-open-pools-for-game">list_all_open_pools_for_game (code 387)</a>. These are intended to be displayed as available for a user to make a prediction. </p>
+
+<p>If you only want to see open pools for yourself send message <a href="">list_my_open_betting_pools_for_game (code 388)</a>. </p>
+
+<p><strong>Running</strong> </p>
+
+<p>Running pools have a prediction made by a user but do not yet have an outcome. They are in a pending state. For example, if a question arrives &ldquo;who will score the next goal&rdquo; and the user selects &ldquo;Messi&rdquo; the pool will remain in the <em>running</em> state until a goal is scored. If no goal is scored please see the section <a href="">What happens to unresolved predictions?</a>. Obviously, we must wait until the next goal is scored before we move the pool from the <em>running</em> state to the <em>resolved</em> state. Instamrkt will notify you when a pool must be moved from state to state. </p>
+
+<p><strong>Closed</strong></p>
+
+<p>Closed pools have a user prediction, an outcome and a status. Essential pieces of information to convey to the user are:</p>
+
+<ol>
+<li>The prediction they made</li>
+<li>The actual outcome</li>
+<li>Optional - The points won through this prediction</li>
+<li>Optional - How many people the user beat</li>
+</ol>
+
+<p><strong>Retrieving Pool State</strong> 
+You can request the state of each of the various pools with by sending the following messages:</p>
+
+<p>NOTE that requesting <em>running</em> and <em>closed</em> pools will only return the users pools. </p>
+
+<ol>
+<li><em>Open</em> - send the message <a href="">list_open_pools_for_game (code 387)</a> for all opened pools and <list_my_open_pools_for_game (code 388)</a> for users open pools.</li>
+<li><em>Running</em> - send the message <a href="">list_my_running_pools_for_game (code 389)</a></li>
+<li><em>Closed</em> - send the message <a href="">list_my_resolved_pools_for_game (code 390)</a></li>
+</ol>
+<h3 id='notes'>NOTES</h3>
+<p>The action is usually specified in the title of the pool or chosen by the user if the interface allows it. A user may choose at MOST one target and one action. A pool is fully specified if both a target and an action are chosen. Instamrkt does not support compound predictions (parlays) at this time. </p>
+
           <h1 id='authentication'>Authentication</h1>
 <p><aside class="success">
 Remember — we care about security for your own good!
