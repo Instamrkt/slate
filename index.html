@@ -104,9 +104,11 @@
 
 <p>A <em>pool</em> defined by a <strong>pool_id</strong> is a single question about an <em>event</em> in the game - e.g. &ldquo;Will Federer&rsquo;s next serve be an ace?&rdquo; is a pool. The  <em>pool_id</em> is a globally unique string. </p>
 
-<p>This is a good time to introduce the concepts of <em>actions</em> and <em>targets</em>. Every <em>pool</em> contains at MOST 1 <em>action</em> and 2 or more <em>targets</em>. In the previous example of &ldquo;Will Federer&rsquo;s next serve be an ace?&rdquo; In this case the options available to the user would be &ldquo;Yes&rdquo; and &ldquo;No&rdquo;. These are targets. Federer&rsquo;s ace is the action. A more complex pool structure might allow the user to choose from a set of targets (team members for example). Something like &ldquo;Who will get substituted next?&rdquo; with options available to the user of &ldquo;Messi, Neymar, Suarez, None&rdquo;. In this case &ldquo;Messi, Neymar, Suarez&rdquo; are targets. &ldquo;None&rdquo; is a special target appended to all <em>parimutuel</em> pools that indicates &ldquo;None of these choices&rdquo;. It is up to you whether or not to display the &ldquo;None&rdquo; target. </p>
+<p>This is a good time to introduce the concepts of <em>actions</em> and <em>targets</em>. Every <em>pool</em> contains at MOST 1 <em>action</em> and 2 or more <em>targets</em>. In the previous example of &ldquo;Will Federer&rsquo;s next serve be an ace?&rdquo; In this case the options available to the user would be &ldquo;Yes&rdquo; and &ldquo;No&rdquo;. These are targets. Federer&rsquo;s ace is the action. </p>
 
-<p>Instamrkt supports several types of pools but the basic distinctions are between <em>parimutuel</em> and <em>binary</em>. </p>
+<p>A more complex pool structure might allow the user to choose from a set of targets (team members for example). Something like &ldquo;Who will get substituted next?&rdquo; with options available to the user of &ldquo;Messi, Neymar, Suarez, None&rdquo;. In this case &ldquo;Messi, Neymar, Suarez&rdquo; are targets. &ldquo;None&rdquo; is a special target appended to all <em>parimutuel</em> pools that indicates &ldquo;None of these choices&rdquo;. It is up to you whether or not to display the &ldquo;None&rdquo; target. </p>
+
+<p>Instamrkt supports several variations of pools but the basic distinctions are between <em>parimutuel</em> and <em>binary</em>. </p>
 
 <p><strong>Parimutuel</strong>
 Parimutuel pools are defined by having multiple targets (usually more than 2) and the &ldquo;None&rdquo; target which allows a user to choose the target for the specified action. </p>
@@ -4163,7 +4165,7 @@ This functionality is also provided automatically by instamrkt - pools are opene
 </span></code></pre>
 <pre><code class="highlight json"><span class="p">{</span><span class="w">
     </span><span class="s2">"response_header"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
-    </span><span class="s2">"res"</span><span class="p">:</span><span class="w"> </span><span class="mi">360</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"res"</span><span class="p">:</span><span class="w"> </span><span class="mi">361</span><span class="p">,</span><span class="w">
     </span><span class="s2">"pool_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"6cca4a84-d3e5-4d56-9f5e-acb50ecd5f1d"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"target_level"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
     </span><span class="s2">"distribution"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
@@ -4173,30 +4175,28 @@ This functionality is also provided automatically by instamrkt - pools are opene
             </span><span class="s2">"to_win_if_backed"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w">
             </span><span class="s2">"display_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"brazil"</span><span class="p">,</span><span class="w">
             </span><span class="s2">"backing_money"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"bets"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-                </span><span class="p">{</span><span class="w">
-                    </span><span class="s2">"bet_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"c34bcc05-58ea-4294-9310-9f8cbd121e29"</span><span class="p">,</span><span class="w">
-                    </span><span class="s2">"placed_at"</span><span class="p">:</span><span class="w"> </span><span class="mi">1421937458</span><span class="p">,</span><span class="w">
-                    </span><span class="s2">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w">
-                    </span><span class="s2">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
-                </span><span class="p">}</span><span class="w">
-            </span><span class="p">]</span><span class="w">
-        </span><span class="p">},</span><span class="w">
+        </span><span class="err">}</span><span class="p">,</span><span class="w">
         </span><span class="p">{</span><span class="w">
             </span><span class="s2">"target_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"none"</span><span class="p">,</span><span class="w">
             </span><span class="s2">"backing_people"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
             </span><span class="s2">"to_win_if_backed"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w">
             </span><span class="s2">"display_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"brazil"</span><span class="p">,</span><span class="w">
             </span><span class="s2">"backing_money"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"bets"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
-        </span><span class="p">},</span><span class="w">
+        </span><span class="err">}</span><span class="p">,</span><span class="w">
         </span><span class="p">{</span><span class="w">
             </span><span class="s2">"target_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"netherlands"</span><span class="p">,</span><span class="w">
             </span><span class="s2">"backing_people"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
             </span><span class="s2">"to_win_if_backed"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w">
             </span><span class="s2">"display_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"brazil"</span><span class="p">,</span><span class="w">
             </span><span class="s2">"backing_money"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"bets"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
+        </span><span class="err">}</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="s2">"new_bets"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"bet_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"c34bcc05-58ea-4294-9310-9f8cbd121e29"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"placed_at"</span><span class="p">:</span><span class="w"> </span><span class="mi">1421937458</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
         </span><span class="p">}</span><span class="w">
     </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
@@ -4255,8 +4255,8 @@ This functionality is also provided automatically by instamrkt - pools are opene
 <td>You have successfully placed your prediction.</td>
 </tr>
 <tr>
-<td>new_betting_pool_bets_distribution</td>
-<td>360</td>
+<td>betting_pool_bets_distribution_update</td>
+<td>361</td>
 <td>You have changed the pool distribution. This is broadcast to all game subscribers.</td>
 </tr>
 </tbody></table>
@@ -4289,8 +4289,35 @@ This functionality is also provided automatically by instamrkt - pools are opene
 <td>The amount which you have specified.</td>
 </tr>
 </tbody></table>
-<h4 id='new-distribution'>New distribution</h4>
-<p>Described in <a href="#get-betting-pool-distribution">this section</a>.</p>
+<h4 id='updated-distribution'>Updated distribution</h4>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>pool_id</td>
+<td>:YOUR_POOL_ID</td>
+<td>The pool id for which the distribution was updated.</td>
+</tr>
+<tr>
+<td>target_level</td>
+<td>0</td>
+<td>The computed target level for sent targets. E.g. - 1 for &ldquo;argentina, brazil&rdquo;, 2 for &ldquo;argentina:9, brazil:7&rdquo;</td>
+</tr>
+<tr>
+<td>distribution</td>
+<td>[]</td>
+<td>A list of current predictions, each an object with predictions for a given target (<em>does not</em> contain a list of all bets, contains current target multiplier, display name and total amount backing the target).</td>
+</tr>
+<tr>
+<td>new_bets</td>
+<td>[]</td>
+<td>A list of new bets that caused the distribution update, with details.</td>
+</tr>
+</tbody></table>
 <h2 id='get-betting-pool-distribution'>Get betting pool distribution</h2>
 <blockquote>
 <p>Expects the following JSON structure:</p>
