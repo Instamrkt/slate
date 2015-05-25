@@ -842,15 +842,16 @@ game_id | :YOUR_GAME_ID | The game id you provided.
     "response_header": {},
     "res": 345,
     "source_id": "30cee1fa-fb20-41a6-a61c-0e0335abc2a9"
-   	"games": {
-        "dc164a36-4b82-47a4-a2b4-be757a018c9e": {
+   	"games": [
+      {
+          "game_id": "dc164a36-4b82-47a4-a2b4-be757a018c9e",
 	        "status": "game_in_progress_betting_active",
 	        "name": "Argentina - Brazil",
 	        "type": "d57951c0-c5a6-4260-bc97-1f1065daece3",
 	        "open_at": "1417188144748",
 	        "close_at": null
     	}
-    }
+    ]
 }
 ```
 
@@ -880,7 +881,7 @@ games_list_for_source | 345 | You have received the list of games active for you
 Parameter | Default | Description
 --------- | ------- | -----------
 source_id | :YOUR_SOURCE_ID | Your source id.
-games | {} | A dictionary containing all the active games for your source. **key** - game id, **value** - game data(status (possible values: "betting_not_yet_active", "pre_game_betting_active", "game_in_progress_betting_active", "game_in_progress_betting_closed", "game_closed"), name, type, open_at, close_at).
+games | [] | A list containing all the active games for your source. Each game objects contains game data - game_id, status (possible values: "betting_not_yet_active", "pre_game_betting_active", "game_in_progress_betting_active", "game_in_progress_betting_closed", "game_closed"), name, type, open_at, close_at.
 
 ## List upcoming games for source
 
