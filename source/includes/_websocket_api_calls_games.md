@@ -823,7 +823,7 @@ Parameter | Default | Description
 game_id | :YOUR_GAME_ID | The game id you provided.
 
 
-## List games for source
+## List active games for source
 
 > Expects the following JSON structure:
 
@@ -841,6 +841,7 @@ game_id | :YOUR_GAME_ID | The game id you provided.
 {
     "response_header": {},
     "res": 345,
+    "source_id": "30cee1fa-fb20-41a6-a61c-0e0335abc2a9"
    	"games": {
         "dc164a36-4b82-47a4-a2b4-be757a018c9e": {
 	        "status": "game_in_progress_betting_active",
@@ -880,3 +881,64 @@ Parameter | Default | Description
 --------- | ------- | -----------
 source_id | :YOUR_SOURCE_ID | Your source id.
 games | {} | A dictionary containing all the active games for your source. **key** - game id, **value** - game data(status (possible values: "betting_not_yet_active", "pre_game_betting_active", "game_in_progress_betting_active", "game_in_progress_betting_closed", "game_closed"), name, type, open_at, close_at).
+
+## List upcoming games for source
+
+> Expects the following JSON structure:
+
+```json
+{
+  "header": {},
+  "op": 3811,
+  "source_id": "30cee1fa-fb20-41a6-a61c-0e0335abc2a9"
+}
+```
+
+> Returns the following JSON structure:
+
+```json
+{
+    "response_header": {},
+    "source_id": "30cee1fa-fb20-41a6-a61c-0e0335abc2a9"
+    "res": 3461,
+    "games": [
+      {
+          "id": "dc164a36-4b82-47a4-a2b4-be757a018c9e",
+          "source_id": "30cee1fa-fb20-41a6-a61c-0e0335abc2a9",
+          "game_name": "Argentina - Brazil",
+          "currency": "DON",
+          "game_type_id": "d57951c0-c5a6-4260-bc97-1f1065daece3",
+          "live_start_at": "1417188144748",
+          "hashtag": "#ArgBra"
+      }
+    ]
+}
+```
+
+
+Obtain full list of upcoming games for a source with given id.
+
+### Operation code
+
+Name | Code
+--------- | -------
+list_upcoming_games_for_source | 3811
+
+### Call Parameters
+
+Parameter | Default | Description
+--------- | ------- | -----------
+source_id | null | Your source id.
+
+### Response code
+
+Name | Code | Result
+--------- | ------- | -----------
+upcoming_games_list_for_source | 3461 | You have received the list of games active for your source id.
+
+### Response Parameters
+
+Parameter | Default | Description
+--------- | ------- | -----------
+source_id | :YOUR_SOURCE_ID | Your source id.
+games | [] | A list containing objects for all the upcoming games for your source. Each object contains game data - id, source_id, game_name, currency, live_start_at, game_type_id and a game hashtag.

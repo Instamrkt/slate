@@ -797,21 +797,21 @@ pools_list | [] | A list of pools opened for game in which you have placed a pre
             "backing_people": 0,
             "to_win_if_backed": 1.0,
             "display_name": "brazil",
-            "backing_money": 1.0,
+            "backing_money": 1.0
         },
         {
             "target_id": "none",
             "backing_people": 0,
             "to_win_if_backed": 1.0,
             "display_name": "brazil",
-            "backing_money": 0.0,
+            "backing_money": 0.0
         },
         {
             "target_id": "netherlands",
             "backing_people": 0,
             "to_win_if_backed": 1.0,
             "display_name": "brazil",
-            "backing_money": 0.0,
+            "backing_money": 0.0
         }
     ],
     "new_bets": [

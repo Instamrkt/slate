@@ -426,7 +426,7 @@ Parameter | Description
 
 Parameter | Default | Description
 --------- | ------- | -----------
-upcoming_games | [] | A list of objects representing games. Each object contains the following fields: id, source_id (for the source hosting the game), currency, live_start_at, game_type_id.
+upcoming_games | [] | A list of objects representing games. Each object contains the following fields: id, source_id (for the source hosting the game), game_name, currency, live_start_at, game_type_id, hashtag.
 
 ## Statistics
 
