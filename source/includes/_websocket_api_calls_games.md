@@ -849,7 +849,38 @@ game_id | :YOUR_GAME_ID | The game id you provided.
 	        "name": "Argentina - Brazil",
 	        "type": "d57951c0-c5a6-4260-bc97-1f1065daece3",
 	        "open_at": "1417188144748",
-	        "close_at": null
+          "schedulted_at": "1417188144748",
+	        "close_at": null,
+          "targets": [
+            {
+                "display_name": "none",
+                "symbol": "non",
+                "target_id": "none",
+                "targets": []
+            },
+            {
+                "display_name": "bra",
+                "symbol": "bra",
+                "target_id": "bra",
+                "targets": []
+            },
+            {
+                "display_name": "arg",
+                "symbol": "arg",
+                "target_id": "arg",
+                "targets": []
+            }
+        ],
+        "actions": [
+            {
+                "name": "offside",
+                "action_id": "offside"
+            },
+            {
+                "name": "goal",
+                "action_id": "goal"
+            }
+        ],
     	}
     ]
 }
@@ -881,7 +912,7 @@ games_list_for_source | 345 | You have received the list of games active for you
 Parameter | Default | Description
 --------- | ------- | -----------
 source_id | :YOUR_SOURCE_ID | Your source id.
-games | [] | A list containing all the active games for your source. Each game objects contains game data - game_id, status (possible values: "betting_not_yet_active", "pre_game_betting_active", "game_in_progress_betting_active", "game_in_progress_betting_closed", "game_closed"), name, type, open_at, close_at.
+games | [] | A list containing all the active games for your source. Each game objects contains game data - game_id, status (possible values: "betting_not_yet_active", "pre_game_betting_active", "game_in_progress_betting_active", "game_in_progress_betting_closed", "game_closed"), name, type, open_at, close_at, list of actions (name and action id) and list of target objects (display_name, symbol, target_id, targets(list of subtargets)).
 
 ## List upcoming games for source
 
