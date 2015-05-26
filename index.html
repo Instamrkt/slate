@@ -8,7 +8,7 @@
 
     <link href="stylesheets/screen.css" rel="stylesheet" type="text/css" media="screen" />
     <link href="stylesheets/print.css" rel="stylesheet" type="text/css" media="print" />
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
       <script src="javascripts/all.js" type="text/javascript"></script>
 
       <script>
@@ -45,10 +45,12 @@
     <div class="page-wrapper">
       <div class="dark-box"></div>
       <div class="content">
-        <h1 id='introduction'>Introduction</h1>
+        <h1 id="introduction">Introduction</h1>
+
 <p>Below you can find a general overview of the system and the philosophy of Instamrkt and the API.</p>
 
-          <h1 id='general-overview'>General overview</h1>
+          <h1 id="general-overview">General overview</h1>
+
 <p>General overview of the system and its APIs.</p>
 
 <p>Instamrkt is completely API driven. As such, we served as the first client developers against the API while building the demo live football (soccer) prediction app.</p>
@@ -61,7 +63,9 @@
 </ol>
 
 <p>The Websocket API is used for distributing all real-time game-related information. Everything else can (and should) be obtainable through the REST API.</p>
-<h2 id='system-architecture'>System architecture</h2>
+
+<h2 id="system-architecture">System architecture</h2>
+
 <p><img alt="System architecture" src="images/architecture.png" /></p>
 
 <p>There are three primary components.</p>
@@ -71,14 +75,22 @@
 <li>Resolver</li>
 <li>Event server</li>
 </ol>
-<h3 id='api-server'>API server</h3>
+
+<h3 id="api-server">API server</h3>
+
 <p>The API server is the primary connection point for all clients. It is a websocket that distributes information to clients via JSON messages. All clients that use the websocket (in contrast to the REST API) connect here. Clients receive solicited (responses to requests) and unsolicited (events and updates) messages from this stream.
 <strong>Clients will only interact with the API server</strong> but it is important to understand the overall architecture of the system. </p>
-<h3 id='resolver'>Resolver</h3>
+
+<h3 id="resolver">Resolver</h3>
+
 <p>The <em>Resolver</em> is a process that receives events and is responsible for checking all open pools and determining if the incoming event is sufficient to definitively determine an outcome.</p>
-<h3 id='event-server'>Event Server</h3>
+
+<h3 id="event-server">Event Server</h3>
+
 <p><em>Event Server</em> is the source of events that can potentially resolve pools or simply events that should be passed on to clients to inform the of current state of the game. <em>This is an optional part of the system, as events can also be registered manually through the API by admins with appropriate privilege.</em></p>
-<h2 id='user-flow-overview'>User flow overview</h2>
+
+<h2 id="user-flow-overview">User flow overview</h2>
+
 <p>User flow is as follows:</p>
 
 <ol>
@@ -89,13 +101,20 @@
 
 <p>Please check our <a href="#sample-scenarios">Sample scenarios</a> section for examples of more detailed game flow.</p>
 
-          <h1 id='getting-started-with-the-instamrkt-api-1-0'>Getting started with the Instamrkt API (1.0)</h1><h2 id='overview'>Overview</h2>
+          <h1 id="getting-started-with-the-instamrkt-api-(1.0)">Getting started with the Instamrkt API (1.0)</h1>
+
+<h2 id="overview">Overview</h2>
+
 <p>We use the word &ldquo;user&rdquo; to mean the end user of your app/site/device and &ldquo;you&rdquo; to mean the developer implenenting your app/site/device and integrating with Instamrkt.  </p>
-<h3 id='introduction'>Introduction</h3>
+
+<h3 id="introduction">Introduction</h3>
+
 <p>Instamrkt is an API based prediction market with 2 modes of operation. Both the REST version of the API and the websocket mode support similary functionality but with different operational characteristics. Websockets are push based while REST must be polled to retrieve updates. </p>
 
 <p>Regardless of the connection mechanism much of the terminology is the same so let&rsquo;s start with that. </p>
-<h3 id='basic-terminology'>Basic terminology</h3>
+
+<h3 id="basic-terminology">Basic terminology</h3>
+
 <p>Every registerd site or app has a unique <em>source</em> defined by a <strong>source_id</strong> that identifies the owner of the games underneath it. It serves as a top level grouping for all games that happen underneath it. The <strong>source_id</strong> is a globally unique string. </p>
 
 <p>A <em>game</em> defined by a <strong>game_id</strong> is a single game (full game, not set or half or quarter or period) - e.g. Chelsea v. Man United, Federer v. Nadal, Knicks v. Nets. The <strong>game_id</strong> is a globally unique string. </p>
@@ -115,9 +134,13 @@ Parimutuel pools are defined by having multiple targets (usually more than 2) an
 
 <p><strong>Binary</strong>
 Binary pools only have two targets which are &ldquo;yes&rdquo; and &ldquo;no&rdquo;. A user may choose only those options when submitting a prediction. A synthetic ID is generated for the &ldquo;yes&rdquo; option while the no option target is &ldquo;None&rdquo;.</p>
-<h3 id='what-happens-to-unresolved-predictions'>What happens to unresolved predictions?</h3>
+
+<h3 id="what-happens-to-unresolved-predictions?">What happens to unresolved predictions?</h3>
+
 <p>COMING <strong>TODO</strong></p>
-<h3 id='the-flow-of-your-application'>The flow of your application</h3>
+
+<h3 id="the-flow-of-your-application">The flow of your application</h3>
+
 <p><strong>Login</strong></p>
 
 <p><em>We assume that you have signed up (registered) on the Instamrkt.com site already - either directly on our site or by using an embedded script.</em></p>
@@ -195,13 +218,16 @@ You can request the state of each of the various pools with by sending the follo
 <li><em>Running</em> - send the message <a href="">list_my_running_pools_for_game (code 389)</a></li>
 <li><em>Closed</em> - send the message <a href="">list_my_resolved_pools_for_game (code 390)</a></li>
 </ol>
-<h3 id='notes'>NOTES</h3>
+
+<h3 id="notes">NOTES</h3>
+
 <p>The action is usually specified in the title of the pool or chosen by the user if the interface allows it. A user may choose at MOST one target and one action. A pool is fully specified if both a target and an action are chosen. Instamrkt does not support compound predictions (parlays) at this time. </p>
 
-          <h1 id='authentication'>Authentication</h1>
-<p><aside class="success">
+          <h1 id="authentication">Authentication</h1>
+
+<aside class="success">
 Remember — we care about security for your own good!
-</aside></p>
+</aside>
 
 <p>All <strong>REST Api</strong> calls require the presence of an encrypted cookie, which is generated for user upon successful sign in / sign up and returned as a cookie.</p>
 
@@ -216,7 +242,8 @@ Remember — we care about security for your own good!
 
 <p>This is performed through the REST API and grants further access to this API and a Websocket API.</p>
 
-          <h1 id='authorization'>Authorization</h1>
+          <h1 id="authorization">Authorization</h1>
+
 <p>Some of the calls require a different level of priviliges.</p>
 
 <p>We distinguish the following admin level privileges:</p>
@@ -226,10 +253,14 @@ Remember — we care about security for your own good!
 <li>Game admins</li>
 </ol>
 
-<p><aside class="warning">
+<aside class="warning">
 As of now, the above privilege levels are not opened to users.
-</aside></p>
-<h2 id='privilege-levels'>Privilege levels</h2><h3 id='game-source-admin'>Game source admin</h3>
+</aside>
+
+<h2 id="privilege-levels">Privilege levels</h2>
+
+<h3 id="game-source-admin">Game source admin</h3>
+
 <p>Game source admin is authorized to:</p>
 
 <ol>
@@ -238,7 +269,9 @@ As of now, the above privilege levels are not opened to users.
 <li><a href="#create-and-open-a-game">Open a game for game source</a></li>
 <li><a href="#become-an-admin-for-a-game">Become an admin</a> for every game opened for game source</li>
 </ol>
-<h3 id='game-admin'>Game admin</h3>
+
+<h3 id="game-admin">Game admin</h3>
+
 <ol>
 <li><a href="#update-game-details">Update game details</a></li>
 <li><a href="#close-a-game">Close a game</a></li>
@@ -250,18 +283,19 @@ As of now, the above privilege levels are not opened to users.
 <li><a href="#resolve-pool--register-game-event">Register events</a></li>
 </ol>
 
-          <h1 id='rest-calls'>REST Calls</h1>
-<p><aside class="notice">
+          <h1 id="rest-calls">REST Calls</h1>
+
+<aside class="notice">
 Every rest call (except for signup and login) requires a server generated xsrf token. This (encrypted) token is generated by the server and saved on the client as soon as the user hits the first site / screen.
-</aside></p>
+</aside>
 
-<p><aside class="notice">
+<aside class="notice">
 All request that require personal information require a userId parameter which is checked against a secure cookie.
-</aside></p>
+</aside>
 
-<p><aside class="notice">
-All responses are of type <code class="prettyprint">application/json</code>.
-</aside></p>
+<aside class="notice">
+All responses are of type `application/json`.
+</aside>
 
 <p>Passing parameters happens as follows:</p>
 
@@ -295,11 +329,13 @@ All responses are of type <code class="prettyprint">application/json</code>.
 <td>500</td>
 </tr>
 </tbody></table>
-<h2 id='login'>Login</h2>
+
+<h2 id="login">Login</h2>
+
 <blockquote>
 <p>Sample request object:</p>
 </blockquote>
-<pre><code class="highlight javascript"><span class="kd">var</span> <span class="nx">$</span>       <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'jquery'</span><span class="p">);</span>
+<pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">$</span>       <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'jquery'</span><span class="p">);</span>
 <span class="nx">$</span><span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="s1">'/r/login'</span><span class="p">,</span> <span class="p">{</span>
   <span class="s1">'username'</span><span class="p">:</span> <span class="nx">username</span><span class="p">,</span>
   <span class="s1">'password'</span><span class="p">:</span> <span class="nx">password</span>
@@ -308,11 +344,17 @@ All responses are of type <code class="prettyprint">application/json</code>.
 </code></pre>
 
 <p>This is used to sign a user in.</p>
-<h3 id='url'>URL</h3>
+
+<h3 id="url">URL</h3>
+
 <p><code class="prettyprint">/r/login/</code></p>
-<h3 id='request-type'>Request type</h3>
+
+<h3 id="request-type">Request type</h3>
+
 <p><code class="prettyprint">POST</code></p>
-<h3 id='request-parameters'>Request Parameters</h3>
+
+<h3 id="request-parameters">Request Parameters</h3>
+
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -332,7 +374,9 @@ All responses are of type <code class="prettyprint">application/json</code>.
 <td>The page where user is supposed to be redirected after login. Will be appended to the generated redirect url. Optional.</td>
 </tr>
 </tbody></table>
-<h3 id='response-parameters'>Response Parameters</h3>
+
+<h3 id="response-parameters">Response Parameters</h3>
+
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -361,11 +405,13 @@ All responses are of type <code class="prettyprint">application/json</code>.
 <td>Error message. Sent only on <strong>unsuccessful</strong> request.</td>
 </tr>
 </tbody></table>
-<h2 id='oauthlogin'>Oauthlogin</h2>
+
+<h2 id="oauthlogin">Oauthlogin</h2>
+
 <blockquote>
 <p>Sample request object:</p>
 </blockquote>
-<pre><code class="highlight javascript"><span class="kd">var</span> <span class="nx">$</span>       <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'jquery'</span><span class="p">);</span>
+<pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">$</span>       <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'jquery'</span><span class="p">);</span>
 <span class="nx">$</span><span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="s1">'/r/login/oauth/'</span><span class="p">,</span> <span class="p">{</span>
   <span class="s1">'oauthId'</span><span class="p">:</span> <span class="nx">oauth_id</span><span class="p">,</span>
   <span class="s1">'oauthToken'</span><span class="p">:</span> <span class="nx">oauthToken</span><span class="p">,</span>
@@ -375,11 +421,17 @@ All responses are of type <code class="prettyprint">application/json</code>.
 </code></pre>
 
 <p>This is used to sign a user in.</p>
-<h3 id='url'>URL</h3>
+
+<h3 id="url">URL</h3>
+
 <p><code class="prettyprint">/r/login/oauth/</code></p>
-<h3 id='request-type'>Request type</h3>
+
+<h3 id="request-type">Request type</h3>
+
 <p><code class="prettyprint">POST</code></p>
-<h3 id='request-parameters'>Request Parameters</h3>
+
+<h3 id="request-parameters">Request Parameters</h3>
+
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -407,7 +459,9 @@ All responses are of type <code class="prettyprint">application/json</code>.
 <td>The page where user is supposed to be redirected after login. Will be appended to the generated redirect url. Optional.</td>
 </tr>
 </tbody></table>
-<h3 id='response-parameters'>Response Parameters</h3>
+
+<h3 id="response-parameters">Response Parameters</h3>
+
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -436,11 +490,13 @@ All responses are of type <code class="prettyprint">application/json</code>.
 <td>Error message. Sent only on <strong>unsuccessful</strong> request.</td>
 </tr>
 </tbody></table>
-<h2 id='signup'>Signup</h2>
+
+<h2 id="signup">Signup</h2>
+
 <blockquote>
 <p>Sample request object:</p>
 </blockquote>
-<pre><code class="highlight javascript"><span class="kd">var</span> <span class="nx">$</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'jquery'</span><span class="p">);</span>
+<pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">$</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'jquery'</span><span class="p">);</span>
 <span class="nx">$</span><span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="s1">'/r/signup'</span><span class="p">,</span> <span class="p">{</span>
   <span class="s1">'username'</span><span class="p">:</span> <span class="nx">username</span><span class="p">,</span>
   <span class="s1">'email'</span><span class="p">:</span> <span class="nx">email</span><span class="p">,</span>
@@ -449,11 +505,17 @@ All responses are of type <code class="prettyprint">application/json</code>.
 </code></pre>
 
 <p>This is used to sign a user in.</p>
-<h3 id='url'>URL</h3>
+
+<h3 id="url">URL</h3>
+
 <p><code class="prettyprint">/r/signup/</code></p>
-<h3 id='request-type'>Request type</h3>
+
+<h3 id="request-type">Request type</h3>
+
 <p><code class="prettyprint">POST</code></p>
-<h3 id='request-parameters'>Request Parameters</h3>
+
+<h3 id="request-parameters">Request Parameters</h3>
+
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -473,7 +535,9 @@ All responses are of type <code class="prettyprint">application/json</code>.
 <td>The email used to sign up (validated against our database, must be unique). All external communication will be directed to this email.</td>
 </tr>
 </tbody></table>
-<h3 id='response-parameters'>Response Parameters</h3>
+
+<h3 id="response-parameters">Response Parameters</h3>
+
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -502,11 +566,13 @@ All responses are of type <code class="prettyprint">application/json</code>.
 <td>Error message. Sent only on <strong>unsuccessful</strong> request.</td>
 </tr>
 </tbody></table>
-<h2 id='get-username'>Get Username</h2>
+
+<h2 id="get-username">Get Username</h2>
+
 <blockquote>
 <p>Sample request object:</p>
 </blockquote>
-<pre><code class="highlight javascript"><span class="kd">var</span> <span class="nx">$</span>       <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'jquery'</span><span class="p">);</span>
+<pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">$</span>       <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'jquery'</span><span class="p">);</span>
 <span class="kd">var</span> <span class="nx">cookies</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'cookie-getter'</span><span class="p">);</span>
 <span class="kd">var</span> <span class="nx">_xsrf</span>   <span class="o">=</span> <span class="nx">cookies</span><span class="p">(</span><span class="s1">'_xsrf'</span><span class="p">);</span>
 
@@ -519,11 +585,17 @@ All responses are of type <code class="prettyprint">application/json</code>.
 </code></pre>
 
 <p>This is used to retrieve a username of a signed in user.</p>
-<h3 id='url'>URL</h3>
+
+<h3 id="url">URL</h3>
+
 <p><code class="prettyprint">/r/username/</code></p>
-<h3 id='request-type'>Request type</h3>
+
+<h3 id="request-type">Request type</h3>
+
 <p><code class="prettyprint">GET</code></p>
-<h3 id='request-parameters'>Request Parameters</h3>
+
+<h3 id="request-parameters">Request Parameters</h3>
+
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -535,7 +607,9 @@ All responses are of type <code class="prettyprint">application/json</code>.
 <td>userId for which username is to be retrieved.</td>
 </tr>
 </tbody></table>
-<h3 id='response-parameters'>Response Parameters</h3>
+
+<h3 id="response-parameters">Response Parameters</h3>
+
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -554,11 +628,13 @@ All responses are of type <code class="prettyprint">application/json</code>.
 <td>Error message. Sent only on <strong>unsuccessful</strong> request.</td>
 </tr>
 </tbody></table>
-<h2 id='set-username'>Set Username</h2>
+
+<h2 id="set-username">Set Username</h2>
+
 <blockquote>
 <p>Sample request object:</p>
 </blockquote>
-<pre><code class="highlight javascript"><span class="kd">var</span> <span class="nx">$</span>       <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'jquery'</span><span class="p">);</span>
+<pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">$</span>       <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'jquery'</span><span class="p">);</span>
 <span class="kd">var</span> <span class="nx">cookies</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'cookie-getter'</span><span class="p">);</span>
 <span class="kd">var</span> <span class="nx">_xsrf</span>   <span class="o">=</span> <span class="nx">cookies</span><span class="p">(</span><span class="s1">'_xsrf'</span><span class="p">);</span>
 
@@ -571,11 +647,17 @@ All responses are of type <code class="prettyprint">application/json</code>.
 </code></pre>
 
 <p>This is used to update a username of a signed in user. Password needs to be passed for confirmation.</p>
-<h3 id='url'>URL</h3>
+
+<h3 id="url">URL</h3>
+
 <p><code class="prettyprint">/r/username/</code></p>
-<h3 id='request-type'>Request type</h3>
+
+<h3 id="request-type">Request type</h3>
+
 <p><code class="prettyprint">POST</code></p>
-<h3 id='request-parameters'>Request Parameters</h3>
+
+<h3 id="request-parameters">Request Parameters</h3>
+
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -595,7 +677,9 @@ All responses are of type <code class="prettyprint">application/json</code>.
 <td>User&rsquo;s id for which password is to be updated.</td>
 </tr>
 </tbody></table>
-<h3 id='response-parameters'>Response Parameters</h3>
+
+<h3 id="response-parameters">Response Parameters</h3>
+
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -614,11 +698,13 @@ All responses are of type <code class="prettyprint">application/json</code>.
 <td>Error message. Sent only on <strong>unsuccessful</strong> request.</td>
 </tr>
 </tbody></table>
-<h2 id='password-recovery'>Password recovery</h2>
+
+<h2 id="password-recovery">Password recovery</h2>
+
 <blockquote>
 <p>Sample request object:</p>
 </blockquote>
-<pre><code class="highlight javascript"><span class="kd">var</span> <span class="nx">$</span>       <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'jquery'</span><span class="p">);</span>
+<pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">$</span>       <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'jquery'</span><span class="p">);</span>
 <span class="kd">var</span> <span class="nx">cookies</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'cookie-getter'</span><span class="p">);</span>
 <span class="kd">var</span> <span class="nx">_xsrf</span>   <span class="o">=</span> <span class="nx">cookies</span><span class="p">(</span><span class="s1">'_xsrf'</span><span class="p">);</span>
 
@@ -632,11 +718,17 @@ All responses are of type <code class="prettyprint">application/json</code>.
 </code></pre>
 
 <p>This is used to request password recovery. It results in sending out an email with a url in which you can provide a new password (with a recovery code hidden in it).</p>
-<h3 id='url'>URL</h3>
+
+<h3 id="url">URL</h3>
+
 <p><code class="prettyprint">/r/password/recover/</code></p>
-<h3 id='request-type'>Request type</h3>
+
+<h3 id="request-type">Request type</h3>
+
 <p><code class="prettyprint">GER</code></p>
-<h3 id='request-parameters'>Request Parameters</h3>
+
+<h3 id="request-parameters">Request Parameters</h3>
+
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -648,7 +740,9 @@ All responses are of type <code class="prettyprint">application/json</code>.
 <td>Username or email of the user for whom password recovery is requested.</td>
 </tr>
 </tbody></table>
-<h3 id='response-parameters'>Response Parameters</h3>
+
+<h3 id="response-parameters">Response Parameters</h3>
+
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -662,11 +756,13 @@ All responses are of type <code class="prettyprint">application/json</code>.
 <td>Error message. Sent only on <strong>unsuccessful</strong> request.</td>
 </tr>
 </tbody></table>
-<h2 id='password-update-from-recovery'>Password update (from recovery)</h2>
+
+<h2 id="password-update-(from-recovery)">Password update (from recovery)</h2>
+
 <blockquote>
 <p>Sample request object:</p>
 </blockquote>
-<pre><code class="highlight javascript"><span class="kd">var</span> <span class="nx">$</span>       <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'jquery'</span><span class="p">);</span>
+<pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">$</span>       <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'jquery'</span><span class="p">);</span>
 <span class="kd">var</span> <span class="nx">cookies</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'cookie-getter'</span><span class="p">);</span>
 <span class="kd">var</span> <span class="nx">_xsrf</span>   <span class="o">=</span> <span class="nx">cookies</span><span class="p">(</span><span class="s1">'_xsrf'</span><span class="p">);</span>
 
@@ -680,11 +776,17 @@ All responses are of type <code class="prettyprint">application/json</code>.
 </code></pre>
 
 <p>This is used to update password from recovery. Requires the generated and emailed recovery code and an email it was emailed to, since the cookie might not be set in this case (e.g. you are on the new machine and forgot a password).</p>
-<h3 id='url'>URL</h3>
+
+<h3 id="url">URL</h3>
+
 <p><code class="prettyprint">/r/password/update/from_recovery/</code></p>
-<h3 id='request-type'>Request type</h3>
+
+<h3 id="request-type">Request type</h3>
+
 <p><code class="prettyprint">POST</code></p>
-<h3 id='request-parameters'>Request Parameters</h3>
+
+<h3 id="request-parameters">Request Parameters</h3>
+
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -708,7 +810,9 @@ All responses are of type <code class="prettyprint">application/json</code>.
 <td>The email to which the code generated code was sent (the email is also included in the emailed url).</td>
 </tr>
 </tbody></table>
-<h3 id='response-parameters'>Response Parameters</h3>
+
+<h3 id="response-parameters">Response Parameters</h3>
+
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -722,11 +826,13 @@ All responses are of type <code class="prettyprint">application/json</code>.
 <td>Error message. Sent only on <strong>unsuccessful</strong> request.</td>
 </tr>
 </tbody></table>
-<h2 id='password-update-general'>Password update (general)</h2>
+
+<h2 id="password-update-(general)">Password update (general)</h2>
+
 <blockquote>
 <p>Sample request object:</p>
 </blockquote>
-<pre><code class="highlight javascript"><span class="kd">var</span> <span class="nx">$</span>       <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'jquery'</span><span class="p">);</span>
+<pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">$</span>       <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'jquery'</span><span class="p">);</span>
 <span class="kd">var</span> <span class="nx">cookies</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'cookie-getter'</span><span class="p">);</span>
 <span class="kd">var</span> <span class="nx">_xsrf</span>   <span class="o">=</span> <span class="nx">cookies</span><span class="p">(</span><span class="s1">'_xsrf'</span><span class="p">);</span>
 
@@ -740,11 +846,17 @@ All responses are of type <code class="prettyprint">application/json</code>.
 </code></pre>
 
 <p>This is used to update password from a form on the site / app screen.</p>
-<h3 id='url'>URL</h3>
+
+<h3 id="url">URL</h3>
+
 <p><code class="prettyprint">/r/password/update/</code></p>
-<h3 id='request-type'>Request type</h3>
+
+<h3 id="request-type">Request type</h3>
+
 <p><code class="prettyprint">POST</code></p>
-<h3 id='request-parameters'>Request Parameters</h3>
+
+<h3 id="request-parameters">Request Parameters</h3>
+
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -768,7 +880,9 @@ All responses are of type <code class="prettyprint">application/json</code>.
 <td>Id of the user whose the password is to be updated.</td>
 </tr>
 </tbody></table>
-<h3 id='response-parameters'>Response Parameters</h3>
+
+<h3 id="response-parameters">Response Parameters</h3>
+
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -782,11 +896,13 @@ All responses are of type <code class="prettyprint">application/json</code>.
 <td>Error message. Sent only on <strong>unsuccessful</strong> request.</td>
 </tr>
 </tbody></table>
-<h2 id='games-history'>Games history</h2>
+
+<h2 id="games-history">Games history</h2>
+
 <blockquote>
 <p>Sample request object:</p>
 </blockquote>
-<pre><code class="highlight javascript"><span class="kd">var</span> <span class="nx">$</span>       <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'jquery'</span><span class="p">);</span>
+<pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">$</span>       <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'jquery'</span><span class="p">);</span>
 <span class="kd">var</span> <span class="nx">cookies</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'cookie-getter'</span><span class="p">);</span>
 <span class="kd">var</span> <span class="nx">_xsrf</span>   <span class="o">=</span> <span class="nx">cookies</span><span class="p">(</span><span class="s1">'_xsrf'</span><span class="p">)</span>
 
@@ -799,11 +915,17 @@ All responses are of type <code class="prettyprint">application/json</code>.
 </code></pre>
 
 <p>This is used to request a user&rsquo;s game history (all the games he has predicted in).</p>
-<h3 id='url'>URL</h3>
+
+<h3 id="url">URL</h3>
+
 <p><code class="prettyprint">/r/games/history/</code></p>
-<h3 id='request-type'>Request type</h3>
+
+<h3 id="request-type">Request type</h3>
+
 <p><code class="prettyprint">GET</code></p>
-<h3 id='request-parameters'>Request Parameters</h3>
+
+<h3 id="request-parameters">Request Parameters</h3>
+
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -815,7 +937,9 @@ All responses are of type <code class="prettyprint">application/json</code>.
 <td>Id of the user whose game history is to be retrieved.</td>
 </tr>
 </tbody></table>
-<h3 id='response-parameters'>Response Parameters</h3>
+
+<h3 id="response-parameters">Response Parameters</h3>
+
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -829,11 +953,13 @@ All responses are of type <code class="prettyprint">application/json</code>.
 <td>A list of objects representing games. Each object contains the following fields: id, name, type, open_at, close_at.</td>
 </tr>
 </tbody></table>
-<h2 id='games-upcoming'>Games upcoming</h2>
+
+<h2 id="games-upcoming">Games upcoming</h2>
+
 <blockquote>
 <p>Sample request object:</p>
 </blockquote>
-<pre><code class="highlight javascript"><span class="kd">var</span> <span class="nx">$</span>       <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'jquery'</span><span class="p">);</span>
+<pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">$</span>       <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'jquery'</span><span class="p">);</span>
 <span class="kd">var</span> <span class="nx">cookies</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'cookie-getter'</span><span class="p">);</span>
 <span class="kd">var</span> <span class="nx">_xsrf</span>   <span class="o">=</span> <span class="nx">cookies</span><span class="p">(</span><span class="s1">'_xsrf'</span><span class="p">)</span>
 
@@ -845,11 +971,17 @@ All responses are of type <code class="prettyprint">application/json</code>.
 </code></pre>
 
 <p>This is used to request upcoming games.</p>
-<h3 id='url'>URL</h3>
+
+<h3 id="url">URL</h3>
+
 <p><code class="prettyprint">/r/games/upcoming/</code></p>
-<h3 id='request-type'>Request type</h3>
+
+<h3 id="request-type">Request type</h3>
+
 <p><code class="prettyprint">GET</code></p>
-<h3 id='request-parameters'>Request Parameters</h3>
+
+<h3 id="request-parameters">Request Parameters</h3>
+
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -861,7 +993,9 @@ All responses are of type <code class="prettyprint">application/json</code>.
 <td>-</td>
 </tr>
 </tbody></table>
-<h3 id='response-parameters'>Response Parameters</h3>
+
+<h3 id="response-parameters">Response Parameters</h3>
+
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -872,14 +1006,16 @@ All responses are of type <code class="prettyprint">application/json</code>.
 <tr>
 <td>upcoming_games</td>
 <td>[]</td>
-<td>A list of objects representing games. Each object contains the following fields: id, source_id (for the source hosting the game), currency, live_start_at, game_type_id.</td>
+<td>A list of objects representing games. Each object contains the following fields: id, source_id (for the source hosting the game), game_name, currency, live_start_at, game_type_id, hashtag.</td>
 </tr>
 </tbody></table>
-<h2 id='statistics'>Statistics</h2>
+
+<h2 id="statistics">Statistics</h2>
+
 <blockquote>
 <p>Sample request object:</p>
 </blockquote>
-<pre><code class="highlight javascript"><span class="kd">var</span> <span class="nx">$</span>       <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'jquery'</span><span class="p">);</span>
+<pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">$</span>       <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'jquery'</span><span class="p">);</span>
 <span class="kd">var</span> <span class="nx">cookies</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'cookie-getter'</span><span class="p">);</span>
 <span class="kd">var</span> <span class="nx">_xsrf</span>   <span class="o">=</span> <span class="nx">cookies</span><span class="p">(</span><span class="s1">'_xsrf'</span><span class="p">)</span>
 
@@ -892,11 +1028,17 @@ All responses are of type <code class="prettyprint">application/json</code>.
 </code></pre>
 
 <p>This is used to request user&rsquo;s personal statistics.</p>
-<h3 id='url'>URL</h3>
+
+<h3 id="url">URL</h3>
+
 <p><code class="prettyprint">/r/statistics/</code></p>
-<h3 id='request-type'>Request type</h3>
+
+<h3 id="request-type">Request type</h3>
+
 <p><code class="prettyprint">GET</code></p>
-<h3 id='request-parameters'>Request Parameters</h3>
+
+<h3 id="request-parameters">Request Parameters</h3>
+
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -908,7 +1050,9 @@ All responses are of type <code class="prettyprint">application/json</code>.
 <td>Id of the user whose statistics are to be retrieved.</td>
 </tr>
 </tbody></table>
-<h3 id='response-parameters'>Response Parameters</h3>
+
+<h3 id="response-parameters">Response Parameters</h3>
+
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -922,11 +1066,13 @@ All responses are of type <code class="prettyprint">application/json</code>.
 <td>A dictionary containing selected user&rsquo;s personal statistics. <strong>key</strong> - statistic name, <strong>value</strong> - statistic value. Sent statistics: total_bets_won, total_bets_lost, average_number_of_bets_per_game, average_points_won_per_game, average_reaction_time.</td>
 </tr>
 </tbody></table>
-<h2 id='friends'>Friends</h2>
+
+<h2 id="friends">Friends</h2>
+
 <blockquote>
 <p>Sample request object:</p>
 </blockquote>
-<pre><code class="highlight javascript"><span class="kd">var</span> <span class="nx">$</span>       <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'jquery'</span><span class="p">);</span>
+<pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">$</span>       <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'jquery'</span><span class="p">);</span>
 <span class="kd">var</span> <span class="nx">cookies</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'cookie-getter'</span><span class="p">);</span>
 <span class="kd">var</span> <span class="nx">_xsrf</span>   <span class="o">=</span> <span class="nx">cookies</span><span class="p">(</span><span class="s1">'_xsrf'</span><span class="p">)</span>
 
@@ -939,11 +1085,17 @@ All responses are of type <code class="prettyprint">application/json</code>.
 </code></pre>
 
 <p>This is used to request user&rsquo;s personal statistics.</p>
-<h3 id='url'>URL</h3>
+
+<h3 id="url">URL</h3>
+
 <p><code class="prettyprint">/r/friends/</code></p>
-<h3 id='request-type'>Request type</h3>
+
+<h3 id="request-type">Request type</h3>
+
 <p><code class="prettyprint">GET</code></p>
-<h3 id='request-parameters'>Request Parameters</h3>
+
+<h3 id="request-parameters">Request Parameters</h3>
+
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -955,7 +1107,9 @@ All responses are of type <code class="prettyprint">application/json</code>.
 <td>Id of the user whose friends are to be retrieved.</td>
 </tr>
 </tbody></table>
-<h3 id='response-parameters'>Response Parameters</h3>
+
+<h3 id="response-parameters">Response Parameters</h3>
+
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -969,11 +1123,13 @@ All responses are of type <code class="prettyprint">application/json</code>.
 <td>A dictionary containing selected user&rsquo;s personal statistics. <strong>key</strong> - friend&rsquo;s user id, <strong>value</strong> - friend&rsquo;s name.</td>
 </tr>
 </tbody></table>
-<h2 id='leaderboard-global'>Leaderboard (global)</h2>
+
+<h2 id="leaderboard-(global)">Leaderboard (global)</h2>
+
 <blockquote>
 <p>Sample request object:</p>
 </blockquote>
-<pre><code class="highlight javascript"><span class="kd">var</span> <span class="nx">$</span>       <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'jquery'</span><span class="p">);</span>
+<pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">$</span>       <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'jquery'</span><span class="p">);</span>
 <span class="kd">var</span> <span class="nx">cookies</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'cookie-getter'</span><span class="p">);</span>
 <span class="kd">var</span> <span class="nx">_xsrf</span>   <span class="o">=</span> <span class="nx">cookies</span><span class="p">(</span><span class="s1">'_xsrf'</span><span class="p">)</span>
 
@@ -985,11 +1141,17 @@ All responses are of type <code class="prettyprint">application/json</code>.
 </code></pre>
 
 <p>This is used to request a global leaderboard.</p>
-<h3 id='url'>URL</h3>
+
+<h3 id="url">URL</h3>
+
 <p><code class="prettyprint">/r/leaderboard/global/</code></p>
-<h3 id='request-type'>Request type</h3>
+
+<h3 id="request-type">Request type</h3>
+
 <p><code class="prettyprint">GET</code></p>
-<h3 id='request-parameters'>Request Parameters</h3>
+
+<h3 id="request-parameters">Request Parameters</h3>
+
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -1001,7 +1163,9 @@ All responses are of type <code class="prettyprint">application/json</code>.
 <td>-</td>
 </tr>
 </tbody></table>
-<h3 id='response-parameters'>Response Parameters</h3>
+
+<h3 id="response-parameters">Response Parameters</h3>
+
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -1015,11 +1179,13 @@ All responses are of type <code class="prettyprint">application/json</code>.
 <td>A list of objects. Every object has the form: <strong>key</strong> - points, <strong>value</strong> - user&rsquo;s name.</td>
 </tr>
 </tbody></table>
-<h2 id='leaderboard-personal'>Leaderboard (personal)</h2>
+
+<h2 id="leaderboard-(personal)">Leaderboard (personal)</h2>
+
 <blockquote>
 <p>Sample request object:</p>
 </blockquote>
-<pre><code class="highlight javascript"><span class="kd">var</span> <span class="nx">$</span>       <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'jquery'</span><span class="p">);</span>
+<pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">$</span>       <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'jquery'</span><span class="p">);</span>
 <span class="kd">var</span> <span class="nx">cookies</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'cookie-getter'</span><span class="p">);</span>
 <span class="kd">var</span> <span class="nx">_xsrf</span>   <span class="o">=</span> <span class="nx">cookies</span><span class="p">(</span><span class="s1">'_xsrf'</span><span class="p">)</span>
 
@@ -1032,11 +1198,17 @@ All responses are of type <code class="prettyprint">application/json</code>.
 </code></pre>
 
 <p>This is used to request a personal leaderboard.</p>
-<h3 id='url'>URL</h3>
+
+<h3 id="url">URL</h3>
+
 <p><code class="prettyprint">/r/leaderboard/personal/</code></p>
-<h3 id='request-type'>Request type</h3>
+
+<h3 id="request-type">Request type</h3>
+
 <p><code class="prettyprint">GET</code></p>
-<h3 id='request-parameters'>Request Parameters</h3>
+
+<h3 id="request-parameters">Request Parameters</h3>
+
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -1048,7 +1220,9 @@ All responses are of type <code class="prettyprint">application/json</code>.
 <td>User id for which personal leaderboard is requested.</td>
 </tr>
 </tbody></table>
-<h3 id='response-parameters'>Response Parameters</h3>
+
+<h3 id="response-parameters">Response Parameters</h3>
+
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -1063,23 +1237,32 @@ All responses are of type <code class="prettyprint">application/json</code>.
 </tr>
 </tbody></table>
 
-          <h1 id='websocket-api-general'>Websocket API: General</h1>
-<p><aside class="notice">
-All websocket calls are expecting a json with the parameters listed for each call.
-</aside></p>
+          <h1 id="websocket-api:-general">Websocket API: General</h1>
 
-<p><aside class="notice">
+<aside class="notice">
+All websocket calls are expecting a json with the parameters listed for each call.
+</aside>
+
+<aside class="notice">
 Each request needs to contain a valid header. Each response contains a response header. Both are described <a href="#headers">below</a>.
-</aside></p>
-<h2 id='connecting'>Connecting</h2><h3 id='connection-url'>Connection URL</h3>
+</aside>
+
+<h2 id="connecting">Connecting</h2>
+
+<h3 id="connection-url">Connection URL</h3>
+
 <p>The connection url:
 <strong>wss://instamrkt.com:9999
 ?id=:YOUR_USER_ID
 &amp;n=:YOUR_GENERATED_NONCE
 &amp;h=:YOUR_HEXDIGEST</strong></p>
-<h3 id='obtaining-id-and-the-session-key'>Obtaining id and the session key</h3>
+
+<h3 id="obtaining-id-and-the-session-key">Obtaining id and the session key</h3>
+
 <p>Both the user_session_key and id are returned in cookies for HTTP users and also returned in the JSON from login or signup REST requests. </p>
-<h3 id='nonce-and-hexdigest'>Nonce and hexdigest</h3><pre><code class="highlight python"><span class="kn">import</span> <span class="nn">hashlib</span>
+
+<h3 id="nonce-and-hexdigest">Nonce and hexdigest</h3>
+<pre class="highlight python"><code><span class="kn">import</span> <span class="nn">hashlib</span>
 
 <span class="n">sha</span>       <span class="o">=</span> <span class="n">hashlib</span><span class="o">.</span><span class="n">sha256</span><span class="p">()</span>
 
@@ -1101,7 +1284,11 @@ Each request needs to contain a valid header. Each response contains a response 
 </ol>
 
 <p>A python example of how to generate one can be found on the right.</p>
-<h2 id='headers'>Headers</h2><h3 id='header'>Header</h3><pre><code class="highlight json"><span class="p">{</span><span class="w">
+
+<h2 id="headers">Headers</h2>
+
+<h3 id="header">Header</h3>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="s2">"session_key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"//not used currently"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"t"</span><span class="p">:</span><span class="w"> </span><span class="mi">1422006034742</span><span class="p">,</span><span class="w">
   </span><span class="s2">"api_version"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.0</span><span class="w">
@@ -1109,17 +1296,21 @@ Each request needs to contain a valid header. Each response contains a response 
 </span></code></pre>
 
 <p>Each client request needs to contain a header depicted on the right.</p>
-<h3 id='response-header'>Response header</h3><pre><code class="highlight json"><span class="p">{</span><span class="w">
+
+<h3 id="response-header">Response header</h3>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="s2">"t"</span><span class="p">:</span><span class="w"> </span><span class="mi">1422007246302</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
 <p>Each response contains a header depicted on the right.</p>
-<h2 id='ping'>Ping</h2>
+
+<h2 id="ping">Ping</h2>
+
 <blockquote>
 <p>Expects the following JSON structure:</p>
 </blockquote>
-<pre><code class="highlight json"><span class="p">{</span><span class="w">
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="s2">"header"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
   </span><span class="s2">"op"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
 </span><span class="p">}</span><span class="w">
@@ -1128,14 +1319,16 @@ Each request needs to contain a valid header. Each response contains a response 
 <blockquote>
 <p>Returns the following JSON structure:</p>
 </blockquote>
-<pre><code class="highlight json"><span class="p">{</span><span class="w">
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="s2">"response_header"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
   </span><span class="s2">"res"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
 <p>You can use this to make sure the websocket connection is still open and ready for sending / receiving messages.</p>
-<h3 id='operation-code'>Operation code</h3>
+
+<h3 id="operation-code">Operation code</h3>
+
 <table><thead>
 <tr>
 <th>Name</th>
@@ -1147,7 +1340,9 @@ Each request needs to contain a valid header. Each response contains a response 
 <td>1</td>
 </tr>
 </tbody></table>
-<h3 id='call-parameters'>Call Parameters</h3>
+
+<h3 id="call-parameters">Call Parameters</h3>
+
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -1161,7 +1356,9 @@ Each request needs to contain a valid header. Each response contains a response 
 <td>-</td>
 </tr>
 </tbody></table>
-<h3 id='response-code'>Response code</h3>
+
+<h3 id="response-code">Response code</h3>
+
 <table><thead>
 <tr>
 <th>Name</th>
@@ -1175,7 +1372,9 @@ Each request needs to contain a valid header. Each response contains a response 
 <td>You connection is valid.</td>
 </tr>
 </tbody></table>
-<h3 id='response-parameters'>Response Parameters</h3>
+
+<h3 id="response-parameters">Response Parameters</h3>
+
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -1189,11 +1388,13 @@ Each request needs to contain a valid header. Each response contains a response 
 <td>-</td>
 </tr>
 </tbody></table>
-<h2 id='opcodes'>Opcodes</h2>
+
+<h2 id="opcodes">Opcodes</h2>
+
 <blockquote>
 <p>Expects the following JSON structure:</p>
 </blockquote>
-<pre><code class="highlight json"><span class="p">{</span><span class="w">
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="s2">"header"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
   </span><span class="s2">"op"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="w">
 </span><span class="p">}</span><span class="w">
@@ -1202,7 +1403,7 @@ Each request needs to contain a valid header. Each response contains a response 
 <blockquote>
 <p>Returns the following JSON structure:</p>
 </blockquote>
-<pre><code class="highlight json"><span class="p">{</span><span class="w">
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="s2">"response_header"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
   </span><span class="s2">"res"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
   </span><span class="s2">"opcodes"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -1219,7 +1420,9 @@ Each request needs to contain a valid header. Each response contains a response 
 </span></code></pre>
 
 <p>You can use this to dynamically load the list of supported operations with operation codes.</p>
-<h3 id='operation-code'>Operation code</h3>
+
+<h3 id="operation-code">Operation code</h3>
+
 <table><thead>
 <tr>
 <th>Name</th>
@@ -1231,7 +1434,9 @@ Each request needs to contain a valid header. Each response contains a response 
 <td>2</td>
 </tr>
 </tbody></table>
-<h3 id='call-parameters'>Call Parameters</h3>
+
+<h3 id="call-parameters">Call Parameters</h3>
+
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -1245,7 +1450,9 @@ Each request needs to contain a valid header. Each response contains a response 
 <td>-</td>
 </tr>
 </tbody></table>
-<h3 id='response-code'>Response code</h3>
+
+<h3 id="response-code">Response code</h3>
+
 <table><thead>
 <tr>
 <th>Name</th>
@@ -1259,7 +1466,9 @@ Each request needs to contain a valid header. Each response contains a response 
 <td>You received a valid list of opcodes and response codes.</td>
 </tr>
 </tbody></table>
-<h3 id='response-parameters'>Response Parameters</h3>
+
+<h3 id="response-parameters">Response Parameters</h3>
+
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -1278,7 +1487,9 @@ Each request needs to contain a valid header. Each response contains a response 
 <td>A dictionary containing all supported response codes: <strong>key</strong> - response code name, <strong>value</strong> - response code.</td>
 </tr>
 </tbody></table>
-<h2 id='logon'>Logon</h2>
+
+<h2 id="logon">Logon</h2>
+
 <p>Some functionality requires you to send a logon request apart from connecting. Documenation for this calls explicitly says it is presumed you are logged in.</p>
 
 <p>This is performed automatically for you if you are reconnecting (returning to the site after less than 15 minutes). Otherwise, this cll needs to be made explicitly.</p>
@@ -1286,7 +1497,7 @@ Each request needs to contain a valid header. Each response contains a response 
 <blockquote>
 <p>Expects the following JSON structure:</p>
 </blockquote>
-<pre><code class="highlight json"><span class="p">{</span><span class="w">
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="s2">"header"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
   </span><span class="s2">"op"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="w">
 </span><span class="p">}</span><span class="w">
@@ -1295,7 +1506,7 @@ Each request needs to contain a valid header. Each response contains a response 
 <blockquote>
 <p>Returns the following JSON structure:</p>
 </blockquote>
-<pre><code class="highlight json"><span class="p">{</span><span class="w">
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="s2">"response_header"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
   </span><span class="s2">"res"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
   </span><span class="s2">"session_key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"4"</span><span class="w">
@@ -1303,7 +1514,9 @@ Each request needs to contain a valid header. Each response contains a response 
 </span></code></pre>
 
 <p>This authenticates you with the api server and allows to send all requests.</p>
-<h3 id='operation-code'>Operation code</h3>
+
+<h3 id="operation-code">Operation code</h3>
+
 <table><thead>
 <tr>
 <th>Name</th>
@@ -1315,7 +1528,9 @@ Each request needs to contain a valid header. Each response contains a response 
 <td>100</td>
 </tr>
 </tbody></table>
-<h3 id='call-parameters'>Call Parameters</h3>
+
+<h3 id="call-parameters">Call Parameters</h3>
+
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -1329,7 +1544,9 @@ Each request needs to contain a valid header. Each response contains a response 
 <td>-</td>
 </tr>
 </tbody></table>
-<h3 id='response-codes'>Response codes</h3>
+
+<h3 id="response-codes">Response codes</h3>
+
 <table><thead>
 <tr>
 <th>Name</th>
@@ -1354,15 +1571,18 @@ Each request needs to contain a valid header. Each response contains a response 
 </tr>
 </tbody></table>
 
-          <h1 id='websocket-api-game-sources'>Websocket API: Game sources</h1>
-<p><aside class="notice">
+          <h1 id="websocket-api:-game-sources">Websocket API: Game sources</h1>
+
+<aside class="notice">
 This section assumes you are connected as an instamrkt developer. If you do not have a developer&rsquo;s account, please <a href="https://developers.instamrkt.com">register here</a>.
-</aside></p>
-<h2 id='open-a-game-source'>Open a game source</h2>
+</aside>
+
+<h2 id="open-a-game-source">Open a game source</h2>
+
 <blockquote>
 <p>Expects the following JSON structure:</p>
 </blockquote>
-<pre><code class="highlight json"><span class="p">{</span><span class="w">
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="s2">"header"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
   </span><span class="s2">"op"</span><span class="p">:</span><span class="w"> </span><span class="mi">365</span><span class="p">,</span><span class="w">
   </span><span class="s2">"source_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">":YOUR_SOURCE_NAME"</span><span class="w">
@@ -1372,7 +1592,7 @@ This section assumes you are connected as an instamrkt developer. If you do not 
 <blockquote>
 <p>Returns the following JSON structure:</p>
 </blockquote>
-<pre><code class="highlight json"><span class="p">{</span><span class="w">
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="s2">"response_header"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
   </span><span class="s2">"res"</span><span class="p">:</span><span class="w"> </span><span class="mi">335</span><span class="p">,</span><span class="w">
   </span><span class="s2">"source_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">":YOUR_SOURCE_ID"</span><span class="w">
@@ -1380,7 +1600,9 @@ This section assumes you are connected as an instamrkt developer. If you do not 
 </span></code></pre>
 
 <p>This called is used to register yourself as a game provider.</p>
-<h3 id='operation-code'>Operation code</h3>
+
+<h3 id="operation-code">Operation code</h3>
+
 <table><thead>
 <tr>
 <th>Name</th>
@@ -1392,7 +1614,9 @@ This section assumes you are connected as an instamrkt developer. If you do not 
 <td>365</td>
 </tr>
 </tbody></table>
-<h3 id='call-parameters'>Call Parameters</h3>
+
+<h3 id="call-parameters">Call Parameters</h3>
+
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -1406,7 +1630,9 @@ This section assumes you are connected as an instamrkt developer. If you do not 
 <td>The name you want to assign to your source (your domain suggested).</td>
 </tr>
 </tbody></table>
-<h3 id='response-code'>Response code</h3>
+
+<h3 id="response-code">Response code</h3>
+
 <table><thead>
 <tr>
 <th>Name</th>
@@ -1420,7 +1646,9 @@ This section assumes you are connected as an instamrkt developer. If you do not 
 <td>Your source has been registered. You can now open and host games.</td>
 </tr>
 </tbody></table>
-<h3 id='response-parameters'>Response Parameters</h3>
+
+<h3 id="response-parameters">Response Parameters</h3>
+
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -1434,11 +1662,13 @@ This section assumes you are connected as an instamrkt developer. If you do not 
 <td>The new server-assigned source id with which you, as a game provider, will be identified. Necessary for making all game source-related calls.</td>
 </tr>
 </tbody></table>
-<h2 id='close-a-game-source'>Close a game source</h2>
+
+<h2 id="close-a-game-source">Close a game source</h2>
+
 <blockquote>
 <p>Expects the following JSON structure:</p>
 </blockquote>
-<pre><code class="highlight json"><span class="p">{</span><span class="w">
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="s2">"header"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
   </span><span class="s2">"op"</span><span class="p">:</span><span class="w"> </span><span class="mi">366</span><span class="p">,</span><span class="w">
   </span><span class="s2">"source_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">":YOUR_SOURCE_ID"</span><span class="w">
@@ -1448,7 +1678,7 @@ This section assumes you are connected as an instamrkt developer. If you do not 
 <blockquote>
 <p>Returns the following JSON structure:</p>
 </blockquote>
-<pre><code class="highlight json"><span class="p">{</span><span class="w">
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="s2">"response_header"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
   </span><span class="s2">"res"</span><span class="p">:</span><span class="w"> </span><span class="mi">336</span><span class="p">,</span><span class="w">
   </span><span class="s2">"source_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">":YOUR_SOURCE_ID"</span><span class="w">
@@ -1457,10 +1687,12 @@ This section assumes you are connected as an instamrkt developer. If you do not 
 
 <p>This called is used to close a game source you are hosting. This means you will not be able to host games anymore.</p>
 
-<p><aside class="warning">
+<aside class="warning">
 This will automatically close all the games (and resolve pools accordingly) hosted by the source. Make sure you really want to send this request.
-</aside></p>
-<h3 id='operation-code'>Operation code</h3>
+</aside>
+
+<h3 id="operation-code">Operation code</h3>
+
 <table><thead>
 <tr>
 <th>Name</th>
@@ -1472,7 +1704,9 @@ This will automatically close all the games (and resolve pools accordingly) host
 <td>366</td>
 </tr>
 </tbody></table>
-<h3 id='call-parameters'>Call Parameters</h3>
+
+<h3 id="call-parameters">Call Parameters</h3>
+
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -1486,7 +1720,9 @@ This will automatically close all the games (and resolve pools accordingly) host
 <td>The source id assigned by the server upon source opening.</td>
 </tr>
 </tbody></table>
-<h3 id='response-code'>Response code</h3>
+
+<h3 id="response-code">Response code</h3>
+
 <table><thead>
 <tr>
 <th>Name</th>
@@ -1500,7 +1736,9 @@ This will automatically close all the games (and resolve pools accordingly) host
 <td>Your source has been closed. No more games can be hosted for this source.</td>
 </tr>
 </tbody></table>
-<h3 id='response-parameters'>Response Parameters</h3>
+
+<h3 id="response-parameters">Response Parameters</h3>
+
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -1515,19 +1753,22 @@ This will automatically close all the games (and resolve pools accordingly) host
 </tr>
 </tbody></table>
 
-          <h1 id='websocket-api-games'>Websocket API: Games</h1>
-<p><aside class="notice">
+          <h1 id="websocket-api:-games">Websocket API: Games</h1>
+
+<aside class="notice">
 This section assumes you have an active game source opened. If not, read on how to open it <a href="#open-a-game-source">here</a>.
-</aside></p>
-<h2 id='create-and-open-a-game'>Create and open a game</h2>
-<p><aside class="notice">
+</aside>
+
+<h2 id="create-and-open-a-game">Create and open a game</h2>
+
+<aside class="notice">
 Only users listed as admins for the source are authorized for this call.
-</aside></p>
+</aside>
 
 <blockquote>
 <p>Expects the following JSON structure:</p>
 </blockquote>
-<pre><code class="highlight json"><span class="p">{</span><span class="w">
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="s2">"header"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
   </span><span class="s2">"op"</span><span class="p">:</span><span class="w"> </span><span class="mi">370</span><span class="p">,</span><span class="w">
   </span><span class="s2">"source_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"30cee1fa-fb20-41a6-a61c-0e0335abc2a9"</span><span class="p">,</span><span class="w">
@@ -1548,7 +1789,7 @@ Only users listed as admins for the source are authorized for this call.
 <blockquote>
 <p>Returns the following JSON structure:</p>
 </blockquote>
-<pre><code class="highlight json"><span class="p">{</span><span class="w">
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="s2">"response_header"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
   </span><span class="s2">"res"</span><span class="p">:</span><span class="w"> </span><span class="mi">340</span><span class="p">,</span><span class="w">
   </span><span class="s2">"source_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"30cee1fa-fb20-41a6-a61c-0e0335abc2a9"</span><span class="p">,</span><span class="w">
@@ -1614,7 +1855,9 @@ Only users listed as admins for the source are authorized for this call.
 </span></code></pre>
 
 <p>This registers the game in the system and opens it automatically. Betting pools can now be opened for this game. Broadcasts the game created and opened message to all users connected through a given game source.</p>
-<h3 id='operation-code'>Operation code</h3>
+
+<h3 id="operation-code">Operation code</h3>
+
 <table><thead>
 <tr>
 <th>Name</th>
@@ -1626,7 +1869,9 @@ Only users listed as admins for the source are authorized for this call.
 <td>370</td>
 </tr>
 </tbody></table>
-<h3 id='call-parameters'>Call Parameters</h3>
+
+<h3 id="call-parameters">Call Parameters</h3>
+
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -1657,7 +1902,7 @@ Only users listed as admins for the source are authorized for this call.
 <tr>
 <td>targets</td>
 <td>[]</td>
-<td>List of targets taking part in the game. Sent as a comma-separated string or an array. Targets can be infinitely nested. Nesting is indicated by including a &lsquo;:&rsquo; in the target. E.g. &ldquo;Argentina:1&rdquo; means &ldquo;Argentina, player 1&rdquo;. Server automatically builds a nested structure (see the example to the right). You can send targets of different nesting levels. An event registered for Argentina:1 will resolve pools for Argentina:1 and Argentina (e.g. Messi scores - pools for Messi&rsquo;s goals and Argentina goals get resovled). <strong>IMPORTANT</strong>: target &lsquo;none&rsquo; will be added to the target list if skipped. It&rsquo;s necessary for automatic pool resolution.</td>
+<td>List of targets taking part in the game. Sent as a comma-separated string or an array. Targets can be infinitely nested. Nesting is indicated by including a &rsquo;:&rsquo; in the target. E.g. &ldquo;Argentina:1&rdquo; means &ldquo;Argentina, player 1&rdquo;. Server automatically builds a nested structure (see the example to the right). You can send targets of different nesting levels. An event registered for Argentina:1 will resolve pools for Argentina:1 and Argentina (e.g. Messi scores - pools for Messi&rsquo;s goals and Argentina goals get resovled). <strong>IMPORTANT</strong>: target &lsquo;none&rsquo; will be added to the target list if skipped. It&rsquo;s necessary for automatic pool resolution.</td>
 </tr>
 <tr>
 <td>open_at</td>
@@ -1695,7 +1940,9 @@ Only users listed as admins for the source are authorized for this call.
 <td>The image you want to be associated and displayed with a game (e.g. as a background).</td>
 </tr>
 </tbody></table>
-<h3 id='response-code'>Response code</h3>
+
+<h3 id="response-code">Response code</h3>
+
 <table><thead>
 <tr>
 <th>Name</th>
@@ -1709,7 +1956,9 @@ Only users listed as admins for the source are authorized for this call.
 <td>Your game has been created and opened. You can now open betting pools for the game.</td>
 </tr>
 </tbody></table>
-<h3 id='response-parameters'>Response Parameters</h3>
+
+<h3 id="response-parameters">Response Parameters</h3>
+
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -1740,7 +1989,7 @@ Only users listed as admins for the source are authorized for this call.
 <tr>
 <td>actions</td>
 <td>[]</td>
-<td>A list containing the actions ({&lsquo;action_id:&rsquo;, &lsquo;name&rsquo;:}) for the game.</td>
+<td>A list containing the actions ({&#39;action_id:&rsquo;, &#39;name&rsquo;:}) for the game.</td>
 </tr>
 <tr>
 <td>targets</td>
@@ -1773,15 +2022,17 @@ Only users listed as admins for the source are authorized for this call.
 <td>The social media hashtag to be associated with the game. If skipped will be generated from game name.</td>
 </tr>
 </tbody></table>
-<h2 id='create-a-game'>Create a game</h2>
-<p><aside class="notice">
+
+<h2 id="create-a-game">Create a game</h2>
+
+<aside class="notice">
 Only users listed as admins for the source are authorized for this call.
-</aside></p>
+</aside>
 
 <blockquote>
 <p>Expects the following JSON structure:</p>
 </blockquote>
-<pre><code class="highlight json"><span class="p">{</span><span class="w">
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="s2">"header"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
   </span><span class="s2">"op"</span><span class="p">:</span><span class="w"> </span><span class="mi">3701</span><span class="p">,</span><span class="w">
   </span><span class="s2">"source_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"30cee1fa-fb20-41a6-a61c-0e0335abc2a9"</span><span class="p">,</span><span class="w">
@@ -1800,7 +2051,7 @@ Only users listed as admins for the source are authorized for this call.
 <blockquote>
 <p>Returns the following JSON structure:</p>
 </blockquote>
-<pre><code class="highlight json"><span class="p">{</span><span class="w">
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="s2">"response_header"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
   </span><span class="s2">"res"</span><span class="p">:</span><span class="w"> </span><span class="mi">3401</span><span class="p">,</span><span class="w">
   </span><span class="s2">"source_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"30cee1fa-fb20-41a6-a61c-0e0335abc2a9"</span><span class="p">,</span><span class="w">
@@ -1818,7 +2069,9 @@ Only users listed as admins for the source are authorized for this call.
 <p>This registers the game in the system as an upcoming game. An <a href="#open-a-game">open game</a> request needs to be sent afterwards to open a game for betting. Broadcasts the game created message to all users connected through a given game source.</p>
 
 <p>To allow making predictions, targets and actions need to be added to the game either with the <a href="#open-a-game">open game</a> request.</p>
-<h3 id='operation-code'>Operation code</h3>
+
+<h3 id="operation-code">Operation code</h3>
+
 <table><thead>
 <tr>
 <th>Name</th>
@@ -1830,7 +2083,9 @@ Only users listed as admins for the source are authorized for this call.
 <td>3701</td>
 </tr>
 </tbody></table>
-<h3 id='call-parameters'>Call Parameters</h3>
+
+<h3 id="call-parameters">Call Parameters</h3>
+
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -1889,7 +2144,9 @@ Only users listed as admins for the source are authorized for this call.
 <td>The image you want to be associated and displayed with a game (e.g. as a background).</td>
 </tr>
 </tbody></table>
-<h3 id='response-code'>Response code</h3>
+
+<h3 id="response-code">Response code</h3>
+
 <table><thead>
 <tr>
 <th>Name</th>
@@ -1903,7 +2160,9 @@ Only users listed as admins for the source are authorized for this call.
 <td>Your game has been created and is listed as an upcoming game. You still need to open it for betting and add actions and targets.</td>
 </tr>
 </tbody></table>
-<h3 id='response-parameters'>Response Parameters</h3>
+
+<h3 id="response-parameters">Response Parameters</h3>
+
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -1957,15 +2216,17 @@ Only users listed as admins for the source are authorized for this call.
 <td>The social media hashtag to be associated with the game. If skipped will be generated from game name.</td>
 </tr>
 </tbody></table>
-<h2 id='open-a-game'>Open a game</h2>
-<p><aside class="notice">
+
+<h2 id="open-a-game">Open a game</h2>
+
+<aside class="notice">
 Only users listed as admins for the source are authorized for this call.
-</aside></p>
+</aside>
 
 <blockquote>
 <p>Expects the following JSON structure:</p>
 </blockquote>
-<pre><code class="highlight json"><span class="p">{</span><span class="w">
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="s2">"header"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
   </span><span class="s2">"op"</span><span class="p">:</span><span class="w"> </span><span class="mi">3702</span><span class="p">,</span><span class="w">
   </span><span class="s2">"actions"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"Goal"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Offside"</span><span class="p">,</span><span class="w"> </span><span class="s2">".."</span><span class="p">],</span><span class="w">
@@ -1976,7 +2237,7 @@ Only users listed as admins for the source are authorized for this call.
 <blockquote>
 <p>Returns the following JSON structure:</p>
 </blockquote>
-<pre><code class="highlight json"><span class="p">{</span><span class="w">
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="s2">"response_header"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
   </span><span class="s2">"res"</span><span class="p">:</span><span class="w"> </span><span class="mi">3402</span><span class="p">,</span><span class="w">
   </span><span class="s2">"source_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"30cee1fa-fb20-41a6-a61c-0e0335abc2a9"</span><span class="p">,</span><span class="w">
@@ -1992,7 +2253,9 @@ Only users listed as admins for the source are authorized for this call.
 
 <p>This opens a previously created upcoming game (with a <a href="#create-a-game">create game</a> request) for making predictions.
 Broadcasts the game opened message to all users connected through a given game source.</p>
-<h3 id='operation-code'>Operation code</h3>
+
+<h3 id="operation-code">Operation code</h3>
+
 <table><thead>
 <tr>
 <th>Name</th>
@@ -2004,7 +2267,9 @@ Broadcasts the game opened message to all users connected through a given game s
 <td>3702</td>
 </tr>
 </tbody></table>
-<h3 id='call-parameters'>Call Parameters</h3>
+
+<h3 id="call-parameters">Call Parameters</h3>
+
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -2025,10 +2290,12 @@ Broadcasts the game opened message to all users connected through a given game s
 <tr>
 <td>targets</td>
 <td>[]</td>
-<td>List of targets taking part in the game. Sent as a comma-separated string or an array. Targets can be infinitely nested. Nesting is indicated by including a &lsquo;:&rsquo; in the target. E.g. &ldquo;Argentina:1&rdquo; means &ldquo;Argentina, player 1&rdquo;. Server automatically builds a nested structure (see the example to the right). You can send targets of different nesting levels. An event registered for Argentina:1 will resolve pools for Argentina:1 and Argentina (e.g. Messi scores - pools for Messi&rsquo;s goals and Argentina goals get resovled).</td>
+<td>List of targets taking part in the game. Sent as a comma-separated string or an array. Targets can be infinitely nested. Nesting is indicated by including a &rsquo;:&rsquo; in the target. E.g. &ldquo;Argentina:1&rdquo; means &ldquo;Argentina, player 1&rdquo;. Server automatically builds a nested structure (see the example to the right). You can send targets of different nesting levels. An event registered for Argentina:1 will resolve pools for Argentina:1 and Argentina (e.g. Messi scores - pools for Messi&rsquo;s goals and Argentina goals get resovled).</td>
 </tr>
 </tbody></table>
-<h3 id='response-code'>Response code</h3>
+
+<h3 id="response-code">Response code</h3>
+
 <table><thead>
 <tr>
 <th>Name</th>
@@ -2042,7 +2309,9 @@ Broadcasts the game opened message to all users connected through a given game s
 <td>Your game has been opened. You can now open betting pools for the game. <strong>Warning</strong>: This is the same response as for the <a href="#create-and-open-a-game">create and open game</a> request (except for the response code). The state after processing both calls is semantically equivalent.</td>
 </tr>
 </tbody></table>
-<h3 id='response-parameters'>Response Parameters</h3>
+
+<h3 id="response-parameters">Response Parameters</h3>
+
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -2073,7 +2342,7 @@ Broadcasts the game opened message to all users connected through a given game s
 <tr>
 <td>actions</td>
 <td>[]</td>
-<td>A list containing the actions ({&lsquo;action_id:&rsquo;, &lsquo;name&rsquo;:}) for the game.</td>
+<td>A list containing the actions ({&#39;action_id:&rsquo;, &#39;name&rsquo;:}) for the game.</td>
 </tr>
 <tr>
 <td>targets</td>
@@ -2101,15 +2370,17 @@ Broadcasts the game opened message to all users connected through a given game s
 <td>The close game time in epoch millis (if null, game close request needs to be sent explicitly).</td>
 </tr>
 </tbody></table>
-<h2 id='become-an-admin-for-a-game'>Become an admin for a game</h2>
-<p><aside class="notice">
+
+<h2 id="become-an-admin-for-a-game">Become an admin for a game</h2>
+
+<aside class="notice">
 Only the game source admin is allowed to send request as of now. Authorizing additional users to do that will come soon.
-</aside></p>
+</aside>
 
 <blockquote>
 <p>Expects the following JSON structure:</p>
 </blockquote>
-<pre><code class="highlight json"><span class="p">{</span><span class="w">
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="s2">"header"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
   </span><span class="s2">"op"</span><span class="p">:</span><span class="w"> </span><span class="mi">616</span><span class="p">,</span><span class="w">
   </span><span class="s2">"game_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"30cee1fa-fb20-41a6-a61c-0e0335abc2a9"</span><span class="w">
@@ -2119,7 +2390,7 @@ Only the game source admin is allowed to send request as of now. Authorizing add
 <blockquote>
 <p>Returns the following JSON structure:</p>
 </blockquote>
-<pre><code class="highlight json"><span class="p">{</span><span class="w">
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="s2">"response_header"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
   </span><span class="s2">"res"</span><span class="p">:</span><span class="w"> </span><span class="mi">640</span><span class="p">,</span><span class="w">
   </span><span class="s2">"game_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"30cee1fa-fb20-41a6-a61c-0e0335abc2a9"</span><span class="w">
@@ -2129,7 +2400,7 @@ Only the game source admin is allowed to send request as of now. Authorizing add
 <blockquote>
 <p>or</p>
 </blockquote>
-<pre><code class="highlight json"><span class="p">{</span><span class="w">
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="s2">"response_header"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
   </span><span class="s2">"res"</span><span class="p">:</span><span class="w"> </span><span class="mi">645</span><span class="p">,</span><span class="w">
   </span><span class="s2">"game_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"30cee1fa-fb20-41a6-a61c-0e0335abc2a9"</span><span class="p">,</span><span class="w">
@@ -2138,7 +2409,9 @@ Only the game source admin is allowed to send request as of now. Authorizing add
 </span></code></pre>
 
 <p>Game creation and opening requires game-source level privileges. All other game related calls require explicitly asking for game-level privileges. These can be obtained through this call.</p>
-<h3 id='operation-code'>Operation code</h3>
+
+<h3 id="operation-code">Operation code</h3>
+
 <table><thead>
 <tr>
 <th>Name</th>
@@ -2150,7 +2423,9 @@ Only the game source admin is allowed to send request as of now. Authorizing add
 <td>616</td>
 </tr>
 </tbody></table>
-<h3 id='call-parameters'>Call Parameters</h3>
+
+<h3 id="call-parameters">Call Parameters</h3>
+
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -2164,7 +2439,9 @@ Only the game source admin is allowed to send request as of now. Authorizing add
 <td>The game id for which you want to become an admin.</td>
 </tr>
 </tbody></table>
-<h3 id='response-code'>Response code</h3>
+
+<h3 id="response-code">Response code</h3>
+
 <table><thead>
 <tr>
 <th>Name</th>
@@ -2183,7 +2460,9 @@ Only the game source admin is allowed to send request as of now. Authorizing add
 <td>You have <strong>not</strong> become an admin for the game. This can happen in 2 cases: you have no privileges or the game already has enough admins.</td>
 </tr>
 </tbody></table>
-<h3 id='response-parameters'>Response Parameters</h3>
+
+<h3 id="response-parameters">Response Parameters</h3>
+
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -2202,11 +2481,13 @@ Only the game source admin is allowed to send request as of now. Authorizing add
 <td>The reason why you couldn&rsquo;t become an admin. Sent <strong>only</strong> with become_an_admin_for_game_fail response code.</td>
 </tr>
 </tbody></table>
-<h2 id='get-game-details'>Get game details</h2>
+
+<h2 id="get-game-details">Get game details</h2>
+
 <blockquote>
 <p>Expects the following JSON structure:</p>
 </blockquote>
-<pre><code class="highlight json"><span class="p">{</span><span class="w">
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="s2">"header"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
   </span><span class="s2">"op"</span><span class="p">:</span><span class="w"> </span><span class="mi">373</span><span class="p">,</span><span class="w">
   </span><span class="s2">"game_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"30cee1fa-fb20-41a6-a61c-0e0335abc2a9"</span><span class="w">
@@ -2216,7 +2497,7 @@ Only the game source admin is allowed to send request as of now. Authorizing add
 <blockquote>
 <p>Returns the following JSON structure:</p>
 </blockquote>
-<pre><code class="highlight json"><span class="p">{</span><span class="w">
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
     </span><span class="s2">"response_header"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
     </span><span class="s2">"res"</span><span class="p">:</span><span class="w"> </span><span class="mi">342</span><span class="p">,</span><span class="w">
     </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"game_in_progress_betting_active"</span><span class="p">,</span><span class="w">
@@ -2307,7 +2588,9 @@ Only the game source admin is allowed to send request as of now. Authorizing add
 </span></code></pre>
 
 <p>Obtain full details for a game with given id.</p>
-<h3 id='operation-code'>Operation code</h3>
+
+<h3 id="operation-code">Operation code</h3>
+
 <table><thead>
 <tr>
 <th>Name</th>
@@ -2319,7 +2602,9 @@ Only the game source admin is allowed to send request as of now. Authorizing add
 <td>372</td>
 </tr>
 </tbody></table>
-<h3 id='call-parameters'>Call Parameters</h3>
+
+<h3 id="call-parameters">Call Parameters</h3>
+
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -2333,7 +2618,9 @@ Only the game source admin is allowed to send request as of now. Authorizing add
 <td>The game id of the game which you want to obtain details for.</td>
 </tr>
 </tbody></table>
-<h3 id='response-codes'>Response codes</h3>
+
+<h3 id="response-codes">Response codes</h3>
+
 <table><thead>
 <tr>
 <th>Name</th>
@@ -2347,7 +2634,9 @@ Only the game source admin is allowed to send request as of now. Authorizing add
 <td>You have received the requested game details.</td>
 </tr>
 </tbody></table>
-<h3 id='response-parameters'>Response Parameters</h3>
+
+<h3 id="response-parameters">Response Parameters</h3>
+
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -2378,7 +2667,7 @@ Only the game source admin is allowed to send request as of now. Authorizing add
 <tr>
 <td>actions</td>
 <td>[]</td>
-<td>A list containing the actions ({&lsquo;action_id:&rsquo;, &lsquo;name&rsquo;:}) for the game.</td>
+<td>A list containing the actions ({&#39;action_id:&rsquo;, &#39;name&rsquo;:}) for the game.</td>
 </tr>
 <tr>
 <td>targets</td>
@@ -2388,7 +2677,7 @@ Only the game source admin is allowed to send request as of now. Authorizing add
 <tr>
 <td>game_state</td>
 <td>[]</td>
-<td>A list of objects serving the purpose of displaying game state. Sorted according to a game_type specific action priority list. E.g for game_type <em>football</em> the list looks as follows: [&lsquo;goal&rsquo;, &lsquo;red-card&rsquo;, &lsquo;yellow-card&rsquo;, &lsquo;corner-kick&rsquo;, &lsquo;offside&rsquo;, &lsquo;foul&rsquo;, &lsquo;shot&rsquo;]. Counts for all other actions, not specified in priority list (e.g throw-ins), come at the end in random order.</td>
+<td>A list of objects serving the purpose of displaying game state. Sorted according to a game_type specific action priority list. E.g for game_type <em>football</em> the list looks as follows: [&#39;goal&rsquo;, &#39;red-card&rsquo;, &#39;yellow-card&rsquo;, &#39;corner-kick&rsquo;, &#39;offside&rsquo;, &#39;foul&rsquo;, &#39;shot&rsquo;]. Counts for all other actions, not specified in priority list (e.g throw-ins), come at the end in random order.</td>
 </tr>
 <tr>
 <td>past_events</td>
@@ -2431,15 +2720,17 @@ Only the game source admin is allowed to send request as of now. Authorizing add
 <td>The image associated and displayed with a game (e.g. as a background).</td>
 </tr>
 </tbody></table>
-<h2 id='update-game-details'>Update game details</h2>
-<p><aside class="notice">
+
+<h2 id="update-game-details">Update game details</h2>
+
+<aside class="notice">
 Only users listed as admins for the source are authorized for this call.
-</aside></p>
+</aside>
 
 <blockquote>
 <p>Expects the following JSON structure:</p>
 </blockquote>
-<pre><code class="highlight json"><span class="p">{</span><span class="w">
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="s2">"header"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
   </span><span class="s2">"op"</span><span class="p">:</span><span class="w"> </span><span class="mi">373</span><span class="p">,</span><span class="w">
   </span><span class="s2">"game_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"30cee1fa-fb20-41a6-a61c-0e0335abc2a9"</span><span class="p">,</span><span class="w">
@@ -2452,7 +2743,7 @@ Only users listed as admins for the source are authorized for this call.
 <blockquote>
 <p>Returns the following JSON structure:</p>
 </blockquote>
-<pre><code class="highlight json"><span class="p">{</span><span class="w">
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
     </span><span class="s2">"response_header"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
     </span><span class="s2">"res"</span><span class="p">:</span><span class="w"> </span><span class="mi">343</span><span class="p">,</span><span class="w">
     </span><span class="s2">"game_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"30cee1fa-fb20-41a6-a61c-0e0335abc2a9"</span><span class="w">
@@ -2462,7 +2753,9 @@ Only users listed as admins for the source are authorized for this call.
 <p>Update game details - add new targets or actions.</p>
 
 <p>This publishes the updated game details to users subscribed to the game.</p>
-<h3 id='operation-code'>Operation code</h3>
+
+<h3 id="operation-code">Operation code</h3>
+
 <table><thead>
 <tr>
 <th>Name</th>
@@ -2474,7 +2767,9 @@ Only users listed as admins for the source are authorized for this call.
 <td>373</td>
 </tr>
 </tbody></table>
-<h3 id='call-parameters'>Call Parameters</h3>
+
+<h3 id="call-parameters">Call Parameters</h3>
+
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -2495,7 +2790,7 @@ Only users listed as admins for the source are authorized for this call.
 <tr>
 <td>targets</td>
 <td>[]</td>
-<td>List of targets that you want to add to the game. Sent as a comma-separated string or an array. Targets can be infinitely nested. Nesting is indicated by including a &lsquo;:&rsquo; in the target. E.g. &ldquo;Argentina:1&rdquo; means &ldquo;Argentina, player 1&rdquo;. Server automatically builds a nested structure (see the example to the right). You can send targets of different nesting levels. An event registered for Argentina:1 will resolve pools for Argentina:1 and Argentina (e.g. Messi scores - pools for Messi&rsquo;s goals and Argentina goals get resovled).</td>
+<td>List of targets that you want to add to the game. Sent as a comma-separated string or an array. Targets can be infinitely nested. Nesting is indicated by including a &rsquo;:&rsquo; in the target. E.g. &ldquo;Argentina:1&rdquo; means &ldquo;Argentina, player 1&rdquo;. Server automatically builds a nested structure (see the example to the right). You can send targets of different nesting levels. An event registered for Argentina:1 will resolve pools for Argentina:1 and Argentina (e.g. Messi scores - pools for Messi&rsquo;s goals and Argentina goals get resovled).</td>
 </tr>
 <tr>
 <td>image_url</td>
@@ -2503,7 +2798,9 @@ Only users listed as admins for the source are authorized for this call.
 <td>The updated image you want to be associated and displayed with a game (e.g. as a background).</td>
 </tr>
 </tbody></table>
-<h3 id='response-codes'>Response codes</h3>
+
+<h3 id="response-codes">Response codes</h3>
+
 <table><thead>
 <tr>
 <th>Name</th>
@@ -2522,7 +2819,9 @@ Only users listed as admins for the source are authorized for this call.
 <td>New game details are published to everyone subscribed to the game (including you). Check <a href="#get-game-details"> get game details</a> section for a list of response parameter for this message.</td>
 </tr>
 </tbody></table>
-<h3 id='response-parameters'>Response Parameters</h3>
+
+<h3 id="response-parameters">Response Parameters</h3>
+
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -2536,11 +2835,13 @@ Only users listed as admins for the source are authorized for this call.
 <td>The game id you provided.</td>
 </tr>
 </tbody></table>
-<h2 id='join-game'>Join game</h2>
+
+<h2 id="join-game">Join game</h2>
+
 <blockquote>
 <p>Expects the following JSON structure:</p>
 </blockquote>
-<pre><code class="highlight json"><span class="p">{</span><span class="w">
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="s2">"header"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
   </span><span class="s2">"op"</span><span class="p">:</span><span class="w"> </span><span class="mi">363</span><span class="p">,</span><span class="w">
   </span><span class="s2">"game_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"30cee1fa-fb20-41a6-a61c-0e0335abc2a9"</span><span class="w">
@@ -2550,7 +2851,7 @@ Only users listed as admins for the source are authorized for this call.
 <blockquote>
 <p>Returns the following JSON structure:</p>
 </blockquote>
-<pre><code class="highlight json"><span class="p">{</span><span class="w">
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
     </span><span class="s2">"response_header"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
     </span><span class="s2">"res"</span><span class="p">:</span><span class="w"> </span><span class="mi">333</span><span class="p">,</span><span class="w">
     </span><span class="s2">"game_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"30cee1fa-fb20-41a6-a61c-0e0335abc2a9"</span><span class="w">
@@ -2560,7 +2861,7 @@ Only users listed as admins for the source are authorized for this call.
 <blockquote>
 <p>Publishes the following JSON structure:</p>
 </blockquote>
-<pre><code class="highlight json"><span class="p">{</span><span class="w">
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
     </span><span class="s2">"response_header"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
     </span><span class="s2">"res"</span><span class="p">:</span><span class="w"> </span><span class="mi">470</span><span class="p">,</span><span class="w">
     </span><span class="s2">"game_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"30cee1fa-fb20-41a6-a61c-0e0335abc2a9"</span><span class="p">,</span><span class="w">
@@ -2572,7 +2873,9 @@ Only users listed as admins for the source are authorized for this call.
 <p>Join the game. This subscribes you to all the events / notifications regarding a given game.</p>
 
 <p>This publishes the information you joined to all users subscribed to the game.</p>
-<h3 id='operation-code'>Operation code</h3>
+
+<h3 id="operation-code">Operation code</h3>
+
 <table><thead>
 <tr>
 <th>Name</th>
@@ -2584,7 +2887,9 @@ Only users listed as admins for the source are authorized for this call.
 <td>363</td>
 </tr>
 </tbody></table>
-<h3 id='call-parameters'>Call Parameters</h3>
+
+<h3 id="call-parameters">Call Parameters</h3>
+
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -2598,7 +2903,9 @@ Only users listed as admins for the source are authorized for this call.
 <td>The game id of the game you want to join.</td>
 </tr>
 </tbody></table>
-<h3 id='response-codes'>Response codes</h3>
+
+<h3 id="response-codes">Response codes</h3>
+
 <table><thead>
 <tr>
 <th>Name</th>
@@ -2617,7 +2924,9 @@ Only users listed as admins for the source are authorized for this call.
 <td>New user joined game. Published to all users subscribed to game.</td>
 </tr>
 </tbody></table>
-<h3 id='response-parameters-game_joined'>Response Parameters (game_joined)</h3>
+
+<h3 id="response-parameters-(game_joined)">Response Parameters (game_joined)</h3>
+
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -2631,7 +2940,9 @@ Only users listed as admins for the source are authorized for this call.
 <td>The game id you provided.</td>
 </tr>
 </tbody></table>
-<h3 id='response-parameters-user_joined_game'>Response Parameters (user_joined_game)</h3>
+
+<h3 id="response-parameters-(user_joined_game)">Response Parameters (user_joined_game)</h3>
+
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -2655,11 +2966,13 @@ Only users listed as admins for the source are authorized for this call.
 <td>The name of the user that joined the game.</td>
 </tr>
 </tbody></table>
-<h2 id='leave-game'>Leave game</h2>
+
+<h2 id="leave-game">Leave game</h2>
+
 <blockquote>
 <p>Expects the following JSON structure:</p>
 </blockquote>
-<pre><code class="highlight json"><span class="p">{</span><span class="w">
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="s2">"header"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
   </span><span class="s2">"op"</span><span class="p">:</span><span class="w"> </span><span class="mi">364</span><span class="p">,</span><span class="w">
   </span><span class="s2">"game_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"30cee1fa-fb20-41a6-a61c-0e0335abc2a9"</span><span class="w">
@@ -2669,7 +2982,7 @@ Only users listed as admins for the source are authorized for this call.
 <blockquote>
 <p>Returns the following JSON structure:</p>
 </blockquote>
-<pre><code class="highlight json"><span class="p">{</span><span class="w">
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
     </span><span class="s2">"response_header"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
     </span><span class="s2">"res"</span><span class="p">:</span><span class="w"> </span><span class="mi">334</span><span class="p">,</span><span class="w">
     </span><span class="s2">"game_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"30cee1fa-fb20-41a6-a61c-0e0335abc2a9"</span><span class="w">
@@ -2679,7 +2992,7 @@ Only users listed as admins for the source are authorized for this call.
 <blockquote>
 <p>Publishes the following JSON structure:</p>
 </blockquote>
-<pre><code class="highlight json"><span class="p">{</span><span class="w">
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
     </span><span class="s2">"response_header"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
     </span><span class="s2">"res"</span><span class="p">:</span><span class="w"> </span><span class="mi">480</span><span class="p">,</span><span class="w">
     </span><span class="s2">"game_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"30cee1fa-fb20-41a6-a61c-0e0335abc2a9"</span><span class="p">,</span><span class="w">
@@ -2691,7 +3004,9 @@ Only users listed as admins for the source are authorized for this call.
 <p>Leave the game. This unsubscribes you from all the events / notifications regarding a given game.</p>
 
 <p>This publishes the information you left to all users subscribed to the game.</p>
-<h3 id='operation-code'>Operation code</h3>
+
+<h3 id="operation-code">Operation code</h3>
+
 <table><thead>
 <tr>
 <th>Name</th>
@@ -2703,7 +3018,9 @@ Only users listed as admins for the source are authorized for this call.
 <td>364</td>
 </tr>
 </tbody></table>
-<h3 id='call-parameters'>Call Parameters</h3>
+
+<h3 id="call-parameters">Call Parameters</h3>
+
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -2717,7 +3034,9 @@ Only users listed as admins for the source are authorized for this call.
 <td>The game id of the game you want to leave.</td>
 </tr>
 </tbody></table>
-<h3 id='response-codes'>Response codes</h3>
+
+<h3 id="response-codes">Response codes</h3>
+
 <table><thead>
 <tr>
 <th>Name</th>
@@ -2736,7 +3055,9 @@ Only users listed as admins for the source are authorized for this call.
 <td>User left game. Published to all users subscribed to game.</td>
 </tr>
 </tbody></table>
-<h3 id='response-parameters-game_joined'>Response Parameters (game_joined)</h3>
+
+<h3 id="response-parameters-(game_joined)">Response Parameters (game_joined)</h3>
+
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -2750,7 +3071,9 @@ Only users listed as admins for the source are authorized for this call.
 <td>The game id you provided.</td>
 </tr>
 </tbody></table>
-<h3 id='response-parameters-user_joined_game'>Response Parameters (user_joined_game)</h3>
+
+<h3 id="response-parameters-(user_joined_game)">Response Parameters (user_joined_game)</h3>
+
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -2774,19 +3097,21 @@ Only users listed as admins for the source are authorized for this call.
 <td>The name of the user that left the game.</td>
 </tr>
 </tbody></table>
-<h2 id='close-a-game'>Close a game</h2>
-<p><aside class="notice">
-Only users listed as admins for the source are authorized for this call.
-</aside></p>
 
-<p><aside class="warning">
+<h2 id="close-a-game">Close a game</h2>
+
+<aside class="notice">
+Only users listed as admins for the source are authorized for this call.
+</aside>
+
+<aside class="warning">
 This will automatically close and resolve all the automatically resolvable pools opened in the game. It will block betting in all the pools that need to be resolved manually. Request has to be resent after these pools are resolved (if there are any). Make sure you really want to send this request.
-</aside></p>
+</aside>
 
 <blockquote>
 <p>Expects the following JSON structure:</p>
 </blockquote>
-<pre><code class="highlight json"><span class="p">{</span><span class="w">
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="s2">"header"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
   </span><span class="s2">"op"</span><span class="p">:</span><span class="w"> </span><span class="mi">375</span><span class="p">,</span><span class="w">
   </span><span class="s2">"game_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"30cee1fa-fb20-41a6-a61c-0e0335abc2a9"</span><span class="w">
@@ -2796,7 +3121,7 @@ This will automatically close and resolve all the automatically resolvable pools
 <blockquote>
 <p>Returns and publishes the following JSON structure:</p>
 </blockquote>
-<pre><code class="highlight json"><span class="p">{</span><span class="w">
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
     </span><span class="s2">"response_header"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
     </span><span class="s2">"res"</span><span class="p">:</span><span class="w"> </span><span class="mi">341</span><span class="p">,</span><span class="w">
     </span><span class="s2">"game_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"30cee1fa-fb20-41a6-a61c-0e0335abc2a9"</span><span class="w">
@@ -2812,7 +3137,9 @@ This will automatically close and resolve all the automatically resolvable pools
 <p>If there exist any pools which need manual resolution, the request needs to be <strong>resent</strong> after this is performed.</p>
 
 <p>After that, the game disappears from all the listings for running games.</p>
-<h3 id='operation-code'>Operation code</h3>
+
+<h3 id="operation-code">Operation code</h3>
+
 <table><thead>
 <tr>
 <th>Name</th>
@@ -2824,7 +3151,9 @@ This will automatically close and resolve all the automatically resolvable pools
 <td>375</td>
 </tr>
 </tbody></table>
-<h3 id='call-parameters'>Call Parameters</h3>
+
+<h3 id="call-parameters">Call Parameters</h3>
+
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -2838,7 +3167,9 @@ This will automatically close and resolve all the automatically resolvable pools
 <td>The game id of the game you want to close.</td>
 </tr>
 </tbody></table>
-<h3 id='response-codes'>Response codes</h3>
+
+<h3 id="response-codes">Response codes</h3>
+
 <table><thead>
 <tr>
 <th>Name</th>
@@ -2862,7 +3193,9 @@ This will automatically close and resolve all the automatically resolvable pools
 <td>Published to all game subscribers for all manually resolveable pools. Check <a href="#betting-in-pool-blocked"> betting pool blocked</a> section for a list of response parameter for this message.</td>
 </tr>
 </tbody></table>
-<h3 id='response-parameters'>Response Parameters</h3>
+
+<h3 id="response-parameters">Response Parameters</h3>
+
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -2876,11 +3209,13 @@ This will automatically close and resolve all the automatically resolvable pools
 <td>The game id you provided.</td>
 </tr>
 </tbody></table>
-<h2 id='list-games-for-source'>List games for source</h2>
+
+<h2 id="list-active-games-for-source">List active games for source</h2>
+
 <blockquote>
 <p>Expects the following JSON structure:</p>
 </blockquote>
-<pre><code class="highlight json"><span class="p">{</span><span class="w">
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="s2">"header"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
   </span><span class="s2">"op"</span><span class="p">:</span><span class="w"> </span><span class="mi">380</span><span class="p">,</span><span class="w">
   </span><span class="s2">"source_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"30cee1fa-fb20-41a6-a61c-0e0335abc2a9"</span><span class="w">
@@ -2890,23 +3225,58 @@ This will automatically close and resolve all the automatically resolvable pools
 <blockquote>
 <p>Returns the following JSON structure:</p>
 </blockquote>
-<pre><code class="highlight json"><span class="p">{</span><span class="w">
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
     </span><span class="s2">"response_header"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
     </span><span class="s2">"res"</span><span class="p">:</span><span class="w"> </span><span class="mi">345</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"games"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"dc164a36-4b82-47a4-a2b4-be757a018c9e"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"source_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"30cee1fa-fb20-41a6-a61c-0e0335abc2a9"</span><span class="w">
+    </span><span class="s2">"games"</span><span class="err">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+          </span><span class="s2">"game_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"dc164a36-4b82-47a4-a2b4-be757a018c9e"</span><span class="p">,</span><span class="w">
             </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"game_in_progress_betting_active"</span><span class="p">,</span><span class="w">
             </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Argentina - Brazil"</span><span class="p">,</span><span class="w">
             </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"d57951c0-c5a6-4260-bc97-1f1065daece3"</span><span class="p">,</span><span class="w">
             </span><span class="s2">"open_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1417188144748"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"close_at"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
-        </span><span class="p">}</span><span class="w">
-    </span><span class="p">}</span><span class="w">
+          </span><span class="s2">"schedulted_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1417188144748"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"close_at"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"targets"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+                </span><span class="s2">"display_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"none"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"non"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"target_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"none"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"targets"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+                </span><span class="s2">"display_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"bra"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"bra"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"target_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"bra"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"targets"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+                </span><span class="s2">"display_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"arg"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"arg"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"target_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"arg"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"targets"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="s2">"actions"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+                </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"offside"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"action_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"offside"</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+                </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"goal"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"action_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"goal"</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="err">}</span><span class="w">
+    </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
 <p>Obtain full list of active games for a source with given id.</p>
-<h3 id='operation-code'>Operation code</h3>
+
+<h3 id="operation-code">Operation code</h3>
+
 <table><thead>
 <tr>
 <th>Name</th>
@@ -2918,7 +3288,9 @@ This will automatically close and resolve all the automatically resolvable pools
 <td>380</td>
 </tr>
 </tbody></table>
-<h3 id='call-parameters'>Call Parameters</h3>
+
+<h3 id="call-parameters">Call Parameters</h3>
+
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -2932,7 +3304,9 @@ This will automatically close and resolve all the automatically resolvable pools
 <td>Your source id.</td>
 </tr>
 </tbody></table>
-<h3 id='response-code'>Response code</h3>
+
+<h3 id="response-code">Response code</h3>
+
 <table><thead>
 <tr>
 <th>Name</th>
@@ -2946,7 +3320,9 @@ This will automatically close and resolve all the automatically resolvable pools
 <td>You have received the list of games active for your source id.</td>
 </tr>
 </tbody></table>
-<h3 id='response-parameters'>Response Parameters</h3>
+
+<h3 id="response-parameters">Response Parameters</h3>
+
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -2961,16 +3337,121 @@ This will automatically close and resolve all the automatically resolvable pools
 </tr>
 <tr>
 <td>games</td>
-<td>{}</td>
-<td>A dictionary containing all the active games for your source. <strong>key</strong> - game id, <strong>value</strong> - game data(status (possible values: &ldquo;betting_not_yet_active&rdquo;, &ldquo;pre_game_betting_active&rdquo;, &ldquo;game_in_progress_betting_active&rdquo;, &ldquo;game_in_progress_betting_closed&rdquo;, &ldquo;game_closed&rdquo;), name, type, open_at, close_at).</td>
+<td>[]</td>
+<td>A list containing all the active games for your source. Each game objects contains game data - game_id, status (possible values: &ldquo;betting_not_yet_active&rdquo;, &ldquo;pre_game_betting_active&rdquo;, &ldquo;game_in_progress_betting_active&rdquo;, &ldquo;game_in_progress_betting_closed&rdquo;, &ldquo;game_closed&rdquo;), name, type, open_at, close_at, list of actions (name and action id) and list of target objects (display_name, symbol, target_id, targets(list of subtargets)).</td>
 </tr>
 </tbody></table>
 
-          <h1 id='websocket-api-betting-pools'>Websocket API: Betting pools</h1>
-<p><aside class="notice">
+<h2 id="list-upcoming-games-for-source">List upcoming games for source</h2>
+
+<blockquote>
+<p>Expects the following JSON structure:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"header"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
+  </span><span class="s2">"op"</span><span class="p">:</span><span class="w"> </span><span class="mi">3811</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"source_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"30cee1fa-fb20-41a6-a61c-0e0335abc2a9"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<blockquote>
+<p>Returns the following JSON structure:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"response_header"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
+    </span><span class="s2">"source_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"30cee1fa-fb20-41a6-a61c-0e0335abc2a9"</span><span class="w">
+    </span><span class="s2">"res"</span><span class="err">:</span><span class="w"> </span><span class="mi">3461</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"games"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+          </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"dc164a36-4b82-47a4-a2b4-be757a018c9e"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"source_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"30cee1fa-fb20-41a6-a61c-0e0335abc2a9"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"game_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Argentina - Brazil"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"DON"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"game_type_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"d57951c0-c5a6-4260-bc97-1f1065daece3"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"live_start_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1417188144748"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"hashtag"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#ArgBra"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>Obtain full list of upcoming games for a source with given id.</p>
+
+<h3 id="operation-code">Operation code</h3>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Code</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>list_upcoming_games_for_source</td>
+<td>3811</td>
+</tr>
+</tbody></table>
+
+<h3 id="call-parameters">Call Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>source_id</td>
+<td>null</td>
+<td>Your source id.</td>
+</tr>
+</tbody></table>
+
+<h3 id="response-code">Response code</h3>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Code</th>
+<th>Result</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>upcoming_games_list_for_source</td>
+<td>3461</td>
+<td>You have received the list of games active for your source id.</td>
+</tr>
+</tbody></table>
+
+<h3 id="response-parameters">Response Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>source_id</td>
+<td>:YOUR_SOURCE_ID</td>
+<td>Your source id.</td>
+</tr>
+<tr>
+<td>games</td>
+<td>[]</td>
+<td>A list containing objects for all the upcoming games for your source. Each object contains game data - id, source_id, game_name, currency, live_start_at, game_type_id and a game hashtag.</td>
+</tr>
+</tbody></table>
+
+          <h1 id="websocket-api:-betting-pools">Websocket API: Betting pools</h1>
+
+<aside class="notice">
 This section assumes you have an active game opened and running. If not, read on how to open it <a href="#open-a-game">here</a>.
-</aside></p>
-<h2 id='bet-pool-types'>Bet pool types</h2>
+</aside>
+
+<h2 id="bet-pool-types">Bet pool types</h2>
+
 <p>We have two bet pool types recognized by the system:</p>
 
 <ol>
@@ -2978,23 +3459,25 @@ This section assumes you have an active game opened and running. If not, read on
 <li>Binary pools.</li>
 </ol>
 
-<p>Parimutuel pools are pools with an arbitrary number of mutually exclusive targets, one of which is a target &lsquo;none&rsquo;. These pools are resolvable automatically. A sample parimutuel pool would look like this: &lsquo;Who will score the next goal?&rsquo; with targets: Brazil, Argentina, none.</p>
+<p>Parimutuel pools are pools with an arbitrary number of mutually exclusive targets, one of which is a target &lsquo;none&rsquo;. These pools are resolvable automatically. A sample parimutuel pool would look like this: &#39;Who will score the next goal?&rsquo; with targets: Brazil, Argentina, none.</p>
 
 <p>Binary pools are pools with two options for selection. They are designed with yes/no questions in mind but not limited to that. They are not automatically resolvable - game cannot be closed until all these pools are resolved.
-A sample binary pool would look like this: &lsquo;Will a brazilian player score today?&rsquo; with targets: yes, no. For these pools action is generated internally - the parameter can be skipped.</p>
-<h2 id='create-and-open-betting-pool'>Create and open betting pool</h2>
-<p><aside class="notice">
-Only users listed as admins for the game are authorized for this call.
-</aside></p>
+A sample binary pool would look like this: &#39;Will a brazilian player score today?&rsquo; with targets: yes, no. For these pools action is generated internally - the parameter can be skipped.</p>
 
-<p><aside class="success">
+<h2 id="create-and-open-betting-pool">Create and open betting pool</h2>
+
+<aside class="notice">
+Only users listed as admins for the game are authorized for this call.
+</aside>
+
+<aside class="success">
 This functionality is also provided automatically by instamrkt - pools are opened and resolved automatically.
-</aside></p>
+</aside>
 
 <blockquote>
 <p>Expects the following JSON structure:</p>
 </blockquote>
-<pre><code class="highlight json"><span class="p">{</span><span class="w">
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
     </span><span class="s2">"header"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
     </span><span class="s2">"op"</span><span class="p">:</span><span class="w"> </span><span class="mi">385</span><span class="p">,</span><span class="w">
     </span><span class="s2">"game_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"30cee1fa-fb20-41a6-a61c-0e0335abc2a9"</span><span class="p">,</span><span class="w">
@@ -3012,7 +3495,7 @@ This functionality is also provided automatically by instamrkt - pools are opene
 <blockquote>
 <p>Returns the following JSON structures:</p>
 </blockquote>
-<pre><code class="highlight json"><span class="p">{</span><span class="w">
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
     </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Next Goal By Team"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"res"</span><span class="p">:</span><span class="w"> </span><span class="mi">350</span><span class="p">,</span><span class="w">
     </span><span class="s2">"pool_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"f2dd90e9-50ba-4c23-8161-2541ecd6720c"</span><span class="p">,</span><span class="w">
@@ -3023,7 +3506,7 @@ This functionality is also provided automatically by instamrkt - pools are opene
     </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
-<pre><code class="highlight json"><span class="p">{</span><span class="w">
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
     </span><span class="s2">"response_header"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
     </span><span class="s2">"res"</span><span class="p">:</span><span class="w"> </span><span class="mi">352</span><span class="p">,</span><span class="w">
     </span><span class="s2">"game_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"30cee1fa-fb20-41a6-a61c-0e0335abc2a9"</span><span class="p">,</span><span class="w">
@@ -3071,7 +3554,9 @@ This functionality is also provided automatically by instamrkt - pools are opene
 <p>This creates and opens a pool for predictions for people subscribed to the game in the system. Predictions can now be made in this pool. The successful call results in broadcasting the response to all users subscribed to the game. The creator also gets a separate confirmation message.</p>
 
 <p>How to make a prediction is described <a href="#place-bet-in-betting-pool">here</a>.</p>
-<h3 id='operation-code'>Operation code</h3>
+
+<h3 id="operation-code">Operation code</h3>
+
 <table><thead>
 <tr>
 <th>Name</th>
@@ -3083,7 +3568,9 @@ This functionality is also provided automatically by instamrkt - pools are opene
 <td>385</td>
 </tr>
 </tbody></table>
-<h3 id='call-parameters'>Call Parameters</h3>
+
+<h3 id="call-parameters">Call Parameters</h3>
+
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -3109,7 +3596,7 @@ This functionality is also provided automatically by instamrkt - pools are opene
 <tr>
 <td>targets</td>
 <td>[]</td>
-<td>List of targets on which predictions for actoin can happen. Has to be a subset of targets available for game. Sent as a comma-separated string or an array. Targets have to be of same level. That means &ldquo;argentina, brazil&rdquo; is correct, but &ldquo;argentina, brazil:9&rdquo; is not. <strong>IMPORTANT</strong>: target &lsquo;none&rsquo; will be added to target list for parimutuel pools.</td>
+<td>List of targets on which predictions for actoin can happen. Has to be a subset of targets available for game. Sent as a comma-separated string or an array. Targets have to be of same level. That means &ldquo;argentina, brazil&rdquo; is correct, but &ldquo;argentina, brazil:9&rdquo; is not. <strong>IMPORTANT</strong>: target &#39;none&rsquo; will be added to target list for parimutuel pools.</td>
 </tr>
 <tr>
 <td>type</td>
@@ -3147,7 +3634,9 @@ This functionality is also provided automatically by instamrkt - pools are opene
 <td>Boolean value describing if pool is to be recreated anew upon resolution.</td>
 </tr>
 </tbody></table>
-<h3 id='response-codes'>Response codes</h3>
+
+<h3 id="response-codes">Response codes</h3>
+
 <table><thead>
 <tr>
 <th>Name</th>
@@ -3166,7 +3655,11 @@ This functionality is also provided automatically by instamrkt - pools are opene
 <td>New pool has been created and is now opened for predictions (broadcast to all users subscribed to game).</td>
 </tr>
 </tbody></table>
-<h3 id='response-parameters'>Response Parameters</h3><h4 id='betting-pool-created'>Betting pool created</h4>
+
+<h3 id="response-parameters">Response Parameters</h3>
+
+<h4 id="betting-pool-created">Betting pool created</h4>
+
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -3195,7 +3688,9 @@ This functionality is also provided automatically by instamrkt - pools are opene
 <td>Provided pool type: 1 - parimutuel event based, 2 - parimutuel time based, 3 - binary event based, 4 - binary time based.</td>
 </tr>
 </tbody></table>
-<h4 id='new-petting-pool'>New petting pool</h4>
+
+<h4 id="new-petting-pool">New petting pool</h4>
+
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -3279,19 +3774,21 @@ This functionality is also provided automatically by instamrkt - pools are opene
 <td>Provided stop accepting bets at time (&gt; now()) in epoch millis.</td>
 </tr>
 </tbody></table>
-<h2 id='resolve-pool--register-game-event'>Resolve pool / register game event</h2>
-<p><aside class="notice">
-Only users listed as admins for the game are authorized for this call.
-</aside></p>
 
-<p><aside class="success">
+<h2 id="resolve-pool-/-register-game-event">Resolve pool / register game event</h2>
+
+<aside class="notice">
+Only users listed as admins for the game are authorized for this call.
+</aside>
+
+<aside class="success">
 This functionality is also provided automatically by instamrkt - pools are opened and resolved automatically.
-</aside></p>
+</aside>
 
 <blockquote>
 <p>Expects the following JSON structure:</p>
 </blockquote>
-<pre><code class="highlight json"><span class="p">{</span><span class="w">
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
     </span><span class="s2">"header"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
     </span><span class="s2">"op"</span><span class="p">:</span><span class="w"> </span><span class="mi">395</span><span class="p">,</span><span class="w">
     </span><span class="s2">"action_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"goal"</span><span class="p">,</span><span class="w">
@@ -3304,7 +3801,7 @@ This functionality is also provided automatically by instamrkt - pools are opene
 <blockquote>
 <p>Returns the following JSON structures:</p>
 </blockquote>
-<pre><code class="highlight json"><span class="p">{</span><span class="w">
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
     </span><span class="s2">"response_header"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
     </span><span class="s2">"res"</span><span class="p">:</span><span class="w"> </span><span class="mi">366</span><span class="p">,</span><span class="w">
     </span><span class="s2">"action_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"goal"</span><span class="p">,</span><span class="w">
@@ -3317,7 +3814,7 @@ This functionality is also provided automatically by instamrkt - pools are opene
     </span><span class="s2">"happened_at"</span><span class="p">:</span><span class="w"> </span><span class="mi">1421933670549</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
-<pre><code class="highlight json"><span class="p">{</span><span class="w">
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
     </span><span class="s2">"response_header"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
     </span><span class="s2">"res"</span><span class="p">:</span><span class="w"> </span><span class="mi">362</span><span class="p">,</span><span class="w">
     </span><span class="s2">"pool_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"7d48ecbc-cd97-41fa-94e8-ca0a8ff22629"</span><span class="p">,</span><span class="w">
@@ -3337,7 +3834,9 @@ This functionality is also provided automatically by instamrkt - pools are opene
 <p>Events of higher levels resolve also pools for events of lower levels. E.g., an event &ldquo;goal&rdquo; for target &ldquo;brazil:9&rdquo;, will resolve all pools opened for &ldquo;goal&rdquo; containing &ldquo;brazil:9&rdquo; <strong>and</strong> &ldquo;brazil&rdquo; in its targets.</p>
 
 <p>Pool resolution in turn will cause sending out a bet_pool_resolved message, also described below. It also sends out a <a href="#balance-update-server-message">new balance</a> message to all users participating in a pool.</p>
-<h3 id='operation-code'>Operation code</h3>
+
+<h3 id="operation-code">Operation code</h3>
+
 <table><thead>
 <tr>
 <th>Name</th>
@@ -3349,7 +3848,9 @@ This functionality is also provided automatically by instamrkt - pools are opene
 <td>395</td>
 </tr>
 </tbody></table>
-<h3 id='call-parameters'>Call Parameters</h3>
+
+<h3 id="call-parameters">Call Parameters</h3>
+
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -3388,7 +3889,9 @@ This functionality is also provided automatically by instamrkt - pools are opene
 <td>Epoch millis when event happened. If skipped, defaulted to message receival time.</td>
 </tr>
 </tbody></table>
-<h3 id='response-codes'>Response codes</h3>
+
+<h3 id="response-codes">Response codes</h3>
+
 <table><thead>
 <tr>
 <th>Name</th>
@@ -3407,7 +3910,11 @@ This functionality is also provided automatically by instamrkt - pools are opene
 <td>Pool resolved. Sent for every pool for action and target. Broadcast to all game subscribers.</td>
 </tr>
 </tbody></table>
-<h3 id='response-parameters'>Response Parameters</h3><h4 id='new-game-event'>New game event</h4>
+
+<h3 id="response-parameters">Response Parameters</h3>
+
+<h4 id="new-game-event">New game event</h4>
+
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -3456,7 +3963,9 @@ This functionality is also provided automatically by instamrkt - pools are opene
 <td>Epoch millis when event happened. If skipped, defaulted to message receival time.</td>
 </tr>
 </tbody></table>
-<h4 id='pool-resolved'>Pool resolved</h4>
+
+<h4 id="pool-resolved">Pool resolved</h4>
+
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -3505,11 +4014,13 @@ This functionality is also provided automatically by instamrkt - pools are opene
 <td>The time of pool resolution in epoch millis.</td>
 </tr>
 </tbody></table>
-<h2 id='pool-expired-server-message'>Pool expired (server message)</h2>
+
+<h2 id="pool-expired-(server-message)">Pool expired (server message)</h2>
+
 <blockquote>
 <p>Returns the following JSON structure:</p>
 </blockquote>
-<pre><code class="highlight json"><span class="p">{</span><span class="w">
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
     </span><span class="s2">"response_header"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
     </span><span class="s2">"res"</span><span class="p">:</span><span class="w"> </span><span class="mi">363</span><span class="p">,</span><span class="w">
     </span><span class="s2">"pool_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"7d48ecbc-cd97-41fa-94e8-ca0a8ff22629"</span><span class="p">,</span><span class="w">
@@ -3524,8 +4035,10 @@ This functionality is also provided automatically by instamrkt - pools are opene
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
-<p>When a pool is created as a time-based and it expires (e.g.: &ldquo;Will Brazil score before 65:00?&rdquo;) that means the pool will be resolved with target &lsquo;none&rsquo;. That means people who predicted this target are victorious. The message broadcast to all game subscribers.</p>
-<h3 id='response-code'>Response code</h3>
+<p>When a pool is created as a time-based and it expires (e.g.: &ldquo;Will Brazil score before 65:00?&rdquo;) that means the pool will be resolved with target &#39;none&rsquo;. That means people who predicted this target are victorious. The message broadcast to all game subscribers.</p>
+
+<h3 id="response-code">Response code</h3>
+
 <table><thead>
 <tr>
 <th>Name</th>
@@ -3536,10 +4049,12 @@ This functionality is also provided automatically by instamrkt - pools are opene
 <tr>
 <td>bet_pool_expored</td>
 <td>363</td>
-<td>Pool expired (resolved to &lsquo;none&rsquo;). Sent for every pool for action and target. Broadcast to all game subscribers.</td>
+<td>Pool expired (resolved to &#39;none&rsquo;). Sent for every pool for action and target. Broadcast to all game subscribers.</td>
 </tr>
 </tbody></table>
-<h3 id='response-parameters'>Response Parameters</h3>
+
+<h3 id="response-parameters">Response Parameters</h3>
+
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -3588,11 +4103,13 @@ This functionality is also provided automatically by instamrkt - pools are opene
 <td>The time of pool resolution in epoch millis.</td>
 </tr>
 </tbody></table>
-<h2 id='list-all-open-pools-for-game'>List all open pools for game</h2>
+
+<h2 id="list-all-open-pools-for-game">List all open pools for game</h2>
+
 <blockquote>
 <p>Expects the following JSON structure:</p>
 </blockquote>
-<pre><code class="highlight json"><span class="p">{</span><span class="w">
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
     </span><span class="s2">"header"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
     </span><span class="s2">"op"</span><span class="p">:</span><span class="w"> </span><span class="mi">387</span><span class="p">,</span><span class="w">
     </span><span class="s2">"game_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1b9a4a42-0c8a-46c0-95ee-c1e649e16fce"</span><span class="w">
@@ -3602,7 +4119,7 @@ This functionality is also provided automatically by instamrkt - pools are opene
 <blockquote>
 <p>Returns the following JSON structure:</p>
 </blockquote>
-<pre><code class="highlight json"><span class="p">{</span><span class="w">
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
     </span><span class="s2">"response_header"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
     </span><span class="s2">"res"</span><span class="p">:</span><span class="w"> </span><span class="mi">3535</span><span class="p">,</span><span class="w">
     </span><span class="s2">"game_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1b9a4a42-0c8a-46c0-95ee-c1e649e16fce"</span><span class="p">,</span><span class="w">
@@ -3691,7 +4208,9 @@ This functionality is also provided automatically by instamrkt - pools are opene
 </span></code></pre>
 
 <p>List all pools opened for predictions for a given game.</p>
-<h3 id='operation-code'>Operation code</h3>
+
+<h3 id="operation-code">Operation code</h3>
+
 <table><thead>
 <tr>
 <th>Name</th>
@@ -3703,7 +4222,9 @@ This functionality is also provided automatically by instamrkt - pools are opene
 <td>387</td>
 </tr>
 </tbody></table>
-<h3 id='call-parameters'>Call Parameters</h3>
+
+<h3 id="call-parameters">Call Parameters</h3>
+
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -3717,7 +4238,9 @@ This functionality is also provided automatically by instamrkt - pools are opene
 <td>Game id for which the pools are to be listed.</td>
 </tr>
 </tbody></table>
-<h3 id='response-code'>Response code</h3>
+
+<h3 id="response-code">Response code</h3>
+
 <table><thead>
 <tr>
 <th>Name</th>
@@ -3731,7 +4254,9 @@ This functionality is also provided automatically by instamrkt - pools are opene
 <td>Opened betting pools for game have been listed to you.</td>
 </tr>
 </tbody></table>
-<h3 id='response-parameters'>Response Parameters</h3>
+
+<h3 id="response-parameters">Response Parameters</h3>
+
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -3750,11 +4275,13 @@ This functionality is also provided automatically by instamrkt - pools are opene
 <td>A list of pools opened for game.</td>
 </tr>
 </tbody></table>
-<h2 id='list-my-open-pools-for-game'>List my open pools for game</h2>
+
+<h2 id="list-my-open-pools-for-game">List my open pools for game</h2>
+
 <blockquote>
 <p>Expects the following JSON structure:</p>
 </blockquote>
-<pre><code class="highlight json"><span class="p">{</span><span class="w">
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
     </span><span class="s2">"header"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
     </span><span class="s2">"op"</span><span class="p">:</span><span class="w"> </span><span class="mi">388</span><span class="p">,</span><span class="w">
     </span><span class="s2">"game_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1b9a4a42-0c8a-46c0-95ee-c1e649e16fce"</span><span class="w">
@@ -3764,7 +4291,7 @@ This functionality is also provided automatically by instamrkt - pools are opene
 <blockquote>
 <p>Returns the following JSON structure:</p>
 </blockquote>
-<pre><code class="highlight json"><span class="p">{</span><span class="w">
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
     </span><span class="s2">"response_header"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
     </span><span class="s2">"res"</span><span class="p">:</span><span class="w"> </span><span class="mi">353</span><span class="p">,</span><span class="w">
     </span><span class="s2">"game_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1b9a4a42-0c8a-46c0-95ee-c1e649e16fce"</span><span class="p">,</span><span class="w">
@@ -3813,7 +4340,9 @@ This functionality is also provided automatically by instamrkt - pools are opene
 </span></code></pre>
 
 <p>List all pools opened for predictions for a given game <strong>in which you have not yet placed a prediction</strong>.</p>
-<h3 id='operation-code'>Operation code</h3>
+
+<h3 id="operation-code">Operation code</h3>
+
 <table><thead>
 <tr>
 <th>Name</th>
@@ -3825,7 +4354,9 @@ This functionality is also provided automatically by instamrkt - pools are opene
 <td>388</td>
 </tr>
 </tbody></table>
-<h3 id='call-parameters'>Call Parameters</h3>
+
+<h3 id="call-parameters">Call Parameters</h3>
+
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -3839,7 +4370,9 @@ This functionality is also provided automatically by instamrkt - pools are opene
 <td>Game id for which the pools are to be listed.</td>
 </tr>
 </tbody></table>
-<h3 id='response-code'>Response code</h3>
+
+<h3 id="response-code">Response code</h3>
+
 <table><thead>
 <tr>
 <th>Name</th>
@@ -3853,7 +4386,9 @@ This functionality is also provided automatically by instamrkt - pools are opene
 <td>Opened betting pools for game in which you have not placed a prediction have been listed to you.</td>
 </tr>
 </tbody></table>
-<h3 id='response-parameters'>Response Parameters</h3>
+
+<h3 id="response-parameters">Response Parameters</h3>
+
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -3872,11 +4407,13 @@ This functionality is also provided automatically by instamrkt - pools are opene
 <td>A lost of pools opened for game in which you have not placed a prediction.</td>
 </tr>
 </tbody></table>
-<h2 id='list-my-running-pools-for-game'>List my running pools for game</h2>
+
+<h2 id="list-my-running-pools-for-game">List my running pools for game</h2>
+
 <blockquote>
 <p>Expects the following JSON structure:</p>
 </blockquote>
-<pre><code class="highlight json"><span class="p">{</span><span class="w">
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
     </span><span class="s2">"header"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
     </span><span class="s2">"op"</span><span class="p">:</span><span class="w"> </span><span class="mi">389</span><span class="p">,</span><span class="w">
     </span><span class="s2">"game_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1b9a4a42-0c8a-46c0-95ee-c1e649e16fce"</span><span class="w">
@@ -3886,7 +4423,7 @@ This functionality is also provided automatically by instamrkt - pools are opene
 <blockquote>
 <p>Returns the following JSON structure:</p>
 </blockquote>
-<pre><code class="highlight json"><span class="p">{</span><span class="w">
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
     </span><span class="s2">"response_header"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
     </span><span class="s2">"res"</span><span class="p">:</span><span class="w"> </span><span class="mi">354</span><span class="p">,</span><span class="w">
     </span><span class="s2">"game_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1b9a4a42-0c8a-46c0-95ee-c1e649e16fce"</span><span class="p">,</span><span class="w">
@@ -3945,7 +4482,9 @@ This functionality is also provided automatically by instamrkt - pools are opene
 </span></code></pre>
 
 <p>List all pools opened for predictions for a given game <strong>in which you have not yet placed a prediction</strong>.</p>
-<h3 id='operation-code'>Operation code</h3>
+
+<h3 id="operation-code">Operation code</h3>
+
 <table><thead>
 <tr>
 <th>Name</th>
@@ -3957,7 +4496,9 @@ This functionality is also provided automatically by instamrkt - pools are opene
 <td>389</td>
 </tr>
 </tbody></table>
-<h3 id='call-parameters'>Call Parameters</h3>
+
+<h3 id="call-parameters">Call Parameters</h3>
+
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -3971,7 +4512,9 @@ This functionality is also provided automatically by instamrkt - pools are opene
 <td>Game id for which the pools are to be listed.</td>
 </tr>
 </tbody></table>
-<h3 id='response-code'>Response code</h3>
+
+<h3 id="response-code">Response code</h3>
+
 <table><thead>
 <tr>
 <th>Name</th>
@@ -3985,7 +4528,9 @@ This functionality is also provided automatically by instamrkt - pools are opene
 <td>Opened betting pools for game in which you have placed a prediction have been listed to you.</td>
 </tr>
 </tbody></table>
-<h3 id='response-parameters'>Response Parameters</h3>
+
+<h3 id="response-parameters">Response Parameters</h3>
+
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -4004,11 +4549,13 @@ This functionality is also provided automatically by instamrkt - pools are opene
 <td>A list of pools opened for game in which you have placed a prediction.</td>
 </tr>
 </tbody></table>
-<h2 id='list-my-resolved-pools-for-game'>List my resolved pools for game</h2>
+
+<h2 id="list-my-resolved-pools-for-game">List my resolved pools for game</h2>
+
 <blockquote>
 <p>Expects the following JSON structure:</p>
 </blockquote>
-<pre><code class="highlight json"><span class="p">{</span><span class="w">
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
     </span><span class="s2">"header"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
     </span><span class="s2">"op"</span><span class="p">:</span><span class="w"> </span><span class="mi">390</span><span class="p">,</span><span class="w">
     </span><span class="s2">"game_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1b9a4a42-0c8a-46c0-95ee-c1e649e16fce"</span><span class="w">
@@ -4018,7 +4565,7 @@ This functionality is also provided automatically by instamrkt - pools are opene
 <blockquote>
 <p>Returns the following JSON structure:</p>
 </blockquote>
-<pre><code class="highlight json"><span class="p">{</span><span class="w">
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
     </span><span class="s2">"response_header"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
     </span><span class="s2">"res"</span><span class="p">:</span><span class="w"> </span><span class="mi">355</span><span class="p">,</span><span class="w">
     </span><span class="s2">"pools_list"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
@@ -4080,7 +4627,9 @@ This functionality is also provided automatically by instamrkt - pools are opene
 </span></code></pre>
 
 <p>List all pools for a given game <strong>in which you have placed a prediction</strong> and the pool has been resolved.</p>
-<h3 id='operation-code'>Operation code</h3>
+
+<h3 id="operation-code">Operation code</h3>
+
 <table><thead>
 <tr>
 <th>Name</th>
@@ -4092,7 +4641,9 @@ This functionality is also provided automatically by instamrkt - pools are opene
 <td>390</td>
 </tr>
 </tbody></table>
-<h3 id='call-parameters'>Call Parameters</h3>
+
+<h3 id="call-parameters">Call Parameters</h3>
+
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -4106,7 +4657,9 @@ This functionality is also provided automatically by instamrkt - pools are opene
 <td>Game id for which the pools are to be listed.</td>
 </tr>
 </tbody></table>
-<h3 id='response-code'>Response code</h3>
+
+<h3 id="response-code">Response code</h3>
+
 <table><thead>
 <tr>
 <th>Name</th>
@@ -4120,7 +4673,9 @@ This functionality is also provided automatically by instamrkt - pools are opene
 <td>Betting pools for game in which you had placed a prediction that had been resolved have been listed to you.</td>
 </tr>
 </tbody></table>
-<h3 id='response-parameters'>Response Parameters</h3>
+
+<h3 id="response-parameters">Response Parameters</h3>
+
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -4139,11 +4694,13 @@ This functionality is also provided automatically by instamrkt - pools are opene
 <td>A list of pools opened for game in which you have placed a prediction and that haved been resolved.</td>
 </tr>
 </tbody></table>
-<h2 id='place-bet-in-betting-pool'>Place bet in betting pool</h2>
+
+<h2 id="place-bet-in-betting-pool">Place bet in betting pool</h2>
+
 <blockquote>
 <p>Expects the following JSON structure:</p>
 </blockquote>
-<pre><code class="highlight json"><span class="p">{</span><span class="w">
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
     </span><span class="s2">"header"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
     </span><span class="s2">"op"</span><span class="p">:</span><span class="w"> </span><span class="mi">392</span><span class="p">,</span><span class="w">
     </span><span class="s2">"pool_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"6cca4a84-d3e5-4d56-9f5e-acb50ecd5f1d"</span><span class="p">,</span><span class="w">
@@ -4155,7 +4712,7 @@ This functionality is also provided automatically by instamrkt - pools are opene
 <blockquote>
 <p>Returns the following JSON structures:</p>
 </blockquote>
-<pre><code class="highlight json"><span class="p">{</span><span class="w">
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
     </span><span class="s2">"response_header"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
     </span><span class="s2">"res"</span><span class="p">:</span><span class="w"> </span><span class="mi">356</span><span class="p">,</span><span class="w">
     </span><span class="s2">"pool_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"6cca4a84-d3e5-4d56-9f5e-acb50ecd5f1d"</span><span class="p">,</span><span class="w">
@@ -4163,7 +4720,7 @@ This functionality is also provided automatically by instamrkt - pools are opene
     </span><span class="s2">"amount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
-<pre><code class="highlight json"><span class="p">{</span><span class="w">
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
     </span><span class="s2">"response_header"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
     </span><span class="s2">"res"</span><span class="p">:</span><span class="w"> </span><span class="mi">361</span><span class="p">,</span><span class="w">
     </span><span class="s2">"pool_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"6cca4a84-d3e5-4d56-9f5e-acb50ecd5f1d"</span><span class="p">,</span><span class="w">
@@ -4174,22 +4731,22 @@ This functionality is also provided automatically by instamrkt - pools are opene
             </span><span class="s2">"backing_people"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
             </span><span class="s2">"to_win_if_backed"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w">
             </span><span class="s2">"display_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"brazil"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"backing_money"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w">
-        </span><span class="err">}</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"backing_money"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.0</span><span class="w">
+        </span><span class="p">},</span><span class="w">
         </span><span class="p">{</span><span class="w">
             </span><span class="s2">"target_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"none"</span><span class="p">,</span><span class="w">
             </span><span class="s2">"backing_people"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
             </span><span class="s2">"to_win_if_backed"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w">
             </span><span class="s2">"display_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"brazil"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"backing_money"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w">
-        </span><span class="err">}</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"backing_money"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="w">
+        </span><span class="p">},</span><span class="w">
         </span><span class="p">{</span><span class="w">
             </span><span class="s2">"target_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"netherlands"</span><span class="p">,</span><span class="w">
             </span><span class="s2">"backing_people"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
             </span><span class="s2">"to_win_if_backed"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w">
             </span><span class="s2">"display_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"brazil"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"backing_money"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w">
-        </span><span class="err">}</span><span class="w">
+            </span><span class="s2">"backing_money"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="w">
+        </span><span class="p">}</span><span class="w">
     </span><span class="p">],</span><span class="w">
     </span><span class="s2">"new_bets"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
         </span><span class="p">{</span><span class="w">
@@ -4205,7 +4762,9 @@ This functionality is also provided automatically by instamrkt - pools are opene
 <p>Places a prediction for the specified target for the specified amount in the specified pool.</p>
 
 <p>If user does not have sufficient available funds, an appropriate dedicated error message is returned.</p>
-<h3 id='operation-code'>Operation code</h3>
+
+<h3 id="operation-code">Operation code</h3>
+
 <table><thead>
 <tr>
 <th>Name</th>
@@ -4217,7 +4776,9 @@ This functionality is also provided automatically by instamrkt - pools are opene
 <td>392</td>
 </tr>
 </tbody></table>
-<h3 id='call-parameters'>Call Parameters</h3>
+
+<h3 id="call-parameters">Call Parameters</h3>
+
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -4241,7 +4802,9 @@ This functionality is also provided automatically by instamrkt - pools are opene
 <td>Amount that you want to wager.</td>
 </tr>
 </tbody></table>
-<h3 id='response-codes'>Response codes</h3>
+
+<h3 id="response-codes">Response codes</h3>
+
 <table><thead>
 <tr>
 <th>Name</th>
@@ -4260,7 +4823,11 @@ This functionality is also provided automatically by instamrkt - pools are opene
 <td>You have changed the pool distribution. This is broadcast to all game subscribers.</td>
 </tr>
 </tbody></table>
-<h3 id='response-parameters'>Response Parameters</h3><h4 id='placing-confirmation'>Placing confirmation</h4>
+
+<h3 id="response-parameters">Response Parameters</h3>
+
+<h4 id="placing-confirmation">Placing confirmation</h4>
+
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -4289,7 +4856,9 @@ This functionality is also provided automatically by instamrkt - pools are opene
 <td>The amount which you have specified.</td>
 </tr>
 </tbody></table>
-<h4 id='updated-distribution'>Updated distribution</h4>
+
+<h4 id="updated-distribution">Updated distribution</h4>
+
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -4318,11 +4887,13 @@ This functionality is also provided automatically by instamrkt - pools are opene
 <td>A list of new bets that caused the distribution update, with details.</td>
 </tr>
 </tbody></table>
-<h2 id='get-betting-pool-distribution'>Get betting pool distribution</h2>
+
+<h2 id="get-betting-pool-distribution">Get betting pool distribution</h2>
+
 <blockquote>
 <p>Expects the following JSON structure:</p>
 </blockquote>
-<pre><code class="highlight json"><span class="p">{</span><span class="w">
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
     </span><span class="s2">"header"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
     </span><span class="s2">"op"</span><span class="p">:</span><span class="w"> </span><span class="mi">393</span><span class="p">,</span><span class="w">
     </span><span class="s2">"pool_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"6cca4a84-d3e5-4d56-9f5e-acb50ecd5f1d"</span><span class="w">
@@ -4332,7 +4903,7 @@ This functionality is also provided automatically by instamrkt - pools are opene
 <blockquote>
 <p>Returns the following JSON structures:</p>
 </blockquote>
-<pre><code class="highlight json"><span class="p">{</span><span class="w">
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
     </span><span class="s2">"response_header"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
     </span><span class="s2">"res"</span><span class="p">:</span><span class="w"> </span><span class="mi">356</span><span class="p">,</span><span class="w">
     </span><span class="s2">"pool_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"6cca4a84-d3e5-4d56-9f5e-acb50ecd5f1d"</span><span class="p">,</span><span class="w">
@@ -4340,7 +4911,7 @@ This functionality is also provided automatically by instamrkt - pools are opene
     </span><span class="s2">"amount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
-<pre><code class="highlight json"><span class="p">{</span><span class="w">
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
     </span><span class="s2">"response_header"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
     </span><span class="s2">"res"</span><span class="p">:</span><span class="w"> </span><span class="mi">360</span><span class="p">,</span><span class="w">
     </span><span class="s2">"pool_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"6cca4a84-d3e5-4d56-9f5e-acb50ecd5f1d"</span><span class="p">,</span><span class="w">
@@ -4384,7 +4955,9 @@ This functionality is also provided automatically by instamrkt - pools are opene
 <p>Places a prediction for the specified target for the specified amount in the specified pool.</p>
 
 <p>If user does not have sufficient available funds, an appropriate dedicated error message is returned.</p>
-<h3 id='operation-code'>Operation code</h3>
+
+<h3 id="operation-code">Operation code</h3>
+
 <table><thead>
 <tr>
 <th>Name</th>
@@ -4396,7 +4969,9 @@ This functionality is also provided automatically by instamrkt - pools are opene
 <td>393</td>
 </tr>
 </tbody></table>
-<h3 id='call-parameters'>Call Parameters</h3>
+
+<h3 id="call-parameters">Call Parameters</h3>
+
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -4410,7 +4985,9 @@ This functionality is also provided automatically by instamrkt - pools are opene
 <td>Pool id for which distribution is to be returned.</td>
 </tr>
 </tbody></table>
-<h3 id='response-code'>Response code</h3>
+
+<h3 id="response-code">Response code</h3>
+
 <table><thead>
 <tr>
 <th>Name</th>
@@ -4424,7 +5001,9 @@ This functionality is also provided automatically by instamrkt - pools are opene
 <td>You have received the pool distribution.</td>
 </tr>
 </tbody></table>
-<h3 id='response-parameters'>Response Parameters</h3>
+
+<h3 id="response-parameters">Response Parameters</h3>
+
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -4448,15 +5027,17 @@ This functionality is also provided automatically by instamrkt - pools are opene
 <td>A list of current predictions, each an object with predictions for a given target (containing a list of all bets, with details, current target multiplier, display name and total amount backing the target).</td>
 </tr>
 </tbody></table>
-<h2 id='block-betting-in-a-pool'>Block betting in a pool</h2>
-<p><aside class="notice">
+
+<h2 id="block-betting-in-a-pool">Block betting in a pool</h2>
+
+<aside class="notice">
 Only users listed as admins for the game are authorized for this call.
-</aside></p>
+</aside>
 
 <blockquote>
 <p>Expects the following JSON structure:</p>
 </blockquote>
-<pre><code class="highlight json"><span class="p">{</span><span class="w">
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
     </span><span class="s2">"header"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
     </span><span class="s2">"op"</span><span class="p">:</span><span class="w"> </span><span class="mi">397</span><span class="p">,</span><span class="w">
     </span><span class="s2">"pool_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"a183b2da-b561-4bc9-99b5-078e570e0117"</span><span class="p">,</span><span class="w">
@@ -4467,7 +5048,7 @@ Only users listed as admins for the game are authorized for this call.
 <blockquote>
 <p>Returns the following JSON structure:</p>
 </blockquote>
-<pre><code class="highlight json"><span class="p">{</span><span class="w">
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
     </span><span class="s2">"response_header"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
     </span><span class="s2">"res"</span><span class="p">:</span><span class="w"> </span><span class="mi">368</span><span class="p">,</span><span class="w">
     </span><span class="s2">"blocked_at"</span><span class="p">:</span><span class="w"> </span><span class="mi">1421942161542</span><span class="p">,</span><span class="w">
@@ -4476,7 +5057,9 @@ Only users listed as admins for the game are authorized for this call.
 </span></code></pre>
 
 <p>Blocks placing predictions in the specified pool until unblocked (or pool resolved).</p>
-<h3 id='operation-code'>Operation code</h3>
+
+<h3 id="operation-code">Operation code</h3>
+
 <table><thead>
 <tr>
 <th>Name</th>
@@ -4488,7 +5071,9 @@ Only users listed as admins for the game are authorized for this call.
 <td>397</td>
 </tr>
 </tbody></table>
-<h3 id='call-parameters'>Call Parameters</h3>
+
+<h3 id="call-parameters">Call Parameters</h3>
+
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -4507,7 +5092,9 @@ Only users listed as admins for the game are authorized for this call.
 <td>Block pool at a later time - epoch_millis (&gt; now()).</td>
 </tr>
 </tbody></table>
-<h3 id='response-code'>Response code</h3>
+
+<h3 id="response-code">Response code</h3>
+
 <table><thead>
 <tr>
 <th>Name</th>
@@ -4521,7 +5108,9 @@ Only users listed as admins for the game are authorized for this call.
 <td>You have blocked a given pool. This is broadcast to all game subscribers.</td>
 </tr>
 </tbody></table>
-<h3 id='response-parameters'>Response Parameters</h3>
+
+<h3 id="response-parameters">Response Parameters</h3>
+
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -4540,15 +5129,17 @@ Only users listed as admins for the game are authorized for this call.
 <td>The timestamp indicating when the pool was blocked.</td>
 </tr>
 </tbody></table>
-<h2 id='block-betting-for-action'>Block betting for action</h2>
-<p><aside class="notice">
+
+<h2 id="block-betting-for-action">Block betting for action</h2>
+
+<aside class="notice">
 Only users listed as admins for the game are authorized for this call.
-</aside></p>
+</aside>
 
 <blockquote>
 <p>Expects the following JSON structure:</p>
 </blockquote>
-<pre><code class="highlight json"><span class="p">{</span><span class="w">
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
     </span><span class="s2">"header"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
     </span><span class="s2">"op"</span><span class="p">:</span><span class="w"> </span><span class="mi">3975</span><span class="p">,</span><span class="w">
     </span><span class="s2">"game_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"a183b2da-b561-4bc9-99b5-078e570e0117"</span><span class="p">,</span><span class="w">
@@ -4560,7 +5151,7 @@ Only users listed as admins for the game are authorized for this call.
 <blockquote>
 <p>Returns the following JSON structures:</p>
 </blockquote>
-<pre><code class="highlight json"><span class="p">{</span><span class="w">
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
     </span><span class="s2">"response_header"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
     </span><span class="s2">"res"</span><span class="p">:</span><span class="w"> </span><span class="mi">370</span><span class="p">,</span><span class="w">
     </span><span class="s2">"game_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"a183b2da-b561-4bc9-99b5-078e570e0117"</span><span class="p">,</span><span class="w">
@@ -4568,7 +5159,7 @@ Only users listed as admins for the game are authorized for this call.
     </span><span class="s2">"blocked_at"</span><span class="p">:</span><span class="w"> </span><span class="mi">1421942161542</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
-<pre><code class="highlight json"><span class="p">{</span><span class="w">
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
     </span><span class="s2">"response_header"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
     </span><span class="s2">"res"</span><span class="p">:</span><span class="w"> </span><span class="mi">368</span><span class="p">,</span><span class="w">
     </span><span class="s2">"blocked_at"</span><span class="p">:</span><span class="w"> </span><span class="mi">1421942161542</span><span class="p">,</span><span class="w">
@@ -4577,7 +5168,9 @@ Only users listed as admins for the game are authorized for this call.
 </span></code></pre>
 
 <p>Blocks placing predictions in all pools for specified action in a specified game until unblocked (or pools resolved).</p>
-<h3 id='operation-code'>Operation code</h3>
+
+<h3 id="operation-code">Operation code</h3>
+
 <table><thead>
 <tr>
 <th>Name</th>
@@ -4589,7 +5182,9 @@ Only users listed as admins for the game are authorized for this call.
 <td>3975</td>
 </tr>
 </tbody></table>
-<h3 id='call-parameters'>Call Parameters</h3>
+
+<h3 id="call-parameters">Call Parameters</h3>
+
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -4613,7 +5208,9 @@ Only users listed as admins for the game are authorized for this call.
 <td>Block pools at a later time - epoch_millis (&gt; now()).</td>
 </tr>
 </tbody></table>
-<h3 id='response-codes'>Response codes</h3>
+
+<h3 id="response-codes">Response codes</h3>
+
 <table><thead>
 <tr>
 <th>Name</th>
@@ -4632,7 +5229,11 @@ Only users listed as admins for the game are authorized for this call.
 <td>You have blocked a given pool. This is broadcast to all game subscribers for all pools in game for given action.</td>
 </tr>
 </tbody></table>
-<h3 id='response-parameters'>Response Parameters</h3><h4 id='blocking-confirmation'>Blocking confirmation</h4>
+
+<h3 id="response-parameters">Response Parameters</h3>
+
+<h4 id="blocking-confirmation">Blocking confirmation</h4>
+
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -4656,17 +5257,21 @@ Only users listed as admins for the game are authorized for this call.
 <td>The timestamp indicating when the pools were blocked.</td>
 </tr>
 </tbody></table>
-<h4 id='blocked-pool'>Blocked pool</h4>
+
+<h4 id="blocked-pool">Blocked pool</h4>
+
 <p>Described in <a href="#block-betting-in-a-pool">this section</a>.</p>
-<h2 id='allow-betting-in-a-pool'>Allow betting in a pool</h2>
-<p><aside class="notice">
+
+<h2 id="allow-betting-in-a-pool">Allow betting in a pool</h2>
+
+<aside class="notice">
 Only users listed as admins for the game are authorized for this call.
-</aside></p>
+</aside>
 
 <blockquote>
 <p>Expects the following JSON structure:</p>
 </blockquote>
-<pre><code class="highlight json"><span class="p">{</span><span class="w">
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
     </span><span class="s2">"header"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
     </span><span class="s2">"op"</span><span class="p">:</span><span class="w"> </span><span class="mi">398</span><span class="p">,</span><span class="w">
     </span><span class="s2">"pool_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"a183b2da-b561-4bc9-99b5-078e570e0117"</span><span class="p">,</span><span class="w">
@@ -4677,7 +5282,7 @@ Only users listed as admins for the game are authorized for this call.
 <blockquote>
 <p>Returns the following JSON structure:</p>
 </blockquote>
-<pre><code class="highlight json"><span class="p">{</span><span class="w">
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
     </span><span class="s2">"response_header"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
     </span><span class="s2">"res"</span><span class="p">:</span><span class="w"> </span><span class="mi">369</span><span class="p">,</span><span class="w">
     </span><span class="s2">"allowed_at"</span><span class="p">:</span><span class="w"> </span><span class="mi">1421942161542</span><span class="p">,</span><span class="w">
@@ -4686,7 +5291,9 @@ Only users listed as admins for the game are authorized for this call.
 </span></code></pre>
 
 <p>Allow for placing predictions in the specified pool. Needs to called only after explicitly blocking the pool.</p>
-<h3 id='operation-code'>Operation code</h3>
+
+<h3 id="operation-code">Operation code</h3>
+
 <table><thead>
 <tr>
 <th>Name</th>
@@ -4698,7 +5305,9 @@ Only users listed as admins for the game are authorized for this call.
 <td>398</td>
 </tr>
 </tbody></table>
-<h3 id='call-parameters'>Call Parameters</h3>
+
+<h3 id="call-parameters">Call Parameters</h3>
+
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -4717,7 +5326,9 @@ Only users listed as admins for the game are authorized for this call.
 <td>Allow betting pool at a later time - epoch_millis (&gt; now()).</td>
 </tr>
 </tbody></table>
-<h3 id='response-code'>Response code</h3>
+
+<h3 id="response-code">Response code</h3>
+
 <table><thead>
 <tr>
 <th>Name</th>
@@ -4731,7 +5342,9 @@ Only users listed as admins for the game are authorized for this call.
 <td>You have allowed for placing predictions in a given pool. This is broadcast to all game subscribers.</td>
 </tr>
 </tbody></table>
-<h3 id='response-parameters'>Response Parameters</h3>
+
+<h3 id="response-parameters">Response Parameters</h3>
+
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -4750,15 +5363,17 @@ Only users listed as admins for the game are authorized for this call.
 <td>The timestamp indicating when placing predictions in the given pool was allowed.</td>
 </tr>
 </tbody></table>
-<h2 id='allow-betting-for-action'>Allow betting for action</h2>
-<p><aside class="notice">
+
+<h2 id="allow-betting-for-action">Allow betting for action</h2>
+
+<aside class="notice">
 Only users listed as admins for the game are authorized for this call.
-</aside></p>
+</aside>
 
 <blockquote>
 <p>Expects the following JSON structure:</p>
 </blockquote>
-<pre><code class="highlight json"><span class="p">{</span><span class="w">
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
     </span><span class="s2">"header"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
     </span><span class="s2">"op"</span><span class="p">:</span><span class="w"> </span><span class="mi">3985</span><span class="p">,</span><span class="w">
     </span><span class="s2">"game_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"a183b2da-b561-4bc9-99b5-078e570e0117"</span><span class="p">,</span><span class="w">
@@ -4770,7 +5385,7 @@ Only users listed as admins for the game are authorized for this call.
 <blockquote>
 <p>Returns the following JSON structures:</p>
 </blockquote>
-<pre><code class="highlight json"><span class="p">{</span><span class="w">
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
     </span><span class="s2">"response_header"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
     </span><span class="s2">"res"</span><span class="p">:</span><span class="w"> </span><span class="mi">371</span><span class="p">,</span><span class="w">
     </span><span class="s2">"game_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"a183b2da-b561-4bc9-99b5-078e570e0117"</span><span class="p">,</span><span class="w">
@@ -4778,7 +5393,7 @@ Only users listed as admins for the game are authorized for this call.
     </span><span class="s2">"allowed_at"</span><span class="p">:</span><span class="w"> </span><span class="mi">1421942161542</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
-<pre><code class="highlight json"><span class="p">{</span><span class="w">
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
     </span><span class="s2">"response_header"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
     </span><span class="s2">"res"</span><span class="p">:</span><span class="w"> </span><span class="mi">369</span><span class="p">,</span><span class="w">
     </span><span class="s2">"allowed_at"</span><span class="p">:</span><span class="w"> </span><span class="mi">1421942161542</span><span class="p">,</span><span class="w">
@@ -4787,7 +5402,9 @@ Only users listed as admins for the game are authorized for this call.
 </span></code></pre>
 
 <p>Allows for placing predictions in all pools for specified action in a specified game. Only necessary if action blocked previously.</p>
-<h3 id='operation-code'>Operation code</h3>
+
+<h3 id="operation-code">Operation code</h3>
+
 <table><thead>
 <tr>
 <th>Name</th>
@@ -4799,7 +5416,9 @@ Only users listed as admins for the game are authorized for this call.
 <td>3985</td>
 </tr>
 </tbody></table>
-<h3 id='call-parameters'>Call Parameters</h3>
+
+<h3 id="call-parameters">Call Parameters</h3>
+
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -4823,7 +5442,9 @@ Only users listed as admins for the game are authorized for this call.
 <td>Allow for predcitions in pools at a later time - epoch_millis (&gt; now()).</td>
 </tr>
 </tbody></table>
-<h3 id='response-codes'>Response codes</h3>
+
+<h3 id="response-codes">Response codes</h3>
+
 <table><thead>
 <tr>
 <th>Name</th>
@@ -4842,7 +5463,11 @@ Only users listed as admins for the game are authorized for this call.
 <td>You have allowed for placing predictions in a given pool. This is broadcast to all game subscribers for all pools in game for given action.</td>
 </tr>
 </tbody></table>
-<h3 id='response-parameters'>Response Parameters</h3><h4 id='allowing-confirmation'>Allowing confirmation</h4>
+
+<h3 id="response-parameters">Response Parameters</h3>
+
+<h4 id="allowing-confirmation">Allowing confirmation</h4>
+
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -4866,17 +5491,21 @@ Only users listed as admins for the game are authorized for this call.
 <td>The timestamp indicating when the placing predictions in pools was allowed.</td>
 </tr>
 </tbody></table>
-<h4 id='unblocked-pool'>Unblocked pool</h4>
+
+<h4 id="unblocked-pool">Unblocked pool</h4>
+
 <p>Described in <a href="#allow-betting-in-a-pool">this section</a>.</p>
-<h2 id='suggest-hot-pool'>Suggest hot pool</h2>
-<p><aside class="notice">
+
+<h2 id="suggest-hot-pool">Suggest hot pool</h2>
+
+<aside class="notice">
 Only users listed as admins for the game are authorized for this call.
-</aside></p>
+</aside>
 
 <blockquote>
 <p>Expects the following JSON structure:</p>
 </blockquote>
-<pre><code class="highlight json"><span class="p">{</span><span class="w">
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
     </span><span class="s2">"header"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
     </span><span class="s2">"op"</span><span class="p">:</span><span class="w"> </span><span class="mi">396</span><span class="p">,</span><span class="w">
     </span><span class="s2">"pool_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"a183b2da-b561-4bc9-99b5-078e570e0117"</span><span class="p">,</span><span class="w">
@@ -4887,7 +5516,7 @@ Only users listed as admins for the game are authorized for this call.
 <blockquote>
 <p>Returns the following JSON structure:</p>
 </blockquote>
-<pre><code class="highlight json"><span class="p">{</span><span class="w">
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
     </span><span class="s2">"response_header"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
     </span><span class="s2">"res"</span><span class="p">:</span><span class="w"> </span><span class="mi">367</span><span class="p">,</span><span class="w">
     </span><span class="s2">"hot_since"</span><span class="p">:</span><span class="w"> </span><span class="mi">1421942161542</span><span class="p">,</span><span class="w">
@@ -4896,7 +5525,9 @@ Only users listed as admins for the game are authorized for this call.
 </span></code></pre>
 
 <p>Marks pool as hot at <em>likely_to_happen_at</em> time. Allows clients to move pool up the list or put a special label on it.</p>
-<h3 id='operation-code'>Operation code</h3>
+
+<h3 id="operation-code">Operation code</h3>
+
 <table><thead>
 <tr>
 <th>Name</th>
@@ -4908,7 +5539,9 @@ Only users listed as admins for the game are authorized for this call.
 <td>396</td>
 </tr>
 </tbody></table>
-<h3 id='call-parameters'>Call Parameters</h3>
+
+<h3 id="call-parameters">Call Parameters</h3>
+
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -4927,7 +5560,9 @@ Only users listed as admins for the game are authorized for this call.
 <td>At what time (epoch_millis) broadcas new hot pool message to clients.</td>
 </tr>
 </tbody></table>
-<h3 id='response-code'>Response code</h3>
+
+<h3 id="response-code">Response code</h3>
+
 <table><thead>
 <tr>
 <th>Name</th>
@@ -4941,7 +5576,9 @@ Only users listed as admins for the game are authorized for this call.
 <td>You have marked pool as <em>hot</em>. All clients subscribed to game notified.</td>
 </tr>
 </tbody></table>
-<h3 id='response-parameters'>Response Parameters</h3>
+
+<h3 id="response-parameters">Response Parameters</h3>
+
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -4960,15 +5597,17 @@ Only users listed as admins for the game are authorized for this call.
 <td>Since when the pool is marked as hot.</td>
 </tr>
 </tbody></table>
-<h2 id='suggest-hot-pool-for-action-and-target'>Suggest hot pool for action and target</h2>
-<p><aside class="notice">
+
+<h2 id="suggest-hot-pool-for-action-and-target">Suggest hot pool for action and target</h2>
+
+<aside class="notice">
 Only users listed as admins for the game are authorized for this call.
-</aside></p>
+</aside>
 
 <blockquote>
 <p>Expects the following JSON structure:</p>
 </blockquote>
-<pre><code class="highlight json"><span class="p">{</span><span class="w">
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
     </span><span class="s2">"header"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
     </span><span class="s2">"op"</span><span class="p">:</span><span class="w"> </span><span class="mi">3961</span><span class="p">,</span><span class="w">
     </span><span class="s2">"game_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"a183b2da-b561-4bc9-99b5-078e570e0117"</span><span class="p">,</span><span class="w">
@@ -4981,7 +5620,7 @@ Only users listed as admins for the game are authorized for this call.
 <blockquote>
 <p>Returns the following JSON structures:</p>
 </blockquote>
-<pre><code class="highlight json"><span class="p">{</span><span class="w">
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
     </span><span class="s2">"response_header"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
     </span><span class="s2">"res"</span><span class="p">:</span><span class="w"> </span><span class="mi">367</span><span class="p">,</span><span class="w">
     </span><span class="s2">"hot_since"</span><span class="p">:</span><span class="w"> </span><span class="mi">1421942161542</span><span class="p">,</span><span class="w">
@@ -4990,7 +5629,9 @@ Only users listed as admins for the game are authorized for this call.
 </span></code></pre>
 
 <p>Marks <em>every</em> pool relevant for game and action and target as hot at <em>likely_to_happen_at</em> time. Allows clients to move pool up the list or put a special label on it.</p>
-<h3 id='operation-code'>Operation code</h3>
+
+<h3 id="operation-code">Operation code</h3>
+
 <table><thead>
 <tr>
 <th>Name</th>
@@ -5002,7 +5643,9 @@ Only users listed as admins for the game are authorized for this call.
 <td>3961</td>
 </tr>
 </tbody></table>
-<h3 id='call-parameters'>Call Parameters</h3>
+
+<h3 id="call-parameters">Call Parameters</h3>
+
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -5031,7 +5674,9 @@ Only users listed as admins for the game are authorized for this call.
 <td>At what time (epoch_millis) broadcas new hot pool message(s) to clients.</td>
 </tr>
 </tbody></table>
-<h3 id='response-codes'>Response codes</h3>
+
+<h3 id="response-codes">Response codes</h3>
+
 <table><thead>
 <tr>
 <th>Name</th>
@@ -5050,7 +5695,9 @@ Only users listed as admins for the game are authorized for this call.
 <td>You have allowed for placing predictions in a given pool. This is broadcast to all game subscribers for all pools in game for given action.</td>
 </tr>
 </tbody></table>
-<h3 id='response-parameters'>Response Parameters</h3>
+
+<h3 id="response-parameters">Response Parameters</h3>
+
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -5070,11 +5717,14 @@ Only users listed as admins for the game are authorized for this call.
 </tr>
 </tbody></table>
 
-          <h1 id='websocket-api-accounting'>Websocket API: Accounting</h1><h2 id='current-balance'>Current balance</h2>
+          <h1 id="websocket-api:-accounting">Websocket API: Accounting</h1>
+
+<h2 id="current-balance">Current balance</h2>
+
 <blockquote>
 <p>Expects the following JSON structure:</p>
 </blockquote>
-<pre><code class="highlight json"><span class="p">{</span><span class="w">
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="s2">"header"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
   </span><span class="s2">"op"</span><span class="p">:</span><span class="w"> </span><span class="mi">800</span><span class="p">,</span><span class="w">
   </span><span class="s2">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"DON"</span><span class="w">
@@ -5084,7 +5734,7 @@ Only users listed as admins for the game are authorized for this call.
 <blockquote>
 <p>Returns the following JSON structure:</p>
 </blockquote>
-<pre><code class="highlight json"><span class="p">{</span><span class="w">
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
     </span><span class="s2">"response_header"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
     </span><span class="s2">"res"</span><span class="p">:</span><span class="w"> </span><span class="mi">800</span><span class="p">,</span><span class="w">
     </span><span class="s2">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"DON"</span><span class="p">,</span><span class="w">
@@ -5097,7 +5747,9 @@ Only users listed as admins for the game are authorized for this call.
 <p><strong>Available balance</strong> is the amount that can be used for making predictions.</p>
 
 <p><strong>Exposure</strong> is the amount placed in currently running, unresolved bet pools.</p>
-<h3 id='operation-code'>Operation code</h3>
+
+<h3 id="operation-code">Operation code</h3>
+
 <table><thead>
 <tr>
 <th>Name</th>
@@ -5109,7 +5761,9 @@ Only users listed as admins for the game are authorized for this call.
 <td>800</td>
 </tr>
 </tbody></table>
-<h3 id='call-parameters'>Call Parameters</h3>
+
+<h3 id="call-parameters">Call Parameters</h3>
+
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -5123,7 +5777,9 @@ Only users listed as admins for the game are authorized for this call.
 <td>The currency in which balance is to be retrieved. Defaults to DONuts, can be skipped.</td>
 </tr>
 </tbody></table>
-<h3 id='response-code'>Response code</h3>
+
+<h3 id="response-code">Response code</h3>
+
 <table><thead>
 <tr>
 <th>Name</th>
@@ -5137,7 +5793,9 @@ Only users listed as admins for the game are authorized for this call.
 <td>You have retrieved your current balance.</td>
 </tr>
 </tbody></table>
-<h3 id='response-parameters'>Response Parameters</h3>
+
+<h3 id="response-parameters">Response Parameters</h3>
+
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -5156,11 +5814,13 @@ Only users listed as admins for the game are authorized for this call.
 <td>Current balance of the requestor.</td>
 </tr>
 </tbody></table>
-<h2 id='available-balance'>Available balance</h2>
+
+<h2 id="available-balance">Available balance</h2>
+
 <blockquote>
 <p>Expects the following JSON structure:</p>
 </blockquote>
-<pre><code class="highlight json"><span class="p">{</span><span class="w">
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="s2">"header"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
   </span><span class="s2">"op"</span><span class="p">:</span><span class="w"> </span><span class="mi">810</span><span class="p">,</span><span class="w">
   </span><span class="s2">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"DON"</span><span class="w">
@@ -5170,7 +5830,7 @@ Only users listed as admins for the game are authorized for this call.
 <blockquote>
 <p>Returns the following JSON structure:</p>
 </blockquote>
-<pre><code class="highlight json"><span class="p">{</span><span class="w">
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
     </span><span class="s2">"response_header"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
     </span><span class="s2">"res"</span><span class="p">:</span><span class="w"> </span><span class="mi">810</span><span class="p">,</span><span class="w">
     </span><span class="s2">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"DON"</span><span class="p">,</span><span class="w">
@@ -5183,7 +5843,9 @@ Only users listed as admins for the game are authorized for this call.
 <p><strong>Available balance</strong> is the amount that can be used for making predictions.</p>
 
 <p><strong>Exposure</strong> is the amount placed in currently running, unresolved bet pools.</p>
-<h3 id='operation-code'>Operation code</h3>
+
+<h3 id="operation-code">Operation code</h3>
+
 <table><thead>
 <tr>
 <th>Name</th>
@@ -5195,7 +5857,9 @@ Only users listed as admins for the game are authorized for this call.
 <td>810</td>
 </tr>
 </tbody></table>
-<h3 id='call-parameters'>Call Parameters</h3>
+
+<h3 id="call-parameters">Call Parameters</h3>
+
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -5209,7 +5873,9 @@ Only users listed as admins for the game are authorized for this call.
 <td>The currency in which balance is to be retrieved. Defaults to DONuts, can be skipped.</td>
 </tr>
 </tbody></table>
-<h3 id='response-code'>Response code</h3>
+
+<h3 id="response-code">Response code</h3>
+
 <table><thead>
 <tr>
 <th>Name</th>
@@ -5223,7 +5889,9 @@ Only users listed as admins for the game are authorized for this call.
 <td>You have retrieved your available balance.</td>
 </tr>
 </tbody></table>
-<h3 id='response-parameters'>Response Parameters</h3>
+
+<h3 id="response-parameters">Response Parameters</h3>
+
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -5242,11 +5910,13 @@ Only users listed as admins for the game are authorized for this call.
 <td>Available balance of the requestor.</td>
 </tr>
 </tbody></table>
-<h2 id='exposure'>Exposure</h2>
+
+<h2 id="exposure">Exposure</h2>
+
 <blockquote>
 <p>Expects the following JSON structure:</p>
 </blockquote>
-<pre><code class="highlight json"><span class="p">{</span><span class="w">
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="s2">"header"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
   </span><span class="s2">"op"</span><span class="p">:</span><span class="w"> </span><span class="mi">840</span><span class="p">,</span><span class="w">
   </span><span class="s2">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"DON"</span><span class="w">
@@ -5256,7 +5926,7 @@ Only users listed as admins for the game are authorized for this call.
 <blockquote>
 <p>Returns the following JSON structure:</p>
 </blockquote>
-<pre><code class="highlight json"><span class="p">{</span><span class="w">
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
     </span><span class="s2">"response_header"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
     </span><span class="s2">"res"</span><span class="p">:</span><span class="w"> </span><span class="mi">840</span><span class="p">,</span><span class="w">
     </span><span class="s2">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"DON"</span><span class="p">,</span><span class="w">
@@ -5269,7 +5939,9 @@ Only users listed as admins for the game are authorized for this call.
 <p><strong>Available balance</strong> is the amount that can be used for making predictions.</p>
 
 <p><strong>Exposure</strong> is the amount placed in currently running, unresolved bet pools.</p>
-<h3 id='operation-code'>Operation code</h3>
+
+<h3 id="operation-code">Operation code</h3>
+
 <table><thead>
 <tr>
 <th>Name</th>
@@ -5281,7 +5953,9 @@ Only users listed as admins for the game are authorized for this call.
 <td>840</td>
 </tr>
 </tbody></table>
-<h3 id='response-code'>Response code</h3>
+
+<h3 id="response-code">Response code</h3>
+
 <table><thead>
 <tr>
 <th>Name</th>
@@ -5295,7 +5969,9 @@ Only users listed as admins for the game are authorized for this call.
 <td>You have retrieved your exposure.</td>
 </tr>
 </tbody></table>
-<h3 id='response-parameters'>Response Parameters</h3>
+
+<h3 id="response-parameters">Response Parameters</h3>
+
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -5314,15 +5990,17 @@ Only users listed as admins for the game are authorized for this call.
 <td>Requested currency.</td>
 </tr>
 </tbody></table>
-<h2 id='balance-update-server-message'>Balance update (server message)</h2>
-<p><aside class="notice">
-This is an <strong>unsolicited</strong> server message, pushed at the user through the websocket on every balance update.
-</aside></p>
+
+<h2 id="balance-update-(server-message)">Balance update (server message)</h2>
+
+<aside class="notice">
+This is an **unsolicited** server message, pushed at the user through the websocket on every balance update.
+</aside>
 
 <blockquote>
 <p>Sends the following JSON structure:</p>
 </blockquote>
-<pre><code class="highlight json"><span class="p">{</span><span class="w">
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
     </span><span class="s2">"response_header"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
     </span><span class="s2">"res"</span><span class="p">:</span><span class="w"> </span><span class="mi">815</span><span class="p">,</span><span class="w">
     </span><span class="s2">"current_balance"</span><span class="p">:</span><span class="w"> </span><span class="mf">1000.0</span><span class="p">,</span><span class="w">
@@ -5332,7 +6010,9 @@ This is an <strong>unsolicited</strong> server message, pushed at the user throu
 </span></code></pre>
 
 <p>Updates you with your changed current and available balance.</p>
-<h3 id='response-code'>Response code</h3>
+
+<h3 id="response-code">Response code</h3>
+
 <table><thead>
 <tr>
 <th>Name</th>
@@ -5346,7 +6026,9 @@ This is an <strong>unsolicited</strong> server message, pushed at the user throu
 <td>You have received your current and available balance update.</td>
 </tr>
 </tbody></table>
-<h3 id='response-parameters'>Response Parameters</h3>
+
+<h3 id="response-parameters">Response Parameters</h3>
+
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -5371,11 +6053,14 @@ This is an <strong>unsolicited</strong> server message, pushed at the user throu
 </tr>
 </tbody></table>
 
-          <h1 id='websocket-api-chat'>Websocket API: Chat</h1><h2 id='send-chat-message'>Send chat message</h2>
+          <h1 id="websocket-api:-chat">Websocket API: Chat</h1>
+
+<h2 id="send-chat-message">Send chat message</h2>
+
 <blockquote>
 <p>Expects the following JSON structure:</p>
 </blockquote>
-<pre><code class="highlight json"><span class="p">{</span><span class="w">
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="s2">"header"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
   </span><span class="s2">"op"</span><span class="p">:</span><span class="w"> </span><span class="mi">900</span><span class="p">,</span><span class="w">
   </span><span class="s2">"targets"</span><span class="p">:</span><span class="w"> </span><span class="s2">"69c623bf-046a-43b6-8de5-a0b3ae9b142e"</span><span class="p">,</span><span class="w">
@@ -5386,7 +6071,7 @@ This is an <strong>unsolicited</strong> server message, pushed at the user throu
 <blockquote>
 <p>Returns the following JSON structure:</p>
 </blockquote>
-<pre><code class="highlight json"><span class="p">{</span><span class="w">
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="s2">"response_header"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
   </span><span class="s2">"res"</span><span class="p">:</span><span class="w"> </span><span class="mi">901</span><span class="p">,</span><span class="w">
   </span><span class="s2">"sender"</span><span class="p">:</span><span class="w"> </span><span class="s2">"vinnie"</span><span class="p">,</span><span class="w">
@@ -5397,7 +6082,9 @@ This is an <strong>unsolicited</strong> server message, pushed at the user throu
 </span></code></pre>
 
 <p>This sends a chat message to user&rsquo;s subscribed to specified games. If target is left empty, the message is broadcast to all games user is subscribed to. Therefore, specifying a single (the one user is actively following) game is recommended.</p>
-<h3 id='operation-code'>Operation code</h3>
+
+<h3 id="operation-code">Operation code</h3>
+
 <table><thead>
 <tr>
 <th>Name</th>
@@ -5409,7 +6096,9 @@ This is an <strong>unsolicited</strong> server message, pushed at the user throu
 <td>900</td>
 </tr>
 </tbody></table>
-<h3 id='call-parameters'>Call Parameters</h3>
+
+<h3 id="call-parameters">Call Parameters</h3>
+
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -5428,7 +6117,9 @@ This is an <strong>unsolicited</strong> server message, pushed at the user throu
 <td>An array with string of game ids, or a single string containing a game id to which the message is to be broadcast. Single target recommended.</td>
 </tr>
 </tbody></table>
-<h3 id='response-code'>Response code</h3>
+
+<h3 id="response-code">Response code</h3>
+
 <table><thead>
 <tr>
 <th>Name</th>
@@ -5442,7 +6133,9 @@ This is an <strong>unsolicited</strong> server message, pushed at the user throu
 <td>New text message. Broadcast to all users subscribed to game which id was passed as a target.</td>
 </tr>
 </tbody></table>
-<h3 id='response-parameters'>Response Parameters</h3>
+
+<h3 id="response-parameters">Response Parameters</h3>
+
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -5472,11 +6165,14 @@ This is an <strong>unsolicited</strong> server message, pushed at the user throu
 </tr>
 </tbody></table>
 
-          <h1 id='websocket-api-errors'>Websocket API: Errors</h1><h2 id='generic-error'>Generic error</h2>
+          <h1 id="websocket-api:-errors">Websocket API: Errors</h1>
+
+<h2 id="generic-error">Generic error</h2>
+
 <blockquote>
 <p>Sends the following JSON structure:</p>
 </blockquote>
-<pre><code class="highlight json"><span class="p">{</span><span class="w">
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
     </span><span class="s2">"response_header"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
     </span><span class="s2">"res"</span><span class="p">:</span><span class="w"> </span><span class="mi">666</span><span class="p">,</span><span class="w">
     </span><span class="s2">"text"</span><span class="p">:</span><span class="w"> </span><span class="s2">"You are not authorized to open a game source."</span><span class="w">
@@ -5491,7 +6187,9 @@ This is an <strong>unsolicited</strong> server message, pushed at the user throu
 <li>some of the input data is missing,</li>
 <li>you are not authorized to perform the operation you are intending to.</li>
 </ul>
-<h3 id='response-code'>Response code</h3>
+
+<h3 id="response-code">Response code</h3>
+
 <table><thead>
 <tr>
 <th>Name</th>
@@ -5505,7 +6203,9 @@ This is an <strong>unsolicited</strong> server message, pushed at the user throu
 <td>Your requested operation has resulted in an error.</td>
 </tr>
 </tbody></table>
-<h3 id='response-parameters'>Response Parameters</h3>
+
+<h3 id="response-parameters">Response Parameters</h3>
+
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -5520,23 +6220,42 @@ This is an <strong>unsolicited</strong> server message, pushed at the user throu
 </tr>
 </tbody></table>
 
-          <h1 id='sample-scenarios'>Sample scenarios</h1><h2 id='list-running-games'>List running games</h2>
+          <h1 id="sample-scenarios">Sample scenarios</h1>
+
+<h2 id="list-running-games">List running games</h2>
+
 <p>To list running games, simply use <a href="#list-games-for-source"> this call</a>. Use <a href="#instamrkt-source-uuid"> INSTAMRKT_SOURCE_ID</a> as game source.</p>
-<h2 id='join-a-game-subscribe'>Join a game (subscribe)</h2>
+
+<h2 id="join-a-game-(subscribe)">Join a game (subscribe)</h2>
+
 <p>Pick a game from a <a href="#list-running-games">list of currently running games</a>, and send a <a href="#join-game">join game</a> request. Include a game uuid of a selected game in your request.</p>
-<h2 id='list-open-pools'>List open pools</h2>
+
+<h2 id="list-open-pools">List open pools</h2>
+
 <p>Once you&rsquo;ve <a href="#join-a-game-subscribe">joined a game</a>, you can list pools that are opened for predictions for this game with  <a href="#list-my-open-pools-for-game">this request</a>.</p>
-<h2 id='place-a-prediction'>Place a prediction</h2>
+
+<h2 id="place-a-prediction">Place a prediction</h2>
+
 <p>Once you know in which pool the prediction is to be placed (e.g. having <a href="#list-open-pools">listed</a> them), perform this using <a href="#place-bet-in-betting-pool">this call</a>. Remember to include the pool uuid in your request.</p>
-<h2 id='check-balance'>Check balance</h2>
+
+<h2 id="check-balance">Check balance</h2>
+
 <p>If you want to see how you&rsquo;re currently doing, you can always check your <a href="#current-balance">current</a> and <a href="#available-balance">available</a> balance, as well as check <a href="#exposure">exposure</a>.</p>
 
-          <h1 id='terms-of-use'>Terms of use</h1>
-          <h1 id='dictionary'>Dictionary</h1><h2 id='instamrkt-source-uuid'>Instamrkt source uuid</h2>
+          <h1 id="terms-of-use">Terms of use</h1>
+
+          <h1 id="dictionary">Dictionary</h1>
+
+<h2 id="instamrkt-source-uuid">Instamrkt source uuid</h2>
+
 <p>It&rsquo;s <strong>1d963264-b4f4-4f52-aa42-1bf76e4df381</strong>.</p>
-<h2 id='ids'>Ids</h2>
+
+<h2 id="ids">Ids</h2>
+
 <p>All object ids are in the form of unique uuids.</p>
-<h2 id='bet--prediction'>Bet / prediction</h2>
+
+<h2 id="bet-/-prediction">Bet / prediction</h2>
+
 <p>We use these terms interchangeably. It basically means placing a some of the held currency in a prediction pool and backing a selected target with that amount. The money will be returned (multiplied by a multiplier resulting from a pool distribution) if the pool is resolved with that target (target performs the action).</p>
 
       </div>
