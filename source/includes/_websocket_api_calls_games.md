@@ -841,7 +841,7 @@ game_id | :YOUR_GAME_ID | The game id you provided.
 {
     "response_header": {},
     "res": 345,
-    "source_id": "30cee1fa-fb20-41a6-a61c-0e0335abc2a9"
+    "source_id": "30cee1fa-fb20-41a6-a61c-0e0335abc2a9",
    	"games": [
       {
           "game_id": "dc164a36-4b82-47a4-a2b4-be757a018c9e",
@@ -880,7 +880,7 @@ game_id | :YOUR_GAME_ID | The game id you provided.
                 "name": "goal",
                 "action_id": "goal"
             }
-        ],
+        ]
     	}
     ]
 }
@@ -931,7 +931,7 @@ games | [] | A list containing all the active games for your source. Each game o
 ```json
 {
     "response_header": {},
-    "source_id": "30cee1fa-fb20-41a6-a61c-0e0335abc2a9"
+    "source_id": "30cee1fa-fb20-41a6-a61c-0e0335abc2a9",
     "res": 3461,
     "games": [
       {
