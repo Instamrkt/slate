@@ -445,6 +445,80 @@ $.get('/r/statistics/', {
 })
 ```
 
+Get prediction pools for a specified upcoming game
+
+### URL
+`/r/games/upcoming/<game_uuid>/pools/`
+
+### Request type
+
+`GET`
+
+### Request Parameters
+
+Parameter | Default | Description
+--------- | ------- | -----------
+game_uuid | undefined | The uuid of the game for which you are requesting pools. This can be obtained from the `/r/games/upcoming` list of games. 
+
+### Response Parameters
+
+Parameter | Default | Description
+--------- | ------- | -----------
+pools | [] | Array of objects. An array of open pool objects for the specified game. 
+
+Each pool object includes the following fields:
+start_at | n/a | opening time of the pool in epoch milliseconds UTC 
+description | "" | textual title of the pool 
+money_at_stake | 0.0 | total value of points in the pool - not for a specific target
+finish_at | null | closing time of the pool in epoch milliseconds UTC
+distributions | [] | array of distribution objects for each target in the pool including user_id[] of predictors, the current multiplier, the target_id, and total amount for each target
+target_level | 1 | the level of the target that is the subject of the prediction (usually 1 unless this is a subtarget)
+people_involved | 0 | total number of players in the pool
+pool_id | n/a | the uuid of this pool
+stop_accepting_bets_at | null | time in epoch milliseconds UTC when to stop accepting incoming predictions
+type | n/a | The type of pool - a combination of parimutuel or binary and event based or time based
+action_id | n/a | the uuid of the action which this pool relates to
+
+
+Enter pre-game predictions into a specified pool http://local.instamrkt.com/i/r/games/upcoming/ad5db7bf-cd91-4d5d-a635-cf335661d69d/pools/ab571569-08b2-4a88-9d9e-47145370e67f/predictions/?email=tkaria@gmail.com
+
+### URL
+`/r/games/upcoming/<game_uuid>/pools/<pool_uuid>/predictions/`
+
+### Request type
+
+`PUT`, `POST`
+
+### Request Parameters In URL
+
+Parameter | Default | Description
+--------- | ------- | -----------
+game_uuid | undefined | The uuid of the game for which you are requesting pools. This can be obtained from the `/r/games/upcoming` list of games. 
+pool_uuid | undefined | The uuid of the pool for which the prediction should be entered.
+email | undefined | Since we only have an email address at this point we create an account for this user and assign a random password which can be recovered. 
+
+NOTE: email MUST be appended the query string and not in the payload. 
+
+An example query string is:
+http://local.instamrkt.com/i/r/games/upcoming/ad5db7bf-cd91-4d5d-a635-cf335661d69d/pools/ab571569-08b2-4a88-9d9e-47145370e67f/predictions/?email=timir@instamrkt.com
+
+### Response Parameters
+
+Parameter | Default | Description
+--------- | ------- | -----------
+status | 200 | Response code of the request
+msg | [] | Empty if status = 200
+username | "" | The username of the new account that was created
+user_id | "" | The user id of the newly created account
+
+Note that each pool is serialized individually. One pool per request. For example, to make 3 predictions you must send 3 requests. 
+
+### Payload 
+Parameter | Default | Description
+--------- | ------- | -----------
+user_backed | null | An object with a single key and value. The key is the target_id of the users prediction and the value is the amount to place on this target. 
+
+
 This is used to request user's personal statistics.
 
 ### URL
