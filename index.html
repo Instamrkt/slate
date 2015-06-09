@@ -1027,6 +1027,151 @@ All responses are of type `application/json`.
 <span class="p">})</span>
 </code></pre>
 
+<p>Get prediction pools for a specified upcoming game</p>
+
+<h3 id="url">URL</h3>
+
+<p><code class="prettyprint">/r/games/upcoming/&lt;game_uuid&gt;/pools/</code></p>
+
+<h3 id="request-type">Request type</h3>
+
+<p><code class="prettyprint">GET</code></p>
+
+<h3 id="request-parameters">Request Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>game_uuid</td>
+<td>undefined</td>
+<td>The uuid of the game for which you are requesting pools. This can be obtained from the <code class="prettyprint">/r/games/upcoming</code> list of games.</td>
+</tr>
+</tbody></table>
+
+<h3 id="response-parameters">Response Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>pools</td>
+<td>[]</td>
+<td>Array of objects. An array of open pool objects for the specified game.</td>
+</tr>
+</tbody></table>
+
+<p>Each pool object includes the following fields:
+start_at | n/a | opening time of the pool in epoch milliseconds UTC 
+description | &ldquo;&rdquo; | textual title of the pool 
+money_at_stake | 0.0 | total value of points in the pool - not for a specific target
+finish_at | null | closing time of the pool in epoch milliseconds UTC
+distributions | [] | array of distribution objects for each target in the pool including user_id[] of predictors, the current multiplier, the target_id, and total amount for each target
+target_level | 1 | the level of the target that is the subject of the prediction (usually 1 unless this is a subtarget)
+people_involved | 0 | total number of players in the pool
+pool_id | n/a | the uuid of this pool
+stop_accepting_bets_at | null | time in epoch milliseconds UTC when to stop accepting incoming predictions
+type | n/a | The type of pool - a combination of parimutuel or binary and event based or time based
+action_id | n/a | the uuid of the action which this pool relates to</p>
+
+<p>Enter pre-game predictions into a specified pool http://local.instamrkt.com/i/r/games/upcoming/ad5db7bf-cd91-4d5d-a635-cf335661d69d/pools/ab571569-08b2-4a88-9d9e-47145370e67f/predictions/?email=tkaria@gmail.com</p>
+
+<h3 id="url">URL</h3>
+
+<p><code class="prettyprint">/r/games/upcoming/&lt;game_uuid&gt;/pools/&lt;pool_uuid&gt;/predictions/</code></p>
+
+<h3 id="request-type">Request type</h3>
+
+<p><code class="prettyprint">PUT</code>, <code class="prettyprint">POST</code></p>
+
+<h3 id="request-parameters-in-url">Request Parameters In URL</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>game_uuid</td>
+<td>undefined</td>
+<td>The uuid of the game for which you are requesting pools. This can be obtained from the <code class="prettyprint">/r/games/upcoming</code> list of games.</td>
+</tr>
+<tr>
+<td>pool_uuid</td>
+<td>undefined</td>
+<td>The uuid of the pool for which the prediction should be entered.</td>
+</tr>
+<tr>
+<td>email</td>
+<td>undefined</td>
+<td>Since we only have an email address at this point we create an account for this user and assign a random password which can be recovered.</td>
+</tr>
+</tbody></table>
+
+<p>NOTE: email MUST be appended the query string and not in the payload. </p>
+
+<p>An example query string is:
+http://local.instamrkt.com/i/r/games/upcoming/ad5db7bf-cd91-4d5d-a635-cf335661d69d/pools/ab571569-08b2-4a88-9d9e-47145370e67f/predictions/?email=timir@instamrkt.com</p>
+
+<h3 id="response-parameters">Response Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>status</td>
+<td>200</td>
+<td>Response code of the request</td>
+</tr>
+<tr>
+<td>msg</td>
+<td>[]</td>
+<td>Empty if status = 200</td>
+</tr>
+<tr>
+<td>username</td>
+<td>&ldquo;&rdquo;</td>
+<td>The username of the new account that was created</td>
+</tr>
+<tr>
+<td>user_id</td>
+<td>&ldquo;&rdquo;</td>
+<td>The user id of the newly created account</td>
+</tr>
+</tbody></table>
+
+<p>Note that each pool is serialized individually. One pool per request. For example, to make 3 predictions you must send 3 requests. </p>
+
+<h3 id="payload">Payload</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>user_backed</td>
+<td>null</td>
+<td>An object with a single key and value. The key is the target_id of the users prediction and the value is the amount to place on this target.</td>
+</tr>
+</tbody></table>
+
 <p>This is used to request user&rsquo;s personal statistics.</p>
 
 <h3 id="url">URL</h3>
@@ -3228,8 +3373,8 @@ This will automatically close and resolve all the automatically resolvable pools
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
     </span><span class="s2">"response_header"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
     </span><span class="s2">"res"</span><span class="p">:</span><span class="w"> </span><span class="mi">345</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"source_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"30cee1fa-fb20-41a6-a61c-0e0335abc2a9"</span><span class="w">
-    </span><span class="s2">"games"</span><span class="err">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="s2">"source_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"30cee1fa-fb20-41a6-a61c-0e0335abc2a9"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"games"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
       </span><span class="p">{</span><span class="w">
           </span><span class="s2">"game_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"dc164a36-4b82-47a4-a2b4-be757a018c9e"</span><span class="p">,</span><span class="w">
             </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"game_in_progress_betting_active"</span><span class="p">,</span><span class="w">
@@ -3267,8 +3412,8 @@ This will automatically close and resolve all the automatically resolvable pools
                 </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"goal"</span><span class="p">,</span><span class="w">
                 </span><span class="s2">"action_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"goal"</span><span class="w">
             </span><span class="p">}</span><span class="w">
-        </span><span class="p">],</span><span class="w">
-        </span><span class="err">}</span><span class="w">
+        </span><span class="p">]</span><span class="w">
+        </span><span class="p">}</span><span class="w">
     </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
@@ -3359,8 +3504,8 @@ This will automatically close and resolve all the automatically resolvable pools
 </blockquote>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
     </span><span class="s2">"response_header"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
-    </span><span class="s2">"source_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"30cee1fa-fb20-41a6-a61c-0e0335abc2a9"</span><span class="w">
-    </span><span class="s2">"res"</span><span class="err">:</span><span class="w"> </span><span class="mi">3461</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"source_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"30cee1fa-fb20-41a6-a61c-0e0335abc2a9"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"res"</span><span class="p">:</span><span class="w"> </span><span class="mi">3461</span><span class="p">,</span><span class="w">
     </span><span class="s2">"games"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
       </span><span class="p">{</span><span class="w">
           </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"dc164a36-4b82-47a4-a2b4-be757a018c9e"</span><span class="p">,</span><span class="w">
