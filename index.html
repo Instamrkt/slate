@@ -897,7 +897,7 @@ All responses are of type `application/json`.
 </tr>
 </tbody></table>
 
-<h2 id="games-history">Games history</h2>
+<h2 id="games---games-played-history">Games - games played history</h2>
 
 <blockquote>
 <p>Sample request object:</p>
@@ -954,7 +954,7 @@ All responses are of type `application/json`.
 </tr>
 </tbody></table>
 
-<h2 id="games-upcoming">Games upcoming</h2>
+<h2 id="games-upcoming---list-games">Games upcoming - list games</h2>
 
 <blockquote>
 <p>Sample request object:</p>
@@ -1010,22 +1010,7 @@ All responses are of type `application/json`.
 </tr>
 </tbody></table>
 
-<h2 id="statistics">Statistics</h2>
-
-<blockquote>
-<p>Sample request object:</p>
-</blockquote>
-<pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">$</span>       <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'jquery'</span><span class="p">);</span>
-<span class="kd">var</span> <span class="nx">cookies</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'cookie-getter'</span><span class="p">);</span>
-<span class="kd">var</span> <span class="nx">_xsrf</span>   <span class="o">=</span> <span class="nx">cookies</span><span class="p">(</span><span class="s1">'_xsrf'</span><span class="p">)</span>
-
-<span class="nx">$</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">'/r/statistics/'</span><span class="p">,</span> <span class="p">{</span>
-  <span class="na">headers</span><span class="p">:</span> <span class="p">{</span>
-      <span class="s1">'X-XSRFToken'</span><span class="p">:</span> <span class="nx">_xsrf</span>
-  <span class="p">},</span>
-  <span class="s1">'userId'</span><span class="p">:</span> <span class="nx">userId</span>
-<span class="p">})</span>
-</code></pre>
+<h2 id="games---upcoming-pools">Games - upcoming pools</h2>
 
 <p>Get prediction pools for a specified upcoming game</p>
 
@@ -1069,18 +1054,71 @@ All responses are of type `application/json`.
 </tr>
 </tbody></table>
 
-<p>Each pool object includes the following fields:
-start_at | n/a | opening time of the pool in epoch milliseconds UTC 
-description | &ldquo;&rdquo; | textual title of the pool 
-money_at_stake | 0.0 | total value of points in the pool - not for a specific target
-finish_at | null | closing time of the pool in epoch milliseconds UTC
-distributions | [] | array of distribution objects for each target in the pool including user_id[] of predictors, the current multiplier, the target_id, and total amount for each target
-target_level | 1 | the level of the target that is the subject of the prediction (usually 1 unless this is a subtarget)
-people_involved | 0 | total number of players in the pool
-pool_id | n/a | the uuid of this pool
-stop_accepting_bets_at | null | time in epoch milliseconds UTC when to stop accepting incoming predictions
-type | n/a | The type of pool - a combination of parimutuel or binary and event based or time based
-action_id | n/a | the uuid of the action which this pool relates to</p>
+<p>Each pool object includes the following fields:</p>
+
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>start_at</td>
+<td>n/a</td>
+<td>opening time of the pool in epoch milliseconds UTC</td>
+</tr>
+<tr>
+<td>description</td>
+<td>null</td>
+<td>textual title of the pool</td>
+</tr>
+<tr>
+<td>money_at_stake</td>
+<td>0.0</td>
+<td>total value of points in the pool - not for a specific target</td>
+</tr>
+<tr>
+<td>finish_at</td>
+<td>null</td>
+<td>closing time of the pool in epoch milliseconds UTC</td>
+</tr>
+<tr>
+<td>distributions</td>
+<td>[]</td>
+<td>array of distribution objects for each target in the pool including user_id[] of predictors, the current multiplier, the target_id, and total amount for each target</td>
+</tr>
+<tr>
+<td>target_level</td>
+<td>1</td>
+<td>the level of the target that is the subject of the prediction (usually 1 unless this is a subtarget)</td>
+</tr>
+<tr>
+<td>people_involved</td>
+<td>0</td>
+<td>total number of players in the pool</td>
+</tr>
+<tr>
+<td>pool_id</td>
+<td>n/a</td>
+<td>the uuid of this pool</td>
+</tr>
+<tr>
+<td>stop_accepting_bets_at</td>
+<td>null</td>
+<td>time in epoch milliseconds UTC when to stop accepting incoming predictions</td>
+</tr>
+<tr>
+<td>type</td>
+<td>n/a</td>
+<td>The type of pool - a combination of parimutuel or binary and event based or time based</td>
+</tr>
+<tr>
+<td>action_id</td>
+<td>n/a</td>
+<td>the uuid of the action which this pool relates to</td>
+</tr>
+</tbody></table>
 
 <p>Enter pre-game predictions into a specified pool http://local.instamrkt.com/i/r/games/upcoming/ad5db7bf-cd91-4d5d-a635-cf335661d69d/pools/ab571569-08b2-4a88-9d9e-47145370e67f/predictions/?email=tkaria@gmail.com</p>
 
@@ -1172,7 +1210,24 @@ http://local.instamrkt.com/i/r/games/upcoming/ad5db7bf-cd91-4d5d-a635-cf335661d6
 </tr>
 </tbody></table>
 
+<h2 id="statistics">Statistics</h2>
+
 <p>This is used to request user&rsquo;s personal statistics.</p>
+
+<blockquote>
+<p>Sample request object:</p>
+</blockquote>
+<pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">$</span>       <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'jquery'</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">cookies</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'cookie-getter'</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">_xsrf</span>   <span class="o">=</span> <span class="nx">cookies</span><span class="p">(</span><span class="s1">'_xsrf'</span><span class="p">)</span>
+
+<span class="nx">$</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">'/r/statistics/'</span><span class="p">,</span> <span class="p">{</span>
+  <span class="na">headers</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s1">'X-XSRFToken'</span><span class="p">:</span> <span class="nx">_xsrf</span>
+  <span class="p">},</span>
+  <span class="s1">'userId'</span><span class="p">:</span> <span class="nx">userId</span>
+<span class="p">})</span>
+</code></pre>
 
 <h3 id="url">URL</h3>
 
