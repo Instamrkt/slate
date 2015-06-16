@@ -353,7 +353,7 @@ Parameter | Default | Description
 --------- | ------- | -----------
 msg | null | Error message. Sent only on **unsuccessful** request.
 
-## Games - games played history
+## Games - history of games played for user
 
 > Sample request object:
 
@@ -391,7 +391,7 @@ Parameter | Default | Description
 --------- | ------- | -----------
 game_history | [] | A list of objects representing games. Each object contains the following fields: id, name, type, open_at, close_at.
 
-## Games upcoming - list games
+## Games - list upcoming games
 
 > Sample request object:
 
@@ -429,7 +429,7 @@ Parameter | Default | Description
 upcoming_games | [] | A list of objects representing games. Each object contains the following fields: id, source_id (for the source hosting the game), game_name, currency, live_start_at, game_type_id, hashtag.
 
 
-## Games - upcoming pools
+## Games - get upcoming pools for game
 
 Get prediction pools for a specified upcoming game
 
