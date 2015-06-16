@@ -353,7 +353,7 @@ Parameter | Default | Description
 --------- | ------- | -----------
 msg | null | Error message. Sent only on **unsuccessful** request.
 
-## Games history
+## Games - games played history
 
 > Sample request object:
 
@@ -391,7 +391,7 @@ Parameter | Default | Description
 --------- | ------- | -----------
 game_history | [] | A list of objects representing games. Each object contains the following fields: id, name, type, open_at, close_at.
 
-## Games upcoming
+## Games upcoming - list games
 
 > Sample request object:
 
@@ -428,22 +428,8 @@ Parameter | Default | Description
 --------- | ------- | -----------
 upcoming_games | [] | A list of objects representing games. Each object contains the following fields: id, source_id (for the source hosting the game), game_name, currency, live_start_at, game_type_id, hashtag.
 
-## Statistics
 
-> Sample request object:
-
-```javascript
-var $       = require('jquery');
-var cookies = require('cookie-getter');
-var _xsrf   = cookies('_xsrf')
-
-$.get('/r/statistics/', {
-  headers: {
-      'X-XSRFToken': _xsrf
-  },
-  'userId': userId
-})
-```
+## Games - upcoming pools
 
 Get prediction pools for a specified upcoming game
 
@@ -467,8 +453,11 @@ Parameter | Default | Description
 pools | [] | Array of objects. An array of open pool objects for the specified game. 
 
 Each pool object includes the following fields:
+
+Field | Default | Description
+--------- | ------- | -----------
 start_at | n/a | opening time of the pool in epoch milliseconds UTC 
-description | "" | textual title of the pool 
+description | null | textual title of the pool 
 money_at_stake | 0.0 | total value of points in the pool - not for a specific target
 finish_at | null | closing time of the pool in epoch milliseconds UTC
 distributions | [] | array of distribution objects for each target in the pool including user_id[] of predictors, the current multiplier, the target_id, and total amount for each target
@@ -519,7 +508,23 @@ Parameter | Default | Description
 user_backed | null | An object with a single key and value. The key is the target_id of the users prediction and the value is the amount to place on this target. 
 
 
+## Statistics
 This is used to request user's personal statistics.
+
+> Sample request object:
+
+```javascript
+var $       = require('jquery');
+var cookies = require('cookie-getter');
+var _xsrf   = cookies('_xsrf')
+
+$.get('/r/statistics/', {
+  headers: {
+      'X-XSRFToken': _xsrf
+  },
+  'userId': userId
+})
+```
 
 ### URL
 `/r/statistics/`
