@@ -1174,7 +1174,7 @@ All responses are of type `application/json`.
 
 <h2 id="games---make-pregame-predictions">Games - make pregame predictions</h2>
 
-<p>Enter pre-game predictions into a specified pool, e.g <code class="prettyprint">https://.instamrkt.com/i/r/games/upcoming/ad5db7bf-cd91-4d5d-a635-cf335661d69d/pools/ab571569-08b2-4a88-9d9e-47145370e67f/predictions/?email=timir@instamrkt.com</code></p>
+<p>Enter pre-game predictions into a specified pool.</p>
 
 <h3 id="url">URL</h3>
 
@@ -1212,8 +1212,7 @@ All responses are of type `application/json`.
 
 <p>NOTE: email MUST be appended the query string and not in the payload.</p>
 
-<p>An example query string is:
-<code class="prettyprint">https://instamrkt.com/i/r/games/upcoming/ad5db7bf-cd91-4d5d-a635-cf335661d69d/pools/ab571569-08b2-4a88-9d9e-47145370e67f/predictions/?email=timir@instamrkt.com</code></p>
+<p>An example query string is: <code class="prettyprint">/i/r/games/upcoming/ad5db7bf-cd91-4d5d-a635-cf335661d69d/pools/ab571569-08b2-4a88-9d9e-47145370e67f/predictions/?email=timir@instamrkt.com</code></p>
 
 <h3 id="response-parameters">Response Parameters</h3>
 
@@ -1247,12 +1246,12 @@ All responses are of type `application/json`.
 <tr>
 <td>user_session_key</td>
 <td>null</td>
-<td>The session key of the user.</td>
+<td>The session key of the user (included only for newly created accounts, otherwise null).</td>
 </tr>
 <tr>
-<td>user_id</td>
+<td>needs_auth</td>
 <td>&ldquo;&rdquo;</td>
-<td>The user id of the newly created account</td>
+<td>Indication whether user needs to authenticate to join the full game.</td>
 </tr>
 </tbody></table>
 
