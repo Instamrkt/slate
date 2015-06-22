@@ -567,6 +567,58 @@ All responses are of type `application/json`.
 </tr>
 </tbody></table>
 
+<h2 id="pre-signup">Pre-Signup</h2>
+
+<p>This is used to register a user in our database without fully creating an account. Goes in pair e.g. with pre-game predictions. <strong>Sends out a welcome email.</strong></p>
+
+<p>Successful response means all the intended actions (a subset of saving email, sending email and handling the challenge) were performed successfully.</p>
+
+<h3 id="url">URL</h3>
+
+<p><code class="prettyprint">/r/n/</code></p>
+
+<h3 id="request-type">Request type</h3>
+
+<p><code class="prettyprint">POST</code></p>
+
+<h3 id="request-parameters">Request Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>email</td>
+<td>The email used to saved. All external communication will be directed to this email.</td>
+</tr>
+<tr>
+<td>prediction_saved</td>
+<td>Boolean flag indicated whether user is making pregame predictions. Outgoing pre-signup email is dependent on that flag.</td>
+</tr>
+<tr>
+<td>challenge_id</td>
+<td>If user is coming from a friend&rsquo;s challenge (shared through email / social media), include the challenge id here. This will initiate the friendship for users.</td>
+</tr>
+</tbody></table>
+
+<h3 id="response-parameters">Response Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>msg</td>
+<td>null</td>
+<td>Error message. Sent only on <strong>unsuccessful</strong> request.</td>
+</tr>
+</tbody></table>
+
 <h2 id="get-username">Get Username</h2>
 
 <blockquote>
@@ -1033,7 +1085,7 @@ All responses are of type `application/json`.
 </thead><tbody>
 <tr>
 <td>game_uuid</td>
-<td>undefined</td>
+<td>null</td>
 <td>The uuid of the game for which you are requesting pools. This can be obtained from the <code class="prettyprint">/r/games/upcoming</code> list of games.</td>
 </tr>
 </tbody></table>
@@ -1120,7 +1172,9 @@ All responses are of type `application/json`.
 </tr>
 </tbody></table>
 
-<p>Enter pre-game predictions into a specified pool http://local.instamrkt.com/i/r/games/upcoming/ad5db7bf-cd91-4d5d-a635-cf335661d69d/pools/ab571569-08b2-4a88-9d9e-47145370e67f/predictions/?email=tkaria@gmail.com</p>
+<h2 id="games---make-pregame-predictions">Games - make pregame predictions</h2>
+
+<p>Enter pre-game predictions into a specified pool, e.g <code class="prettyprint">https://.instamrkt.com/i/r/games/upcoming/ad5db7bf-cd91-4d5d-a635-cf335661d69d/pools/ab571569-08b2-4a88-9d9e-47145370e67f/predictions/?email=timir@instamrkt.com</code></p>
 
 <h3 id="url">URL</h3>
 
@@ -1141,25 +1195,25 @@ All responses are of type `application/json`.
 </thead><tbody>
 <tr>
 <td>game_uuid</td>
-<td>undefined</td>
+<td>null</td>
 <td>The uuid of the game for which you are requesting pools. This can be obtained from the <code class="prettyprint">/r/games/upcoming</code> list of games.</td>
 </tr>
 <tr>
 <td>pool_uuid</td>
-<td>undefined</td>
+<td>null</td>
 <td>The uuid of the pool for which the prediction should be entered.</td>
 </tr>
 <tr>
 <td>email</td>
-<td>undefined</td>
+<td>null</td>
 <td>Since we only have an email address at this point we create an account for this user and assign a random password which can be recovered.</td>
 </tr>
 </tbody></table>
 
-<p>NOTE: email MUST be appended the query string and not in the payload. </p>
+<p>NOTE: email MUST be appended the query string and not in the payload.</p>
 
 <p>An example query string is:
-http://local.instamrkt.com/i/r/games/upcoming/ad5db7bf-cd91-4d5d-a635-cf335661d69d/pools/ab571569-08b2-4a88-9d9e-47145370e67f/predictions/?email=timir@instamrkt.com</p>
+<code class="prettyprint">https://instamrkt.com/i/r/games/upcoming/ad5db7bf-cd91-4d5d-a635-cf335661d69d/pools/ab571569-08b2-4a88-9d9e-47145370e67f/predictions/?email=timir@instamrkt.com</code></p>
 
 <h3 id="response-parameters">Response Parameters</h3>
 
@@ -1183,7 +1237,17 @@ http://local.instamrkt.com/i/r/games/upcoming/ad5db7bf-cd91-4d5d-a635-cf335661d6
 <tr>
 <td>username</td>
 <td>&ldquo;&rdquo;</td>
-<td>The username of the new account that was created</td>
+<td>The assigned username.</td>
+</tr>
+<tr>
+<td>user_id</td>
+<td>&ldquo;&rdquo;</td>
+<td>The user id of the user&rsquo;s account (possibly newly created).</td>
+</tr>
+<tr>
+<td>user_session_key</td>
+<td>null</td>
+<td>The session key of the user.</td>
 </tr>
 <tr>
 <td>user_id</td>
@@ -1192,7 +1256,7 @@ http://local.instamrkt.com/i/r/games/upcoming/ad5db7bf-cd91-4d5d-a635-cf335661d6
 </tr>
 </tbody></table>
 
-<p>Note that each pool is serialized individually. One pool per request. For example, to make 3 predictions you must send 3 requests. </p>
+<p>Note that each pool is serialized individually. One pool per request. For example, to make 3 predictions you must send 3 requests.</p>
 
 <h3 id="payload">Payload</h3>
 
