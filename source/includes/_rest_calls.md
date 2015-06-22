@@ -497,7 +497,7 @@ action_id | n/a | the uuid of the action which this pool relates to
 
 ## Games - make pregame predictions
 
-Enter pre-game predictions into a specified pool, e.g `https://.instamrkt.com/i/r/games/upcoming/ad5db7bf-cd91-4d5d-a635-cf335661d69d/pools/ab571569-08b2-4a88-9d9e-47145370e67f/predictions/?email=timir@instamrkt.com`
+Enter pre-game predictions into a specified pool.
 
 ### URL
 `/r/games/upcoming/<game_uuid>/pools/<pool_uuid>/predictions/`
@@ -516,8 +516,7 @@ email | null | Since we only have an email address at this point we create an ac
 
 NOTE: email MUST be appended the query string and not in the payload.
 
-An example query string is:
-`https://instamrkt.com/i/r/games/upcoming/ad5db7bf-cd91-4d5d-a635-cf335661d69d/pools/ab571569-08b2-4a88-9d9e-47145370e67f/predictions/?email=timir@instamrkt.com`
+An example query string is: `/i/r/games/upcoming/ad5db7bf-cd91-4d5d-a635-cf335661d69d/pools/ab571569-08b2-4a88-9d9e-47145370e67f/predictions/?email=timir@instamrkt.com`
 
 ### Response Parameters
 
@@ -527,8 +526,8 @@ status | 200 | Response code of the request
 msg | [] | Empty if status = 200
 username | "" | The assigned username.
 user_id | "" | The user id of the user's account (possibly newly created).
-user_session_key | null | The session key of the user.
-user_id | "" | The user id of the newly created account
+user_session_key | null | The session key of the user (included only for newly created accounts, otherwise null).
+needs_auth | "" | Indication whether user needs to authenticate to join the full game.
 
 Note that each pool is serialized individually. One pool per request. For example, to make 3 predictions you must send 3 requests.
 
