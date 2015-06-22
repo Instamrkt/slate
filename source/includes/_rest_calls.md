@@ -148,6 +148,33 @@ user_id | null | Id of the signed up user. Necessary for Websocket API connectio
 redirect_url | /i/play | Redirect url for a signedin user (presumably for an endpoint requiring authentication). Can be used only on **successful** request.
 msg | null | Error message. Sent only on **unsuccessful** request.
 
+## Pre-Signup
+
+This is used to register a user in our database without fully creating an account. Goes in pair e.g. with pre-game predictions. **Sends out a welcome email.**
+
+Successful response means all the intended actions (a subset of saving email, sending email and handling the challenge) were performed successfully.
+
+### URL
+`/r/n/`
+
+### Request type
+
+`POST`
+
+### Request Parameters
+
+Parameter | Description
+--------- | -------
+email | The email used to saved. All external communication will be directed to this email.
+prediction_saved | Boolean flag indicated whether user is making pregame predictions. Outgoing pre-signup email is dependent on that flag.
+challenge_id | If user is coming from a friend's challenge (shared through email / social media), include the challenge id here. This will initiate the friendship for users.
+
+### Response Parameters
+
+Parameter | Default | Description
+--------- | ------- | -----------
+msg | null | Error message. Sent only on **unsuccessful** request.
+
 ## Get Username
 
 > Sample request object:
@@ -444,20 +471,20 @@ Get prediction pools for a specified upcoming game
 
 Parameter | Default | Description
 --------- | ------- | -----------
-game_uuid | undefined | The uuid of the game for which you are requesting pools. This can be obtained from the `/r/games/upcoming` list of games. 
+game_uuid | null | The uuid of the game for which you are requesting pools. This can be obtained from the `/r/games/upcoming` list of games.
 
 ### Response Parameters
 
 Parameter | Default | Description
 --------- | ------- | -----------
-pools | [] | Array of objects. An array of open pool objects for the specified game. 
+pools | [] | Array of objects. An array of open pool objects for the specified game.
 
 Each pool object includes the following fields:
 
 Field | Default | Description
 --------- | ------- | -----------
-start_at | n/a | opening time of the pool in epoch milliseconds UTC 
-description | null | textual title of the pool 
+start_at | n/a | opening time of the pool in epoch milliseconds UTC
+description | null | textual title of the pool
 money_at_stake | 0.0 | total value of points in the pool - not for a specific target
 finish_at | null | closing time of the pool in epoch milliseconds UTC
 distributions | [] | array of distribution objects for each target in the pool including user_id[] of predictors, the current multiplier, the target_id, and total amount for each target
@@ -468,8 +495,9 @@ stop_accepting_bets_at | null | time in epoch milliseconds UTC when to stop acce
 type | n/a | The type of pool - a combination of parimutuel or binary and event based or time based
 action_id | n/a | the uuid of the action which this pool relates to
 
+## Games - make pregame predictions
 
-Enter pre-game predictions into a specified pool http://local.instamrkt.com/i/r/games/upcoming/ad5db7bf-cd91-4d5d-a635-cf335661d69d/pools/ab571569-08b2-4a88-9d9e-47145370e67f/predictions/?email=tkaria@gmail.com
+Enter pre-game predictions into a specified pool, e.g `https://.instamrkt.com/i/r/games/upcoming/ad5db7bf-cd91-4d5d-a635-cf335661d69d/pools/ab571569-08b2-4a88-9d9e-47145370e67f/predictions/?email=timir@instamrkt.com`
 
 ### URL
 `/r/games/upcoming/<game_uuid>/pools/<pool_uuid>/predictions/`
@@ -482,14 +510,14 @@ Enter pre-game predictions into a specified pool http://local.instamrkt.com/i/r/
 
 Parameter | Default | Description
 --------- | ------- | -----------
-game_uuid | undefined | The uuid of the game for which you are requesting pools. This can be obtained from the `/r/games/upcoming` list of games. 
-pool_uuid | undefined | The uuid of the pool for which the prediction should be entered.
-email | undefined | Since we only have an email address at this point we create an account for this user and assign a random password which can be recovered. 
+game_uuid | null | The uuid of the game for which you are requesting pools. This can be obtained from the `/r/games/upcoming` list of games.
+pool_uuid | null | The uuid of the pool for which the prediction should be entered.
+email | null | Since we only have an email address at this point we create an account for this user and assign a random password which can be recovered.
 
-NOTE: email MUST be appended the query string and not in the payload. 
+NOTE: email MUST be appended the query string and not in the payload.
 
 An example query string is:
-http://local.instamrkt.com/i/r/games/upcoming/ad5db7bf-cd91-4d5d-a635-cf335661d69d/pools/ab571569-08b2-4a88-9d9e-47145370e67f/predictions/?email=timir@instamrkt.com
+`https://instamrkt.com/i/r/games/upcoming/ad5db7bf-cd91-4d5d-a635-cf335661d69d/pools/ab571569-08b2-4a88-9d9e-47145370e67f/predictions/?email=timir@instamrkt.com`
 
 ### Response Parameters
 
@@ -497,15 +525,17 @@ Parameter | Default | Description
 --------- | ------- | -----------
 status | 200 | Response code of the request
 msg | [] | Empty if status = 200
-username | "" | The username of the new account that was created
+username | "" | The assigned username.
+user_id | "" | The user id of the user's account (possibly newly created).
+user_session_key | null | The session key of the user.
 user_id | "" | The user id of the newly created account
 
-Note that each pool is serialized individually. One pool per request. For example, to make 3 predictions you must send 3 requests. 
+Note that each pool is serialized individually. One pool per request. For example, to make 3 predictions you must send 3 requests.
 
-### Payload 
+### Payload
 Parameter | Default | Description
 --------- | ------- | -----------
-user_backed | null | An object with a single key and value. The key is the target_id of the users prediction and the value is the amount to place on this target. 
+user_backed | null | An object with a single key and value. The key is the target_id of the users prediction and the value is the amount to place on this target.
 
 
 ## Statistics
