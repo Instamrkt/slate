@@ -12,6 +12,10 @@ All request that require personal information require a userId parameter which i
 All responses are of type `application/json`.
 </aside>
 
+<aside class="notice">
+All POST request should include a body that is a valid JSON-formatted string.
+</aside>
+
 
 Passing parameters happens as follows:
 
