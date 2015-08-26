@@ -72,6 +72,102 @@ currency | DON | Currency for which the leadeboard should be returned.
 leaderboard | [] | A list sorted by `rank`. Each object contains `username`, `points` and `rank`.
 
 ## Global Personalized Leaderboard
+
+> Expects the following JSON structure:
+
+```json
+{
+  "header": {},
+  "op": 4505,
+  "top_count": 3,
+  "bottom_count": 3,
+  "surrounding_count": 1
+}
+```
+
+> Returns the following JSON structure:
+
+```json
+{
+  "response_header": {},
+  "res": 450,
+  "game_type": "INSTAMRKT",
+  "currency", "DON",
+  "leaderboard": [
+        {
+            "username": "instamrkt",
+            "points": 999.17,
+            "rank": 1
+        },
+        {
+            "username": "vinnie",
+            "points": 100.0,
+            "rank": 2
+        },
+        {
+            "username": "boodles",
+            "points": 98.68,
+            "rank": 3
+        },
+        {
+            "username": "boodles2",
+            "points": 50.47,
+            "rank": 43
+        },
+        {
+            "username": "boodles3",
+            "points": 50.12,
+            "rank": 44
+        },
+        {
+            "username": "boodles4",
+            "points": 49.68,
+            "rank": 45
+        },
+        {
+            "username": "last",
+            "points": 17.21,
+            "rank": 100
+        }
+  ],
+  "break_after_rank": [3, 45]
+}
+```
+
+This requests the full personalized leaderboard for a given game type (defaults to `INSTAMRKT`) on the platform. The response includes top `top_count` users on the leaderboard, the requesting user plus surroundings (specified by `surroundings_count`) and bottom `bottom_count` users.
+
+### Operation code
+
+Name | Code
+--------- | -------
+get_user_tailored_leaderboard | 4505
+
+### Call Parameters
+
+Parameter | Default | Description
+--------- | ------- | -----------
+game_type | INSTAMRKT | Game type for which to return global leaderboard.
+currency | DON | Currency for which the leadeboard should be returned.
+top_count | 3 | How many users to include on the top of the leaderboard.
+surrounding_count | 1 | How many users to include right before and after the requesting user.
+bottom_count | 3 | How many users to include on the bottom of the leaderboard.
+
+### Response code
+
+Name | Code | Result
+--------- | ------- | -----------
+leaderboard_tailored | 4505 | You have requested the global personalized leaderboard.
+
+### Response Parameters
+
+Parameter | Default | Description
+--------- | ------- | -----------
+game_type | INSTAMRKT | Game type for which to return global leaderboard.
+currency | DON | Currency for which the leadeboard should be returned.
+leaderboard | [] | A list sorted by `rank`. Each object contains `username`, `points` and `rank`.
+break_after_rank | [] | If the leaderboard is not continuous, the ranks after which breaks happen are included in this list (check sample code on the right).
+
+
 ## Friends Leaderboard
 
 ## Game Full Leaderboard
@@ -143,4 +239,100 @@ game_id | - | Game id for which to return global leaderboard.
 leaderboard | [] | A list sorted by `rank`. Each object contains `username`, `points` and `rank`.
 
 ## Game Personalized Leaderboard
+
+> Expects the following JSON structure:
+
+```json
+{
+  "header": {},
+  "op": 4505,
+  "game_id": "f6951935-d201-43b9-b3ee-8bb7f6f3ecb1",
+  "top_count": 3,
+  "bottom_count": 3,
+  "surrounding_count": 1
+}
+```
+
+> Returns the following JSON structure:
+
+```json
+{
+  "response_header": {},
+  "res": 450,
+  "game_type": "INSTAMRKT",
+  "currency", "DON",
+  "leaderboard": [
+        {
+            "username": "instamrkt",
+            "points": 999.17,
+            "rank": 1
+        },
+        {
+            "username": "vinnie",
+            "points": 100.0,
+            "rank": 2
+        },
+        {
+            "username": "boodles",
+            "points": 98.68,
+            "rank": 3
+        },
+        {
+            "username": "boodles2",
+            "points": 50.47,
+            "rank": 43
+        },
+        {
+            "username": "boodles3",
+            "points": 50.12,
+            "rank": 44
+        },
+        {
+            "username": "boodles4",
+            "points": 49.68,
+            "rank": 45
+        },
+        {
+            "username": "last",
+            "points": 17.21,
+            "rank": 100
+        }
+  ],
+  "break_after_rank": [3, 45]
+}
+```
+
+This requests the full personalized leaderboard for a given game. The response includes top `top_count` users on the leaderboard, the requesting user plus surroundings (specified by `surroundings_count`) and bottom `bottom_count` users.
+
+### Operation code
+
+Name | Code
+--------- | -------
+get_user_tailored_leaderboard | 4505
+
+### Call Parameters
+
+Parameter | Default | Description
+--------- | ------- | -----------
+game_type | INSTAMRKT | Game type for which to return global leaderboard.
+currency | DON | Currency for which the leadeboard should be returned.
+game_id| - | Which game to request the leaderboard for.
+top_count | 3 | How many users to include on the top of the leaderboard.
+surrounding_count | 1 | How many users to include right before and after the requesting user.
+bottom_count | 3 | How many users to include on the bottom of the leaderboard.
+
+### Response code
+
+Name | Code | Result
+--------- | ------- | -----------
+leaderboard_for_game_tailored | 4515 | You have requested the personalized leaderboard for a game.
+
+### Response Parameters
+
+Parameter | Default | Description
+--------- | ------- | -----------
+game_id | - | Game for which the leaderboard was requested.
+leaderboard | [] | A list sorted by `rank`. Each object contains `username`, `points` and `rank`.
+break_after_rank | [] | If the leaderboard is not continuous, the ranks after which breaks happen are included in this list (check sample code on the right).
+
 ## Game Friends Leaderboard
