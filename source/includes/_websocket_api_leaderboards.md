@@ -170,6 +170,76 @@ break_after_rank | [] | If the leaderboard is not continuous, the ranks after wh
 
 ## Friends Leaderboard
 
+
+> Expects the following JSON structure:
+
+```json
+{
+  "header": {},
+  "op": 452,
+}
+```
+
+> Returns the following JSON structure:
+
+```json
+{
+  "response_header": {},
+  "res": 450,
+  "game_type": "INSTAMRKT",
+  "currency", "DON",
+  "leaderboard": [
+        {
+            "username": "instamrkt",
+            "points": 999.17,
+            "rank": 1
+        },
+        {
+            "username": "vinnie",
+            "points": 100.0,
+            "rank": 2
+        },
+        {
+            "username": "boodles",
+            "points": 98.68,
+            "rank": 3
+        }
+  ]
+}
+```
+
+This requests the friends global leaderboard for a given game type (defaults to `INSTAMRKT`) on the platform. Is a subset of a global leaderboard, includes only friends of a requestor.
+
+### Operation code
+
+Name | Code
+--------- | -------
+get_friends_leaderboard | 452
+
+### Call Parameters
+
+Parameter | Default | Description
+--------- | ------- | -----------
+game_type | INSTAMRKT | Game type for which to return global leaderboard.
+currency | DON | Currency for which the leadeboard should be returned.
+start | 0 | The rank at which to start the leaderboard (e.g. 3 will not show the top three).
+end | 1000000 | The rank at which to finish the leaderboard (e.g. 10 ranks from 11 on).
+
+### Response code
+
+Name | Code | Result
+--------- | ------- | -----------
+leaderboard | 450 | You have requested the global leaderboard.
+
+### Response Parameters
+
+Parameter | Default | Description
+--------- | ------- | -----------
+game_type | INSTAMRKT | Game type for which to return global leaderboard.
+currency | DON | Currency for which the leadeboard should be returned.
+leaderboard | [] | A list sorted by `rank`. Each object contains `username`, `points` and `rank`.
+
+
 ## Game Full Leaderboard
 
 > Expects the following JSON structure:
@@ -336,3 +406,70 @@ leaderboard | [] | A list sorted by `rank`. Each object contains `username`, `po
 break_after_rank | [] | If the leaderboard is not continuous, the ranks after which breaks happen are included in this list (check sample code on the right).
 
 ## Game Friends Leaderboard
+
+> Expects the following JSON structure:
+
+```json
+{
+  "header": {},
+  "op": 453,
+  "game_id": "f6951935-d201-43b9-b3ee-8bb7f6f3ecb1"
+}
+```
+
+> Returns the following JSON structure:
+
+```json
+{
+  "response_header": {},
+  "res": 453,
+  "game_id": "f6951935-d201-43b9-b3ee-8bb7f6f3ecb1"
+  "leaderboard": [
+        {
+            "username": "instamrkt",
+            "points": 999.17,
+            "rank": 1
+        },
+        {
+            "username": "vinnie",
+            "points": 100.0,
+            "rank": 2
+        },
+        {
+            "username": "boodles",
+            "points": 98.68,
+            "rank": 3
+        }
+  ]
+}
+```
+
+This requests the friends leaderboard for a given game. The leaderboard is a subset of game global leaderboard - includes only friends of a requesting user.
+
+### Operation code
+
+Name | Code
+--------- | -------
+get_friends_leaderboard_for_game | 453
+
+### Call Parameters
+
+Parameter | Default | Description
+--------- | ------- | -----------
+game_id | - | Game id for which to return global leaderboard.
+start | 0 | The rank at which to start the leaderboard (e.g. 3 will not show the top three).
+end | 1000000 | The rank at which to finish the leaderboard (e.g. 10 ranks from 11 on).
+
+### Response code
+
+Name | Code | Result
+--------- | ------- | -----------
+leaderboard_friends_for_game | 451 | You have requested the global leaderboard for a given game.
+
+### Response Parameters
+
+Parameter | Default | Description
+--------- | ------- | -----------
+game_id | - | Game id for which to return global leaderboard.
+leaderboard | [] | A list sorted by `rank`. Each object contains `username`, `points` and `rank`.
+
