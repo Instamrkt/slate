@@ -617,7 +617,7 @@ Parameter | Default | Description
 friends | {} | A dictionary containing selected user's personal statistics. **key** - friend's user id, **value** - friend's name.
 
 
-## Leaderboard (global)
+## Leaderboard global
 
 
 > Sample request object:
@@ -634,10 +634,12 @@ $.get('/r/leaderboard/global/', {
 })
 ```
 
-This is used to request a global leaderboard.
+This is used to request a global leaderboard. If `USER_ID` is included, the leaderboard can be personalised according to the parameters described below.
+
+This does not send the full leaderboard - only top, bottom and requestor's surroundings.
 
 ### URL
-`/r/leaderboard/global/`
+`/r/leaderboard/global/USER_ID`
 
 ### Request type
 
@@ -645,19 +647,27 @@ This is used to request a global leaderboard.
 
 ### Request Parameters
 
-Parameter | Description
---------- | -------
-- | -
+Parameter | Default | Description
+--------- | ------- | -------
+top_count | 3 | | How many users to show on the top of the leaderboard.
+bottom_count | 3 | How many users to show on the bottom of the leaderboard.
+surrounding_count 1 | How many users directly above and below requesting user.
 
 ### Response Parameters
 
 Parameter | Default | Description
 --------- | ------- | -----------
-leaderboard | [] | A list of objects. Every object has the form: **key** - points, **value** - user's name.
+leaderboard | [] | A list of objects. Every object contains `username`, `rank` and `points`.
+break_after_rank | [] | A list of ranks after which leaderboard loses its continuity. For a leaderbord with ranks: [1,2,3,17,18,98,99,100] this array would be equal to [3,18]. It indicates where to display breaks in leaderboard.
 
+## Leaderboard global per game
 
+Global game leaderboard can be requested in the exact same manner as <a href="#leaderboard-global">a global leaderboard</a>. The only difference is the url, shown below.
 
-## Leaderboard (personal)
+### URL
+`/r/leaderboard/global/GAME_UUID/USER_ID`
+
+## Leaderboard personal
 
 
 > Sample request object:
@@ -670,15 +680,14 @@ var _xsrf   = cookies('_xsrf')
 $.get('/r/leaderboard/personal/', {
   headers: {
       'X-XSRFToken': _xsrf
-  },
-  'userId': userId
+  }
 })
 ```
 
-This is used to request a personal leaderboard.
+This is used to request a personal leaderboard. The returned leaderboard is full, contains each user ranked below `start` and `end`.
 
 ### URL
-`/r/leaderboard/personal/`
+`/r/leaderboard/personal/USER_ID`
 
 ### Request type
 
@@ -686,12 +695,20 @@ This is used to request a personal leaderboard.
 
 ### Request Parameters
 
-Parameter | Description
---------- | -------
-userId | User id for which personal leaderboard is requested.
+Parameter | Default | Description
+--------- | ------- | -------
+start | 1 | | Start leaderboard at rank.
+end | 10000000 | End leaderboard at rank.
 
 ### Response Parameters
 
 Parameter | Default | Description
 --------- | ------- | -----------
-leaderboard | [] | A list of objects. Every object has the form: **key** - points, **value** - user's name.
+leaderboard | [] | A list of objects. Every object contains `username`, `rank` and `points`.
+
+## Leaderboard global per game
+
+Personal game leaderboard can be requested in the exact same manner as <a href="#leaderboard-personal">a personal leaderboard</a>. The only difference is the url, shown below.
+
+### URL
+`/r/leaderboard/global/GAME_UUID/USER_ID`
