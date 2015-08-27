@@ -495,6 +495,3 @@ Personal game leaderboard can be requested in the exact same manner as <a href="
 
 ### URL
 `/r/leaderboard/personal/[GAME_UUID]/[USER_ID]`
-=======
-leaderboard | [] | A list of objects. Every object has the form: **key** - points, **value** - user's name.
-

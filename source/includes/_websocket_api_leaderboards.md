@@ -8,7 +8,7 @@
 ```json
 {
   "header": {},
-  "op": 450,
+  "op": 450
 }
 ```
 
@@ -19,7 +19,7 @@
   "response_header": {},
   "res": 450,
   "game_type": "INSTAMRKT",
-  "currency", "DON",
+  "currency": "DON",
   "leaderboard": [
         {
             "username": "instamrkt",
@@ -92,7 +92,7 @@ leaderboard | [] | A list sorted by `rank`. Each object contains `username`, `po
   "response_header": {},
   "res": 450,
   "game_type": "INSTAMRKT",
-  "currency", "DON",
+  "currency": "DON",
   "leaderboard": [
         {
             "username": "instamrkt",
@@ -176,7 +176,7 @@ break_after_rank | [] | If the leaderboard is not continuous, the ranks after wh
 ```json
 {
   "header": {},
-  "op": 452,
+  "op": 452
 }
 ```
 
@@ -185,7 +185,7 @@ break_after_rank | [] | If the leaderboard is not continuous, the ranks after wh
 ```json
 {
   "response_header": {},
-  "res": 450,
+  "res": 452,
   "game_type": "INSTAMRKT",
   "currency", "DON",
   "leaderboard": [
@@ -258,7 +258,7 @@ leaderboard | [] | A list sorted by `rank`. Each object contains `username`, `po
 {
   "response_header": {},
   "res": 451,
-  "game_id": "f6951935-d201-43b9-b3ee-8bb7f6f3ecb1"
+  "game_id": "f6951935-d201-43b9-b3ee-8bb7f6f3ecb1",
   "leaderboard": [
         {
             "username": "instamrkt",
@@ -330,7 +330,7 @@ leaderboard | [] | A list sorted by `rank`. Each object contains `username`, `po
   "response_header": {},
   "res": 450,
   "game_type": "INSTAMRKT",
-  "currency", "DON",
+  "currency": "DON",
   "leaderboard": [
         {
             "username": "instamrkt",
@@ -423,7 +423,7 @@ break_after_rank | [] | If the leaderboard is not continuous, the ranks after wh
 {
   "response_header": {},
   "res": 453,
-  "game_id": "f6951935-d201-43b9-b3ee-8bb7f6f3ecb1"
+  "game_id": "f6951935-d201-43b9-b3ee-8bb7f6f3ecb1",
   "leaderboard": [
         {
             "username": "instamrkt",
