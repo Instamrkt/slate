@@ -1025,7 +1025,7 @@ curl -H &quot;Content-Type: application/json&rdquo; -X POST  -d &rsquo;{&ldquo;J
 </tr>
 </tbody></table>
 
-<h2 id="leaderboard-(global)">Leaderboard (global)</h2>
+<h2 id="leaderboard-global">Leaderboard global</h2>
 
 <blockquote>
 <p>Sample request object:</p>
@@ -1041,11 +1041,13 @@ curl -H &quot;Content-Type: application/json&rdquo; -X POST  -d &rsquo;{&ldquo;J
 <span class="p">})</span>
 </code></pre>
 
-<p>This is used to request a global leaderboard.</p>
+<p>This is used to request a global leaderboard. If <code class="prettyprint">USER_ID</code> is included, the leaderboard can be personalised according to the parameters described below.</p>
+
+<p>This does not send the full leaderboard - only top, bottom and requestor&rsquo;s surroundings.</p>
 
 <h3 id="url">URL</h3>
 
-<p><code class="prettyprint">/r/leaderboard/global/</code></p>
+<p><code class="prettyprint">/r/leaderboard/global/[USER_ID]</code></p>
 
 <h3 id="request-type">Request type</h3>
 
@@ -1056,12 +1058,24 @@ curl -H &quot;Content-Type: application/json&rdquo; -X POST  -d &rsquo;{&ldquo;J
 <table><thead>
 <tr>
 <th>Parameter</th>
+<th>Default</th>
 <th>Description</th>
 </tr>
 </thead><tbody>
 <tr>
-<td>-</td>
-<td>-</td>
+<td>top_count</td>
+<td>3</td>
+<td></td>
+</tr>
+<tr>
+<td>bottom_count</td>
+<td>3</td>
+<td>How many users to show on the bottom of the leaderboard.</td>
+</tr>
+<tr>
+<td>surrounding_count 1</td>
+<td>How many users directly above and below requesting user.</td>
+<td></td>
 </tr>
 </tbody></table>
 
@@ -1077,11 +1091,24 @@ curl -H &quot;Content-Type: application/json&rdquo; -X POST  -d &rsquo;{&ldquo;J
 <tr>
 <td>leaderboard</td>
 <td>[]</td>
-<td>A list of objects. Every object has the form: <strong>key</strong> - points, <strong>value</strong> - user&rsquo;s name.</td>
+<td>A list of objects. Every object contains <code class="prettyprint">username</code>, <code class="prettyprint">rank</code> and <code class="prettyprint">points</code>.</td>
+</tr>
+<tr>
+<td>break_after_rank</td>
+<td>[]</td>
+<td>A list of ranks after which leaderboard loses its continuity. For a leaderbord with ranks: [1,2,3,17,18,98,99,100] this array would be equal to [3,18]. It indicates where to display breaks in leaderboard.</td>
 </tr>
 </tbody></table>
 
-<h2 id="leaderboard-(personal)">Leaderboard (personal)</h2>
+<h2 id="leaderboard-global-per-game">Leaderboard global per game</h2>
+
+<p>Global game leaderboard can be requested in the exact same manner as <a href="#leaderboard-global">a global leaderboard</a>. The only difference is the url, shown below.</p>
+
+<h3 id="url">URL</h3>
+
+<p><code class="prettyprint">/r/leaderboard/global/[GAME_UUID]/[USER_ID]</code></p>
+
+<h2 id="leaderboard-personal">Leaderboard personal</h2>
 
 <blockquote>
 <p>Sample request object:</p>
@@ -1097,7 +1124,7 @@ curl -H &quot;Content-Type: application/json&rdquo; -X POST  -d &rsquo;{&ldquo;J
 <span class="p">})</span>
 </code></pre>
 
-<p>This is used to request a personal leaderboard.</p>
+<p>This is used to request a personal leaderboard. The returned leaderboard is full, contains each user ranked below <code class="prettyprint">start</code> and <code class="prettyprint">end</code>.</p>
 
 <h3 id="url">URL</h3>
 
@@ -1112,12 +1139,19 @@ curl -H &quot;Content-Type: application/json&rdquo; -X POST  -d &rsquo;{&ldquo;J
 <table><thead>
 <tr>
 <th>Parameter</th>
+<th>Default</th>
 <th>Description</th>
 </tr>
 </thead><tbody>
 <tr>
-<td>userId</td>
-<td>User id for which personal leaderboard is requested.</td>
+<td>start</td>
+<td>1</td>
+<td></td>
+</tr>
+<tr>
+<td>end</td>
+<td>10000000</td>
+<td>End leaderboard at rank.</td>
 </tr>
 </tbody></table>
 
@@ -1133,9 +1167,19 @@ curl -H &quot;Content-Type: application/json&rdquo; -X POST  -d &rsquo;{&ldquo;J
 <tr>
 <td>leaderboard</td>
 <td>[]</td>
-<td>A list of objects. Every object has the form: <strong>key</strong> - points, <strong>value</strong> - user&rsquo;s name.</td>
+<td>A list of objects. Every object contains <code class="prettyprint">username</code>, <code class="prettyprint">rank</code> and <code class="prettyprint">points</code>.</td>
 </tr>
 </tbody></table>
+
+<h2 id="leaderboard-personal-per-game">Leaderboard personal per game</h2>
+
+<p>Personal game leaderboard can be requested in the exact same manner as <a href="#leaderboard-personal">a personal leaderboard</a>. The only difference is the url, shown below.</p>
+
+<h3 id="url">URL</h3>
+
+<h1 id="/r/leaderboard/personal/[game_uuid]/[user_id]"><code class="prettyprint">/r/leaderboard/personal/[GAME_UUID]/[USER_ID]</code></h1>
+
+<p>leaderboard | [] | A list of objects. Every object has the form: <strong>key</strong> - points, <strong>value</strong> - user&rsquo;s name.</p>
 
           <h1 id="websocket-api:-general">Websocket API: General</h1>
 
@@ -3341,6 +3385,825 @@ This will automatically close and resolve all the automatically resolvable pools
 <td>games</td>
 <td>[]</td>
 <td>A list containing objects for all the upcoming games for your source. Each object contains game data - id, source_id, game_name, currency, live_start_at, game_type_id and a game hashtag.</td>
+</tr>
+</tbody></table>
+
+          <h1 id="websocket-api:-leaderboards">Websocket API: Leaderboards</h1>
+
+<h2 id="global-full-leaderboard">Global Full Leaderboard</h2>
+
+<blockquote>
+<p>Expects the following JSON structure:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"header"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
+  </span><span class="s2">"op"</span><span class="p">:</span><span class="w"> </span><span class="mi">450</span><span class="p">,</span><span class="w">
+</span><span class="err">}</span><span class="w">
+</span></code></pre>
+
+<blockquote>
+<p>Returns the following JSON structure:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"response_header"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
+  </span><span class="s2">"res"</span><span class="p">:</span><span class="w"> </span><span class="mi">450</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"game_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"INSTAMRKT"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"currency"</span><span class="err">,</span><span class="w"> </span><span class="s2">"DON"</span><span class="err">,</span><span class="w">
+  </span><span class="s2">"leaderboard"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"instamrkt"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"points"</span><span class="p">:</span><span class="w"> </span><span class="mf">999.17</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"rank"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"vinnie"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"points"</span><span class="p">:</span><span class="w"> </span><span class="mf">100.0</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"rank"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"boodles"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"points"</span><span class="p">:</span><span class="w"> </span><span class="mf">98.68</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"rank"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>This requests the full global leaderboard for a given game type (defaults to <code class="prettyprint">INSTAMRKT</code>) on the platform.</p>
+
+<h3 id="operation-code">Operation code</h3>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Code</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>get_leaderboard</td>
+<td>450</td>
+</tr>
+</tbody></table>
+
+<h3 id="call-parameters">Call Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>game_type</td>
+<td>INSTAMRKT</td>
+<td>Game type for which to return global leaderboard.</td>
+</tr>
+<tr>
+<td>currency</td>
+<td>DON</td>
+<td>Currency for which the leadeboard should be returned.</td>
+</tr>
+<tr>
+<td>start</td>
+<td>0</td>
+<td>The rank at which to start the leaderboard (e.g. 3 will not show the top three).</td>
+</tr>
+<tr>
+<td>end</td>
+<td>1000000</td>
+<td>The rank at which to finish the leaderboard (e.g. 10 ranks from 11 on).</td>
+</tr>
+</tbody></table>
+
+<h3 id="response-code">Response code</h3>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Code</th>
+<th>Result</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>leaderboard</td>
+<td>450</td>
+<td>You have requested the global leaderboard.</td>
+</tr>
+</tbody></table>
+
+<h3 id="response-parameters">Response Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>game_type</td>
+<td>INSTAMRKT</td>
+<td>Game type for which to return global leaderboard.</td>
+</tr>
+<tr>
+<td>currency</td>
+<td>DON</td>
+<td>Currency for which the leadeboard should be returned.</td>
+</tr>
+<tr>
+<td>leaderboard</td>
+<td>[]</td>
+<td>A list sorted by <code class="prettyprint">rank</code>. Each object contains <code class="prettyprint">username</code>, <code class="prettyprint">points</code> and <code class="prettyprint">rank</code>.</td>
+</tr>
+</tbody></table>
+
+<h2 id="global-personalized-leaderboard">Global Personalized Leaderboard</h2>
+
+<blockquote>
+<p>Expects the following JSON structure:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"header"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
+  </span><span class="s2">"op"</span><span class="p">:</span><span class="w"> </span><span class="mi">4505</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"top_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"bottom_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"surrounding_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<blockquote>
+<p>Returns the following JSON structure:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"response_header"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
+  </span><span class="s2">"res"</span><span class="p">:</span><span class="w"> </span><span class="mi">450</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"game_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"INSTAMRKT"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"currency"</span><span class="err">,</span><span class="w"> </span><span class="s2">"DON"</span><span class="err">,</span><span class="w">
+  </span><span class="s2">"leaderboard"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"instamrkt"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"points"</span><span class="p">:</span><span class="w"> </span><span class="mf">999.17</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"rank"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"vinnie"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"points"</span><span class="p">:</span><span class="w"> </span><span class="mf">100.0</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"rank"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"boodles"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"points"</span><span class="p">:</span><span class="w"> </span><span class="mf">98.68</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"rank"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"boodles2"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"points"</span><span class="p">:</span><span class="w"> </span><span class="mf">50.47</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"rank"</span><span class="p">:</span><span class="w"> </span><span class="mi">43</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"boodles3"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"points"</span><span class="p">:</span><span class="w"> </span><span class="mf">50.12</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"rank"</span><span class="p">:</span><span class="w"> </span><span class="mi">44</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"boodles4"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"points"</span><span class="p">:</span><span class="w"> </span><span class="mf">49.68</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"rank"</span><span class="p">:</span><span class="w"> </span><span class="mi">45</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"last"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"points"</span><span class="p">:</span><span class="w"> </span><span class="mf">17.21</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"rank"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="s2">"break_after_rank"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">45</span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>This requests the full personalized leaderboard for a given game type (defaults to <code class="prettyprint">INSTAMRKT</code>) on the platform. The response includes top <code class="prettyprint">top_count</code> users on the leaderboard, the requesting user plus surroundings (specified by <code class="prettyprint">surroundings_count</code>) and bottom <code class="prettyprint">bottom_count</code> users.</p>
+
+<h3 id="operation-code">Operation code</h3>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Code</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>get_user_tailored_leaderboard</td>
+<td>4505</td>
+</tr>
+</tbody></table>
+
+<h3 id="call-parameters">Call Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>game_type</td>
+<td>INSTAMRKT</td>
+<td>Game type for which to return global leaderboard.</td>
+</tr>
+<tr>
+<td>currency</td>
+<td>DON</td>
+<td>Currency for which the leadeboard should be returned.</td>
+</tr>
+<tr>
+<td>top_count</td>
+<td>3</td>
+<td>How many users to include on the top of the leaderboard.</td>
+</tr>
+<tr>
+<td>surrounding_count</td>
+<td>1</td>
+<td>How many users to include right before and after the requesting user.</td>
+</tr>
+<tr>
+<td>bottom_count</td>
+<td>3</td>
+<td>How many users to include on the bottom of the leaderboard.</td>
+</tr>
+</tbody></table>
+
+<h3 id="response-code">Response code</h3>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Code</th>
+<th>Result</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>leaderboard_tailored</td>
+<td>4505</td>
+<td>You have requested the global personalized leaderboard.</td>
+</tr>
+</tbody></table>
+
+<h3 id="response-parameters">Response Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>game_type</td>
+<td>INSTAMRKT</td>
+<td>Game type for which to return global leaderboard.</td>
+</tr>
+<tr>
+<td>currency</td>
+<td>DON</td>
+<td>Currency for which the leadeboard should be returned.</td>
+</tr>
+<tr>
+<td>leaderboard</td>
+<td>[]</td>
+<td>A list sorted by <code class="prettyprint">rank</code>. Each object contains <code class="prettyprint">username</code>, <code class="prettyprint">points</code> and <code class="prettyprint">rank</code>.</td>
+</tr>
+<tr>
+<td>break_after_rank</td>
+<td>[]</td>
+<td>If the leaderboard is not continuous, the ranks after which breaks happen are included in this list (check sample code on the right).</td>
+</tr>
+</tbody></table>
+
+<h2 id="friends-leaderboard">Friends Leaderboard</h2>
+
+<blockquote>
+<p>Expects the following JSON structure:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"header"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
+  </span><span class="s2">"op"</span><span class="p">:</span><span class="w"> </span><span class="mi">452</span><span class="p">,</span><span class="w">
+</span><span class="err">}</span><span class="w">
+</span></code></pre>
+
+<blockquote>
+<p>Returns the following JSON structure:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"response_header"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
+  </span><span class="s2">"res"</span><span class="p">:</span><span class="w"> </span><span class="mi">450</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"game_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"INSTAMRKT"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"currency"</span><span class="err">,</span><span class="w"> </span><span class="s2">"DON"</span><span class="err">,</span><span class="w">
+  </span><span class="s2">"leaderboard"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"instamrkt"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"points"</span><span class="p">:</span><span class="w"> </span><span class="mf">999.17</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"rank"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"vinnie"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"points"</span><span class="p">:</span><span class="w"> </span><span class="mf">100.0</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"rank"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"boodles"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"points"</span><span class="p">:</span><span class="w"> </span><span class="mf">98.68</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"rank"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>This requests the friends global leaderboard for a given game type (defaults to <code class="prettyprint">INSTAMRKT</code>) on the platform. Is a subset of a global leaderboard, includes only friends of a requestor.</p>
+
+<h3 id="operation-code">Operation code</h3>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Code</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>get_friends_leaderboard</td>
+<td>452</td>
+</tr>
+</tbody></table>
+
+<h3 id="call-parameters">Call Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>game_type</td>
+<td>INSTAMRKT</td>
+<td>Game type for which to return global leaderboard.</td>
+</tr>
+<tr>
+<td>currency</td>
+<td>DON</td>
+<td>Currency for which the leadeboard should be returned.</td>
+</tr>
+<tr>
+<td>start</td>
+<td>0</td>
+<td>The rank at which to start the leaderboard (e.g. 3 will not show the top three).</td>
+</tr>
+<tr>
+<td>end</td>
+<td>1000000</td>
+<td>The rank at which to finish the leaderboard (e.g. 10 ranks from 11 on).</td>
+</tr>
+</tbody></table>
+
+<h3 id="response-code">Response code</h3>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Code</th>
+<th>Result</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>leaderboard</td>
+<td>450</td>
+<td>You have requested the global leaderboard.</td>
+</tr>
+</tbody></table>
+
+<h3 id="response-parameters">Response Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>game_type</td>
+<td>INSTAMRKT</td>
+<td>Game type for which to return global leaderboard.</td>
+</tr>
+<tr>
+<td>currency</td>
+<td>DON</td>
+<td>Currency for which the leadeboard should be returned.</td>
+</tr>
+<tr>
+<td>leaderboard</td>
+<td>[]</td>
+<td>A list sorted by <code class="prettyprint">rank</code>. Each object contains <code class="prettyprint">username</code>, <code class="prettyprint">points</code> and <code class="prettyprint">rank</code>.</td>
+</tr>
+</tbody></table>
+
+<h2 id="game-full-leaderboard">Game Full Leaderboard</h2>
+
+<blockquote>
+<p>Expects the following JSON structure:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"header"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
+  </span><span class="s2">"op"</span><span class="p">:</span><span class="w"> </span><span class="mi">451</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"game_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"f6951935-d201-43b9-b3ee-8bb7f6f3ecb1"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<blockquote>
+<p>Returns the following JSON structure:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"response_header"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
+  </span><span class="s2">"res"</span><span class="p">:</span><span class="w"> </span><span class="mi">451</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"game_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"f6951935-d201-43b9-b3ee-8bb7f6f3ecb1"</span><span class="w">
+  </span><span class="s2">"leaderboard"</span><span class="err">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"instamrkt"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"points"</span><span class="p">:</span><span class="w"> </span><span class="mf">999.17</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"rank"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"vinnie"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"points"</span><span class="p">:</span><span class="w"> </span><span class="mf">100.0</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"rank"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"boodles"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"points"</span><span class="p">:</span><span class="w"> </span><span class="mf">98.68</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"rank"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>This requests the full global leaderboard for a given game.</p>
+
+<h3 id="operation-code">Operation code</h3>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Code</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>get_leaderboard_for_game</td>
+<td>451</td>
+</tr>
+</tbody></table>
+
+<h3 id="call-parameters">Call Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>game_id</td>
+<td>-</td>
+<td>Game id for which to return global leaderboard.</td>
+</tr>
+<tr>
+<td>start</td>
+<td>0</td>
+<td>The rank at which to start the leaderboard (e.g. 3 will not show the top three).</td>
+</tr>
+<tr>
+<td>end</td>
+<td>1000000</td>
+<td>The rank at which to finish the leaderboard (e.g. 10 ranks from 11 on).</td>
+</tr>
+</tbody></table>
+
+<h3 id="response-code">Response code</h3>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Code</th>
+<th>Result</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>leaderboard_for_game</td>
+<td>451</td>
+<td>You have requested the global leaderboard for a given game.</td>
+</tr>
+</tbody></table>
+
+<h3 id="response-parameters">Response Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>game_id</td>
+<td>-</td>
+<td>Game id for which to return global leaderboard.</td>
+</tr>
+<tr>
+<td>leaderboard</td>
+<td>[]</td>
+<td>A list sorted by <code class="prettyprint">rank</code>. Each object contains <code class="prettyprint">username</code>, <code class="prettyprint">points</code> and <code class="prettyprint">rank</code>.</td>
+</tr>
+</tbody></table>
+
+<h2 id="game-personalized-leaderboard">Game Personalized Leaderboard</h2>
+
+<blockquote>
+<p>Expects the following JSON structure:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"header"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
+  </span><span class="s2">"op"</span><span class="p">:</span><span class="w"> </span><span class="mi">4505</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"game_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"f6951935-d201-43b9-b3ee-8bb7f6f3ecb1"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"top_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"bottom_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"surrounding_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<blockquote>
+<p>Returns the following JSON structure:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"response_header"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
+  </span><span class="s2">"res"</span><span class="p">:</span><span class="w"> </span><span class="mi">450</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"game_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"INSTAMRKT"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"currency"</span><span class="err">,</span><span class="w"> </span><span class="s2">"DON"</span><span class="err">,</span><span class="w">
+  </span><span class="s2">"leaderboard"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"instamrkt"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"points"</span><span class="p">:</span><span class="w"> </span><span class="mf">999.17</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"rank"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"vinnie"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"points"</span><span class="p">:</span><span class="w"> </span><span class="mf">100.0</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"rank"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"boodles"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"points"</span><span class="p">:</span><span class="w"> </span><span class="mf">98.68</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"rank"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"boodles2"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"points"</span><span class="p">:</span><span class="w"> </span><span class="mf">50.47</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"rank"</span><span class="p">:</span><span class="w"> </span><span class="mi">43</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"boodles3"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"points"</span><span class="p">:</span><span class="w"> </span><span class="mf">50.12</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"rank"</span><span class="p">:</span><span class="w"> </span><span class="mi">44</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"boodles4"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"points"</span><span class="p">:</span><span class="w"> </span><span class="mf">49.68</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"rank"</span><span class="p">:</span><span class="w"> </span><span class="mi">45</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"last"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"points"</span><span class="p">:</span><span class="w"> </span><span class="mf">17.21</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"rank"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="s2">"break_after_rank"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">45</span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>This requests the full personalized leaderboard for a given game. The response includes top <code class="prettyprint">top_count</code> users on the leaderboard, the requesting user plus surroundings (specified by <code class="prettyprint">surroundings_count</code>) and bottom <code class="prettyprint">bottom_count</code> users.</p>
+
+<h3 id="operation-code">Operation code</h3>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Code</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>get_user_tailored_leaderboard</td>
+<td>4505</td>
+</tr>
+</tbody></table>
+
+<h3 id="call-parameters">Call Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>game_type</td>
+<td>INSTAMRKT</td>
+<td>Game type for which to return global leaderboard.</td>
+</tr>
+<tr>
+<td>currency</td>
+<td>DON</td>
+<td>Currency for which the leadeboard should be returned.</td>
+</tr>
+<tr>
+<td>game_id</td>
+<td>-</td>
+<td>Which game to request the leaderboard for.</td>
+</tr>
+<tr>
+<td>top_count</td>
+<td>3</td>
+<td>How many users to include on the top of the leaderboard.</td>
+</tr>
+<tr>
+<td>surrounding_count</td>
+<td>1</td>
+<td>How many users to include right before and after the requesting user.</td>
+</tr>
+<tr>
+<td>bottom_count</td>
+<td>3</td>
+<td>How many users to include on the bottom of the leaderboard.</td>
+</tr>
+</tbody></table>
+
+<h3 id="response-code">Response code</h3>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Code</th>
+<th>Result</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>leaderboard_for_game_tailored</td>
+<td>4515</td>
+<td>You have requested the personalized leaderboard for a game.</td>
+</tr>
+</tbody></table>
+
+<h3 id="response-parameters">Response Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>game_id</td>
+<td>-</td>
+<td>Game for which the leaderboard was requested.</td>
+</tr>
+<tr>
+<td>leaderboard</td>
+<td>[]</td>
+<td>A list sorted by <code class="prettyprint">rank</code>. Each object contains <code class="prettyprint">username</code>, <code class="prettyprint">points</code> and <code class="prettyprint">rank</code>.</td>
+</tr>
+<tr>
+<td>break_after_rank</td>
+<td>[]</td>
+<td>If the leaderboard is not continuous, the ranks after which breaks happen are included in this list (check sample code on the right).</td>
+</tr>
+</tbody></table>
+
+<h2 id="game-friends-leaderboard">Game Friends Leaderboard</h2>
+
+<blockquote>
+<p>Expects the following JSON structure:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"header"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
+  </span><span class="s2">"op"</span><span class="p">:</span><span class="w"> </span><span class="mi">453</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"game_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"f6951935-d201-43b9-b3ee-8bb7f6f3ecb1"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<blockquote>
+<p>Returns the following JSON structure:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"response_header"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
+  </span><span class="s2">"res"</span><span class="p">:</span><span class="w"> </span><span class="mi">453</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"game_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"f6951935-d201-43b9-b3ee-8bb7f6f3ecb1"</span><span class="w">
+  </span><span class="s2">"leaderboard"</span><span class="err">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"instamrkt"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"points"</span><span class="p">:</span><span class="w"> </span><span class="mf">999.17</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"rank"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"vinnie"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"points"</span><span class="p">:</span><span class="w"> </span><span class="mf">100.0</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"rank"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"boodles"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"points"</span><span class="p">:</span><span class="w"> </span><span class="mf">98.68</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"rank"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>This requests the friends leaderboard for a given game. The leaderboard is a subset of game global leaderboard - includes only friends of a requesting user.</p>
+
+<h3 id="operation-code">Operation code</h3>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Code</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>get_friends_leaderboard_for_game</td>
+<td>453</td>
+</tr>
+</tbody></table>
+
+<h3 id="call-parameters">Call Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>game_id</td>
+<td>-</td>
+<td>Game id for which to return global leaderboard.</td>
+</tr>
+<tr>
+<td>start</td>
+<td>0</td>
+<td>The rank at which to start the leaderboard (e.g. 3 will not show the top three).</td>
+</tr>
+<tr>
+<td>end</td>
+<td>1000000</td>
+<td>The rank at which to finish the leaderboard (e.g. 10 ranks from 11 on).</td>
+</tr>
+</tbody></table>
+
+<h3 id="response-code">Response code</h3>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Code</th>
+<th>Result</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>leaderboard_friends_for_game</td>
+<td>451</td>
+<td>You have requested the global leaderboard for a given game.</td>
+</tr>
+</tbody></table>
+
+<h3 id="response-parameters">Response Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>game_id</td>
+<td>-</td>
+<td>Game id for which to return global leaderboard.</td>
+</tr>
+<tr>
+<td>leaderboard</td>
+<td>[]</td>
+<td>A list sorted by <code class="prettyprint">rank</code>. Each object contains <code class="prettyprint">username</code>, <code class="prettyprint">points</code> and <code class="prettyprint">rank</code>.</td>
 </tr>
 </tbody></table>
 
