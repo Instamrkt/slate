@@ -187,7 +187,7 @@ break_after_rank | [] | If the leaderboard is not continuous, the ranks after wh
   "response_header": {},
   "res": 452,
   "game_type": "INSTAMRKT",
-  "currency", "DON",
+  "currency": "DON",
   "leaderboard": [
         {
             "username": "instamrkt",
