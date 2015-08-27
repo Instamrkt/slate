@@ -1177,7 +1177,9 @@ curl -H &quot;Content-Type: application/json&rdquo; -X POST  -d &rsquo;{&ldquo;J
 
 <h3 id="url">URL</h3>
 
-<p><code class="prettyprint">/r/leaderboard/personal/[GAME_UUID]/[USER_ID]</code></p>
+<h1 id="/r/leaderboard/personal/[game_uuid]/[user_id]"><code class="prettyprint">/r/leaderboard/personal/[GAME_UUID]/[USER_ID]</code></h1>
+
+<p>leaderboard | [] | A list of objects. Every object has the form: <strong>key</strong> - points, <strong>value</strong> - user&rsquo;s name.</p>
 
           <h1 id="websocket-api:-general">Websocket API: General</h1>
 
@@ -3395,8 +3397,8 @@ This will automatically close and resolve all the automatically resolvable pools
 </blockquote>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="s2">"header"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
-  </span><span class="s2">"op"</span><span class="p">:</span><span class="w"> </span><span class="mi">450</span><span class="w">
-</span><span class="p">}</span><span class="w">
+  </span><span class="s2">"op"</span><span class="p">:</span><span class="w"> </span><span class="mi">450</span><span class="p">,</span><span class="w">
+</span><span class="err">}</span><span class="w">
 </span></code></pre>
 
 <blockquote>
@@ -3406,7 +3408,7 @@ This will automatically close and resolve all the automatically resolvable pools
   </span><span class="s2">"response_header"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
   </span><span class="s2">"res"</span><span class="p">:</span><span class="w"> </span><span class="mi">450</span><span class="p">,</span><span class="w">
   </span><span class="s2">"game_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"INSTAMRKT"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"DON"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"currency"</span><span class="err">,</span><span class="w"> </span><span class="s2">"DON"</span><span class="err">,</span><span class="w">
   </span><span class="s2">"leaderboard"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
         </span><span class="p">{</span><span class="w">
             </span><span class="s2">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"instamrkt"</span><span class="p">,</span><span class="w">
@@ -3537,7 +3539,7 @@ This will automatically close and resolve all the automatically resolvable pools
   </span><span class="s2">"response_header"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
   </span><span class="s2">"res"</span><span class="p">:</span><span class="w"> </span><span class="mi">450</span><span class="p">,</span><span class="w">
   </span><span class="s2">"game_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"INSTAMRKT"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"DON"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"currency"</span><span class="err">,</span><span class="w"> </span><span class="s2">"DON"</span><span class="err">,</span><span class="w">
   </span><span class="s2">"leaderboard"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
         </span><span class="p">{</span><span class="w">
             </span><span class="s2">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"instamrkt"</span><span class="p">,</span><span class="w">
@@ -3685,8 +3687,8 @@ This will automatically close and resolve all the automatically resolvable pools
 </blockquote>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="s2">"header"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
-  </span><span class="s2">"op"</span><span class="p">:</span><span class="w"> </span><span class="mi">452</span><span class="w">
-</span><span class="p">}</span><span class="w">
+  </span><span class="s2">"op"</span><span class="p">:</span><span class="w"> </span><span class="mi">452</span><span class="p">,</span><span class="w">
+</span><span class="err">}</span><span class="w">
 </span></code></pre>
 
 <blockquote>
@@ -3694,7 +3696,7 @@ This will automatically close and resolve all the automatically resolvable pools
 </blockquote>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="s2">"response_header"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
-  </span><span class="s2">"res"</span><span class="p">:</span><span class="w"> </span><span class="mi">452</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"res"</span><span class="p">:</span><span class="w"> </span><span class="mi">450</span><span class="p">,</span><span class="w">
   </span><span class="s2">"game_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"INSTAMRKT"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"currency"</span><span class="err">,</span><span class="w"> </span><span class="s2">"DON"</span><span class="err">,</span><span class="w">
   </span><span class="s2">"leaderboard"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
@@ -3824,8 +3826,8 @@ This will automatically close and resolve all the automatically resolvable pools
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="s2">"response_header"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
   </span><span class="s2">"res"</span><span class="p">:</span><span class="w"> </span><span class="mi">451</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"game_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"f6951935-d201-43b9-b3ee-8bb7f6f3ecb1"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"leaderboard"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+  </span><span class="s2">"game_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"f6951935-d201-43b9-b3ee-8bb7f6f3ecb1"</span><span class="w">
+  </span><span class="s2">"leaderboard"</span><span class="err">:</span><span class="w"> </span><span class="p">[</span><span class="w">
         </span><span class="p">{</span><span class="w">
             </span><span class="s2">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"instamrkt"</span><span class="p">,</span><span class="w">
             </span><span class="s2">"points"</span><span class="p">:</span><span class="w"> </span><span class="mf">999.17</span><span class="p">,</span><span class="w">
@@ -3946,7 +3948,7 @@ This will automatically close and resolve all the automatically resolvable pools
   </span><span class="s2">"response_header"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
   </span><span class="s2">"res"</span><span class="p">:</span><span class="w"> </span><span class="mi">450</span><span class="p">,</span><span class="w">
   </span><span class="s2">"game_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"INSTAMRKT"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"DON"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"currency"</span><span class="err">,</span><span class="w"> </span><span class="s2">"DON"</span><span class="err">,</span><span class="w">
   </span><span class="s2">"leaderboard"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
         </span><span class="p">{</span><span class="w">
             </span><span class="s2">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"instamrkt"</span><span class="p">,</span><span class="w">
@@ -4105,8 +4107,8 @@ This will automatically close and resolve all the automatically resolvable pools
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="s2">"response_header"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
   </span><span class="s2">"res"</span><span class="p">:</span><span class="w"> </span><span class="mi">453</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"game_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"f6951935-d201-43b9-b3ee-8bb7f6f3ecb1"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"leaderboard"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+  </span><span class="s2">"game_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"f6951935-d201-43b9-b3ee-8bb7f6f3ecb1"</span><span class="w">
+  </span><span class="s2">"leaderboard"</span><span class="err">:</span><span class="w"> </span><span class="p">[</span><span class="w">
         </span><span class="p">{</span><span class="w">
             </span><span class="s2">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"instamrkt"</span><span class="p">,</span><span class="w">
             </span><span class="s2">"points"</span><span class="p">:</span><span class="w"> </span><span class="mf">999.17</span><span class="p">,</span><span class="w">
