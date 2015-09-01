@@ -13,14 +13,13 @@ Each request needs to contain a valid header. Each response contains a response 
 ### Connection URL
 
 The connection url:
-**wss://instamrkt.com:9999
-?id=:YOUR_USER_ID
-&n=:YOUR_GENERATED_NONCE
-&h=:YOUR_HEXDIGEST**
+`wss://instamrkt.com:9999?id=:YOUR_USER_ID&n=:YOUR_GENERATED_NONCE&h=:YOUR_HEXDIGEST`
 
 ### Obtaining id and the session key
 
-Both the user_session_key and id are returned in cookies for HTTP users and also returned in the JSON from login or signup REST requests. 
+Both the user_session_key and id are returned in cookies for HTTP users and also returned in the JSON from login or signup REST requests.
+
+The session keys are valid for 24 hours. It is refreshed on every <a href="#login">login</a> request.
 
 ### Nonce and hexdigest
 
