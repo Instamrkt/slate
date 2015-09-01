@@ -18,7 +18,8 @@ includes:
   - websocket_api_calls_general
   - websocket_api_calls_game_sources
   - websocket_api_calls_games
-  - websocket_api_leaderboards
+  - websocket_api_calls_leaderboards
+  - websocket_api_calls_friends
   - websocket_api_calls_betting_pools
   - websocket_api_calls_accounting
   - websocket_api_calls_chat
