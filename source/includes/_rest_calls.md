@@ -129,22 +129,23 @@ msg | null | Error message. Sent only on **unsuccessful** request.
 
 ```javascript
 var $       = require('jquery');
-var jqxhr = $.ajax('/logout', {
-            type: 'GET',
+var jqxhr = $.ajax('/r/logout', {
+            type: 'POST',
             headers: {
                 'X-XSRFToken': _xsrf
-            }
+            },
+            contentType: 'application/json; charset=utf-8'
         });
 ```
 
-This is used to sign a user out. Mind the fact that the url has no `/r/` at the beginning, as most others do.
+This is used to sign a user out. User id is inferred from the secure cookie.
 
 ### URL
-`/login/`
+`/r/logout/`
 
 ### Request type
 
-`GET`
+`POST`
 
 ### Request Parameters
 
