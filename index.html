@@ -507,6 +507,61 @@ curl -H &quot;Content-Type: application/json&rdquo; -X POST  -d &rsquo;{&ldquo;J
 </tr>
 </tbody></table>
 
+<h2 id="logout">Logout</h2>
+
+<blockquote>
+<p>Sample request object:</p>
+</blockquote>
+<pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">$</span>       <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'jquery'</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">jqxhr</span> <span class="o">=</span> <span class="nx">$</span><span class="p">.</span><span class="nx">ajax</span><span class="p">(</span><span class="s1">'/r/logout'</span><span class="p">,</span> <span class="p">{</span>
+            <span class="na">type</span><span class="p">:</span> <span class="s1">'POST'</span><span class="p">,</span>
+            <span class="na">headers</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s1">'X-XSRFToken'</span><span class="p">:</span> <span class="nx">_xsrf</span>
+            <span class="p">},</span>
+            <span class="na">contentType</span><span class="p">:</span> <span class="s1">'application/json; charset=utf-8'</span>
+        <span class="p">});</span>
+</code></pre>
+
+<p>This is used to sign a user out. User id is inferred from the secure cookie.</p>
+
+<h3 id="url">URL</h3>
+
+<p><code class="prettyprint">/r/logout/</code></p>
+
+<h3 id="request-type">Request type</h3>
+
+<p><code class="prettyprint">POST</code></p>
+
+<h3 id="request-parameters">Request Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>-</td>
+<td>-</td>
+</tr>
+</tbody></table>
+
+<h3 id="response-parameters">Response Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>-</td>
+<td>-</td>
+<td>The user has been signed out.</td>
+</tr>
+</tbody></table>
+
 <h2 id="signup">Signup</h2>
 
 <blockquote>
@@ -1177,9 +1232,7 @@ curl -H &quot;Content-Type: application/json&rdquo; -X POST  -d &rsquo;{&ldquo;J
 
 <h3 id="url">URL</h3>
 
-<h1 id="/r/leaderboard/personal/[game_uuid]/[user_id]"><code class="prettyprint">/r/leaderboard/personal/[GAME_UUID]/[USER_ID]</code></h1>
-
-<p>leaderboard | [] | A list of objects. Every object has the form: <strong>key</strong> - points, <strong>value</strong> - user&rsquo;s name.</p>
+<p><code class="prettyprint">/r/leaderboard/personal/[GAME_UUID]/[USER_ID]</code></p>
 
           <h1 id="websocket-api:-general">Websocket API: General</h1>
 
@@ -1196,14 +1249,13 @@ Each request needs to contain a valid header. Each response contains a response 
 <h3 id="connection-url">Connection URL</h3>
 
 <p>The connection url:
-<strong>wss://instamrkt.com:9999
-?id=:YOUR_USER_ID
-&amp;n=:YOUR_GENERATED_NONCE
-&amp;h=:YOUR_HEXDIGEST</strong></p>
+<code class="prettyprint">wss://instamrkt.com:9999?id=:YOUR_USER_ID&amp;n=:YOUR_GENERATED_NONCE&amp;h=:YOUR_HEXDIGEST</code></p>
 
 <h3 id="obtaining-id-and-the-session-key">Obtaining id and the session key</h3>
 
-<p>Both the user_session_key and id are returned in cookies for HTTP users and also returned in the JSON from login or signup REST requests. </p>
+<p>Both the user_session_key and id are returned in cookies for HTTP users and also returned in the JSON from login or signup REST requests.</p>
+
+<p>The session keys are valid for 24 hours. It is refreshed on every <a href="#login">login</a> request.</p>
 
 <h3 id="nonce-and-hexdigest">Nonce and hexdigest</h3>
 <pre class="highlight python"><code><span class="kn">import</span> <span class="nn">hashlib</span>
@@ -3397,8 +3449,8 @@ This will automatically close and resolve all the automatically resolvable pools
 </blockquote>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="s2">"header"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
-  </span><span class="s2">"op"</span><span class="p">:</span><span class="w"> </span><span class="mi">450</span><span class="p">,</span><span class="w">
-</span><span class="err">}</span><span class="w">
+  </span><span class="s2">"op"</span><span class="p">:</span><span class="w"> </span><span class="mi">450</span><span class="w">
+</span><span class="p">}</span><span class="w">
 </span></code></pre>
 
 <blockquote>
@@ -3408,7 +3460,7 @@ This will automatically close and resolve all the automatically resolvable pools
   </span><span class="s2">"response_header"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
   </span><span class="s2">"res"</span><span class="p">:</span><span class="w"> </span><span class="mi">450</span><span class="p">,</span><span class="w">
   </span><span class="s2">"game_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"INSTAMRKT"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"currency"</span><span class="err">,</span><span class="w"> </span><span class="s2">"DON"</span><span class="err">,</span><span class="w">
+  </span><span class="s2">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"DON"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"leaderboard"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
         </span><span class="p">{</span><span class="w">
             </span><span class="s2">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"instamrkt"</span><span class="p">,</span><span class="w">
@@ -3539,7 +3591,7 @@ This will automatically close and resolve all the automatically resolvable pools
   </span><span class="s2">"response_header"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
   </span><span class="s2">"res"</span><span class="p">:</span><span class="w"> </span><span class="mi">450</span><span class="p">,</span><span class="w">
   </span><span class="s2">"game_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"INSTAMRKT"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"currency"</span><span class="err">,</span><span class="w"> </span><span class="s2">"DON"</span><span class="err">,</span><span class="w">
+  </span><span class="s2">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"DON"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"leaderboard"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
         </span><span class="p">{</span><span class="w">
             </span><span class="s2">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"instamrkt"</span><span class="p">,</span><span class="w">
@@ -3687,8 +3739,8 @@ This will automatically close and resolve all the automatically resolvable pools
 </blockquote>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="s2">"header"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
-  </span><span class="s2">"op"</span><span class="p">:</span><span class="w"> </span><span class="mi">452</span><span class="p">,</span><span class="w">
-</span><span class="err">}</span><span class="w">
+  </span><span class="s2">"op"</span><span class="p">:</span><span class="w"> </span><span class="mi">452</span><span class="w">
+</span><span class="p">}</span><span class="w">
 </span></code></pre>
 
 <blockquote>
@@ -3696,9 +3748,9 @@ This will automatically close and resolve all the automatically resolvable pools
 </blockquote>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="s2">"response_header"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
-  </span><span class="s2">"res"</span><span class="p">:</span><span class="w"> </span><span class="mi">450</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"res"</span><span class="p">:</span><span class="w"> </span><span class="mi">452</span><span class="p">,</span><span class="w">
   </span><span class="s2">"game_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"INSTAMRKT"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"currency"</span><span class="err">,</span><span class="w"> </span><span class="s2">"DON"</span><span class="err">,</span><span class="w">
+  </span><span class="s2">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"DON"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"leaderboard"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
         </span><span class="p">{</span><span class="w">
             </span><span class="s2">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"instamrkt"</span><span class="p">,</span><span class="w">
@@ -3826,8 +3878,8 @@ This will automatically close and resolve all the automatically resolvable pools
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="s2">"response_header"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
   </span><span class="s2">"res"</span><span class="p">:</span><span class="w"> </span><span class="mi">451</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"game_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"f6951935-d201-43b9-b3ee-8bb7f6f3ecb1"</span><span class="w">
-  </span><span class="s2">"leaderboard"</span><span class="err">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+  </span><span class="s2">"game_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"f6951935-d201-43b9-b3ee-8bb7f6f3ecb1"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"leaderboard"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
         </span><span class="p">{</span><span class="w">
             </span><span class="s2">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"instamrkt"</span><span class="p">,</span><span class="w">
             </span><span class="s2">"points"</span><span class="p">:</span><span class="w"> </span><span class="mf">999.17</span><span class="p">,</span><span class="w">
@@ -3948,7 +4000,7 @@ This will automatically close and resolve all the automatically resolvable pools
   </span><span class="s2">"response_header"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
   </span><span class="s2">"res"</span><span class="p">:</span><span class="w"> </span><span class="mi">450</span><span class="p">,</span><span class="w">
   </span><span class="s2">"game_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"INSTAMRKT"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"currency"</span><span class="err">,</span><span class="w"> </span><span class="s2">"DON"</span><span class="err">,</span><span class="w">
+  </span><span class="s2">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"DON"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"leaderboard"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
         </span><span class="p">{</span><span class="w">
             </span><span class="s2">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"instamrkt"</span><span class="p">,</span><span class="w">
@@ -4107,8 +4159,8 @@ This will automatically close and resolve all the automatically resolvable pools
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="s2">"response_header"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
   </span><span class="s2">"res"</span><span class="p">:</span><span class="w"> </span><span class="mi">453</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"game_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"f6951935-d201-43b9-b3ee-8bb7f6f3ecb1"</span><span class="w">
-  </span><span class="s2">"leaderboard"</span><span class="err">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+  </span><span class="s2">"game_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"f6951935-d201-43b9-b3ee-8bb7f6f3ecb1"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"leaderboard"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
         </span><span class="p">{</span><span class="w">
             </span><span class="s2">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"instamrkt"</span><span class="p">,</span><span class="w">
             </span><span class="s2">"points"</span><span class="p">:</span><span class="w"> </span><span class="mf">999.17</span><span class="p">,</span><span class="w">
@@ -4204,6 +4256,230 @@ This will automatically close and resolve all the automatically resolvable pools
 <td>leaderboard</td>
 <td>[]</td>
 <td>A list sorted by <code class="prettyprint">rank</code>. Each object contains <code class="prettyprint">username</code>, <code class="prettyprint">points</code> and <code class="prettyprint">rank</code>.</td>
+</tr>
+</tbody></table>
+
+          <h1 id="websocket-api:-friends">Websocket API: Friends</h1>
+
+<h2 id="friends-predictions-in-pool">Friends Predictions in Pool</h2>
+
+<blockquote>
+<p>Expects the following JSON structure:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"header"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
+  </span><span class="s2">"op"</span><span class="p">:</span><span class="w"> </span><span class="mi">460</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"pool_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"30cee1fa-fb20-41a6-a61c-0e0335abc2a9"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"is_resolved"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<blockquote>
+<p>Returns the following JSON structure:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"response_header"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
+  </span><span class="s2">"res"</span><span class="p">:</span><span class="w"> </span><span class="mi">460</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"pool_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"30cee1fa-fb20-41a6-a61c-0e0335abc2a9"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"predictions"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"instamrkt"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"target"</span><span class="p">:</span><span class="w"> </span><span class="s2">"brazil"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"placed_at"</span><span class="p">:</span><span class="w"> </span><span class="mi">1417106170</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"bet_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"30cee1fa-fb20-41a6-a61c-0e0335abc2a9"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>This requests the list of predictions made by requestor&rsquo;s friends in a given pool.</p>
+
+<h3 id="operation-code">Operation code</h3>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Code</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>get_my_friends_predictions_for_pool</td>
+<td>460</td>
+</tr>
+</tbody></table>
+
+<h3 id="call-parameters">Call Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>pool_id</td>
+<td>-</td>
+<td>Pool for which to return the list of friends predictions.</td>
+</tr>
+<tr>
+<td>is_resolved</td>
+<td>False</td>
+<td>Indicates whether it is a resolved or an active pool.</td>
+</tr>
+</tbody></table>
+
+<h3 id="response-code">Response code</h3>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Code</th>
+<th>Result</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>your_friends_predictions_for_pool</td>
+<td>460</td>
+<td>You have requested the list of your friend predictions in a given pool.</td>
+</tr>
+</tbody></table>
+
+<h3 id="response-parameters">Response Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>pool_id</td>
+<td>-</td>
+<td>Pool for which the list of friends predictions is returned.</td>
+</tr>
+<tr>
+<td>predictions</td>
+<td>[]</td>
+<td>A list of prediction objects. Each object contains <code class="prettyprint">user_id</code>, <code class="prettyprint">username</code>, <code class="prettyprint">target</code>, <code class="prettyprint">amount</code>, <code class="prettyprint">placed_at</code>, and <code class="prettyprint">bet_id</code>.</td>
+</tr>
+</tbody></table>
+
+<h2 id="friends-predictions-in-game">Friends Predictions in Game</h2>
+
+<blockquote>
+<p>Expects the following JSON structure:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"header"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
+  </span><span class="s2">"op"</span><span class="p">:</span><span class="w"> </span><span class="mi">461</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"game_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"30cee1fa-fb20-41a6-a61c-0e0335abc2a9"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<blockquote>
+<p>Returns the following JSON structure:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"response_header"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
+  </span><span class="s2">"res"</span><span class="p">:</span><span class="w"> </span><span class="mi">461</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"game_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"30cee1fa-fb20-41a6-a61c-0e0335abc2a9"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"predictions"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"running"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+                </span><span class="s2">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"instamrkt"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"target"</span><span class="p">:</span><span class="w"> </span><span class="s2">"brazil"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"placed_at"</span><span class="p">:</span><span class="w"> </span><span class="mi">1417106170</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"bet_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"30cee1fa-fb20-41a6-a61c-0e0335abc2a9"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"pool_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"30cee1fa-fb20-41a6-a61c-0e0335abc2a9"</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="s2">"resolved"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+                </span><span class="s2">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"vinnie"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"target"</span><span class="p">:</span><span class="w"> </span><span class="s2">"netherlands"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mf">3.0</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"placed_at"</span><span class="p">:</span><span class="w"> </span><span class="mi">1417106170</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"bet_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"30cee1fa-fb20-41a6-a61c-0e0335abc2a9"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"pool_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"30cee1fa-fb20-41a6-a61c-0e0335abc2a9"</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+  </span><span class="err">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>This requests the list of predictions made by requestor&rsquo;s friends in all pools in a given game.</p>
+
+<h3 id="operation-code">Operation code</h3>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Code</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>get_my_friends_predictions_for_game</td>
+<td>461</td>
+</tr>
+</tbody></table>
+
+<h3 id="call-parameters">Call Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>game_id</td>
+<td>-</td>
+<td>Game for which to return the list of pools with lists of friends predictions.</td>
+</tr>
+</tbody></table>
+
+<h3 id="response-code">Response code</h3>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Code</th>
+<th>Result</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>your_friends_predictions_for_game</td>
+<td>461</td>
+<td>You have requested the list of your friend predictions in all pools in a given game.</td>
+</tr>
+</tbody></table>
+
+<h3 id="response-parameters">Response Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>game_id</td>
+<td>-</td>
+<td>Pool for which the list of friends predictions is returned.</td>
+</tr>
+<tr>
+<td>predictions</td>
+<td>{}</td>
+<td>A dictionary consisting of two lists, stored under keys <code class="prettyprint">running</code> and <code class="prettyprint">resolved</code>. Each value is a list of prediction objects. Each object contains <code class="prettyprint">user_id</code>, <code class="prettyprint">username</code>, <code class="prettyprint">target</code>, <code class="prettyprint">amount</code>, <code class="prettyprint">placed_at</code>, and <code class="prettyprint">bet_id</code>.</td>
 </tr>
 </tbody></table>
 
