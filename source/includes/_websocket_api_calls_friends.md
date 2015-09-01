@@ -102,7 +102,7 @@ predictions | [] | A list of prediction objects. Each object contains `user_id`,
 	            "bet_id": "30cee1fa-fb20-41a6-a61c-0e0335abc2a9",
 	            "pool_id": "30cee1fa-fb20-41a6-a61c-0e0335abc2a9"
 	        }
-	    ],
+	    ]
   }
 }
 ```
