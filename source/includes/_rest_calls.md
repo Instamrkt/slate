@@ -80,7 +80,6 @@ user_session_key | null | Session key for connecting to websocket. Necessary for
 redirect_url | /i/play | Redirect url for a signedin user (presumably for an endpoint requiring authentication). Can be used only on **successful** request.
 msg | null | Error message. Sent only on **unsuccessful** request.
 
-
 ## Oauthlogin - DO NOT USE
 
 > Sample request object:
@@ -122,6 +121,43 @@ username | null | Username of the signed in user. Sent only on **successful** re
 id | null | Id of the signed in user. Necessary for Websocket API connection. Sent only on **successful** request.
 redirect_url | /i/play | Redirect url for a signedin user (presumably for an endpoint requiring authentication). Can be used only on **successful** request.
 msg | null | Error message. Sent only on **unsuccessful** request.
+
+
+## Logout
+
+> Sample request object:
+
+```javascript
+var $       = require('jquery');
+var jqxhr = $.ajax('/logout', {
+            type: 'GET',
+            headers: {
+                'X-XSRFToken': _xsrf
+            }
+        });
+```
+
+This is used to sign a user out. Mind the fact that the url has no `/r/` at the beginning, as most others do.
+
+### URL
+`/login/`
+
+### Request type
+
+`GET`
+
+### Request Parameters
+
+Parameter | Description
+--------- | -------
+- | -
+
+### Response Parameters
+
+Parameter | Default | Description
+--------- | ------- | -----------
+- | - | The user has been signed out.
+
 
 ## Signup
 
