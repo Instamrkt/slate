@@ -313,7 +313,7 @@ start_at | n/a | opening time of the pool in epoch milliseconds UTC
 description | null | textual title of the pool
 money_at_stake | 0.0 | total value of points in the pool - not for a specific target
 finish_at | null | closing time of the pool in epoch milliseconds UTC
-distributions | [] | array of distribution objects for each target in the pool including user_id[] of predictors, the current multiplier, the target_id, and total amount for each target
+distribution | [] | array of distribution objects for each target in the pool including user_id[] of predictors, the current multiplier, the target_id, display_name and total amount for each target
 target_level | 1 | the level of the target that is the subject of the prediction (usually 1 unless this is a subtarget)
 people_involved | 0 | total number of players in the pool
 pool_id | n/a | the uuid of this pool
