@@ -284,7 +284,7 @@ upcoming_games | [] | A list of objects representing games. Each object contains
 
 ## Games - get upcoming pools for game
 
-Get prediction pools for a specified upcoming game
+Get prediction pools for a specified upcoming game. Requesting user id is retrieved from a secure cookie. This id is used to determine whether a pool is open or running. For a user who is not logged in all pools are sent as open.
 
 ### URL
 `/r/games/upcoming/<game_uuid>/pools/`
@@ -303,7 +303,8 @@ game_uuid | null | The uuid of the game for which you are requesting pools. This
 
 Parameter | Default | Description
 --------- | ------- | -----------
-pools | [] | Array of objects. An array of open pool objects for the specified game.
+open | [] | Array of objects. An array of open pool objects for the specified game.
+running | [] | Array of objects. An array of running pool (in which requesting user placed prediction) objects for the specified game.
 
 Each pool object includes the following fields:
 
