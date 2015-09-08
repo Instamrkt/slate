@@ -282,12 +282,12 @@ Parameter | Default | Description
 upcoming_games | [] | A list of objects representing games. Each object contains the following fields: id, source_id (for the source hosting the game), game_name, currency, live_start_at, game_type_id, hashtag.
 
 
-## Games - get upcoming pools for game
+## Games - get upcoming open pools for game
 
-Get prediction pools for a specified upcoming game. Requesting user id is retrieved from a secure cookie. This id is used to determine whether a pool is open or running. For a user who is not logged in all pools are sent as open.
+Get prediction pools for a specified upcoming game. Requesting user id is retrieved from a url. This id is used to determine whether a pool is open or running (and whether should be included). For a user who is not logged in all pools are sent as open.
 
 ### URL
-`/r/games/upcoming/<game_uuid>/pools/`
+`/r/games/upcoming/<game_uuid>/pools/open/<user_id>`
 
 ### Request type
 
@@ -298,13 +298,53 @@ Get prediction pools for a specified upcoming game. Requesting user id is retrie
 Parameter | Default | Description
 --------- | ------- | -----------
 game_uuid | null | The uuid of the game for which you are requesting pools. This can be obtained from the `/r/games/upcoming` list of games.
+user_id | null | Optional: specify user id to send in only open pools (exclude the ones he predicted in).
 
 ### Response Parameters
 
 Parameter | Default | Description
 --------- | ------- | -----------
-open | [] | Array of objects. An array of open pool objects for the specified game.
-running | [] | Array of objects. An array of running pool (in which requesting user placed prediction) objects for the specified game.
+pools | [] | Array of objects. An array of open pool objects for the specified game.
+
+Each pool object includes the following fields:
+
+Field | Default | Description
+--------- | ------- | -----------
+start_at | n/a | opening time of the pool in epoch milliseconds UTC
+description | null | textual title of the pool
+money_at_stake | 0.0 | total value of points in the pool - not for a specific target
+finish_at | null | closing time of the pool in epoch milliseconds UTC
+distribution | [] | array of distribution objects for each target in the pool including user_id[] of predictors, the current multiplier, the target_id, display_name and total amount for each target
+target_level | 1 | the level of the target that is the subject of the prediction (usually 1 unless this is a subtarget)
+people_involved | 0 | total number of players in the pool
+pool_id | n/a | the uuid of this pool
+stop_accepting_bets_at | null | time in epoch milliseconds UTC when to stop accepting incoming predictions
+type | n/a | The type of pool - a combination of parimutuel or binary and event based or time based
+action_id | n/a | the uuid of the action which this pool relates to
+
+## Games - get upcoming running pools for game
+
+Get prediction pools for a specified upcoming game. Requesting user id is retrieved from a url. This id is used to determine whether a pool is open or running (and whether should be included). For a user who is not logged no pools are sent as running.
+
+### URL
+`/r/games/upcoming/<game_uuid>/pools/running/<user_id>`
+
+### Request type
+
+`GET`
+
+### Request Parameters
+
+Parameter | Default | Description
+--------- | ------- | -----------
+game_uuid | null | The uuid of the game for which you are requesting pools. This can be obtained from the `/r/games/upcoming` list of games.
+user_id | null | Optional: specify user id to send in only running pools.
+
+### Response Parameters
+
+Parameter | Default | Description
+--------- | ------- | -----------
+pools | [] | Array of objects. An array of open pool objects for the specified game.
 
 Each pool object includes the following fields:
 
