@@ -701,6 +701,43 @@ curl -H &quot;Content-Type: application/json&rdquo; -X POST  -d &rsquo;{&ldquo;J
 </tr>
 </tbody></table>
 
+<!-- ## Games - list active games for source
+
+> Sample request object:
+
+&rdquo;`javascript
+var $       = require(&lsquo;jquery&rsquo;);
+var cookies = require('cookie-getter&rsquo;);
+var _xsrf   = cookies(&rsquo;_xsrf&rsquo;)
+
+$.get(&rsquo;/r/sources/c294ecdc-9194-428a-8353-20513856cda1/games/active/&rsquo;, {
+  headers: {
+      'X-XSRFToken&rsquo;: _xsrf
+  }
+})
+&ldquo;`
+
+This is used to request active games for a specific source.
+
+### URL
+`/r/sources/SOURCE_UUID/games/active/`
+
+### Request type
+
+`GET`
+
+### Request Parameters
+
+Parameter | Description
+&mdash;&mdash;&mdash; | &mdash;&mdash;-
+- | -
+
+### Response Parameters
+
+Parameter | Default | Description
+&mdash;&mdash;&mdash; | &mdash;&mdash;- | &mdash;&mdash;&mdash;&ndash;
+games_active | [] | A list of objects representing games. Each object contains the following fields: name, opening_source_id (for the source hosting the game), name, open_at, live_start_at. &ndash;>
+
 <h2 id="games---list-upcoming-games">Games - list upcoming games</h2>
 
 <blockquote>
@@ -757,13 +794,69 @@ curl -H &quot;Content-Type: application/json&rdquo; -X POST  -d &rsquo;{&ldquo;J
 </tr>
 </tbody></table>
 
-<h2 id="games---get-upcoming-open-pools-for-game">Games - get upcoming open pools for game</h2>
+<h2 id="games---list-upcoming-games-for-source">Games - list upcoming games for source</h2>
 
-<p>Get prediction pools for a specified upcoming game. Requesting user id is retrieved from a url. This id is used to determine whether a pool is open or running (and whether should be included). For a user who is not logged in all pools are sent as open.</p>
+<blockquote>
+<p>Sample request object:</p>
+</blockquote>
+<pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">$</span>       <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'jquery'</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">cookies</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'cookie-getter'</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">_xsrf</span>   <span class="o">=</span> <span class="nx">cookies</span><span class="p">(</span><span class="s1">'_xsrf'</span><span class="p">)</span>
+
+<span class="nx">$</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">'/r/sources/c294ecdc-9194-428a-8353-20513856cda1/games/upcoming/'</span><span class="p">,</span> <span class="p">{</span>
+  <span class="na">headers</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s1">'X-XSRFToken'</span><span class="p">:</span> <span class="nx">_xsrf</span>
+  <span class="p">}</span>
+<span class="p">})</span>
+</code></pre>
+
+<p>This is used to request upcoming games for a specific source.</p>
 
 <h3 id="url">URL</h3>
 
-<p><code class="prettyprint">/r/games/upcoming/&lt;game_uuid&gt;/pools/open/&lt;user_id&gt;</code></p>
+<p><code class="prettyprint">/r/sources/SOURCE_UUID/games/upcoming/</code></p>
+
+<h3 id="request-type">Request type</h3>
+
+<p><code class="prettyprint">GET</code></p>
+
+<h3 id="request-parameters">Request Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>-</td>
+<td>-</td>
+</tr>
+</tbody></table>
+
+<h3 id="response-parameters">Response Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>upcoming_games</td>
+<td>[]</td>
+<td>A list of objects representing games. Each object contains the following fields: id, source_id (for the source hosting the game), game_name, currency, live_start_at, game_type_id, hashtag.</td>
+</tr>
+</tbody></table>
+
+<h2 id="games---get-upcoming-open-pools-for-game">Games - get upcoming open pools for game</h2>
+
+<p>Get prediction pools for a specified upcoming game. Requesting user id is retrieved from a url. This id is used to determine whether a pool is open or running (and whether should be included). For a user who is not logged in (no user id specified) all pools are sent as open.</p>
+
+<h3 id="url">URL</h3>
+
+<p><code class="prettyprint">/r/sources/SOURCE_UUID/games/upcoming/&lt;game_uuid&gt;/pools/open/&lt;user_id&gt;</code></p>
 
 <h3 id="request-type">Request type</h3>
 
@@ -786,7 +879,7 @@ curl -H &quot;Content-Type: application/json&rdquo; -X POST  -d &rsquo;{&ldquo;J
 <tr>
 <td>user_id</td>
 <td>null</td>
-<td>Optional: specify user id to send in only open pools (exclude the ones he predicted in).</td>
+<td>Optional: specify user id to send only open pools (exclude the ones user predicted in).</td>
 </tr>
 </tbody></table>
 
@@ -874,11 +967,11 @@ curl -H &quot;Content-Type: application/json&rdquo; -X POST  -d &rsquo;{&ldquo;J
 
 <h2 id="games---get-upcoming-running-pools-for-game">Games - get upcoming running pools for game</h2>
 
-<p>Get prediction pools for a specified upcoming game. Requesting user id is retrieved from a url. This id is used to determine whether a pool is open or running (and whether should be included). For a user who is not logged no pools are sent as running.</p>
+<p>Get prediction pools for a specified upcoming game. Requesting user id is retrieved from a url. This id is used to determine whether a pool is open or running (and whether should be included). For a user who is not logged in (no user id specified) no pools are sent as running.</p>
 
 <h3 id="url">URL</h3>
 
-<p><code class="prettyprint">/r/games/upcoming/&lt;game_uuid&gt;/pools/running/&lt;user_id&gt;</code></p>
+<p><code class="prettyprint">/r/sources/SOURCE_UUID/games/upcoming/&lt;game_uuid&gt;/pools/running/&lt;user_id&gt;</code></p>
 
 <h3 id="request-type">Request type</h3>
 
@@ -901,7 +994,7 @@ curl -H &quot;Content-Type: application/json&rdquo; -X POST  -d &rsquo;{&ldquo;J
 <tr>
 <td>user_id</td>
 <td>null</td>
-<td>Optional: specify user id to send in only running pools.</td>
+<td>Optional: specify user id to send only running pools.</td>
 </tr>
 </tbody></table>
 
@@ -917,7 +1010,7 @@ curl -H &quot;Content-Type: application/json&rdquo; -X POST  -d &rsquo;{&ldquo;J
 <tr>
 <td>pools</td>
 <td>[]</td>
-<td>Array of objects. An array of open pool objects for the specified game.</td>
+<td>Array of objects. An array of running pool objects for the specified game.</td>
 </tr>
 </tbody></table>
 
@@ -993,7 +1086,7 @@ curl -H &quot;Content-Type: application/json&rdquo; -X POST  -d &rsquo;{&ldquo;J
 
 <h3 id="url">URL</h3>
 
-<p><code class="prettyprint">/r/games/upcoming/&lt;game_uuid&gt;/pools/&lt;pool_uuid&gt;/predictions/</code></p>
+<p><code class="prettyprint">/r/sources/SOURCE_UUID/games/upcoming/&lt;game_uuid&gt;/pools/&lt;pool_uuid&gt;/predictions/</code></p>
 
 <h3 id="request-type">Request type</h3>
 
