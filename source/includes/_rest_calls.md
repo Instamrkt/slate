@@ -245,44 +245,6 @@ Parameter | Default | Description
 game_history | [] | A list of objects representing games. Each object contains the following fields: id, name, type, open_at, close_at.
 
 
-<!-- ## Games - list active games for source
-
-> Sample request object:
-
-```javascript
-var $       = require('jquery');
-var cookies = require('cookie-getter');
-var _xsrf   = cookies('_xsrf')
-
-$.get('/r/sources/c294ecdc-9194-428a-8353-20513856cda1/games/active/', {
-  headers: {
-      'X-XSRFToken': _xsrf
-  }
-})
-```
-
-This is used to request active games for a specific source.
-
-### URL
-`/r/sources/SOURCE_UUID/games/active/`
-
-### Request type
-
-`GET`
-
-### Request Parameters
-
-Parameter | Description
---------- | -------
-- | -
-
-### Response Parameters
-
-Parameter | Default | Description
---------- | ------- | -----------
-games_active | [] | A list of objects representing games. Each object contains the following fields: name, opening_source_id (for the source hosting the game), name, open_at, live_start_at. -->
-
-
 ## Games - list upcoming games
 
 > Sample request object:
