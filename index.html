@@ -757,13 +757,13 @@ curl -H &quot;Content-Type: application/json&rdquo; -X POST  -d &rsquo;{&ldquo;J
 </tr>
 </tbody></table>
 
-<h2 id="games---get-upcoming-pools-for-game">Games - get upcoming pools for game</h2>
+<h2 id="games---get-upcoming-open-pools-for-game">Games - get upcoming open pools for game</h2>
 
-<p>Get prediction pools for a specified upcoming game</p>
+<p>Get prediction pools for a specified upcoming game. Requesting user id is retrieved from a url. This id is used to determine whether a pool is open or running (and whether should be included). For a user who is not logged in all pools are sent as open.</p>
 
 <h3 id="url">URL</h3>
 
-<p><code class="prettyprint">/r/games/upcoming/&lt;game_uuid&gt;/pools/</code></p>
+<p><code class="prettyprint">/r/games/upcoming/&lt;game_uuid&gt;/pools/open/&lt;user_id&gt;</code></p>
 
 <h3 id="request-type">Request type</h3>
 
@@ -782,6 +782,11 @@ curl -H &quot;Content-Type: application/json&rdquo; -X POST  -d &rsquo;{&ldquo;J
 <td>game_uuid</td>
 <td>null</td>
 <td>The uuid of the game for which you are requesting pools. This can be obtained from the <code class="prettyprint">/r/games/upcoming</code> list of games.</td>
+</tr>
+<tr>
+<td>user_id</td>
+<td>null</td>
+<td>Optional: specify user id to send in only open pools (exclude the ones he predicted in).</td>
 </tr>
 </tbody></table>
 
@@ -831,9 +836,124 @@ curl -H &quot;Content-Type: application/json&rdquo; -X POST  -d &rsquo;{&ldquo;J
 <td>closing time of the pool in epoch milliseconds UTC</td>
 </tr>
 <tr>
-<td>distributions</td>
+<td>distribution</td>
 <td>[]</td>
-<td>array of distribution objects for each target in the pool including user_id[] of predictors, the current multiplier, the target_id, and total amount for each target</td>
+<td>array of distribution objects for each target in the pool including user_id[] of predictors, the current multiplier, the target_id, display_name and total amount for each target</td>
+</tr>
+<tr>
+<td>target_level</td>
+<td>1</td>
+<td>the level of the target that is the subject of the prediction (usually 1 unless this is a subtarget)</td>
+</tr>
+<tr>
+<td>people_involved</td>
+<td>0</td>
+<td>total number of players in the pool</td>
+</tr>
+<tr>
+<td>pool_id</td>
+<td>n/a</td>
+<td>the uuid of this pool</td>
+</tr>
+<tr>
+<td>stop_accepting_bets_at</td>
+<td>null</td>
+<td>time in epoch milliseconds UTC when to stop accepting incoming predictions</td>
+</tr>
+<tr>
+<td>type</td>
+<td>n/a</td>
+<td>The type of pool - a combination of parimutuel or binary and event based or time based</td>
+</tr>
+<tr>
+<td>action_id</td>
+<td>n/a</td>
+<td>the uuid of the action which this pool relates to</td>
+</tr>
+</tbody></table>
+
+<h2 id="games---get-upcoming-running-pools-for-game">Games - get upcoming running pools for game</h2>
+
+<p>Get prediction pools for a specified upcoming game. Requesting user id is retrieved from a url. This id is used to determine whether a pool is open or running (and whether should be included). For a user who is not logged no pools are sent as running.</p>
+
+<h3 id="url">URL</h3>
+
+<p><code class="prettyprint">/r/games/upcoming/&lt;game_uuid&gt;/pools/running/&lt;user_id&gt;</code></p>
+
+<h3 id="request-type">Request type</h3>
+
+<p><code class="prettyprint">GET</code></p>
+
+<h3 id="request-parameters">Request Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>game_uuid</td>
+<td>null</td>
+<td>The uuid of the game for which you are requesting pools. This can be obtained from the <code class="prettyprint">/r/games/upcoming</code> list of games.</td>
+</tr>
+<tr>
+<td>user_id</td>
+<td>null</td>
+<td>Optional: specify user id to send in only running pools.</td>
+</tr>
+</tbody></table>
+
+<h3 id="response-parameters">Response Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>pools</td>
+<td>[]</td>
+<td>Array of objects. An array of open pool objects for the specified game.</td>
+</tr>
+</tbody></table>
+
+<p>Each pool object includes the following fields:</p>
+
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>start_at</td>
+<td>n/a</td>
+<td>opening time of the pool in epoch milliseconds UTC</td>
+</tr>
+<tr>
+<td>description</td>
+<td>null</td>
+<td>textual title of the pool</td>
+</tr>
+<tr>
+<td>money_at_stake</td>
+<td>0.0</td>
+<td>total value of points in the pool - not for a specific target</td>
+</tr>
+<tr>
+<td>finish_at</td>
+<td>null</td>
+<td>closing time of the pool in epoch milliseconds UTC</td>
+</tr>
+<tr>
+<td>distribution</td>
+<td>[]</td>
+<td>array of distribution objects for each target in the pool including user_id[] of predictors, the current multiplier, the target_id, display_name and total amount for each target</td>
 </tr>
 <tr>
 <td>target_level</td>
@@ -4409,8 +4529,8 @@ This will automatically close and resolve all the automatically resolvable pools
                 </span><span class="s2">"bet_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"30cee1fa-fb20-41a6-a61c-0e0335abc2a9"</span><span class="p">,</span><span class="w">
                 </span><span class="s2">"pool_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"30cee1fa-fb20-41a6-a61c-0e0335abc2a9"</span><span class="w">
             </span><span class="p">}</span><span class="w">
-        </span><span class="p">],</span><span class="w">
-  </span><span class="err">}</span><span class="w">
+        </span><span class="p">]</span><span class="w">
+  </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
