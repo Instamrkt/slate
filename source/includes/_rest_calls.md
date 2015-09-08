@@ -284,7 +284,7 @@ upcoming_games | [] | A list of objects representing games. Each object contains
 
 ## Games - get upcoming open pools for game
 
-Get prediction pools for a specified upcoming game. Requesting user id is retrieved from a url. This id is used to determine whether a pool is open or running (and whether should be included). For a user who is not logged in all pools are sent as open.
+Get prediction pools for a specified upcoming game. Requesting user id is retrieved from a url. This id is used to determine whether a pool is open or running (and whether should be included). For a user who is not logged in (no user id specified) all pools are sent as open.
 
 ### URL
 `/r/games/upcoming/<game_uuid>/pools/open/<user_id>`
@@ -298,7 +298,7 @@ Get prediction pools for a specified upcoming game. Requesting user id is retrie
 Parameter | Default | Description
 --------- | ------- | -----------
 game_uuid | null | The uuid of the game for which you are requesting pools. This can be obtained from the `/r/games/upcoming` list of games.
-user_id | null | Optional: specify user id to send in only open pools (exclude the ones he predicted in).
+user_id | null | Optional: specify user id to send only open pools (exclude the ones user predicted in).
 
 ### Response Parameters
 
@@ -324,7 +324,7 @@ action_id | n/a | the uuid of the action which this pool relates to
 
 ## Games - get upcoming running pools for game
 
-Get prediction pools for a specified upcoming game. Requesting user id is retrieved from a url. This id is used to determine whether a pool is open or running (and whether should be included). For a user who is not logged no pools are sent as running.
+Get prediction pools for a specified upcoming game. Requesting user id is retrieved from a url. This id is used to determine whether a pool is open or running (and whether should be included). For a user who is not logged in (no user id specified) no pools are sent as running.
 
 ### URL
 `/r/games/upcoming/<game_uuid>/pools/running/<user_id>`
@@ -338,13 +338,13 @@ Get prediction pools for a specified upcoming game. Requesting user id is retrie
 Parameter | Default | Description
 --------- | ------- | -----------
 game_uuid | null | The uuid of the game for which you are requesting pools. This can be obtained from the `/r/games/upcoming` list of games.
-user_id | null | Optional: specify user id to send in only running pools.
+user_id | null | Optional: specify user id to send only running pools.
 
 ### Response Parameters
 
 Parameter | Default | Description
 --------- | ------- | -----------
-pools | [] | Array of objects. An array of open pool objects for the specified game.
+pools | [] | Array of objects. An array of running pool objects for the specified game.
 
 Each pool object includes the following fields:
 
