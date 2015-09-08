@@ -244,6 +244,45 @@ Parameter | Default | Description
 --------- | ------- | -----------
 game_history | [] | A list of objects representing games. Each object contains the following fields: id, name, type, open_at, close_at.
 
+
+<!-- ## Games - list active games for source
+
+> Sample request object:
+
+```javascript
+var $       = require('jquery');
+var cookies = require('cookie-getter');
+var _xsrf   = cookies('_xsrf')
+
+$.get('/r/sources/c294ecdc-9194-428a-8353-20513856cda1/games/active/', {
+  headers: {
+      'X-XSRFToken': _xsrf
+  }
+})
+```
+
+This is used to request active games for a specific source.
+
+### URL
+`/r/sources/SOURCE_UUID/games/active/`
+
+### Request type
+
+`GET`
+
+### Request Parameters
+
+Parameter | Description
+--------- | -------
+- | -
+
+### Response Parameters
+
+Parameter | Default | Description
+--------- | ------- | -----------
+games_active | [] | A list of objects representing games. Each object contains the following fields: name, opening_source_id (for the source hosting the game), name, open_at, live_start_at. -->
+
+
 ## Games - list upcoming games
 
 > Sample request object:
@@ -282,12 +321,50 @@ Parameter | Default | Description
 upcoming_games | [] | A list of objects representing games. Each object contains the following fields: id, source_id (for the source hosting the game), game_name, currency, live_start_at, game_type_id, hashtag.
 
 
+## Games - list upcoming games for source
+
+> Sample request object:
+
+```javascript
+var $       = require('jquery');
+var cookies = require('cookie-getter');
+var _xsrf   = cookies('_xsrf')
+
+$.get('/r/sources/c294ecdc-9194-428a-8353-20513856cda1/games/upcoming/', {
+  headers: {
+      'X-XSRFToken': _xsrf
+  }
+})
+```
+
+This is used to request upcoming games for a specific source.
+
+### URL
+`/r/sources/SOURCE_UUID/games/upcoming/`
+
+### Request type
+
+`GET`
+
+### Request Parameters
+
+Parameter | Description
+--------- | -------
+- | -
+
+### Response Parameters
+
+Parameter | Default | Description
+--------- | ------- | -----------
+upcoming_games | [] | A list of objects representing games. Each object contains the following fields: id, source_id (for the source hosting the game), game_name, currency, live_start_at, game_type_id, hashtag.
+
+
 ## Games - get upcoming open pools for game
 
 Get prediction pools for a specified upcoming game. Requesting user id is retrieved from a url. This id is used to determine whether a pool is open or running (and whether should be included). For a user who is not logged in (no user id specified) all pools are sent as open.
 
 ### URL
-`/r/games/upcoming/<game_uuid>/pools/open/<user_id>`
+`/r/sources/SOURCE_UUID/games/upcoming/<game_uuid>/pools/open/<user_id>`
 
 ### Request type
 
@@ -327,7 +404,7 @@ action_id | n/a | the uuid of the action which this pool relates to
 Get prediction pools for a specified upcoming game. Requesting user id is retrieved from a url. This id is used to determine whether a pool is open or running (and whether should be included). For a user who is not logged in (no user id specified) no pools are sent as running.
 
 ### URL
-`/r/games/upcoming/<game_uuid>/pools/running/<user_id>`
+`/r/sources/SOURCE_UUID/games/upcoming/<game_uuid>/pools/running/<user_id>`
 
 ### Request type
 
@@ -367,7 +444,7 @@ action_id | n/a | the uuid of the action which this pool relates to
 Enter pre-game predictions into a specified pool.
 
 ### URL
-`/r/games/upcoming/<game_uuid>/pools/<pool_uuid>/predictions/`
+`/r/sources/SOURCE_UUID/games/upcoming/<game_uuid>/pools/<pool_uuid>/predictions/`
 
 ### Request type
 
