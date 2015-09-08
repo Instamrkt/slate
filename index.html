@@ -701,43 +701,6 @@ curl -H &quot;Content-Type: application/json&rdquo; -X POST  -d &rsquo;{&ldquo;J
 </tr>
 </tbody></table>
 
-<!-- ## Games - list active games for source
-
-> Sample request object:
-
-&rdquo;`javascript
-var $       = require(&lsquo;jquery&rsquo;);
-var cookies = require('cookie-getter&rsquo;);
-var _xsrf   = cookies(&rsquo;_xsrf&rsquo;)
-
-$.get(&rsquo;/r/sources/c294ecdc-9194-428a-8353-20513856cda1/games/active/&rsquo;, {
-  headers: {
-      'X-XSRFToken&rsquo;: _xsrf
-  }
-})
-&ldquo;`
-
-This is used to request active games for a specific source.
-
-### URL
-`/r/sources/SOURCE_UUID/games/active/`
-
-### Request type
-
-`GET`
-
-### Request Parameters
-
-Parameter | Description
-&mdash;&mdash;&mdash; | &mdash;&mdash;-
-- | -
-
-### Response Parameters
-
-Parameter | Default | Description
-&mdash;&mdash;&mdash; | &mdash;&mdash;- | &mdash;&mdash;&mdash;&ndash;
-games_active | [] | A list of objects representing games. Each object contains the following fields: name, opening_source_id (for the source hosting the game), name, open_at, live_start_at. &ndash;>
-
 <h2 id="games---list-upcoming-games">Games - list upcoming games</h2>
 
 <blockquote>
