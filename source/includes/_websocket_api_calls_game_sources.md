@@ -13,7 +13,8 @@ This section assumes you are connected as an instamrkt developer. If you do not 
 {
   "header": {},
   "op": 365,
-  "source_name": ":YOUR_SOURCE_NAME"
+  "source_name": ":YOUR_SOURCE_NAME",
+  "description": "Your source description."
 }
 ```
 
@@ -41,6 +42,7 @@ open_game_source | 365
 Parameter | Default | Description
 --------- | ------- | -----------
 source_name | null | The name you want to assign to your source (your domain suggested).
+description | null | The description (up to 512 chars) you want to assign to your source. This parameter is optional.
 
 ### Response code
 
@@ -53,7 +55,6 @@ game_source_opened | 335 | Your source has been registered. You can now open and
 Parameter | Default | Description
 --------- | ------- | -----------
 source_id | null | The new server-assigned source id with which you, as a game provider, will be identified. Necessary for making all game source-related calls.
-
 
 
 ## Close a game source
