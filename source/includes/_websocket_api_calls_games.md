@@ -320,10 +320,10 @@ live_finish_at | null | The real life game finish time in epoch millis (only inf
 close_at | null | The close game time in epoch millis (if null, game close request needs to be sent explicitly).
 
 
-
 ## Become an admin for a game
+
 <aside class="notice">
-Only the game source admin is allowed to send request as of now. Authorizing additional users to do that will come soon.
+Only the game source admin is allowed to send request as of now. Authorizing additional users can be done using appoint admin call.
 </aside>
 
 > Expects the following JSON structure:
@@ -387,6 +387,74 @@ game_id | :YOUR_GAME_ID | The game id you provided.
 reason | :YOUR_GAME_ID | The reason why you couldn't become an admin. Sent **only** with become_an_admin_for_game_fail response code.
 
 
+## Appoint admin for a game
+
+<aside class="notice">
+Only the game source admin is allowed to send this request.
+</aside>
+
+> Expects the following JSON structure:
+
+```json
+{
+  "header": {},
+  "op": 617,
+  "game_id": "30cee1fa-fb20-41a6-a61c-0e0335abc2a9",
+  "username": "instamrkt"
+}
+```
+
+
+> Returns the following JSON structure:
+
+```json
+{
+  "response_header": {},
+  "res": 617,
+  "game_id": "30cee1fa-fb20-41a6-a61c-0e0335abc2a9",
+  "username": "instamrkt"
+}
+```
+
+> if the appointed user is connected, he/she receives
+
+```json
+{
+  "response_header": {},
+  "res": 640,
+  "game_id": "30cee1fa-fb20-41a6-a61c-0e0335abc2a9"
+}
+```
+
+Appoints a game admin.
+
+### Operation code
+
+Name | Code
+--------- | -------
+appoint_admin_for_game_by_username | 617
+
+### Call Parameters
+
+Parameter | Default | Description
+--------- | ------- | -----------
+game_id | null | The game id for which you want to appoint an admin.
+username | null | Valid username of the user who is to be appointed admin.
+
+### Response code
+
+Name | Code | Result
+--------- | ------- | -----------
+game_admin_appointed | 617 | User has been appointed game admin. They can create pools and register events.
+become_an_admin_for_game_success | 640 | User has been appointed game admin. They can create pools and register events. They receive this message.
+
+
+### Response Parameters
+
+Parameter | Default | Description
+--------- | ------- | -----------
+game_id | :YOUR_GAME_ID | The game id for which admin has been appointed.
+username | :PROVIDED_USERNAME | The username who has been appointed.
 
 
 ## Get game details
