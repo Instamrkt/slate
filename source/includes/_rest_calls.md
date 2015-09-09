@@ -565,7 +565,14 @@ break_after_rank | [] | A list of ranks after which leaderboard loses its contin
 Global game leaderboard can be requested in the exact same manner as <a href="#leaderboard-global">a global leaderboard</a>. The only difference is the url, shown below.
 
 ### URL
-`/r/leaderboard/global/[GAME_UUID]/[USER_ID]`
+`/r/leaderboard/global/game/[GAME_UUID]/[USER_ID]`
+
+## Leaderboard global per game source
+
+Global game source leaderboard can be requested in the exact same manner as <a href="#leaderboard-global">a global leaderboard</a>. The only difference is the url, shown below.
+
+### URL
+`/r/leaderboard/global/source/[SOURCE_UUID]/[USER_ID]`
 
 
 ## Leaderboard personal
@@ -611,4 +618,11 @@ leaderboard | [] | A list of objects. Every object contains `username`, `rank` a
 Personal game leaderboard can be requested in the exact same manner as <a href="#leaderboard-personal">a personal leaderboard</a>. The only difference is the url, shown below.
 
 ### URL
-`/r/leaderboard/personal/[GAME_UUID]/[USER_ID]`
+`/r/leaderboard/personal/game/[GAME_UUID]/[USER_ID]`
+
+## Leaderboard personal per game source
+
+Personal game source leaderboard can be requested in the exact same manner as <a href="#leaderboard-personal">a personal leaderboard</a>. The only difference is the url, shown below.
+
+### URL
+`/r/leaderboard/personal/source/[SOURCE_UUID]/[USER_ID]`
