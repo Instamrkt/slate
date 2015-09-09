@@ -109,3 +109,59 @@ game_source_closed | 336 | Your source has been closed. No more games can be hos
 Parameter | Default | Description
 --------- | ------- | -----------
 source_id | null | Your source id.
+
+
+## List game sources I admin
+
+
+> Expects the following JSON structure:
+
+```json
+{
+  "header": {},
+  "op": 611
+}
+```
+
+> Returns the following JSON structure:
+
+```json
+{
+  "response_header": {},
+  "res": 621,
+  "sources": [
+    {
+      "id": "30cee1fa-fb20-41a6-a61c-0e0335abc2a9",
+      "name": "instamrkt",
+      "description": "Default source."
+    }
+  ]
+}
+```
+
+This called is used to list game sources you are admin of.
+
+
+### Operation code
+
+Name | Code
+--------- | -------
+list_game_sources_i_am_admin_of | 611
+
+### Call Parameters
+
+Parameter | Default | Description
+--------- | ------- | -----------
+- | - | -
+
+### Response code
+
+Name | Code | Result
+--------- | ------- | -----------
+game_sources_i_am_admin_of_list | 621 | You have requested a list of game sources you are admin of.
+
+### Response Parameters
+
+Parameter | Default | Description
+--------- | ------- | -----------
+sources | [] | List of game sources user is admin of. Each object consists of `id`, `name` and `description`.

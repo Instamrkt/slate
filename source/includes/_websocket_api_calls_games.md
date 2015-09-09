@@ -1042,3 +1042,56 @@ Parameter | Default | Description
 --------- | ------- | -----------
 source_id | :YOUR_SOURCE_ID | Your source id.
 games | [] | A list containing objects for all the upcoming games for your source. Each object contains game data - id, source_id, game_name, currency, live_start_at, game_type_id and a game hashtag.
+
+## List games I admin
+
+
+> Expects the following JSON structure:
+
+```json
+{
+  "header": {},
+  "op": 610
+}
+```
+
+> Returns the following JSON structure:
+
+```json
+{
+  "response_header": {},
+  "res": 620,
+  "games": [
+    {
+      "id": "30cee1fa-fb20-41a6-a61c-0e0335abc2a9",
+      "name": "Brazil - Netherlands",
+    }
+  ]
+}
+```
+
+This called is used to list games you are admin of.
+
+### Operation code
+
+Name | Code
+--------- | -------
+list_games_i_am_admin_of | 610
+
+### Call Parameters
+
+Parameter | Default | Description
+--------- | ------- | -----------
+- | - | -
+
+### Response code
+
+Name | Code | Result
+--------- | ------- | -----------
+games_i_am_admin_of_list | 620 | You have requested a list of games you are admin of.
+
+### Response Parameters
+
+Parameter | Default | Description
+--------- | ------- | -----------
+games | [] | List of games user is admin of. Each object consists of `id` and `name`.
