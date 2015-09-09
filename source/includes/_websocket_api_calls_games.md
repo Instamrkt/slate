@@ -1064,7 +1064,7 @@ games | [] | A list containing objects for all the upcoming games for your sourc
   "games": [
     {
       "id": "30cee1fa-fb20-41a6-a61c-0e0335abc2a9",
-      "name": "Brazil - Netherlands",
+      "name": "Brazil - Netherlands"
     }
   ]
 }
