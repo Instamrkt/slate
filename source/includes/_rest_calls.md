@@ -401,7 +401,46 @@ stop_accepting_bets_at | null | time in epoch milliseconds UTC when to stop acce
 type | n/a | The type of pool - a combination of parimutuel or binary and event based or time based
 action_id | n/a | the uuid of the action which this pool relates to
 
-## Games - make pregame predictions
+
+## Active Games - make predictions
+
+Enter predictions into a specified pool.
+
+### URL
+`/r/sources/SOURCE_UUID/games/active/<game_uuid>/pools/open/<pool_uuid>/predictions/`
+
+### Request type
+
+`PUT`, `POST`
+
+### Request Parameters In URL
+
+Parameter | Default | Description
+--------- | ------- | -----------
+source_uuid | null | The uuid of the source for which the game is active.
+game_uuid | null | The uuid of the game for which you are entering predictions. This can be obtained from the `/r/games/active` list of games.
+pool_uuid | null | The uuid of the pool for which the prediction should be entered.
+
+An example query string is: `/i/r/games/active/ad5db7bf-cd91-4d5d-a635-cf335661d69d/pools/open/ab571569-08b2-4a88-9d9e-47145370e67f/predictions/`
+
+### Response Parameters
+
+Parameter | Default | Description
+--------- | ------- | -----------
+status | 200 | Response code of the request
+msg | [] | Empty if status = 200
+bet_obj | "" | Standardized prediction object including the `bet_id`, `amount`, `by_friend` (was it made by a friend), `game_id`, `placed_at`, `target_id`, `user_id` (user who made a prediction), `username` (user who made a prediction).
+
+Note that each pool is serialized individually. One pool per request. For example, to make 3 predictions you must send 3 requests.
+
+### Payload
+Parameter | Default | Description
+--------- | ------- | -----------
+target_id | null | The id of the selected target for which prediction is entered.
+amount | null | The amount for which the prediction is placed.
+
+
+## Upcoming Games - make pregame predictions
 
 Enter pre-game predictions into a specified pool.
 
@@ -416,9 +455,11 @@ Enter pre-game predictions into a specified pool.
 
 Parameter | Default | Description
 --------- | ------- | -----------
-game_uuid | null | The uuid of the game for which you are requesting pools. This can be obtained from the `/r/games/upcoming` list of games.
+source_uuid | null | The uuid of the source for which the game is upcoming.
+game_uuid | null | The uuid of the game for which you are entering predictions. This can be obtained from the `/r/games/upcoming` list of games.
 pool_uuid | null | The uuid of the pool for which the prediction should be entered.
 email | null | Since we only have an email address at this point we create an account for this user and assign a random password which can be recovered.
+
 
 NOTE: email MUST be appended the query string and not in the payload.
 
