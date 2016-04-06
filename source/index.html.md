@@ -33,4 +33,4 @@ search: true
 
 # Introduction
 
-Below you can find a general overview of the system and the philosophy of Instamrkt and the API.
+Below you will find a general overview of the system and the philosophy of Instamrkt and the API.
