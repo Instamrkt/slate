@@ -4,6 +4,7 @@ title: Instamrkt API Reference
 language_tabs:
   - javascript
   - python
+  - javascript
 
 toc_footers:
   - <a href='mailto:thatguy@instamrkt.com'>Unclear? Contact us.</a>
