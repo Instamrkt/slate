@@ -18,7 +18,7 @@ Parameter | Description
 --------- | -------
 email | The email used to saved. All external communication will be directed to this email.
 prediction_saved | Boolean flag indicated whether user is making pregame predictions. Outgoing pre-signup email is dependent on that flag.
-challenge_id | If user is coming from a friend's challenge (shared through email / social media), include the challenge id here. This will initiate the friendship for users.
+challenge_id | If user is coming from a friend&apsos;s challenge (shared through email / social media), include the challenge id here. This will initiate the friendship for users.
 
 ### Response Parameters
 
